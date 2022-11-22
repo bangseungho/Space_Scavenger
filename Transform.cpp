@@ -60,3 +60,24 @@ void Transform::ReSet()
 
 	worldPivot = localPivot = vec3(0, 0, 0);
 }
+
+
+void Transform::LookAt(float speed)
+{
+	vec3 ro = worldRotation + localRotation;
+	float x = radians(ro.x);
+	float y = radians(ro.y);
+	float z = radians(ro.z);
+
+	float s = speed * FrameTime::oneFrame;
+
+	worldPosition.x -= sin(y + z) * s;
+	worldPosition.y -= sin(z + x) * s;
+	worldPosition.z -= cos(x + y) * s;
+
+}
+
+void Transform::LookAtTarget(const vec3 targetPos)
+{
+
+}
