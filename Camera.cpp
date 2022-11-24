@@ -2,6 +2,9 @@
 
 Camera* Camera::mainCamera = nullptr;
 
+unsigned int Camera::viewPosLocation;
+
+
 Camera::Camera()
 {
 	name = "Null";
@@ -67,6 +70,7 @@ void Camera::Draw()
 
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
+	glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 }
 void Camera::ProcessInput(int specialKey)
 {

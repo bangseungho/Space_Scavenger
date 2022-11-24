@@ -11,11 +11,13 @@ Collider::Collider()
 		box_Block = new ObjectBlock;
 		ReadObj((char*)"Cube.obj", *box_Block);
 	}
+	block.vertices = box_Block->vertices;
+	block.vertices_uvs = box_Block->vertices_uvs;
+	block.vertices_normals = box_Block->vertices_normals;
 
-	cBlock.vertIndex = box_Block->vertIndex;
-	cBlock.faceIndex = box_Block->faceIndex;
-	cBlock.vertices = box_Block->vertices;
-	cBlock.face = box_Block->face;
+	block.vertexIndices = box_Block->vertexIndices;
+	block.uvIndices = box_Block->uvIndices;
+	block.normalIndices = box_Block->normalIndices;
 
 	tag = "NULL";
 	color.R = 0;
@@ -38,17 +40,36 @@ void Collider::Init()
 	glUseProgram(s_program);
 
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VAO_Dot);
-	glGenBuffers(1, &VAO_Index);
+	glGenBuffers(1, &VAO_VERTICES);
+	glGenBuffers(1, &VAO_VERTICES_INDEX);
+
+	glGenBuffers(1, &VAO_VERTICES_UVS);
+	glGenBuffers(1, &VAO_UV_INDICES);
+
+	glGenBuffers(1, &VAO_VERTICES_NORMALS);
+	glGenBuffers(1, &VAO_NORMAL_INDICES);
 	glBindVertexArray(VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VAO_Dot);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * cBlock.vertices.size(), &cBlock.vertices[0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block.vertices_uvs->size(), &block.vertices_uvs[0][0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_UV_INDICES);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.uvIndices->size(), &block.uvIndices[0][0], GL_STATIC_DRAW);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)0); //--- 텍스쳐
+	//glEnableVertexAttribArray(1);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_Index); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * cBlock.faceIndex, &cBlock.face[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_NORMALS);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices_normals->size(), &block.vertices_normals[0][0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_NORMAL_INDICES);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.normalIndices->size(), &block.normalIndices[0][0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 노말 속성
+
+	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices->size(), &block.vertices[0][0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_VERTICES_INDEX); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.vertexIndices->size(), &block.vertexIndices[0][0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 }
 
 void Collider::DrawBox()
@@ -65,7 +86,90 @@ void Collider::DrawBox()
 
 	//glPointSize(5.0f);
 	//glDrawArrays(GL_POINTS, 0, cBlock.vertices.size());
-	glDrawElements(GL_TRIANGLES, cBlock.faceIndex * 3, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, block.vertexIndices->size() * 3, GL_UNSIGNED_SHORT, 0);
+}
+
+void Collider::SetBox(const vec3* box, int size)
+{
+	colliderBox[0] = colliderBox[1] = vec3(box[0]);
+
+	for (int i = 1; i < size; i++)
+	{
+		if (colliderBox[0].x > box[i].x)
+			colliderBox[0].x = box[i].x;
+		else if (colliderBox[1].x < box[i].x)
+			colliderBox[1].x = box[i].x;
+
+		if (colliderBox[0].y > box[i].y)
+			colliderBox[0].y = box[i].y;
+		else if (colliderBox[1].y < box[i].y)
+			colliderBox[1].y = box[i].y;
+
+		if (colliderBox[0].z < box[i].z)
+			colliderBox[0].z = box[i].z;
+		else if (colliderBox[1].z > box[i].z)
+			colliderBox[1].z = box[i].z;
+	}
+
+	rDistance = colliderBox[1] - colliderBox[0];
+	rDistance.z = -rDistance.z;	// z만 값이 -라 바꾸어줌
+}
+
+void Collider::GetBox()
+{
+	mat4 worldModel = mat4(1.0);
+	mat4 localModel = mat4(1.0);
+
+	localModel = translate(localModel, object->transform.localPosition);
+	localModel = rotate(localModel, radians(object->transform.localRotation.y), vec3(0, 1.0, 0));
+	localModel = translate(localModel, object->transform.localPivot);
+	localModel = scale(localModel, object->transform.localScale);
+
+	worldModel = translate(worldModel, object->transform.worldPosition);
+	worldModel = rotate(worldModel, radians(object->transform.worldRotation.y), vec3(0, 1.0, 0));
+	worldModel = translate(worldModel, object->transform.worldPivot);
+	worldModel = scale(worldModel, object->transform.worldScale);
+
+	for (int i = 0; i < 2; i++)
+		modelbox[i] = localModel * worldModel * vec4(colliderBox[i], 1);
+
+	vec4 copybox[2] = { vec4(modelbox[0]), vec4(modelbox[1]) };
+	for (int i = 0; i < 2; i++)
+	{
+		if (modelbox[0].x > copybox[i].x)
+			modelbox[0].x = copybox[i].x;
+		else if (modelbox[1].x < copybox[i].x)
+			modelbox[1].x = copybox[i].x;
+
+		if (modelbox[0].y > copybox[i].y)
+			modelbox[0].y = copybox[i].y;
+		else if (modelbox[1].y < copybox[i].y)
+			modelbox[1].y = copybox[i].y;
+
+		if (modelbox[0].z < copybox[i].z)
+			modelbox[0].z = copybox[i].z;
+		else if (modelbox[1].z > copybox[i].z)
+			modelbox[1].z = copybox[i].z;
+	}
+}
+
+bool Collider::Collide_XZ(Collider& other)
+{
+	GetBox();
+	other.GetBox();
+
+	if (isPrint)
+	{
+		cout << tag << "\n" << modelbox[0] << "\n" << modelbox[1] << endl;
+		cout << other.tag << "\n" << other.modelbox[0] << "\n" << other.modelbox[1] << endl;
+	}
+
+	if (modelbox[0].x > other.modelbox[1].x) return false;
+	if (modelbox[1].x < other.modelbox[0].x) return false;
+	if (modelbox[0].z < other.modelbox[1].z) return false;
+	if (modelbox[1].z > other.modelbox[0].z) return false;
+
+	return true;
 }
 
 // Right Front Top 점을 정해주면 된다.
@@ -79,7 +183,7 @@ void Collider::SetBox_OBB(vec3 d)
 		axisLen[i] = 0;
 	}
 
-	defaultAxis[0].y = axisLen[0] = d.x / 2;
+	defaultAxis[0].x = axisLen[0] = d.x / 2;
 	defaultAxis[1].y = axisLen[1] = d.y / 2;
 	defaultAxis[2].z = axisLen[2] = d.z / 2;
 }
@@ -103,7 +207,11 @@ void Collider::GetBox_OBB()
 	mat4 model = localModel * worldModel;
 
 	for (int i = 0; i < 3; i++)
-		axis[i] = model * vec4(defaultAxis[i],1);
+	{
+		axis[i] = defaultAxis[i];
+		//axis[i] = model * vec4(defaultAxis[i],1);
+		axisLen[i] = length(defaultAxis[i] * object->transform.worldScale * object->transform.localScale);
+	}
 		//axis[i] = object->transform.model * vec4(defaultAxis[i], 1);
 
 	if (isPrint)
@@ -134,9 +242,10 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 	bool isExitsParallelPair = false;
 
 	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
-	dis = abs(a.object->transform.worldPosition - b.object->transform.worldPosition);
+	dis = b.object->transform.worldPosition - a.object->transform.worldPosition;
 	for (int n = 0; n < 3; n++)
 	{
+		d[n] = Vec3Dot(dis, a.axis[n]);
 		for (int i = 0; i < 3; i++)
 		{
 			c[n][i] = Vec3Dot(a.axis[n], b.axis[i]);
@@ -144,13 +253,14 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 			if (absC[n][i] > cutoff)
 				isExitsParallelPair = true;
 		}
-		d[n] = Vec3Dot(dis, a.axis[n]);
 		r = abs(d[n]);
 		r1 = a.axisLen[n];
 		r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
 		if (r > r1 + r2)
 			return false;
-
+	}
+	for (int n = 0; n < 3; n++)
+	{
 		r = abs(Vec3Dot(dis, b.axis[n]));
 		r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
 		r2 = b.axisLen[n];
@@ -176,7 +286,7 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 
 		r = abs(d[2] * c[1][2] - d[1] * c[2][2]);
 		r1 = a.axisLen[1] * absC[2][2] + a.axisLen[2] * absC[1][2];
-		r2 = b.axisLen[0] * absC[0][1] + b.axisLen[2] * absC[0][0];
+		r2 = b.axisLen[0] * absC[0][1] + b.axisLen[1] * absC[0][0];
 		if (r > r1 + r2)
 			return false;
 	}

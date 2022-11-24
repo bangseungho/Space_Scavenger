@@ -12,20 +12,23 @@ Cube::Cube()
 		ReadObj((char*)"Cube.obj", *cube_Block);
 	}
 
-	block.vertIndex = cube_Block->vertIndex;
-	block.faceIndex = cube_Block->faceIndex;
 	block.vertices = cube_Block->vertices;
-	block.face = cube_Block->face;
+	block.vertices_uvs = cube_Block->vertices_uvs;
+	block.vertices_normals = cube_Block->vertices_normals;
+
+	block.vertexIndices = cube_Block->vertexIndices;
+	block.uvIndices = cube_Block->uvIndices;
+	block.normalIndices = cube_Block->normalIndices;
+
+	block.max = cube_Block->max;
+
+	collider.tag = "Cube";
+	collider.SetBox_OBB(block.max);
+	collider.object = this;
 }
 
 Cube::~Cube()
 {
-}
-
-void Cube::Update()
-{
-	MoveMent();
-	SetMatrix();
 }
 
 void Cube::Init()
@@ -33,11 +36,20 @@ void Cube::Init()
 	Object::Init();
 
 	color.SetRandomColor();
-	collider.InitTransform(transform);
-	collider.SetBox(block.vertices);
-	collider.tag = "Object";
 
-	Render::mainRender->AddObject(this);
+	Render::objectRender->AddObject(this);
+}
+
+void Cube::Update()
+{
+	MoveMent();
+}
+
+void Cube::Collision()
+{
+	for (const auto& other : Collider::allCollider)
+	{
+	}
 }
 
 void Cube::MoveMent()

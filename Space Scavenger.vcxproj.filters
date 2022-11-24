@@ -13,57 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="프레임 워크">
+      <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="프레임 워크\소스">
+      <UniqueIdentifier>{fc4b9ea0-f799-4c67-bbd0-4844eb2c200f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="프레임 워크\헤더">
+      <UniqueIdentifier>{56c74fee-2469-4c79-9d10-a341e68fbb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{c889ebc8-ea1b-4fd7-8eea-824648da0bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Defualt">
+      <UniqueIdentifier>{257491a6-6bf5-41f6-afe5-8f6a3a95d70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{2668cdb6-39dc-44ce-8b38-c789df3ef4b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Afx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameTime.cpp">
+    <ClCompile Include="reference_main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>프레임 워크\소스</Filter>
     </ClCompile>
-    <ClCompile Include="reference_main.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="FrameTime.cpp">
+      <Filter>프레임 워크\소스</Filter>
     </ClCompile>
-    <ClCompile Include="Render.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Color.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Afx.cpp">
+      <Filter>프레임 워크\소스</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Object\Defualt</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex_AFX.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>프레임 워크\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>프레임 워크\헤더</Filter>
     </ClInclude>
     <ClInclude Include="FrameTime.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>프레임 워크\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>프레임 워크\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Object\Defualt</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector_AFX.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

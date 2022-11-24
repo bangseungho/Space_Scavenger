@@ -61,14 +61,16 @@ typedef struct Face {
 }Face;
 
 typedef struct ObjectBlock {
-	vector< unsigned int > vertexIndices, uvIndices, normalIndices;
-	vector<vec3> vertices;
-	vector<vec2> vertices_uvs;
-	vector<vec3> vertices_normals;
-	Face* face;
-	int vertIndex;
-	int faceIndex;
+	vector<Face>* vertexIndices, *uvIndices, *normalIndices;
+	vector<vec3>* vertices;
+	vector<vec2>* vertices_uvs;
+	vector<vec3>* vertices_normals;
+	vector<Face>* fGroups;
+	vec3 max, min;
+	int groupIndex;
 }ObjectBlock;
+
+Face operator- (const Face my, int other);
 
 Vector2 RealPosition(Vector2 pos);
 Vector2 Coordinate(Vector2 pos);

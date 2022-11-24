@@ -16,6 +16,17 @@ int Time_Duration;
 
 float PI = 3.14159265;
 
+#pragma region VectorFuntion
+
+Face operator-(const Face my, int other)
+{
+	Face result;
+	result.a = my.a - other;
+	result.b = my.b - other;
+	result.c = my.c - other;
+	return result;
+}
+
 Vector2 RealPosition(Vector2 pos)
 {
 	Vector2 real_pos;
@@ -175,7 +186,7 @@ float DistanceVec3(const vec3 my, const vec3 other)
 		abs(pow(my.z - other.z, 2))
 	);
 }
-
+#pragma endregion
 float RandomFloat(float first, float second)
 {
 	random_device rd;
@@ -285,90 +296,74 @@ void ReadObj(char* fileName, ObjectBlock& block)
 	obj = fopen(fileName, "r");
 
 	//--- 1. 전체 버텍스 개수 및 삼각형 개수 세기
-	char count[100];
 	char lineHeader[200];
 	int vertexNum = 0;
 	int faceNum = 0;
+	int groupNum = 0;
 	while (!feof(obj)) {
-		fscanf(obj, "%s", count);
-		if (count[0] == 'v' && count[1] == '\0')
+		fscanf(obj, "%s", lineHeader);
+		if (strcmp(lineHeader, "v") == 0)
 			vertexNum += 1;
-		else if (count[0] == 'f' && count[1] == '\0')
+		else if (strcmp(lineHeader, "f") == 0)
 			faceNum += 1;
-		memset(count, '\0', sizeof(count));
+		else if (strcmp(lineHeader, "g") == 0)
+			groupNum++;
+		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
 	fclose(obj);
 	//--- 2. 메모리 할당'
-	block.vertIndex = 0;
-	block.faceIndex = 0;
-	//block.vertex = new vec3[vertexNum];
-	block.face = new Face[faceNum];
-	unsigned short faces[3] = {};
+	block.fGroups = new vector<Face>[groupNum];
+	block.vertices = new vector<vec3>;
+	block.vertices_normals = new vector<vec3>;
+	block.vertices_uvs = new vector<vec2>;
+
+	block.vertexIndices = new vector<Face>;
+	block.uvIndices = new vector<Face>;
+	block.normalIndices = new vector<Face>;
+	block.groupIndex = 0;
+	//block.face = new Face[faceNum];
+	block.max = vec3(0);
+	block.min = vec3(0);
 
 	//--- 3. 할당된 메모리에 각 버텍스, 페이스 정보 입력
 	obj = fopen(fileName, "r");
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
-		//if (count[0] == 'v' && count[1] == '\0') {
-		//	fscanf(obj, "%f %f %f",
-		//		&block.vertex[block.vertIndex].x,
-		//		&block.vertex[block.vertIndex].y,
-		//		&block.vertex[block.vertIndex].z);
-		//	block.vertIndex++;
-		//}
 		if (strcmp(lineHeader, "v") == 0) {
-			glm::vec3 vertex;
+			vec3 vertex;
 			fscanf(obj, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			block.vertices.push_back(vertex);
+			block.vertices->push_back(vertex);
+			block.max = max(vertex, block.max);
+			block.min = min(vertex, block.min);
 		}
-		//else if (strcmp(lineHeader, "vt") == 0) {
-		//	vec2 uv;
-		//	fscanf(obj, "%f %f\n", &uv.x, &uv.y);
-		//	block.vertices_uvs.push_back(uv);
-		//}
-		//else if (strcmp(lineHeader, "vn") == 0) {
-		//	vec3 normal;
-		//	fscanf(obj, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-		//	block.vertices_normals.push_back(normal);
-		//}
-		//else if (strcmp(lineHeader, "f") == 0) {
-		//	std::string vertex1, vertex2, vertex3;
-		//	unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-		//	int matches = fscanf(obj, "%d/%d/%d %d/%d/%d %d/%d/%d\n", 
-		//		&vertexIndex[0], &uvIndex[0], &normalIndex[0],
-		//		&vertexIndex[1], &uvIndex[1], &normalIndex[1], 
-		//		&vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-		//	if (matches != 9) {
-		//		printf("File can't be read by our simple parser : ( Try exporting with other options\n");
-		//		return;
-		//	}
-		//	block.vertexIndices.push_back(vertexIndex[0] - 1);
-		//	block.vertexIndices.push_back(vertexIndex[1] - 1);
-		//	block.vertexIndices.push_back(vertexIndex[2] - 1);
-		//	block.uvIndices.push_back(uvIndex[0] - 1);
-		//	block.uvIndices.push_back(uvIndex[1] - 1);
-		//	block.uvIndices.push_back(uvIndex[2] - 1);
-		//	block.normalIndices.push_back(normalIndex[0] - 1);
-		//	block.normalIndices.push_back(normalIndex[1] - 1);
-		//	block.normalIndices.push_back(normalIndex[2] - 1);
-		//}
+		else if (strcmp(lineHeader, "vt") == 0) {
+			vec2 uv;
+			fscanf(obj, "%f %f\n", &uv.x, &uv.y);
+			block.vertices_uvs->push_back(uv);
+		}
+		else if (strcmp(lineHeader, "vn") == 0) {
+			vec3 normal;
+			fscanf(obj, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+			block.vertices_normals->push_back(normal);
+		}
 		else if (strcmp(lineHeader, "f") == 0) {
-
-			unsigned short vt;
-			unsigned short vn;
-			for (unsigned short& i : faces)
-			{
-				fscanf(obj, "%hu", &i);
-				fgetc(obj);
-				fscanf(obj, "%hu", &vt);
-				fgetc(obj);
-				fscanf(obj, "%hu", &vn);
-
-				--i;
+			Face vertexIndex, uvIndex, normalIndex;
+			int matches = fscanf(obj, "%hu/%hu/%hu %hu/%hu/%hu %hu/%hu/%hu\n", 
+				&vertexIndex.a, &uvIndex.a, &normalIndex.a,
+				&vertexIndex.b, &uvIndex.b, &normalIndex.b, 
+				&vertexIndex.c, &uvIndex.c, &normalIndex.c);
+			if (matches != 9) {
+				printf("File can't be read by our simple parser : ( Try exporting with other options\n");
+				return;
 			}
-			block.face[block.faceIndex] = { faces[0], faces[1], faces[2] };
-			block.faceIndex++;	
+			block.vertexIndices->push_back(vertexIndex - 1);
+			block.uvIndices->push_back(uvIndex - 1);
+			block.normalIndices->push_back(normalIndex - 1);
 		}
+		else if (strcmp(lineHeader, "g") == 0) {
+			block.groupIndex++;
+		}
+		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
 	//fclose(obj);	// Player 불러올때 에러 나서 잠시 꺼둠 이유는 모름
 }

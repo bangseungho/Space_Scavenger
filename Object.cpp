@@ -5,8 +5,10 @@ int Object::ID_Count = 0;
 unsigned char Object::key;
 int Object::specialKey;
 
-int Object::modelLocation;
-int Object::vColorLocation;
+unsigned int Object::modelLocation;
+unsigned int Object::vColorLocation;
+
+unsigned int Object::objectColorLocation;
 
 Object::Object(): transform(), color()
 {
@@ -34,27 +36,49 @@ void Object::Init()
 	glUseProgram(s_program);
 
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VAO_Dot);
-	glGenBuffers(1, &VAO_Index);
+	glGenBuffers(1, &VAO_VERTICES);
+	glGenBuffers(1, &VAO_VERTICES_INDEX);
+
+	glGenBuffers(1, &VAO_VERTICES_UVS);
+	glGenBuffers(1, &VAO_UV_INDICES);
+
+	glGenBuffers(1, &VAO_VERTICES_NORMALS);
+	glGenBuffers(1, &VAO_NORMAL_INDICES);
 	glBindVertexArray(VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VAO_Dot);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices.size(), &block.vertices[0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block.vertices_uvs->size(), &block.vertices_uvs[0][0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_UV_INDICES);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.uvIndices->size(), &block.uvIndices[0][0], GL_STATIC_DRAW);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)0); //--- 텍스쳐
+	//glEnableVertexAttribArray(1);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_Index); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.faceIndex, block.face, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), 0);
+	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_NORMALS);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices_normals->size(), &block.vertices_normals[0][0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_NORMAL_INDICES);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.normalIndices->size(), &block.normalIndices[0][0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vec3) , (void*)0); //--- 노말 속성
+
+	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices->size(), &block.vertices[0][0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_VERTICES_INDEX); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.vertexIndices->size(), &block.vertexIndices[0][0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 }
 
-void Object::ObjcetDraw()
+void Object::ObjectDraw()
 {
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
 	glUniform4f(vColorLocation, color.R, color.G, color.B, color.A);
 
 	glBindVertexArray(VAO);
 
-	glDrawElements(GL_TRIANGLES, block.faceIndex * 3, GL_UNSIGNED_SHORT, 0);
+	//glPointSize(5.0f);
+	//glDrawArrays(GL_POINTS, 0, block.vertices->size());
+	glDrawElements(GL_TRIANGLES, block.vertexIndices->size() * 3, GL_UNSIGNED_SHORT, 0);
+	
 }
 
 
@@ -63,9 +87,19 @@ void Object::Collision()
 
 }
 
+void Object::SetActive(bool value)
+{
+	if (this->isActive == false && value == true)
+		this->Enable();
+	else if (this->isActive == true && value == false)
+		this->Disable();
+
+	this->isActive = value;
+}
+
 void Object::Info()
 {
-	cout << name << " : " << id << endl;
+	cout << id << " : " << name << endl;
 }
 
 mat4& Object::SetMatrix()

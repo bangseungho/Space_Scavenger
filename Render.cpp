@@ -1,6 +1,7 @@
 #include "Render.h"
 
-Render* Render::mainRender = nullptr;
+Render* Render::objectRender = nullptr;
+Render* Render::uiRender = nullptr;
 
 Render::Render()
 {
@@ -23,10 +24,13 @@ void Render::Draw()
 	{
 		for (auto& obj : layer.second)
 		{
-			if (!obj->isActive)
+			if (!obj->ActiveSelf())
 				continue;
 
-			obj->ObjcetDraw();
+			if (!obj->isDraw)
+				continue;
+
+			obj->ObjectDraw();
 		}
 	}
 }

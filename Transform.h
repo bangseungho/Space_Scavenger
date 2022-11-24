@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Afx.h"
 #include "Vector_AFX.h"
 
 class Transform {

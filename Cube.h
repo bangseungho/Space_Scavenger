@@ -1,6 +1,6 @@
 #pragma once
-#include "Collider.h"
 #include "Render.h"
+#include "Collider.h"
 
 class Cube :public Object
 {
@@ -12,16 +12,15 @@ public:
 	~Cube();
 
 public:
-	void Update();
 	void Init();
+	void Update();
+	void Collision();
 
 private:
 	void MoveMent();
 
 public:
 	Collider collider;
-
-	float yScaleSpeed = 0;
 };
 
 
