@@ -75,7 +75,13 @@
     <ClCompile Include="Player.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MouseControl.cpp">
+    <ClCompile Include="Light.cpp">
+      <Filter>프레임 워크</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Object\Defualt</Filter>
+    </ClCompile>
+    <ClCompile Include="FragmentShader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,7 +119,13 @@
     <ClInclude Include="Player.h">
       <Filter>Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="MouseControl.h">
+    <ClInclude Include="Light.h">
+      <Filter>프레임 워크</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Object\Defualt</Filter>
+    </ClInclude>
+    <ClInclude Include="FragmentShader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -130,6 +142,9 @@
       <Filter>리소스 파일\obj</Filter>
     </Object>
     <Object Include="Player.obj">
+      <Filter>리소스 파일\obj</Filter>
+    </Object>
+    <Object Include="Sphere.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
   </ItemGroup>

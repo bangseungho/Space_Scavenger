@@ -18,8 +18,12 @@ public:
 	void Handle_Evnet(int specialKey);
 	void Collision();
 
+private: // MouseEvent
+	//void MouseWheelEvent(int wheel, int direction, vec2 pos);
+
 public:
 	Collider collider;
 	float speed = 1;
+
 };
 

@@ -33,6 +33,7 @@ void Init()
 
 	Object::modelLocation = glGetUniformLocation(s_program, "modelTransform");
 	Object::vColorLocation = glGetUniformLocation(s_program, "vColor");
+	Object::meterialBlockLoaction = glGetUniformBlockIndex(s_program,"meterial");
 	FrameTime::currentTime = clock();
 
 	windowColor.R = windowColor.G = windowColor.B = 0;
@@ -189,7 +190,7 @@ void Mouse(int button, int state, int x, int y)
 {
 	StartMouse = { (float)x, (float)y };
 	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
+	StartMouse.y = -StartMouse.y;\
 
 	vec2 realStartMouse = RealPosition(StartMouse);
 
@@ -198,6 +199,7 @@ void Mouse(int button, int state, int x, int y)
 		isMouseRight = !isMouseRight;
 	}
 
+	
 	glutPostRedisplay();
 }
 

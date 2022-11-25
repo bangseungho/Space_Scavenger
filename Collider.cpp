@@ -33,6 +33,7 @@ Collider::Collider()
 
 Collider::~Collider()
 {
+	allCollider.erase(remove(allCollider.begin(), allCollider.end(), this), allCollider.end());
 }
 
 void Collider::Init()

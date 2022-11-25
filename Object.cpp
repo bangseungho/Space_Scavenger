@@ -7,8 +7,7 @@ int Object::specialKey;
 
 unsigned int Object::modelLocation;
 unsigned int Object::vColorLocation;
-
-unsigned int Object::objectColorLocation;
+unsigned int Object::meterialBlockLoaction;
 
 Object::Object(): transform(), color()
 {
@@ -46,7 +45,15 @@ void Object::Init()
 
 	glGenBuffers(1, &VAO_VERTICES_NORMALS);
 	glGenBuffers(1, &VAO_NORMAL_INDICES);
+
+	//glGenBuffers(1, &UBO_MATERIAL_BLOCK);
 	glBindVertexArray(VAO);
+
+
+	//glBindBuffer(GL_UNIFORM_BUFFER, UBO_MATERIAL_BLOCK);
+	//glBufferData(GL_UNIFORM_BUFFER, sizeof(vec3) * 3 + sizeof(float), NULL, GL_STATIC_DRAW); // 152 바이트 메모리 할당
+	//glUniformBlockBinding(s_program, meterialBlockLoaction, UBO_MATERIAL_BLOCK);
+	//glBindBufferBase(GL_UNIFORM_BUFFER, 0, buffer_b);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block->vertices_uvs->size(), &block->vertices_uvs[0][0], GL_STATIC_DRAW);

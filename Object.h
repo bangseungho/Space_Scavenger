@@ -3,8 +3,6 @@
 #include "Transform.h"
 #include "Color.h"
 #include "Camera.h"
-#include "MouseControl.h"
-
 class Object {
 public:
 	static int ID_Count;
@@ -15,7 +13,8 @@ public:
 
 	static unsigned int modelLocation;
 	static unsigned int vColorLocation;
-	static unsigned int objectColorLocation;
+
+	static unsigned int meterialBlockLoaction;
 
 public:
 	Object();
@@ -59,6 +58,7 @@ protected:
 	GLuint VAO;
 	GLuint VAO_VERTICES, VAO_VERTICES_UVS, VAO_VERTICES_NORMALS;
 	GLuint VAO_VERTICES_INDEX, VAO_UV_INDICES, VAO_NORMAL_INDICES;
+	GLuint UBO_MATERIAL_BLOCK;
 
 private:
 	bool isActive;

@@ -97,3 +97,10 @@ void Player::Collision()
 			continue;
 	}
 }
+
+//void Player::MouseWheelEvent(int wheel, int direction, vec2 pos)
+//{
+//	vec2 diffPos = (pos - MouseControl::clickPos) * FrameTime::oneFrame * vec2(10);
+//	transform.worldRotation.y -= diffPos.x;
+//	transform.worldRotation.x -= diffPos.y;
+//}
