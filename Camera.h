@@ -17,6 +17,9 @@ public:
 
 	void Info();
 public:
+	void LookAtView(float speed);
+
+public:
 	string name;
 	Transform transform;
 	Transform* target_Pos;

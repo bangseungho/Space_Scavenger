@@ -58,8 +58,10 @@ void Camera::Draw()
 	{
 		mat4 dirModel = translate(target_Pos->model, cameraDirection);
 		mat4 posModel = translate(target_Pos->model, cameraPos);
+
 		vec3 dir = dirModel * vec4(0, 0, 0, 1);
 		vec3 pos = posModel * vec4(0, 0, 0, 1);
+
 		view = lookAt(pos, dir, cameraUp);
 
 		projection = perspective(radians(45.0f), 1.0f, 0.1f, 50.0f);
@@ -96,4 +98,11 @@ void Camera::ProcessInput(int specialKey)
 void Camera::Info()
 {
 	cout << "Camera : " << name << endl;
+}
+
+void Camera::LookAtView(float speed)
+{
+	vec3 dir = cameraPos - cameraDirection;
+	dir = normalize(dir);
+	cameraPos += dir * speed * FrameTime::oneFrame;
 }

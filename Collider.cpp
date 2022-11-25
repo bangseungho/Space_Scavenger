@@ -208,9 +208,9 @@ void Collider::GetBox_OBB()
 
 	for (int i = 0; i < 3; i++)
 	{
-		axis[i] = defaultAxis[i];
-		//axis[i] = model * vec4(defaultAxis[i],1);
-		axisLen[i] = length(defaultAxis[i] * object->transform.worldScale * object->transform.localScale);
+		//axis[i] = defaultAxis[i];
+		axis[i] = model * vec4(defaultAxis[i],1);
+		axisLen[i] = length(axis[i]);
 	}
 		//axis[i] = object->transform.model * vec4(defaultAxis[i], 1);
 
@@ -219,6 +219,8 @@ void Collider::GetBox_OBB()
 		cout << this->tag << endl;
 		for (int i = 0; i < 3; i++)
 			cout << axis[i] << endl;
+		for (int i = 0; i < 3; i++)
+			cout << axisLen[i] << endl;
 	}
 }
 

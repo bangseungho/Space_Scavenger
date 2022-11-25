@@ -50,6 +50,12 @@ void Player::Handle_Evnet(unsigned char key)
 	case 's':
 		transform.LookAt(-speed);
 		break;
+	case 'q':
+		transform.worldRotation.y++;
+		break;
+	case 'e':
+		transform.worldRotation.y--;
+		break;
 	}
 	transform.worldRotation.x += x;
 }
@@ -76,7 +82,5 @@ void Player::Collision()
 
 		if (!collider.OBBCollision(collider, *other))
 			continue;
-
-		cout << "Ãæµ¹ : " << other->tag << endl;
 	}
 }

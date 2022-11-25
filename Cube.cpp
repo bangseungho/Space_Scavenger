@@ -45,13 +45,6 @@ void Cube::Update()
 	MoveMent();
 }
 
-void Cube::Collision()
-{
-	for (const auto& other : Collider::allCollider)
-	{
-	}
-}
-
 void Cube::MoveMent()
 {
 	transform.worldPosition += worldSpeed * FrameTime::oneFrame;

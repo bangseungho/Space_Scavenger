@@ -5,6 +5,7 @@ GLvoid Reshape(int w, int h);
 void KeyBoard(unsigned char key, int x, int y);
 void SpecialKeyBoard(int key, int x, int y);
 void Mouse(int button, int state, int x, int y);
+void MouseWheel(int wheel, int direction, int x, int y);
 void Motion(int x, int y);
 void MouseEntry(int state);
 
@@ -48,9 +49,9 @@ int main(int argc, char** argv)
 		Render::objectRender = &objectRender;
 		fristCamera = &camera;
 		camera.name = "Main";
-		camera.cameraPos.y = 0.5;
-		camera.cameraPos.z = 5;
-		camera.isProjection = true;
+		camera.cameraPos.z = 10;
+		camera.isPitch = true;
+		camera.target_Pos = &player.transform;
 		
 		cube_Obj.transform.worldScale *= 0.1;
 
@@ -69,6 +70,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(KeyBoard);
 	glutSpecialFunc(SpecialKeyBoard);
 	glutMouseFunc(Mouse);
+	glutMouseWheelFunc(MouseWheel);
 	glutPassiveMotionFunc(Motion);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
@@ -152,9 +154,9 @@ void KeyBoard(unsigned char key, int x, int y)
 	Object::key = key;
 	switch (key)
 	{
-	case 'q':
-		exit(1);
-		break;
+	//case 'q':
+	//	exit(1);
+	//	break;
 	}
 
 	glutPostRedisplay();
@@ -192,6 +194,20 @@ void Mouse(int button, int state, int x, int y)
 	}
 
 	glutPostRedisplay();
+}
+
+void MouseWheel(int wheel, int direction, int x, int y)
+{
+	if (direction < 0)
+	{
+		cout << "Zoom out" << endl;
+		camera.LookAtView(1);
+	}
+	else
+	{
+		cout << "Zoom in " << endl;
+		camera.LookAtView(-1);
+	}
 }
 
 void Motion(int x, int y)
