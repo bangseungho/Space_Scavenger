@@ -177,7 +177,7 @@ bool Collider::Collide_XZ(Collider& other)
 // 즉 가로 세로 높이의 크기를 정해주면 된다.
 void Collider::SetBox_OBB(vec3 d)
 {
-	size = d;
+	size = d/2;
 	for (int i = 0; i < 3; i++)
 	{
 		defaultAxis[i] = axis[i] = vec3(0);
@@ -246,6 +246,7 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 
 	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
 	dis = b.object->transform.worldPosition - a.object->transform.worldPosition;
+
 	for (int n = 0; n < 3; n++)
 	{
 		d[n] = Vec3Dot(dis, a.axis[n]);
@@ -258,14 +259,16 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 		}
 		r = abs(d[n]);
 		r1 = a.axisLen[n];
-		r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
+		//r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
+		r2 = absC[n][0] + absC[n][1] + absC[n][2];
 		if (r > r1 + r2)
 			return false;
 	}
 	for (int n = 0; n < 3; n++)
 	{
 		r = abs(Vec3Dot(dis, b.axis[n]));
-		r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
+		//r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
+		r1 = absC[0][n] + absC[1][n] + absC[2][n];
 		r2 = b.axisLen[n];
 		if (r > r1 + r2)
 			return false;

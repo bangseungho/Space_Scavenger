@@ -10,12 +10,12 @@ Player::Player()
 	if (_Block == nullptr)
 	{
 		_Block = new ObjectBlock;
-		ReadObj((char*)"Player.obj", *_Block);
+		ReadObj((char*)"Cube.obj", *_Block);
 	}
 
 	block = _Block;
 
-	collider.SetBox_OBB(block->max);
+	collider.SetBox_OBB(block->max -block->min);
 	collider.object = this;
 }
 
@@ -29,7 +29,7 @@ void Player::Init()
 	Object::Init();
 	collider.tag = "player";
 
-	transform.worldScale *= 0.01;
+	transform.worldScale *= 0.1;
 	Render::objectRender->AddObject(this);
 }
 

@@ -15,7 +15,7 @@ Cube::Cube()
 	block = cube_Block;
 
 	collider.tag = "Cube";
-	collider.SetBox_OBB(block->max);
+	collider.SetBox_OBB(block->max - block->min);
 	collider.object = this;
 }
 

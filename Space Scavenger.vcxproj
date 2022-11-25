@@ -133,8 +133,8 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="FragmentShader.cpp" />
     <ClCompile Include="FrameTime.cpp" />
+    <ClCompile Include="Iron.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -144,6 +144,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
@@ -154,12 +155,13 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="FragmentShader.h" />
     <ClInclude Include="FrameTime.h" />
+    <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector_AFX.h" />

@@ -15,6 +15,7 @@ Iron::Iron()
 	block = _Block;
 
 	collider.SetBox_OBB(block->max);
+
 }
 
 Iron::~Iron()

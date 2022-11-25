@@ -14,6 +14,6 @@ public:
 	Collider collider;
 
 private:
-	unsigned int amount = 0;
-	vec3 moveDirection = vec3(0);
+	unsigned int amount;
+	vec3 moveDirection;
 };

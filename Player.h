@@ -1,6 +1,8 @@
 #pragma once
 #include "Render.h"
 #include "Collider.h"
+
+#include "Cube.h"
 class Player : public Object
 {
 public:
