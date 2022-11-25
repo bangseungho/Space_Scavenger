@@ -31,6 +31,9 @@
     <Filter Include="Object\Player">
       <UniqueIdentifier>{2668cdb6-39dc-44ce-8b38-c789df3ef4b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\obj">
+      <UniqueIdentifier>{f5f77f01-f538-4417-9bba-5c91c23b9b2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="reference_main.cpp">
@@ -118,7 +121,10 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="Cube.obj">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\obj</Filter>
+    </Object>
+    <Object Include="Player.obj">
+      <Filter>리소스 파일\obj</Filter>
     </Object>
   </ItemGroup>
 </Project>

@@ -46,12 +46,12 @@ void Object::Init()
 	glGenBuffers(1, &VAO_NORMAL_INDICES);
 	glBindVertexArray(VAO);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block.vertices_uvs->size(), &block.vertices_uvs[0][0], GL_STATIC_DRAW);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_UV_INDICES);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.uvIndices->size(), &block.uvIndices[0][0], GL_STATIC_DRAW);
-	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)0); //--- 텍스쳐
-	//glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block.vertices_uvs->size(), &block.vertices_uvs[0][0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_UV_INDICES);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.uvIndices->size(), &block.uvIndices[0][0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)0); //--- 텍스쳐
 
 	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_NORMALS);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices_normals->size(), &block.vertices_normals[0][0], GL_STATIC_DRAW);

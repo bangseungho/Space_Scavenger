@@ -72,8 +72,6 @@ typedef struct ObjectBlock {
 
 Face operator- (const Face my, int other);
 
-Vector2 RealPosition(Vector2 pos);
-Vector2 Coordinate(Vector2 pos);
 Vector2 operator+ (const Vector2 my, const Vector2 other);
 Vector2 operator+ (const Vector2 my, const int other);
 Vector2 operator- (const Vector2 my, const Vector2 other);
@@ -92,10 +90,8 @@ vec3 operator* (const vec3 my, const float other);
 vec3 operator/ (const vec3 my, const float other);
 bool operator== (const vec3 my, const float other);
 
-extern Vector2 window_RealPos;
-extern Vector2 StartMouse;
+extern vec2 StartMouse;
 
-float DistanceVec3(const vec3 my, const vec3 other);
 float RandomFloat(float first, float second);
 
 char* filetobuf(const char* file);

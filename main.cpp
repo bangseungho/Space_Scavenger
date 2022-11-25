@@ -1,3 +1,4 @@
+#include "Cube.h"
 #include "Player.h"
 
 void drawScene();
@@ -49,7 +50,7 @@ int main(int argc, char** argv)
 		Render::objectRender = &objectRender;
 		fristCamera = &camera;
 		camera.name = "Main";
-		camera.cameraPos.z = 10;
+		camera.cameraPos.z = 100;
 		camera.isPitch = true;
 		camera.target_Pos = &player.transform;
 		
@@ -186,7 +187,7 @@ void Mouse(int button, int state, int x, int y)
 	StartMouse = Coordinate(StartMouse);
 	StartMouse.y = -StartMouse.y;
 
-	Vector2 realStartMouse = RealPosition(StartMouse);
+	vec2 realStartMouse = RealPosition(StartMouse);
 
 	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
@@ -212,13 +213,16 @@ void MouseWheel(int wheel, int direction, int x, int y)
 
 void Motion(int x, int y)
 {
-	Vector2 mouse_Pos = { (float)x, (float)y };
+	vec2 mouse_Pos = { (float)x, (float)y };
 	mouse_Pos = Coordinate(mouse_Pos);
 	mouse_Pos.y = -mouse_Pos.y;
 
 	//ShowCursor(isMouseRight);
 	if (!isMouseRight)
 	{
+		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame * vec2(10);
+		player.transform.worldRotation.y -= diffPos.x;
+		player.transform.worldRotation.x -= diffPos.y;
 	}
 
 	StartMouse = { (float)x, (float)y };

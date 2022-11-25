@@ -16,7 +16,9 @@ Camera::Camera()
 	isProjection_XZ = false;
 	isPitch = false;
 
+	velocity = vec3(0);
 	cameraPos = vec3(0);
+	realCameraPos = vec3(0);
 	cameraDirection = vec3(0);
 }
 
@@ -56,13 +58,20 @@ void Camera::Draw()
 	}
 	else if (isPitch)
 	{
-		mat4 dirModel = translate(target_Pos->model, cameraDirection);
-		mat4 posModel = translate(target_Pos->model, cameraPos);
+		vec3 dir = translate(target_Pos->model, cameraDirection) *vec4(0, 0, 0, 1);
+		vec3 pos = translate(target_Pos->model, cameraPos) *vec4(0, 0, 0, 1);
 
-		vec3 dir = dirModel * vec4(0, 0, 0, 1);
-		vec3 pos = posModel * vec4(0, 0, 0, 1);
+		vec3 diffDis = realCameraPos - pos;
+		vec3 diffSpeed = -diffDis - 2.0f * velocity;
+		if (length(diffDis) < 0.01)
+		{
+			diffSpeed = vec3(0);
+			realCameraPos = pos;
+		}
+		velocity += diffSpeed * FrameTime::oneFrame;
+		realCameraPos += velocity * FrameTime::oneFrame;
 
-		view = lookAt(pos, dir, cameraUp);
+		view = lookAt(realCameraPos, dir, cameraUp);
 
 		projection = perspective(radians(45.0f), 1.0f, 0.1f, 50.0f);
 	}

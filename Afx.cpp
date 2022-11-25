@@ -27,24 +27,6 @@ Face operator-(const Face my, int other)
 	return result;
 }
 
-Vector2 RealPosition(Vector2 pos)
-{
-	Vector2 real_pos;
-
-	real_pos.x = pos.x / windowSize_W * 2;
-	real_pos.y = pos.y / windowSize_H * 2;
-
-	return real_pos;
-}
-
-Vector2 Coordinate(Vector2 pos)
-{
-	Vector2 result;
-	result.x = pos.x - windowSize_W / 2;
-	result.y = pos.y - windowSize_H / 2;
-
-	return result;
-}
 
 Vector2 operator+ (const Vector2 my, const Vector2 other)
 {
@@ -174,18 +156,8 @@ bool operator== (const vec3 my, const float other)
 	return true;
 }
 
-Vector2 window_RealPos = RealPosition({ 1, 1 });
-Vector2 StartMouse = { 0,0 };
+vec2 StartMouse = vec2(0);
 
-
-
-float DistanceVec3(const vec3 my, const vec3 other)
-{
-	return sqrt(abs(pow(my.x - other.x, 2)) +
-		abs(pow(my.y - other.y, 2)) +
-		abs(pow(my.z - other.z, 2))
-	);
-}
 #pragma endregion
 float RandomFloat(float first, float second)
 {

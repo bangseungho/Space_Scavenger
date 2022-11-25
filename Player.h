@@ -1,9 +1,11 @@
 #pragma once
-#include "Cube.h"
-class Player : public Cube
+#include "Render.h"
+#include "Collider.h"
+class Player : public Object
 {
 public:
 	static Player* Instance;
+	static ObjectBlock* _Block;
 
 public:
 	Player();
@@ -17,6 +19,7 @@ public:
 	void Collision();
 
 public:
+	Collider collider;
 	float speed = 1;
 };
 

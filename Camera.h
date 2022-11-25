@@ -28,7 +28,9 @@ public:
 	bool isProjection_XY;
 	bool isProjection_XZ;
 	bool isPitch;
+	vec3 velocity; // 이동방향
 	vec3 cameraPos; //--- 카메라 위치
+	vec3 realCameraPos;	// 실제 카메라 위치
 	vec3 cameraFront = vec3(0, 0, -1);
 	vec3 cameraDirection; //--- 카메라 바라보는 방향
 	vec3 cameraUp = vec3(0.0f, 1.0f, 0.0f);
