@@ -135,6 +135,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseControl.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="reference_main.cpp">
@@ -152,6 +153,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="FrameTime.h" />
+    <ClInclude Include="MouseControl.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />

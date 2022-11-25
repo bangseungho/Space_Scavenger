@@ -13,22 +13,15 @@ Player::Player()
 		ReadObj((char*)"Player.obj", *_Block);
 	}
 
-	block.vertices = _Block->vertices;
-	block.vertices_uvs = _Block->vertices_uvs;
-	block.vertices_normals = _Block->vertices_normals;
+	block = _Block;
 
-	block.vertexIndices = _Block->vertexIndices;
-	block.uvIndices = _Block->uvIndices;
-	block.normalIndices = _Block->normalIndices;
-
-	block.max = _Block->max;
-
-	collider.SetBox_OBB(block.max);
+	collider.SetBox_OBB(block->max);
 	collider.object = this;
 }
 
 Player::~Player()
 {
+	delete _Block;
 }
 
 void Player::Init()

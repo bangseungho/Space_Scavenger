@@ -27,6 +27,30 @@ list<Object*> Object::allObject;
 Cube cube_Obj;
 Player player;
 
+void Init()
+{
+	Render::objectRender = &objectRender;
+
+	Object::modelLocation = glGetUniformLocation(s_program, "modelTransform");
+	Object::vColorLocation = glGetUniformLocation(s_program, "vColor");
+	FrameTime::currentTime = clock();
+
+	windowColor.R = windowColor.G = windowColor.B = 0;
+
+	fristCamera = &camera;
+	camera.name = "Main";
+	camera.cameraPos.z = 100;
+	camera.isPitch = true;
+	camera.target_Pos = &player.transform;
+
+	cube_Obj.transform.worldScale *= 0.1;
+
+	for (const auto& obj : Object::allObject)
+		obj->Init();
+	for (const auto& collider : Collider::allCollider)
+		collider->Init();
+}
+
 
 int main(int argc, char** argv)
 {
@@ -44,27 +68,7 @@ int main(int argc, char** argv)
 	glewInit();
 
 	InitShader();
-	{
-		windowColor.R = windowColor.G = windowColor.B = 0;
-
-		Render::objectRender = &objectRender;
-		fristCamera = &camera;
-		camera.name = "Main";
-		camera.cameraPos.z = 100;
-		camera.isPitch = true;
-		camera.target_Pos = &player.transform;
-		
-		cube_Obj.transform.worldScale *= 0.1;
-
-		Object::modelLocation = glGetUniformLocation(s_program, "modelTransform");
-		Object::vColorLocation = glGetUniformLocation(s_program, "vColor");
-		FrameTime::currentTime = clock();
-
-		for (const auto& obj : Object::allObject)
-			obj->Init();
-		for (const auto& collider : Collider::allCollider)
-			collider->Init();
-	}
+	Init();
 
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
@@ -202,12 +206,12 @@ void MouseWheel(int wheel, int direction, int x, int y)
 	if (direction < 0)
 	{
 		cout << "Zoom out" << endl;
-		camera.LookAtView(1);
+		camera.LookAtView(10);
 	}
 	else
 	{
 		cout << "Zoom in " << endl;
-		camera.LookAtView(-1);
+		camera.LookAtView(-10);
 	}
 }
 

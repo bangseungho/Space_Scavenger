@@ -58,8 +58,8 @@ void Camera::Draw()
 	}
 	else if (isPitch)
 	{
-		vec3 dir = translate(target_Pos->model, cameraDirection) *vec4(0, 0, 0, 1);
-		vec3 pos = translate(target_Pos->model, cameraPos) *vec4(0, 0, 0, 1);
+		vec3 dir = translate(target_Pos->model, cameraDirection) * vec4(0, 0, 0, 1);
+		vec3 pos = translate(target_Pos->model, cameraPos) * vec4(0, 0, 0, 1);
 
 		vec3 diffDis = realCameraPos - pos;
 		vec3 diffSpeed = -diffDis - 2.0f * velocity;
@@ -70,6 +70,7 @@ void Camera::Draw()
 		}
 		velocity += diffSpeed * FrameTime::oneFrame;
 		realCameraPos += velocity * FrameTime::oneFrame;
+
 
 		view = lookAt(realCameraPos, dir, cameraUp);
 
@@ -111,7 +112,10 @@ void Camera::Info()
 
 void Camera::LookAtView(float speed)
 {
-	vec3 dir = cameraPos - cameraDirection;
-	dir = normalize(dir);
-	cameraPos += dir * speed * FrameTime::oneFrame;
+	vec3 diff = normalize(realCameraPos - cameraDirection) * speed * FrameTime::oneFrame * 100;
+
+	cameraPos += diff;
+	
+	diff *= target_Pos->worldScale * target_Pos->localScale;
+	realCameraPos += diff;
 }

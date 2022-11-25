@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Color.h"
 #include "Camera.h"
+#include "MouseControl.h"
 
 class Object {
 public:
@@ -44,7 +45,7 @@ public:
 	Color color;
 	bool isDraw = true;
 
-	ObjectBlock block;
+	ObjectBlock* block;
 public:
 	vec3 worldSpeed;
 	vec3 localSpeed;
