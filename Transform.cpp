@@ -72,7 +72,7 @@ void Transform::LookAt(float speed)
 	float s = speed * FrameTime::oneFrame;
 
 	worldPosition.x -= sin(y + z) * s;
-	worldPosition.y -= sin(z + x) * s;
+	worldPosition.y -= -sin(z + x) * s;
 	worldPosition.z -= cos(x + y) * s;
 
 }

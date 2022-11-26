@@ -10,7 +10,7 @@ Player::Player()
 	if (_Block == nullptr)
 	{
 		_Block = new ObjectBlock;
-		ReadObj((char*)"Cube.obj", *_Block);
+		ReadObj((char*)"Player.obj", *_Block);
 	}
 
 	block = _Block;
@@ -29,7 +29,7 @@ void Player::Init()
 	Object::Init();
 	collider.tag = "player";
 
-	transform.worldScale *= 0.1;
+	transform.worldScale *= 0.01;
 	Render::objectRender->AddObject(this);
 }
 
@@ -43,8 +43,6 @@ void Player::Update()
 void Player::Handle_Evnet(unsigned char key)
 {
 	float frameSpeed = speed * FrameTime::oneFrame;
-	float x = transform.worldRotation.x;
-	transform.worldRotation.x -= x;
 	switch (key)
 	{
 	case 'a':
@@ -70,7 +68,6 @@ void Player::Handle_Evnet(unsigned char key)
 		transform.worldRotation.y--;
 		break;
 	}
-	transform.worldRotation.x += x;
 }
 
 void Player::Handle_Evnet(int specialKey)
