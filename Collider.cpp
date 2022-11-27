@@ -78,7 +78,7 @@ void Collider::DrawBox()
 	if (!isCollide)
 		return;
 
-	mat4 collideModel = scale(object->transform.model, size);
+	mat4 collideModel = scale(object->transform.model, vec3(1.00001));
 
 	glUniformMatrix4fv(Object::modelLocation, 1, GL_FALSE, value_ptr(collideModel));
 	glUniform4f(Object::vColorLocation, color.R, color.G, color.B, color.A);
@@ -175,7 +175,7 @@ bool Collider::Collide_XZ(Collider& other)
 
 // Right Front Top 점을 정해주면 된다.
 // 즉 가로 세로 높이의 크기를 정해주면 된다.
-void Collider::SetBox_OBB(vec3 d)
+void Collider::SetBox_OBB(const vec3& d)
 {
 	size = d/2;
 	for (int i = 0; i < 3; i++)
@@ -212,6 +212,7 @@ void Collider::GetBox_OBB()
 		//axis[i] = defaultAxis[i];
 		axis[i] = model * vec4(defaultAxis[i],1);
 		axisLen[i] = length(axis[i]);
+		axis[i] = normalize(axis[i]);
 	}
 		//axis[i] = object->transform.model * vec4(defaultAxis[i], 1);
 
@@ -249,7 +250,6 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 
 	for (int n = 0; n < 3; n++)
 	{
-		d[n] = Vec3Dot(dis, a.axis[n]);
 		for (int i = 0; i < 3; i++)
 		{
 			c[n][i] = Vec3Dot(a.axis[n], b.axis[i]);
@@ -257,18 +257,19 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 			if (absC[n][i] > cutoff)
 				isExitsParallelPair = true;
 		}
+		d[n] = Vec3Dot(dis, a.axis[n]);
 		r = abs(d[n]);
 		r1 = a.axisLen[n];
-		//r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
-		r2 = absC[n][0] + absC[n][1] + absC[n][2];
+		r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
+		//r2 = absC[n][0] + absC[n][1] + absC[n][2];
 		if (r > r1 + r2)
 			return false;
 	}
 	for (int n = 0; n < 3; n++)
 	{
 		r = abs(Vec3Dot(dis, b.axis[n]));
-		//r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
-		r1 = absC[0][n] + absC[1][n] + absC[2][n];
+		r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
+		//r1 = absC[0][n] + absC[1][n] + absC[2][n];
 		r2 = b.axisLen[n];
 		if (r > r1 + r2)
 			return false;

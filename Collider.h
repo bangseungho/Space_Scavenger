@@ -22,7 +22,7 @@ public:
 	bool Collide_XZ(Collider& other);
 
 public:
-	void SetBox_OBB(vec3 d);
+	void SetBox_OBB(const vec3& d);
 	void GetBox_OBB();
 	bool OBBCollision(const Collider& a,const Collider& b);
 
