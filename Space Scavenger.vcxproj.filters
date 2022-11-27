@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -39,6 +35,12 @@
     </Filter>
     <Filter Include="Object\Resource\Contain">
       <UniqueIdentifier>{98b2ad9c-4c8e-4b92-850a-f91dc933ac71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiObject">
+      <UniqueIdentifier>{9ae96dcc-1a60-4d6c-8f5f-98d7b0a31ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\image">
+      <UniqueIdentifier>{283aa283-98ae-424c-b5d5-c38e4eacc727}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,21 @@
     <ClCompile Include="Iron.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
+    <ClCompile Include="GuiObject.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>GuiObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatBox.cpp">
+      <Filter>GuiObject</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiRender.cpp">
+      <Filter>프레임 워크\소스</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -140,12 +157,33 @@
     <ClInclude Include="Iron.h">
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiObject.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>GuiObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatBox.h">
+      <Filter>GuiObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiRender.h">
+      <Filter>프레임 워크\헤더</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="Vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="GuiVertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="GuiFragment.glsl">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -159,5 +197,13 @@
     <Object Include="Sphere.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="map.png">
+      <Filter>리소스 파일\image</Filter>
+    </Image>
+    <Image Include="chatbox.png">
+      <Filter>리소스 파일\image</Filter>
+    </Image>
   </ItemGroup>
 </Project>

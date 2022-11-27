@@ -1,7 +1,6 @@
 #include "Render.h"
 
 Render* Render::objectRender = nullptr;
-Render* Render::uiRender = nullptr;
 
 Render::Render()
 {

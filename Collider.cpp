@@ -75,6 +75,8 @@ void Collider::Init()
 
 void Collider::DrawBox()
 {
+	glUseProgram(s_program);
+
 	if (!isCollide)
 		return;
 

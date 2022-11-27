@@ -79,6 +79,9 @@ void Object::Init()
 
 void Object::ObjectDraw()
 {
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
 	glUniform4f(vColorLocation, color.R, color.G, color.B, color.A);
 

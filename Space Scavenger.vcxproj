@@ -130,13 +130,18 @@
   <ItemGroup>
     <ClCompile Include="Afx.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ChatBox.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="FrameTime.cpp" />
+    <ClCompile Include="GuiObject.cpp" />
+    <ClCompile Include="GuiRender.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="Iron.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="reference_main.cpp">
@@ -152,17 +157,22 @@
   <ItemGroup>
     <ClInclude Include="Afx.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ChatBox.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="FrameTime.h" />
+    <ClInclude Include="GuiObject.h" />
+    <ClInclude Include="GuiRender.h" />
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector_AFX.h" />
   </ItemGroup>
@@ -179,7 +189,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
+    <None Include="GuiFragment.glsl" />
+    <None Include="GuiVertex.glsl" />
     <None Include="Vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="chatbox.png" />
+    <Image Include="map.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

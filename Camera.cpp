@@ -44,7 +44,7 @@ void Camera::Draw()
 	{
 		view = lookAt(cameraPos, vec3(0), cameraUp);
 
-		projection = perspective(radians(45.0f), 1.0f, 0.1f, 50.0f);
+		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 
 		projection = translate(projection, transform.localPosition);
 		projection = rotate(projection, radians(transform.localRotation.x), vec3(1.0, 0.0, 0.0));
@@ -74,7 +74,7 @@ void Camera::Draw()
 
 		view = lookAt(realCameraPos, dir, cameraUp);
 
-		projection = perspective(radians(45.0f), 1.0f, 0.1f, 50.0f);
+		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 	}
 
 	unsigned int viewLocation = glGetUniformLocation(s_program, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤

@@ -4,10 +4,16 @@ GLuint s_program;
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
 
+GLuint gui_s_program;
+GLuint gui_vertexShader;
+GLuint gui_fragmentShader;
+
 char default_Cube[] = "Cube.obj";
 
 int windowSize_W = 900;
 int windowSize_H = 900;
+
+double aspect_ratio = windowSize_W / windowSize_H;
 
 bool isFullScreen = false;
 bool isOnTimer = false;
@@ -191,13 +197,18 @@ char* filetobuf(const char* file)
 void make_vertexShaders()
 {
 	GLchar* vertexSource;
+	GLchar* gui_vertexSource;
 	//--- 버텍스 세이더 읽어 저장하고 컴파일 하기
 	//--- filetobuf: 사용자정의 함수로 텍스트를 읽어서 문자열에 저장하는 함수
 	vertexSource = filetobuf("Vertex.glsl");
+	gui_vertexSource = filetobuf("GuiVertex.glsl");
 
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	gui_vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, (const GLchar**)&vertexSource, 0);
 	glCompileShader(vertexShader);
+	glShaderSource(gui_vertexShader, 1, (const GLchar**)&gui_vertexSource, 0);
+	glCompileShader(gui_vertexShader);
 
 	GLint result;
 	GLchar errorLog[512];
@@ -208,17 +219,32 @@ void make_vertexShaders()
 		cerr << "ERROR: vertex shader 컴파일 실패\n" << errorLog << endl;
 		return;
 	}
+
+	GLint gui_result;
+	GLchar gui_errorLog[512];
+	glGetShaderiv(gui_vertexShader, GL_COMPILE_STATUS, &gui_result);
+	if (!gui_result)
+	{
+		glGetShaderInfoLog(gui_vertexShader, 512, NULL, gui_errorLog);
+		cerr << "ERROR: vertex shader 컴파일 실패\n" << gui_errorLog << endl;
+		return;
+	}
 }
 
 void make_fragmentShaders()
 {
 	GLchar* fragmentSource;
+	GLchar* gui_fragmentSource;
 	//--- 프래그먼트 세이더 읽어 저장하고 컴파일하기
 	fragmentSource = filetobuf("Fragment.glsl"); // 프래그세이더 읽어오기
+	gui_fragmentSource = filetobuf("GuiFragment.glsl"); // 프래그세이더 읽어오기
 
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	gui_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, (const GLchar**)&fragmentSource, 0);
 	glCompileShader(fragmentShader);
+	glShaderSource(gui_fragmentShader, 1, (const GLchar**)&gui_fragmentSource, 0);
+	glCompileShader(gui_fragmentShader);
 
 	GLint result;
 	GLchar errorLog[512];
@@ -227,6 +253,16 @@ void make_fragmentShaders()
 	{
 		glGetShaderInfoLog(fragmentShader, 512, NULL, errorLog);
 		cerr << "ERROR: fragment shader 컴파일 실패\n" << errorLog << endl;
+		return;
+	}
+
+	GLint gui_result;
+	GLchar gui_errorLog[512];
+	glGetShaderiv(gui_fragmentShader, GL_COMPILE_STATUS, &gui_result);
+	if (!gui_result)
+	{
+		glGetShaderInfoLog(gui_fragmentShader, 512, NULL, gui_errorLog);
+		cerr << "ERROR: fragment shader 컴파일 실패\n" << gui_errorLog << endl;
 		return;
 	}
 }
@@ -240,9 +276,13 @@ void InitShader()
 	make_fragmentShaders(); //--- 프래그먼트 세이더 만들기
 	//-- shader Program
 	s_program = glCreateProgram();
+	gui_s_program = glCreateProgram();
 	glAttachShader(s_program, vertexShader);
+	glAttachShader(gui_s_program, gui_vertexShader);
 	glAttachShader(s_program, fragmentShader);
+	glAttachShader(gui_s_program, gui_fragmentShader);
 	glLinkProgram(s_program);
+	glLinkProgram(gui_s_program);
 	glGetProgramiv(s_program, GL_LINK_STATUS, &result); // ---세이더가 잘 연결되었는지 체크하기
 	if (!result) {
 		glGetProgramInfoLog(s_program, 512, NULL, errorLog);
@@ -251,9 +291,12 @@ void InitShader()
 	}
 	//--- 세이더 삭제하기
 	glDeleteShader(vertexShader);
+	glDeleteShader(gui_vertexShader);
 	glDeleteShader(fragmentShader);
+	glDeleteShader(gui_fragmentShader);
 	//--- Shader Program 사용하기
 	glUseProgram(s_program);
+	glUseProgram(gui_s_program);
 }
 
 void FrameTimer(int value)

@@ -1,5 +1,7 @@
 #include "Cube.h"
 #include "Player.h"
+#include "Map.h"
+#include "ChatBox.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -21,15 +23,20 @@ bool isMouseRight = false;
 Camera* fristCamera;
 Camera camera;
 Render objectRender;
+guiRender gui_objectRender;
 
 list<Object*> Object::allObject;
+list<GuiObject*> GuiObject::allGuiObject;
 
 Cube cube_Obj;
 Player player;
+Map map;
+ChatBox chat_box;
 
 void Init()
 {
 	Render::objectRender = &objectRender;
+	guiRender::gui_objectRender = &gui_objectRender;
 
 	Object::modelLocation = glGetUniformLocation(s_program, "modelTransform");
 	Object::vColorLocation = glGetUniformLocation(s_program, "vColor");
@@ -37,7 +44,6 @@ void Init()
 	FrameTime::currentTime = clock();
 
 	windowColor.R = windowColor.G = windowColor.B = 0;
-
 	fristCamera = &camera;
 	camera.name = "Main";
 	camera.cameraPos.z = 100;
@@ -46,6 +52,8 @@ void Init()
 
 	cube_Obj.transform.worldScale *= 0.1;
 
+	for (const auto& gui_obj : GuiObject::allGuiObject)
+		gui_obj->Init();
 	for (const auto& obj : Object::allObject)
 		obj->Init();
 	for (const auto& collider : Collider::allCollider)
@@ -60,9 +68,6 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(windowSize_W, windowSize_H);
 	glutCreateWindow("21");
-	
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
 
 	//--- GLEW 초기화하기
 	glewExperimental = GL_TRUE;
@@ -85,7 +90,6 @@ int main(int argc, char** argv)
 void drawScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 	// 모든 오브젝트 업데이트
 	for (const auto& obj : Object::allObject)
@@ -119,6 +123,18 @@ void drawScene()
 		obj->Collision();
 	}
 
+	// GUI 모든 오브젝트 업데이트
+	for (const auto& gui_obj : GuiObject::allGuiObject)
+	{
+		gui_obj->Update();
+	}
+
+	// GUI 모든 오브젝트 세팅
+	for (const auto& gui_obj : GuiObject::allGuiObject)
+	{
+		gui_obj->SetMatrix();
+	}
+
 	// 충돌한 물체들의 밀림 처리
 	//for (const auto& collider : Collider::allCollider)
 	//	collider->OnTrigger();
@@ -129,6 +145,7 @@ void drawScene()
 		Camera::mainCamera = fristCamera;
 
 		objectRender.Draw();
+		gui_objectRender.Draw();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		for (const auto& collider : Collider::allCollider)
@@ -150,6 +167,8 @@ void drawScene()
 GLvoid Reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
+
+	aspect_ratio = GLfloat(w) / h;
 
 	windowSize_W = w;
 	windowSize_H = h;

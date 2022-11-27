@@ -5,7 +5,6 @@ class Render
 {
 public:
 	static Render* objectRender;
-	static Render* uiRender;
 public:
 	Render();
 	~Render();

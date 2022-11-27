@@ -11,12 +11,13 @@
 #include <stdio.h>
 #include "FrameTime.h"
 
+
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <glm/glm.hpp>
-#include <glm/ext.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 using namespace glm;
@@ -29,8 +30,13 @@ extern GLuint s_program;
 extern GLuint vertexShader; //--- 버텍스 세이더 객체
 extern GLuint fragmentShader; //--- 프래그먼트 세이더 객체
 
+extern GLuint gui_s_program;
+extern GLuint gui_vertexShader;
+extern GLuint gui_fragmentShader;
+
 extern int windowSize_W;
 extern int windowSize_H;
+extern double aspect_ratio;
 
 extern bool isFullScreen;
 
