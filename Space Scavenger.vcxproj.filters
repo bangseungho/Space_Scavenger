@@ -42,13 +42,13 @@
     <Filter Include="FramWork\헤더">
       <UniqueIdentifier>{56c74fee-2469-4c79-9d10-a341e68fbb28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FramWork\GameObject">
+      <UniqueIdentifier>{bdac6bbd-2aff-4d96-852e-d6a5fadf5c7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="FrameTime.cpp">
       <Filter>FramWork\소스</Filter>
@@ -59,16 +59,10 @@
     <ClCompile Include="Collider.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
     <ClCompile Include="Afx.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Render.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
@@ -92,30 +86,39 @@
     <ClCompile Include="Iron.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
-    <ClCompile Include="GuiObject.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>GuiObject</Filter>
     </ClCompile>
     <ClCompile Include="ChatBox.cpp">
       <Filter>GuiObject</Filter>
     </ClCompile>
-    <ClCompile Include="GuiRender.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
     <ClCompile Include="ResourcePool.cpp">
       <Filter>Object\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>FramWork\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiRender.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiObject.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>FramWork\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
@@ -127,13 +130,7 @@
     <ClInclude Include="FrameTime.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
@@ -160,22 +157,36 @@
     <ClInclude Include="stb_image.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
-    <ClInclude Include="GuiObject.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>GuiObject</Filter>
     </ClInclude>
     <ClInclude Include="ChatBox.h">
       <Filter>GuiObject</Filter>
     </ClInclude>
-    <ClInclude Include="GuiRender.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
     <ClInclude Include="ResourcePool.h">
       <Filter>Object\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Timer.h">
+      <Filter>FramWork\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiRender.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiObject.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

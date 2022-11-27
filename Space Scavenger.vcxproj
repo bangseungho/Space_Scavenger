@@ -148,6 +148,7 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourcePool.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="ResourcePool.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector_AFX.h" />
   </ItemGroup>

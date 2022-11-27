@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Map.h"
 #include "ChatBox.h"
+#include "ResourcePool.cpp"	// 템플릿 클래스는 cpp를 인클루드 해야함
+#include "Iron.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -33,6 +35,8 @@ Cube cube_Obj;
 Player player;
 Map map;
 ChatBox chat_box;
+
+ResourcePool<Iron, 1> ironPool(1, 1.0f);
 
 void Init()
 {
