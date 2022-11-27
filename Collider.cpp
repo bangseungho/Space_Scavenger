@@ -1,23 +1,19 @@
 #include "Collider.h"
 
-ObjectBlock* Collider::box_Block = nullptr;
+VertexBlock* Collider::_Block = nullptr;
 list<Collider*> Collider::allCollider;
 bool Collider::isPrint = false;
 
 Collider::Collider()
 {
-	if (box_Block == nullptr)
-	{
-		box_Block = new ObjectBlock;
-		ReadObj((char*)"Cube.obj", *box_Block);
-	}
-	block.vertices = box_Block->vertices;
-	block.vertices_uvs = box_Block->vertices_uvs;
-	block.vertices_normals = box_Block->vertices_normals;
 
-	block.vertexIndices = box_Block->vertexIndices;
-	block.uvIndices = box_Block->uvIndices;
-	block.normalIndices = box_Block->normalIndices;
+	if (_Block == nullptr)
+	{
+		_Block = new VertexBlock;
+		ReadObj((char*)"Cube.obj", *_Block);
+	}
+
+	block = _Block;
 
 	tag = "NULL";
 	color.R = 0;
@@ -43,33 +39,13 @@ void Collider::Init()
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VAO_VERTICES);
 	glGenBuffers(1, &VAO_VERTICES_INDEX);
-
-	glGenBuffers(1, &VAO_VERTICES_UVS);
-	glGenBuffers(1, &VAO_UV_INDICES);
-
-	glGenBuffers(1, &VAO_VERTICES_NORMALS);
-	glGenBuffers(1, &VAO_NORMAL_INDICES);
 	glBindVertexArray(VAO);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_UVS);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * block.vertices_uvs->size(), &block.vertices_uvs[0][0], GL_STATIC_DRAW);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_UV_INDICES);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.uvIndices->size(), &block.uvIndices[0][0], GL_STATIC_DRAW);
-	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)0); //--- 텍스쳐
-	//glEnableVertexAttribArray(1);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES_NORMALS);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices_normals->size(), &block.vertices_normals[0][0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_NORMAL_INDICES);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.normalIndices->size(), &block.normalIndices[0][0], GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 노말 속성
-
 	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block.vertices->size(), &block.vertices[0][0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block->vertices->size(), &block->vertices[0][0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_VERTICES_INDEX); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block.vertexIndices->size(), &block.vertexIndices[0][0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block->vertexIndices->size(), &block->vertexIndices[0][0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 }
 
@@ -82,99 +58,15 @@ void Collider::DrawBox()
 
 	mat4 collideModel = scale(object->transform.model, vec3(1.00001));
 
-	glUniformMatrix4fv(Object::modelLocation, 1, GL_FALSE, value_ptr(collideModel));
-	glUniform4f(Object::vColorLocation, color.R, color.G, color.B, color.A);
+	glUniformMatrix4fv(Mesh::modelLocation, 1, GL_FALSE, value_ptr(collideModel));
+	glUniform4f(Mesh::vColorLocation, color.R, color.G, color.B, color.A);
 
 	glBindVertexArray(VAO);
 
 	//glPointSize(5.0f);
 	//glDrawArrays(GL_POINTS, 0, cBlock.vertices.size());
-	glDrawElements(GL_TRIANGLES, block.vertexIndices->size() * 3, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, block->vertexIndices->size() * 3, GL_UNSIGNED_SHORT, 0);
 }
-
-void Collider::SetBox(const vec3* box, int size)
-{
-	colliderBox[0] = colliderBox[1] = vec3(box[0]);
-
-	for (int i = 1; i < size; i++)
-	{
-		if (colliderBox[0].x > box[i].x)
-			colliderBox[0].x = box[i].x;
-		else if (colliderBox[1].x < box[i].x)
-			colliderBox[1].x = box[i].x;
-
-		if (colliderBox[0].y > box[i].y)
-			colliderBox[0].y = box[i].y;
-		else if (colliderBox[1].y < box[i].y)
-			colliderBox[1].y = box[i].y;
-
-		if (colliderBox[0].z < box[i].z)
-			colliderBox[0].z = box[i].z;
-		else if (colliderBox[1].z > box[i].z)
-			colliderBox[1].z = box[i].z;
-	}
-
-	rDistance = colliderBox[1] - colliderBox[0];
-	rDistance.z = -rDistance.z;	// z만 값이 -라 바꾸어줌
-}
-
-void Collider::GetBox()
-{
-	mat4 worldModel = mat4(1.0);
-	mat4 localModel = mat4(1.0);
-
-	localModel = translate(localModel, object->transform.localPosition);
-	localModel = rotate(localModel, radians(object->transform.localRotation.y), vec3(0, 1.0, 0));
-	localModel = translate(localModel, object->transform.localPivot);
-	localModel = scale(localModel, object->transform.localScale);
-
-	worldModel = translate(worldModel, object->transform.worldPosition);
-	worldModel = rotate(worldModel, radians(object->transform.worldRotation.y), vec3(0, 1.0, 0));
-	worldModel = translate(worldModel, object->transform.worldPivot);
-	worldModel = scale(worldModel, object->transform.worldScale);
-
-	for (int i = 0; i < 2; i++)
-		modelbox[i] = localModel * worldModel * vec4(colliderBox[i], 1);
-
-	vec4 copybox[2] = { vec4(modelbox[0]), vec4(modelbox[1]) };
-	for (int i = 0; i < 2; i++)
-	{
-		if (modelbox[0].x > copybox[i].x)
-			modelbox[0].x = copybox[i].x;
-		else if (modelbox[1].x < copybox[i].x)
-			modelbox[1].x = copybox[i].x;
-
-		if (modelbox[0].y > copybox[i].y)
-			modelbox[0].y = copybox[i].y;
-		else if (modelbox[1].y < copybox[i].y)
-			modelbox[1].y = copybox[i].y;
-
-		if (modelbox[0].z < copybox[i].z)
-			modelbox[0].z = copybox[i].z;
-		else if (modelbox[1].z > copybox[i].z)
-			modelbox[1].z = copybox[i].z;
-	}
-}
-
-bool Collider::Collide_XZ(Collider& other)
-{
-	GetBox();
-	other.GetBox();
-
-	if (isPrint)
-	{
-		cout << tag << "\n" << modelbox[0] << "\n" << modelbox[1] << endl;
-		cout << other.tag << "\n" << other.modelbox[0] << "\n" << other.modelbox[1] << endl;
-	}
-
-	if (modelbox[0].x > other.modelbox[1].x) return false;
-	if (modelbox[1].x < other.modelbox[0].x) return false;
-	if (modelbox[0].z < other.modelbox[1].z) return false;
-	if (modelbox[1].z > other.modelbox[0].z) return false;
-
-	return true;
-}
-
 // Right Front Top 점을 정해주면 된다.
 // 즉 가로 세로 높이의 크기를 정해주면 된다.
 void Collider::SetBox_OBB(const vec3& d)

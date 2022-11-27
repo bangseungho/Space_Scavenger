@@ -9,15 +9,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="프레임 워크">
-      <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="프레임 워크\소스">
-      <UniqueIdentifier>{fc4b9ea0-f799-4c67-bbd0-4844eb2c200f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="프레임 워크\헤더">
-      <UniqueIdentifier>{56c74fee-2469-4c79-9d10-a341e68fbb28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{c889ebc8-ea1b-4fd7-8eea-824648da0bcf}</UniqueIdentifier>
     </Filter>
@@ -42,37 +33,43 @@
     <Filter Include="리소스 파일\image">
       <UniqueIdentifier>{283aa283-98ae-424c-b5d5-c38e4eacc727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FramWork">
+      <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FramWork\소스">
+      <UniqueIdentifier>{fc4b9ea0-f799-4c67-bbd0-4844eb2c200f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FramWork\헤더">
+      <UniqueIdentifier>{56c74fee-2469-4c79-9d10-a341e68fbb28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="reference_main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="FrameTime.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Afx.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Render.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Object\Defualt</Filter>
@@ -81,13 +78,13 @@
       <Filter>Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
-      <Filter>프레임 워크</Filter>
+      <Filter>FramWork</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Object\Defualt</Filter>
     </ClCompile>
     <ClCompile Include="Vertex_AFX.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>Object\Resource</Filter>
@@ -96,7 +93,7 @@
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
     <ClCompile Include="GuiObject.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>GuiObject</Filter>
@@ -104,37 +101,40 @@
     <ClCompile Include="ChatBox.cpp">
       <Filter>GuiObject</Filter>
     </ClCompile>
-    <ClCompile Include="image.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="GuiRender.cpp">
-      <Filter>프레임 워크\소스</Filter>
+      <Filter>FramWork\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourcePool.cpp">
+      <Filter>Object\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="FrameTime.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Render.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Object\Defualt</Filter>
@@ -143,13 +143,13 @@
       <Filter>Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>프레임 워크</Filter>
+      <Filter>FramWork</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Object\Defualt</Filter>
     </ClInclude>
     <ClInclude Include="Vector_AFX.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Object\Resource</Filter>
@@ -158,10 +158,10 @@
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="GuiObject.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>GuiObject</Filter>
@@ -170,8 +170,12 @@
       <Filter>GuiObject</Filter>
     </ClInclude>
     <ClInclude Include="GuiRender.h">
-      <Filter>프레임 워크\헤더</Filter>
+      <Filter>FramWork\헤더</Filter>
     </ClInclude>
+    <ClInclude Include="ResourcePool.h">
+      <Filter>Object\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

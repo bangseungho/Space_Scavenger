@@ -3,7 +3,7 @@
 class Iron : public Resource
 {
 public:
-	static ObjectBlock* _Block;
+	static VertexBlock* _Block;
 
 public:
 	Iron();

@@ -1,20 +1,20 @@
 #pragma once
-#include "Object.h"
+#include "Mesh.h"
 
 class Render
 {
 public:
-	static Render* objectRender;
+	static Render* meshtRender;
 public:
 	Render();
 	~Render();
 
 public:
 	void Draw();
-	void AddObject(Object* obj, string layoutName);
-	void AddObject(Object* obj) { AddObject(obj, "Default"); };
+	void AddObject(Mesh* mesh, string layoutName);
+	void AddObject(Mesh* mesh) { AddObject(mesh, "Default"); };
 
 private:
-	map<string, list<Object*>> renderList;
+	map<string, list<Mesh*>> renderList;
 };
 

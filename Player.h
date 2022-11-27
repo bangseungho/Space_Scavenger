@@ -2,12 +2,11 @@
 #include "Render.h"
 #include "Collider.h"
 
-#include "Cube.h"
-class Player : public Object
+class Player : public Object, public Mesh
 {
 public:
 	static Player* Instance;
-	static ObjectBlock* _Block;
+	static VertexBlock* _Block;
 
 public:
 	Player();

@@ -15,9 +15,9 @@
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 using namespace glm;
@@ -66,15 +66,13 @@ typedef struct Face {
 	unsigned short c;
 }Face;
 
-typedef struct ObjectBlock {
-	vector<Face>* vertexIndices, *uvIndices, *normalIndices;
+typedef struct VertexBlock {
+	vector<Face>* vertexIndices, * uvIndices, * normalIndices;
 	vector<vec3>* vertices;
 	vector<vec2>* vertices_uvs;
 	vector<vec3>* vertices_normals;
-	vector<Face>* fGroups;
 	vec3 max, min;
-	int groupIndex;
-}ObjectBlock;
+}VertexBlock;
 
 Face operator- (const Face my, int other);
 
@@ -105,4 +103,4 @@ void make_vertexShaders();
 void make_fragmentShaders();
 void InitShader();
 void FrameTimer(int value);
-void ReadObj(char* fileName, ObjectBlock& block);
+void ReadObj(char* fileName, VertexBlock& block);

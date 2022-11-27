@@ -1,18 +1,18 @@
 #include "Cube.h"
 
-ObjectBlock* Cube::cube_Block = nullptr;
+VertexBlock* Cube::_Block = nullptr;
 
-Cube::Cube()
+Cube::Cube() : Mesh(this)
 {
 	name = "Cube";
 
-	if (cube_Block == nullptr)
+	if (_Block == nullptr)
 	{
-		cube_Block = new ObjectBlock;
-		ReadObj((char*)"Cube.obj", *cube_Block);
+		_Block = new VertexBlock;
+		ReadObj((char*)"Cube.obj", *_Block);
 	}
 
-	block = cube_Block;
+	block = _Block;
 
 	collider.tag = "Cube";
 	collider.SetBox_OBB(block->max - block->min);
@@ -21,16 +21,16 @@ Cube::Cube()
 
 Cube::~Cube()
 {
-	delete cube_Block;
+	block = nullptr;
 }
 
 void Cube::Init()
 {
-	Object::Init();
+	//Object::Init();
 
 	color.SetRandomColor();
 
-	Render::objectRender->AddObject(this);
+	Render::meshtRender->AddObject(this);
 }
 
 void Cube::Update()

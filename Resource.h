@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Collider.h"
-class Resource : public Object
+class Resource : public Object, public Mesh
 {
 public:
 	Resource();
@@ -15,5 +15,5 @@ public:
 
 private:
 	unsigned int amount;
-	vec3 moveDirection;
+	vec3 velocity;
 };

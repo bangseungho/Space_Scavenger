@@ -1,16 +1,16 @@
 #include "Player.h"
 
 Player* Player::Instance = nullptr;
-ObjectBlock* Player::_Block = nullptr;
+VertexBlock* Player::_Block = nullptr;
 
-Player::Player()
+Player::Player() : Mesh(this)
 {
 	name = "Player";
 
 	if (_Block == nullptr)
 	{
-		_Block = new ObjectBlock;
-		ReadObj((char*)"Player.obj", *_Block);
+		_Block = new VertexBlock;
+		ReadObj((char*)"Cube.obj", *_Block);
 	}
 
 	block = _Block;
@@ -30,7 +30,7 @@ void Player::Init()
 	collider.tag = "player";
 
 	transform.worldScale *= 0.01;
-	Render::objectRender->AddObject(this);
+	Render::meshtRender->AddObject(this);
 }
 
 

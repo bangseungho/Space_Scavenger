@@ -1,6 +1,6 @@
 #include "Render.h"
 
-Render* Render::objectRender = nullptr;
+Render* Render::meshtRender = nullptr;
 
 Render::Render()
 {
@@ -18,23 +18,22 @@ void Render::Draw()
 	glUseProgram(s_program);
 
 	Camera::mainCamera->Draw();
-
 	for (auto& layer : renderList)
 	{
-		for (auto& obj : layer.second)
+		for (auto& mesh : layer.second)
 		{
-			if (!obj->ActiveSelf())
+			if (!mesh->isDraw)
 				continue;
 
-			if (!obj->isDraw)
+			if (!mesh->object->ActiveSelf())
 				continue;
 
-			obj->ObjectDraw();
+			mesh->Draw();
 		}
 	}
 }
 
-void Render::AddObject(Object* obj, string layoutName)
+void Render::AddObject(Mesh* mesh, string layoutName)
 {
-	renderList[layoutName].push_back(obj);
+	renderList[layoutName].push_back(mesh);
 }

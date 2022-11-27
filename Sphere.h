@@ -1,11 +1,10 @@
 #pragma once
-#include "Object.h"
 #include "Render.h"
 
-class Sphere : public Object
+class Sphere : public Object, public Mesh
 {
 public:
-	static ObjectBlock* sphere_Block;
+	static VertexBlock* sphere_Block;
 public:
 	Sphere();
 	~Sphere();

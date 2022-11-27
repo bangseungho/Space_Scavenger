@@ -25,6 +25,7 @@ Camera camera;
 Render objectRender;
 guiRender gui_objectRender;
 
+list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<GuiObject*> GuiObject::allGuiObject;
 
@@ -35,11 +36,11 @@ ChatBox chat_box;
 
 void Init()
 {
-	Render::objectRender = &objectRender;
+	Render::meshtRender = &objectRender;
 	guiRender::gui_objectRender = &gui_objectRender;
 
-	Object::modelLocation = glGetUniformLocation(s_program, "modelTransform");
-	Object::vColorLocation = glGetUniformLocation(s_program, "vColor");
+	Mesh::modelLocation = glGetUniformLocation(s_program, "modelTransform");
+	Mesh::vColorLocation = glGetUniformLocation(s_program, "vColor");
 	Object::meterialBlockLoaction = glGetUniformBlockIndex(s_program,"meterial");
 	FrameTime::currentTime = clock();
 
@@ -54,6 +55,8 @@ void Init()
 
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
+	for (const auto& mesh : Mesh::allMesh)
+		mesh->MeshInit();
 	for (const auto& obj : Object::allObject)
 		obj->Init();
 	for (const auto& collider : Collider::allCollider)
@@ -107,6 +110,18 @@ void drawScene()
 		obj->SetMatrix();
 	}
 
+	// GUI 모든 오브젝트 업데이트
+	for (const auto& gui_obj : GuiObject::allGuiObject)
+	{
+		gui_obj->Update();
+	}
+
+	// GUI 모든 오브젝트 세팅
+	for (const auto& gui_obj : GuiObject::allGuiObject)
+	{
+		gui_obj->SetMatrix();
+	}
+
 	// 모든 콜라이더 위치 업데이트
 	for (const auto& collider : Collider::allCollider)
 	{
@@ -123,17 +138,7 @@ void drawScene()
 		obj->Collision();
 	}
 
-	// GUI 모든 오브젝트 업데이트
-	for (const auto& gui_obj : GuiObject::allGuiObject)
-	{
-		gui_obj->Update();
-	}
 
-	// GUI 모든 오브젝트 세팅
-	for (const auto& gui_obj : GuiObject::allGuiObject)
-	{
-		gui_obj->SetMatrix();
-	}
 
 	// 충돌한 물체들의 밀림 처리
 	//for (const auto& collider : Collider::allCollider)
@@ -144,6 +149,8 @@ void drawScene()
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
 
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
 		objectRender.Draw();
 		gui_objectRender.Draw();
 

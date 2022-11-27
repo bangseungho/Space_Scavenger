@@ -137,19 +137,16 @@
     <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GuiObject.cpp" />
     <ClCompile Include="GuiRender.cpp" />
-    <ClCompile Include="image.cpp" />
     <ClCompile Include="Iron.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="reference_main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourcePool.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
@@ -167,10 +164,12 @@
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourcePool.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Transform.h" />

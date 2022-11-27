@@ -1,13 +1,13 @@
 #include "Resource.h"
 
 
-Resource::Resource()
+Resource::Resource() : Mesh(this)
 {
 	collider.tag = "Resource";
 	collider.object = this;
 
 	amount = 0;
-	moveDirection = vec3(0);
+	velocity = vec3(0);
 }
 
 Resource::~Resource()

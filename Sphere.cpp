@@ -1,14 +1,14 @@
 #include "Sphere.h"
 
-ObjectBlock* Sphere::sphere_Block = nullptr;
+VertexBlock* Sphere::sphere_Block = nullptr;
 
-Sphere::Sphere()
+Sphere::Sphere() : Mesh(this)
 {
 	name = "Shpere";
 
 	if (sphere_Block == nullptr)
 	{
-		sphere_Block = new ObjectBlock;
+		sphere_Block = new VertexBlock;
 		ReadObj((char*)"Sphere.obj", *sphere_Block);
 	}
 
@@ -22,7 +22,7 @@ Sphere::~Sphere()
 void Sphere::Init()
 {
 	Object::Init();
-	Render::objectRender->AddObject(this);
+	Render::meshtRender->AddObject(this);
 }
 
 void Sphere::MoveMent()

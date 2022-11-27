@@ -165,6 +165,8 @@ bool operator== (const vec3 my, const float other)
 vec2 StartMouse = vec2(0);
 
 #pragma endregion
+
+
 float RandomFloat(float first, float second)
 {
 	random_device rd;
@@ -305,29 +307,13 @@ void FrameTimer(int value)
 }
 
 
-void ReadObj(char* fileName, ObjectBlock& block)
+void ReadObj(char* fileName, VertexBlock& block)
 {
 	FILE* obj;
+	char lineHeader[200];
 	obj = fopen(fileName, "r");
 
-	//--- 1. 전체 버텍스 개수 및 삼각형 개수 세기
-	char lineHeader[200];
-	int vertexNum = 0;
-	int faceNum = 0;
-	int groupNum = 0;
-	while (!feof(obj)) {
-		fscanf(obj, "%s", lineHeader);
-		if (strcmp(lineHeader, "v") == 0)
-			vertexNum += 1;
-		else if (strcmp(lineHeader, "f") == 0)
-			faceNum += 1;
-		else if (strcmp(lineHeader, "g") == 0)
-			groupNum++;
-		memset(lineHeader, '\0', sizeof(lineHeader));
-	}
-	fclose(obj);
 	//--- 2. 메모리 할당'
-	block.fGroups = new vector<Face>[groupNum];
 	block.vertices = new vector<vec3>;
 	block.vertices_normals = new vector<vec3>;
 	block.vertices_uvs = new vector<vec2>;
@@ -335,13 +321,11 @@ void ReadObj(char* fileName, ObjectBlock& block)
 	block.vertexIndices = new vector<Face>;
 	block.uvIndices = new vector<Face>;
 	block.normalIndices = new vector<Face>;
-	block.groupIndex = 0;
-	//block.face = new Face[faceNum];
+
 	block.max = vec3(0);
 	block.min = vec3(0);
 
 	//--- 3. 할당된 메모리에 각 버텍스, 페이스 정보 입력
-	obj = fopen(fileName, "r");
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
 		if (strcmp(lineHeader, "v") == 0) {
@@ -374,9 +358,6 @@ void ReadObj(char* fileName, ObjectBlock& block)
 			block.vertexIndices->push_back(vertexIndex - 1);
 			block.uvIndices->push_back(uvIndex - 1);
 			block.normalIndices->push_back(normalIndex - 1);
-		}
-		else if (strcmp(lineHeader, "g") == 0) {
-			block.groupIndex++;
 		}
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}

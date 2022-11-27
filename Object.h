@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Transform.h"
-#include "Color.h"
 #include "Camera.h"
+
 class Object {
 public:
 	static int ID_Count;
@@ -10,9 +10,6 @@ public:
 
 	static unsigned char key;
 	static int specialKey;
-
-	static unsigned int modelLocation;
-	static unsigned int vColorLocation;
 
 	static unsigned int meterialBlockLoaction;
 
@@ -25,7 +22,6 @@ public:
 	virtual void Disable() {};
 	virtual void Update();
 	virtual void Init();
-	virtual void ObjectDraw();
 	virtual void Collision();
 
 	//virtual void Handle_Evnet();
@@ -41,15 +37,12 @@ public:
 	int id;
 	string name;
 	Transform transform;
-	Color color;
 	bool isDraw = true;
 
-	ObjectBlock* block;
+	//ObjectBlock* block;
 public:
 	vec3 worldSpeed;
 	vec3 localSpeed;
-
-	vec3 worldPivotSpeed;
 
 	vec3 worldRotateSpeed;
 	vec3 localRotateSpeed;

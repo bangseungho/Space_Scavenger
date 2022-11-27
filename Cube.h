@@ -2,10 +2,10 @@
 #include "Render.h"
 #include "Collider.h"
 
-class Cube :public Object
+class Cube :public Object, public Mesh
 {
 public:
-	static ObjectBlock* cube_Block;
+	static VertexBlock* _Block;
 
 public:
 	Cube();
