@@ -1,25 +1,45 @@
 #include "ResourcePool.h"
 
 template<class ROS>
-ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime)
+ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target)
 	: maxCount(_MaxCount), spawnCount(_SpawnCount)
 {
 	pool = new ROS[_MaxCount];
 	spawnTimer.durationTime = _DurationTime;
+	target_Transform = _Target;
+
+	distance_Min = distance_Max = 1;	// юс╫ц
 }
 
 template<class ROS>
-void ResourcePool<ROS>::Spawn()
+ResourcePool<ROS>::~ResourcePool()
 {
-	activeList.clear();
+}
+
+template<class ROS>
+void ResourcePool<ROS>::Update()
+{
+	if (!spawnTimer.CheckTimer())
+		return;
+
+	Spawn(distance_Min, distance_Max);
+}
+
+template<class ROS>
+void ResourcePool<ROS>::Spawn(float _Min, float _Max)
+{
 	int count = 0;
 	for (int i = 0; i < maxCount; i++)
 	{
 		if (!pool[i].ActiveSelf())
 			continue;
 
+		float dis = RandomFloat(_Min, _Max);
+		float radian = radians(RandomFloat(0, 360));
+		vec3 pos{ dis * sin(radian), dis * cos(radian), dis * tan(radian) };
+		pool[i].transform.worldPosition = pos + target_Transform->worldPosition;
 		pool[i].SetActive(true);
-		activeList.push_back(pool[i]);
+		//activeList.push_back(pool[i]);
 
 		if (++count >= spawnCount)
 			continue;

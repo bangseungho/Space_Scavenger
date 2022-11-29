@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Render.h"
 #include "Collider.h"
 class Resource : public Object, public Mesh
 {
@@ -8,7 +9,7 @@ public:
 	~Resource();
 
 public:
-
+	virtual void Init();
 
 public:
 	Collider collider;

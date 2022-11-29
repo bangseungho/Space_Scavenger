@@ -1,7 +1,8 @@
 #pragma once
-#include "Render.h"
 #include "Collider.h"
 
+#include "ResourcePool.cpp"
+#include "Iron.h"
 class Player : public Object, public Mesh
 {
 public:
@@ -25,6 +26,7 @@ private: // MouseEvent
 public:
 	Collider collider;
 	float speed = 1;
-
+private:	// 플레이어 주위에서 spawn 될 자원 pool
+	ResourcePool<Iron> ironPool;
 };
 

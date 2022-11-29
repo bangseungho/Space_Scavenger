@@ -3,7 +3,8 @@
 Player* Player::Instance = nullptr;
 VertexBlock* Player::_Block = nullptr;
 
-Player::Player() : Mesh(this)
+Player::Player() : Mesh(this),
+ironPool(1,1,3.0f, &transform)
 {
 	name = "Player";
 
@@ -21,14 +22,14 @@ Player::Player() : Mesh(this)
 
 Player::~Player()
 {
-	delete _Block;
 }
 
 void Player::Init()
 {
 	collider.tag = "player";
 
-	transform.worldScale *= 0.01;
+	color.SetRandomColor();
+	transform.worldScale *= 0.1;
 	Render::meshtRender->AddObject(this);
 }
 
