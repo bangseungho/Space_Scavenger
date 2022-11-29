@@ -26,7 +26,6 @@ Player::~Player()
 
 void Player::Init()
 {
-	Object::Init();
 	collider.tag = "player";
 
 	transform.worldScale *= 0.01;

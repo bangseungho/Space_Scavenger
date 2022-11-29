@@ -1,42 +1,25 @@
 #include "ResourcePool.h"
 
-template<class ROS, int _MaxCount>
-ResourcePool<ROS, _MaxCount>::ResourcePool()
+template<class ROS>
+ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime)
+	: maxCount(_MaxCount), spawnCount(_SpawnCount)
 {
-}
-
-template <class ROS, int _MaxCount>
-inline ResourcePool<ROS, _MaxCount>::ResourcePool(int _SpawnCount, float _DurationTime)
-{
-	spawnCount = _SpawnCount;
+	pool = new ROS[_MaxCount];
 	spawnTimer.durationTime = _DurationTime;
 }
 
-template <class ROS, int _MaxCount>
-ResourcePool<ROS, _MaxCount>::~ResourcePool()
+template<class ROS>
+void ResourcePool<ROS>::Spawn()
 {
-}
-
-template <class ROS, int _MaxCount>
-void ResourcePool<ROS, _MaxCount>::Init()
-{
-}
-
-template <class ROS, int _MaxCount>
-void ResourcePool<ROS, _MaxCount>::Update()
-{
-}
-
-template<class ROS, int _MaxCount>
-void ResourcePool<ROS, _MaxCount>::Spawn()
-{
+	activeList.clear();
 	int count = 0;
-	for (int i = 0; i < _MaxCount; i++)
+	for (int i = 0; i < maxCount; i++)
 	{
 		if (!pool[i].ActiveSelf())
 			continue;
 
-		pool[i].SetActive(trues);
+		pool[i].SetActive(true);
+		activeList.push_back(pool[i]);
 
 		if (++count >= spawnCount)
 			continue;

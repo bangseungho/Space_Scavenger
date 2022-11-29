@@ -12,6 +12,17 @@ Light::~Light()
 {
 }
 
+void Light::Enable()
+{
+	shape.SetActive(true);
+}
+
+void Light::Disable()
+{
+	shape.SetActive(false);
+	glUniform3f(lightColorLocation, 0, 0, 0);
+}
+
 void Light::Init()
 {
 	shape.transform.worldScale *= 0.05;
@@ -19,11 +30,12 @@ void Light::Init()
 
 void Light::Update()
 {
-	//float x = transform.worldPosition.x;
-	//float y = transform.worldPosition.y;
-	//float z = transform.worldPosition.z;
-	//glUniform3f(lightPosLocation, x, y, z); // 임시
-	//glUniform3f(lightColorLocation, color.R, color.G, color.B);
+	float x = transform.worldPosition.x;
+	float y = transform.worldPosition.y;
+	float z = transform.worldPosition.z;
+	glUniform3f(lightPosLocation, x, y, z); // 임시
+	glUniform3f(lightColorLocation, color.R, color.G, color.B);
+
 	shape.transform.worldPosition = transform.worldPosition;
 	shape.color.SetColor(color);
 }

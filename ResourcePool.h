@@ -2,23 +2,23 @@
 #include "Resource.h"
 #include "Timer.h"
 
-template <class ROS, int _MaxCount>
+template <class ROS>
 class ResourcePool : public Object
 {
 public:
-	ResourcePool();
-	ResourcePool(int _SpawnCount, float _DurationTime);
+	ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime);
 	~ResourcePool();
 
 public:
-	void Init();
-	void Update();
 	void Spawn();
 
 public:
-	ROS pool[_MaxCount];
+	vector<ROS*> activeList;	// Spawn에 의해 활성화 된 obj
 
 private:
+	ROS* pool;
+
+	int maxCount;
 	int spawnCount;
 	Timer spawnTimer;
 };

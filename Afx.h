@@ -67,10 +67,10 @@ typedef struct Face {
 }Face;
 
 typedef struct VertexBlock {
-	vector<Face>* vertexIndices, * uvIndices, * normalIndices;
-	vector<vec3>* vertices;
-	vector<vec2>* vertices_uvs;
-	vector<vec3>* vertices_normals;
+	vector<Face> vertexIndices, uvIndices, normalIndices;
+	vector<vec3> vertices;
+	vector<vec2> vertices_uvs;
+	vector<vec3> vertices_normals;
 	vec3 max, min;
 }VertexBlock;
 

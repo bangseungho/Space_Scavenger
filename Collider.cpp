@@ -42,10 +42,10 @@ void Collider::Init()
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block->vertices->size(), &block->vertices[0][0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block->vertices.size(), &block->vertices[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_VERTICES_INDEX); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block->vertexIndices->size(), &block->vertexIndices[0][0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block->vertexIndices.size(), &block->vertexIndices[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 }
 
@@ -65,7 +65,7 @@ void Collider::DrawBox()
 
 	//glPointSize(5.0f);
 	//glDrawArrays(GL_POINTS, 0, cBlock.vertices.size());
-	glDrawElements(GL_TRIANGLES, block->vertexIndices->size() * 3, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, block->vertexIndices.size() * 3, GL_UNSIGNED_SHORT, 0);
 }
 // Right Front Top 점을 정해주면 된다.
 // 즉 가로 세로 높이의 크기를 정해주면 된다.

@@ -36,7 +36,8 @@ Player player;
 Map map;
 ChatBox chat_box;
 
-ResourcePool<Iron, 1> ironPool(1, 1.0f);
+//ResourceGenerator rg;
+//ResourcePool<Iron> ironPool;
 
 void Init()
 {
@@ -54,6 +55,8 @@ void Init()
 	camera.cameraPos.z = 100;
 	camera.isPitch = true;
 	camera.target_Pos = &player.transform;
+
+	//rg.AddPool(ironPool);
 
 	cube_Obj.transform.worldScale *= 0.1;
 

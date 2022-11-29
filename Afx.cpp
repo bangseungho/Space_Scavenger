@@ -10,7 +10,7 @@ GLuint gui_fragmentShader;
 
 char default_Cube[] = "Cube.obj";
 
-int windowSize_W = 900;
+int windowSize_W = 1600;
 int windowSize_H = 900;
 
 double aspect_ratio = windowSize_W / windowSize_H;
@@ -314,14 +314,6 @@ void ReadObj(char* fileName, VertexBlock& block)
 	obj = fopen(fileName, "r");
 
 	//--- 2. 메모리 할당'
-	block.vertices = new vector<vec3>;
-	block.vertices_normals = new vector<vec3>;
-	block.vertices_uvs = new vector<vec2>;
-
-	block.vertexIndices = new vector<Face>;
-	block.uvIndices = new vector<Face>;
-	block.normalIndices = new vector<Face>;
-
 	block.max = vec3(0);
 	block.min = vec3(0);
 
@@ -331,19 +323,19 @@ void ReadObj(char* fileName, VertexBlock& block)
 		if (strcmp(lineHeader, "v") == 0) {
 			vec3 vertex;
 			fscanf(obj, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			block.vertices->push_back(vertex);
+			block.vertices.push_back(vertex);
 			block.max = max(vertex, block.max);
 			block.min = min(vertex, block.min);
 		}
 		else if (strcmp(lineHeader, "vt") == 0) {
 			vec2 uv;
 			fscanf(obj, "%f %f\n", &uv.x, &uv.y);
-			block.vertices_uvs->push_back(uv);
+			block.vertices_uvs.push_back(uv);
 		}
 		else if (strcmp(lineHeader, "vn") == 0) {
 			vec3 normal;
 			fscanf(obj, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			block.vertices_normals->push_back(normal);
+			block.vertices_normals.push_back(normal);
 		}
 		else if (strcmp(lineHeader, "f") == 0) {
 			Face vertexIndex, uvIndex, normalIndex;
@@ -355,9 +347,9 @@ void ReadObj(char* fileName, VertexBlock& block)
 				printf("File can't be read by our simple parser : ( Try exporting with other options\n");
 				return;
 			}
-			block.vertexIndices->push_back(vertexIndex - 1);
-			block.uvIndices->push_back(uvIndex - 1);
-			block.normalIndices->push_back(normalIndex - 1);
+			block.vertexIndices.push_back(vertexIndex - 1);
+			block.uvIndices.push_back(uvIndex - 1);
+			block.normalIndices.push_back(normalIndex - 1);
 		}
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}

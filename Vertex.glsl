@@ -1,6 +1,8 @@
 #version 330 core
 
 layout (location = 0) in vec3 vPos; //--- 응용 프로그램에서 받아온 도형 좌표값
+layout (location = 1) in vec2 vUV;
+layout (location = 2) in vec3 vNormal;
 
 uniform mat4 modelTransform; //--- 모델링 변환 행렬: uniform 변수로 선언
 uniform mat4 viewTransform;

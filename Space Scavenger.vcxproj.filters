@@ -71,9 +71,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>FramWork</Filter>
-    </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Object\Defualt</Filter>
     </ClCompile>
@@ -116,6 +113,12 @@
     <ClCompile Include="Render.cpp">
       <Filter>FramWork\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceGenerator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -138,9 +141,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>FramWork</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Object\Defualt</Filter>
@@ -187,6 +187,10 @@
     <ClInclude Include="Camera.h">
       <Filter>FramWork\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceGenerator.h" />
+    <ClInclude Include="Light.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -212,6 +216,7 @@
     <Object Include="Sphere.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
+    <Object Include="SPACESHIP_1.obj" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="map.png">

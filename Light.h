@@ -1,9 +1,7 @@
 #pragma once
-#include "Color.h"
-#include "Transform.h"
 #include "Sphere.h"
 
-class Light
+class Light : public Object
 {
 public:
 	static unsigned int lightPosLocation;
@@ -14,6 +12,8 @@ public:
 	~Light();
 
 public:
+	void Enable();
+	void Disable();
 	void Init();
 	void Update();
 
