@@ -21,3 +21,7 @@ Iron::Iron()
 Iron::~Iron()
 {
 }
+
+void Iron::Init()
+{
+}

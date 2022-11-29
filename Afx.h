@@ -76,22 +76,8 @@ typedef struct VertexBlock {
 
 Face operator- (const Face my, int other);
 
-Vector2 operator+ (const Vector2 my, const Vector2 other);
-Vector2 operator+ (const Vector2 my, const int other);
-Vector2 operator- (const Vector2 my, const Vector2 other);
-Vector2 operator- (const Vector2 my, const int other);
-Vector2 operator* (const Vector2 my, const Vector2 other);
-Vector2 operator* (const Vector2 my, const int other);
-Vector2 operator/ (const Vector2 my, const Vector2 other);
-Vector2 operator/ (const Vector2 my, const int other);
-ostream& operator<< (ostream& outputStream, const Vector2& my);
-Position2 operator+(const Position2 my, const Position2 other);
-
 ostream& operator<< (ostream& outputStream, const vec3& my);
 ostream& operator<< (ostream& outputStream, const Face& my);
-
-vec3 operator* (const vec3 my, const float other);
-vec3 operator/ (const vec3 my, const float other);
 bool operator== (const vec3 my, const float other);
 
 extern vec2 StartMouse;

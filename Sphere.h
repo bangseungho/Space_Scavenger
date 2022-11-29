@@ -8,10 +8,5 @@ public:
 public:
 	Sphere();
 	~Sphere();
-public:
-	void Init();
-
-private:
-	void MoveMent();
 };
 

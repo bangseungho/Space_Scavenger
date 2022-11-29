@@ -10,5 +10,6 @@ public:
 	~Iron();
 
 public:
+	void Init();
 
 };

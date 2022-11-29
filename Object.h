@@ -47,12 +47,6 @@ public:
 	vec3 worldRotateSpeed;
 	vec3 localRotateSpeed;
 
-protected:
-	GLuint VAO;
-	GLuint VAO_VERTICES, VAO_VERTICES_UVS, VAO_VERTICES_NORMALS;
-	GLuint VAO_VERTICES_INDEX, VAO_UV_INDICES, VAO_NORMAL_INDICES;
-	GLuint UBO_MATERIAL_BLOCK;
-
 private:
 	bool isActive;
 	

@@ -13,19 +13,10 @@ Sphere::Sphere() : Mesh(this)
 	}
 
 	block = sphere_Block;
+
+	Render::meshtRender->AddObject(this, "Sphere");
 }
 
 Sphere::~Sphere()
 {
 }
-
-void Sphere::Init()
-{
-	Object::Init();
-	Render::meshtRender->AddObject(this);
-}
-
-void Sphere::MoveMent()
-{
-}
-

@@ -2,8 +2,9 @@
 #include "Player.h"
 #include "Map.h"
 #include "ChatBox.h"
-#include "ResourcePool.cpp"	// 템플릿 클래스는 cpp를 인클루드 해야함
+//#include "ResourcePool.cpp"	// 템플릿 클래스는 cpp를 인클루드 해야함
 #include "Iron.h"
+#include "Light.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -31,19 +32,35 @@ list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<GuiObject*> GuiObject::allGuiObject;
 
-Cube cube_Obj;
-Player player;
-Map map;
-ChatBox chat_box;
+// 임시 클래스
+class GameManager : public Object
+{
+public:
+	Cube cube_Obj;
+	Player player;
+	Map map;
+	ChatBox chat_box;
+	Light light;
 
-//ResourceGenerator rg;
-//ResourcePool<Iron> ironPool;
+public:
+	void Init() {
+		fristCamera->target_Pos = &player.transform;
+		cube_Obj.transform.worldScale *= 0.1;
+
+		light.transform.worldPosition.x = 1;
+	};
+};
+
+GameManager* gameManager;
 
 void Init()
 {
 	Render::meshtRender = &objectRender;
 	guiRender::gui_objectRender = &gui_objectRender;
 
+	Light::lightColorLocation = glGetUniformLocation(s_program, "lightColor");
+	Light::lightPosLocation = glGetUniformLocation(s_program, "lightPos");
+	Camera::viewPosLocation = glGetUniformLocation(s_program, "viewPos");
 	Mesh::modelLocation = glGetUniformLocation(s_program, "modelTransform");
 	Mesh::vColorLocation = glGetUniformLocation(s_program, "vColor");
 	Object::meterialBlockLoaction = glGetUniformBlockIndex(s_program,"meterial");
@@ -54,11 +71,8 @@ void Init()
 	camera.name = "Main";
 	camera.cameraPos.z = 100;
 	camera.isPitch = true;
-	camera.target_Pos = &player.transform;
 
-	//rg.AddPool(ironPool);
-
-	cube_Obj.transform.worldScale *= 0.1;
+	gameManager = new GameManager;
 
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
@@ -260,8 +274,8 @@ void Motion(int x, int y)
 	if (!isMouseRight)
 	{
 		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		player.transform.worldRotation.y -= diffPos.x;
-		player.transform.worldRotation.x -= diffPos.y;
+		//player.transform.worldRotation.y -= diffPos.x;
+		//player.transform.worldRotation.x -= diffPos.y;
 	}
 
 	StartMouse = { (float)x, (float)y };

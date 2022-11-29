@@ -34,92 +34,12 @@ Face operator-(const Face my, int other)
 }
 
 
-Vector2 operator+ (const Vector2 my, const Vector2 other)
-{
-	Vector2 result;
-	result.x = my.x + other.x;
-	result.y = my.y + other.y;
-
-	return result;
-}
-
-Vector2 operator+ (const Vector2 my, const int other)
-{
-	Vector2 result;
-	result.x = my.x + other;
-	result.y = my.y + other;
-
-	return result;
-}
-
-Vector2 operator- (const Vector2 my, const Vector2 other)
-{
-	Vector2 result;
-	result.x = my.x - other.x;
-	result.y = my.y - other.y;
-
-	return result;
-}
-
-Vector2 operator- (const Vector2 my, const int other)
-{
-	Vector2 result;
-	result.x = my.x - other;
-	result.y = my.y - other;
-
-	return result;
-}
-
-Vector2 operator* (const Vector2 my, const Vector2 other)
-{
-	Vector2 result;
-	result.x = my.x * other.x;
-	result.y = my.y * other.y;
-
-	return result;
-}
-
-Vector2 operator* (const Vector2 my, const int other)
-{
-	Vector2 result;
-	result.x = my.x * other;
-	result.y = my.y * other;
-
-	return result;
-}
-
-Vector2 operator/ (const Vector2 my, const Vector2 other)
-{
-	Vector2 result;
-	result.x = my.x / other.x;
-	result.y = my.y / other.y;
-
-	return result;
-}
-
-Vector2 operator/ (const Vector2 my, const int other)
-{
-	Vector2 result;
-	result.x = my.x / other;
-	result.y = my.y / other;
-
-	return result;
-}
-
 ostream& operator<< (ostream& outputStream, const Vector2& my)
 {
 	cout << my.x << ", " << my.y;
 	return outputStream;
 }
 
-Position2 operator+(const Position2 my, const Position2 other)
-{
-	Position2 result;
-	result.x = my.x + other.x;
-	result.y = my.y + other.y;
-
-	return result;
-}
 
 ostream& operator<< (ostream& outputStream, const vec3& my)
 {
@@ -131,26 +51,6 @@ ostream& operator<< (ostream& outputStream, const Face& my)
 {
 	cout << my.a << ", " << my.b << ", " << my.c;
 	return outputStream;
-}
-
-vec3 operator* (const vec3 my, const float other)
-{
-	vec3 result = my;
-	result.x = my.x * other;
-	result.y = my.y * other;
-	result.z = my.z * other;
-
-	return result;
-}
-
-vec3 operator/ (const vec3 my, const float other)
-{
-	vec3 result = my;
-	result.x = my.x / other;
-	result.y = my.y / other;
-	result.z = my.z / other;
-
-	return result;
 }
 
 bool operator== (const vec3 my, const float other)
@@ -310,7 +210,7 @@ void FrameTimer(int value)
 void ReadObj(char* fileName, VertexBlock& block)
 {
 	FILE* obj;
-	char lineHeader[200];
+	char lineHeader[55350];
 	obj = fopen(fileName, "r");
 
 	//--- 2. 메모리 할당'

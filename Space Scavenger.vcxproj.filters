@@ -113,9 +113,6 @@
     <ClCompile Include="Render.cpp">
       <Filter>FramWork\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceGenerator.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>FramWork\GameObject</Filter>
     </ClCompile>
@@ -163,9 +160,6 @@
     <ClInclude Include="ChatBox.h">
       <Filter>GuiObject</Filter>
     </ClInclude>
-    <ClInclude Include="ResourcePool.h">
-      <Filter>Object\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
@@ -187,9 +181,11 @@
     <ClInclude Include="Camera.h">
       <Filter>FramWork\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceGenerator.h" />
     <ClInclude Include="Light.h">
       <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcePool.h">
+      <Filter>Object\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

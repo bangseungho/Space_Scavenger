@@ -71,7 +71,7 @@ void Collider::DrawBox()
 // 즉 가로 세로 높이의 크기를 정해주면 된다.
 void Collider::SetBox_OBB(const vec3& d)
 {
-	size = d/2;
+	size = d/vec3(2);
 	for (int i = 0; i < 3; i++)
 	{
 		defaultAxis[i] = axis[i] = vec3(0);

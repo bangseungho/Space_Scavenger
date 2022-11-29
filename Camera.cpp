@@ -112,7 +112,7 @@ void Camera::Info()
 
 void Camera::LookAtView(float speed)
 {
-	vec3 diff = normalize(realCameraPos - cameraDirection) * speed * FrameTime::oneFrame * 100;
+	vec3 diff = normalize(realCameraPos - cameraDirection) * speed * FrameTime::oneFrame * vec3(100);
 
 	cameraPos += diff;
 	

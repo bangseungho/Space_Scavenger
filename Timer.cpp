@@ -15,7 +15,7 @@ bool Timer::CheckTimer()
 {
     endTime = clock();
 
-    if (endTime - startTime > durationTime)
+    if (endTime - startTime > durationTime * 1000)
     {
         startTime = clock();
         return true;

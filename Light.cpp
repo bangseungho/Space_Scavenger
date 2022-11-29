@@ -25,7 +25,7 @@ void Light::Disable()
 
 void Light::Init()
 {
-	shape.transform.worldScale *= 0.05;
+	transform.worldScale *= 0.1;
 }
 
 void Light::Update()

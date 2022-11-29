@@ -12,13 +12,6 @@ public:
 	~Cube();
 
 public:
-	void Init();
-	void Update();
-
-private:
-	void MoveMent();
-
-public:
 	Collider collider;
 };
 
