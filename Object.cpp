@@ -56,18 +56,18 @@ mat4& Object::SetMatrix()
 	mat4 worldModel = mat4(1.0);
 	mat4 localModel = mat4(1.0);
 
+	localModel = translate(localModel, transform.localPivot);
 	localModel = translate(localModel, transform.localPosition);
 	localModel = rotate(localModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
 	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
 	localModel = rotate(localModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
-	localModel = translate(localModel, transform.localPivot);
 	localModel = scale(localModel, transform.localScale);
 
+	worldModel = translate(worldModel, transform.worldPivot);
 	worldModel = translate(worldModel, transform.worldPosition);
 	worldModel = rotate(worldModel, radians(transform.worldRotation.x), vec3(1.0, 0, 0));
 	worldModel = rotate(worldModel, radians(transform.worldRotation.y), vec3(0, 1.0, 0));
 	worldModel = rotate(worldModel, radians(transform.worldRotation.z), vec3(0, 0, 1.0));
-	worldModel = translate(worldModel, transform.worldPivot);
 	worldModel = scale(worldModel, transform.worldScale);
 
 	transform.model = localModel * worldModel;

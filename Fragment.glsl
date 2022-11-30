@@ -11,7 +11,7 @@ uniform vec3 viewPos;	// 카메라 위치
 out vec4 FragColor; //--- 프레임 버퍼로 출력
 void main()
 {
-    float ambientLenth = 0.5;
+    float ambientLenth = 1.0f;
     vec3 ambient = ambientLenth * vec3(vColor);
     // diffuse 
     vec3 norm = normalize(Normal);

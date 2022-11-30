@@ -67,11 +67,12 @@ typedef struct Face {
 }Face;
 
 typedef struct VertexBlock {
-	vector<Face> vertexIndices, uvIndices, normalIndices;
+	vector<Face>* vertexIndices, *uvIndices, *normalIndices;
 	vector<vec3> vertices;
 	vector<vec2> vertices_uvs;
 	vector<vec3> vertices_normals;
 	vec3 max, min;
+	int groupCount;
 }VertexBlock;
 
 Face operator- (const Face my, int other);

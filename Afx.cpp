@@ -210,22 +210,39 @@ void FrameTimer(int value)
 void ReadObj(char* fileName, VertexBlock& block)
 {
 	FILE* obj;
+	vec3 min = vec3(10000), max = vec3(-10000);
 	char lineHeader[55350];
+	int groupNum = 0;
+
 	obj = fopen(fileName, "r");
+	while (!feof(obj)) {
+		fscanf(obj, "%s", lineHeader);
+		if (strcmp(lineHeader, "g") == 0) {
+			groupNum++;
+		}
+	}
 
 	//--- 2. 메모리 할당'
-	block.max = vec3(0);
-	block.min = vec3(0);
+	block.vertexIndices = new vector<Face>[groupNum];
+	block.normalIndices = new vector<Face>[groupNum];
+	block.uvIndices = new vector<Face>[groupNum];
+	
+	block.groupCount = -1;
 
 	//--- 3. 할당된 메모리에 각 버텍스, 페이스 정보 입력
+	rewind(obj);
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
 		if (strcmp(lineHeader, "v") == 0) {
 			vec3 vertex;
 			fscanf(obj, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			block.vertices.push_back(vertex);
-			block.max = max(vertex, block.max);
-			block.min = min(vertex, block.min);
+			if (vertex.x < min.x) min.x = vertex.x;
+			if (vertex.y < min.y) min.y = vertex.y;
+			if (vertex.z < min.z) min.z = vertex.z;
+			if (vertex.x > max.x) max.x = vertex.x;
+			if (vertex.y > max.y) max.y = vertex.y;
+			if (vertex.z > max.z) max.z = vertex.z;
 		}
 		else if (strcmp(lineHeader, "vt") == 0) {
 			vec2 uv;
@@ -247,12 +264,26 @@ void ReadObj(char* fileName, VertexBlock& block)
 				printf("File can't be read by our simple parser : ( Try exporting with other options\n");
 				return;
 			}
-			block.vertexIndices.push_back(vertexIndex - 1);
-			block.uvIndices.push_back(uvIndex - 1);
-			block.normalIndices.push_back(normalIndex - 1);
+			block.vertexIndices[block.groupCount].push_back(vertexIndex - 1);
+			block.uvIndices[block.groupCount].push_back(uvIndex - 1);
+			block.normalIndices[block.groupCount].push_back(normalIndex - 1);
+		}
+		else if (strcmp(lineHeader, "g") == 0) {
+			block.groupCount++;
 		}
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
+	block.max = max;
+	block.min = min;
+	vec3 scale = max - min;
+
+	for (auto& temp : block.vertices)
+	{
+		temp = temp - min;
+		temp = ((temp * 2.0f) / scale) - 1.0f;
+	}
+
+
 	//fclose(obj);	// Player 불러올때 에러 나서 잠시 꺼둠 이유는 모름
 }
 

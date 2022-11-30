@@ -26,7 +26,7 @@ public:
 	VertexBlock* block;
 
 protected:
-	GLuint VAO, VBO, EBO;
+	GLuint* VAO, *VBO, *EBO;
 
 };
 

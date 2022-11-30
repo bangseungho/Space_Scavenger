@@ -69,7 +69,7 @@ void Init()
 	windowColor.R = windowColor.G = windowColor.B = 0;
 	fristCamera = &camera;
 	camera.name = "Main";
-	camera.cameraPos.z = 100;
+	camera.cameraPos.z = 10;
 	camera.isPitch = true;
 
 	gameManager = new GameManager;

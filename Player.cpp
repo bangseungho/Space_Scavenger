@@ -11,13 +11,14 @@ ironPool(1,1,3.0f, &transform)
 	if (_Block == nullptr)
 	{
 		_Block = new VertexBlock;
-		ReadObj((char*)"Cube.obj", *_Block);
+		ReadObj((char*)"SPACESHIP_1.obj", *_Block);
 	}
 
 	block = _Block;
 
 	collider.SetBox_OBB(block->max -block->min);
 	collider.object = this;
+	Render::meshtRender->AddObject(this);
 }
 
 Player::~Player()
@@ -28,9 +29,10 @@ void Player::Init()
 {
 	collider.tag = "player";
 
+
 	color.SetRandomColor();
-	transform.worldScale *= 0.1;
-	Render::meshtRender->AddObject(this);
+	transform.worldScale *= 1;
+
 }
 
 
