@@ -45,6 +45,15 @@
     <Filter Include="FramWork\GameObject">
       <UniqueIdentifier>{bdac6bbd-2aff-4d96-852e-d6a5fadf5c7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\obj\Default">
+      <UniqueIdentifier>{6f1cde10-29ad-4d4a-9d9c-c9d78b090591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{7092cb9c-fc0d-45f0-a339-e680a54acb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\GLSL">
+      <UniqueIdentifier>{efc56c93-c7cf-4517-8557-0b26bbfc7aca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Xlsx.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,32 +199,35 @@
     <ClInclude Include="ResourcePool.h">
       <Filter>Object\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Xlsx.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="Vertex.glsl">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="GuiVertex.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\GLSL</Filter>
     </None>
     <None Include="GuiFragment.glsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="GuiVertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="Vertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Cube.obj">
-      <Filter>리소스 파일\obj</Filter>
+      <Filter>리소스 파일\obj\Default</Filter>
     </Object>
     <Object Include="Player.obj">
-      <Filter>리소스 파일\obj</Filter>
+      <Filter>리소스 파일\obj\Default</Filter>
     </Object>
     <Object Include="Sphere.obj">
+      <Filter>리소스 파일\obj\Default</Filter>
+    </Object>
+    <Object Include="SPACESHIP_1.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
-    <Object Include="SPACESHIP_1.obj" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="map.png">

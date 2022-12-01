@@ -1,8 +1,17 @@
 #include "Resource.h"
 
+libxl::Book* Resource::book = nullptr;
+libxl::Sheet* Resource::sheet = nullptr;
 
 Resource::Resource() : Mesh(this)
 {
+	if (book == nullptr)
+	{
+		book = xlCreateXMLBook();
+		book->load(L"Data/PlayerData.xlsx");
+		sheet = book->getSheet(0);
+	}
+
 	collider.tag = "Resource";
 	collider.object = this;
 
@@ -18,5 +27,5 @@ Resource::~Resource()
 
 void Resource::Init()
 {
-	
+	SetActive(false);
 }

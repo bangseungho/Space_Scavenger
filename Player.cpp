@@ -3,8 +3,7 @@
 Player* Player::Instance = nullptr;
 VertexBlock* Player::_Block = nullptr;
 
-Player::Player() : Mesh(this),
-ironPool(1,1,3.0f, &transform)
+Player::Player() : Mesh(this)
 {
 	name = "Player";
 
@@ -15,9 +14,8 @@ ironPool(1,1,3.0f, &transform)
 	}
 
 	block = _Block;
+	ironPool.InitPool(5, 1, 1.0f, &transform);
 
-	collider.SetBox_OBB(vec3(2));
-	collider.object = this;
 	Render::meshtRender->AddObject(this);
 }
 
@@ -28,11 +26,8 @@ Player::~Player()
 void Player::Init()
 {
 	collider.tag = "player";
-
-
-	color.SetRandomColor();
-	transform.worldScale *= 1;
-
+	collider.SetBox_OBB(vec3(2));
+	collider.object = this;
 }
 
 
@@ -81,19 +76,25 @@ void Player::Handle_Evnet(int specialKey)
 	}
 }
 
-void Player::Collision()
+void Player::OnCollision()
 {
-	for (const auto& other : Collider::allCollider)
+	for (auto& other : Collider::allCollider)
 	{
-		if (other->object->id == this->id)
-			continue;
 		if (!other->object->ActiveSelf())
 			continue;
 		if (!other->isCollide)
 			continue;
-
-		if (!collider.OBBCollision(collider, *other))
+		if (other->object->id == id)
 			continue;
+		
+		if (!other->OBBCollision(collider, *other))
+			continue;
+
+		if (other->tag == "Resource")
+		{
+			cout << "Ãæµ¹ " << endl;
+			cout << other->tag << endl;
+		}
 	}
 }
 

@@ -6,6 +6,7 @@ Transform::Transform()
 	worldPosition = localPosition = vec3(0);
 	worldRotation = localRotation = vec3(0);
 	worldScale = localScale = vec3(1);
+	model = mat4(1);
 }
 
 Transform::~Transform()

@@ -18,7 +18,7 @@ public:
 	void Update();
 	void Handle_Evnet(unsigned char key);
 	void Handle_Evnet(int specialKey);
-	void Collision();
+	void OnCollision();
 
 public:
 	mat4& SetMatrix();

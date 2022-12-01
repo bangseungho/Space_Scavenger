@@ -1,4 +1,5 @@
 #pragma once
+#include "FrameTime.h"
 #include <iostream>
 #include <random>
 #include <vector>
@@ -9,8 +10,6 @@
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
-#include "FrameTime.h"
-
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>

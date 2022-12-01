@@ -22,7 +22,7 @@ public:
 	virtual void Disable() {};
 	virtual void Update();
 	virtual void Init();
-	virtual void Collision();
+	virtual void OnCollision() {};
 
 	//virtual void Handle_Evnet();
 
@@ -38,14 +38,6 @@ public:
 	string name;
 	Transform transform;
 	bool isDraw = true;
-
-	//ObjectBlock* block;
-public:
-	vec3 worldSpeed;
-	vec3 localSpeed;
-
-	vec3 worldRotateSpeed;
-	vec3 localRotateSpeed;
 
 private:
 	bool isActive;

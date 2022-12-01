@@ -1,6 +1,7 @@
 #include "Iron.h"
 
 VertexBlock* Iron::_Block = nullptr;
+int Iron::amountData = -1;
 
 Iron::Iron()
 {
@@ -14,7 +15,7 @@ Iron::Iron()
 
 	block = _Block;
 
-	collider.SetBox_OBB(block->max);
+	collider.SetBox_OBB(vec3(2));
 
 }
 
@@ -24,4 +25,34 @@ Iron::~Iron()
 
 void Iron::Init()
 {
+	Resource::Init();
+
+	if (amountData == -1)
+	{
+		amountData = sheet->readNum(1, 1);
+	}
+}
+
+void Iron::OnCollision()
+{
+	for (auto& other : Collider::allCollider)
+	{
+		if (!other->object->ActiveSelf())
+			continue;
+		if (!other->isCollide)
+			continue;
+		if (other->object->id == id)
+			continue;
+
+		if (!other->OBBCollision(collider, *other))
+			continue;
+		SetActive(false);
+		amountData++;
+
+		// юс╫ц
+		sheet->writeNum(1, 1, amountData);
+		book->errorMessage();
+		book->save(L"Data/PlayerData.xlsx");
+		book->release();
+	}
 }

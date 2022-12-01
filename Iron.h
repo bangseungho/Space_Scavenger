@@ -4,6 +4,7 @@ class Iron : public Resource
 {
 public:
 	static VertexBlock* _Block;
+	static int amountData;
 
 public:
 	Iron();
@@ -11,5 +12,7 @@ public:
 
 public:
 	void Init();
+
+	void OnCollision();
 
 };

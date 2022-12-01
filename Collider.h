@@ -4,7 +4,7 @@
 
 class Collider {
 public:
-	static list<Collider*> allCollider;
+	static vector<Collider*> allCollider;
 	static VertexBlock* _Block;
 	static bool isPrint;
 
@@ -24,6 +24,7 @@ public:
 public:
 	string tag;
 	Object* object;
+	Color color;
 
 public:
 	bool isCollide;
@@ -32,7 +33,6 @@ public:
 	bool isWindowCollide;
 
 private:
-	Color color;
 	vec3 size;
 
 	vec3 axis[3]; // 중심점에서 right, up, front 벡터

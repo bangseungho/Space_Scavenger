@@ -1,7 +1,7 @@
 #include "Collider.h"
 
 VertexBlock* Collider::_Block = nullptr;
-list<Collider*> Collider::allCollider;
+vector<Collider*> Collider::allCollider;
 bool Collider::isPrint = false;
 
 Collider::Collider()
@@ -54,6 +54,9 @@ void Collider::DrawBox()
 	glUseProgram(s_program);
 
 	if (!isCollide)
+		return;
+
+	if (!object->ActiveSelf())
 		return;
 
 	mat4 collideModel = scale(object->transform.model, vec3(1.00001));
@@ -127,7 +130,6 @@ void Collider::GetBox_OBB()
 // dis와 axis 초기화 문제도 있는 듯
 bool Collider::OBBCollision(const Collider& a,const Collider& b)
 {
-	color.SetColor({ 0, 0, 1, 1 });
 	if (!a.isCollide || !b.isCollide)
 		return false;
 

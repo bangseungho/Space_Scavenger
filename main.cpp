@@ -36,7 +36,6 @@ list<GuiObject*> GuiObject::allGuiObject;
 class GameManager : public Object
 {
 public:
-	Cube cube_Obj;
 	Player player;
 	Map map;
 	ChatBox chat_box;
@@ -45,7 +44,6 @@ public:
 public:
 	void Init() {
 		fristCamera->target_Pos = &player.transform;
-		cube_Obj.transform.worldScale *= 0.1;
 
 		light.transform.worldPosition.x = 1;
 	};
@@ -150,13 +148,14 @@ void drawScene()
 			continue;
 		collider->GetBox_OBB();
 	}
-
+	for (const auto& collider : Collider::allCollider)
+		collider->color.SetColor({ 0,0,1,1 });
 	// 葛电 面倒 贸府
 	for (const auto& obj : Object::allObject)
 	{
 		if (!obj->ActiveSelf())
 			continue;
-		obj->Collision();
+		obj->OnCollision();
 	}
 
 

@@ -13,9 +13,6 @@ Object::Object(): transform()
 	name = "UnName";
 	isActive = true;
 
-	worldSpeed = localSpeed = vec3(0);
-	worldRotateSpeed = localRotateSpeed = vec3(0);
-
 	allObject.push_back(this);
 }
 
@@ -29,11 +26,6 @@ void Object::Update()
 }
 void Object::Init()
 {
-}
-
-void Object::Collision()
-{
-
 }
 
 void Object::SetActive(bool value)
