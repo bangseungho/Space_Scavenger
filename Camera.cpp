@@ -61,18 +61,18 @@ void Camera::Draw()
 		vec3 dir = translate(target_Pos->model, cameraDirection) * vec4(0, 0, 0, 1);
 		vec3 pos = translate(target_Pos->model, cameraPos) * vec4(0, 0, 0, 1);
 
-		vec3 diffDis = realCameraPos - pos;
-		vec3 diffSpeed = -diffDis - 2.0f * velocity;
-		if (length(diffDis) < 0.01)
-		{
-			diffSpeed = vec3(0);
-			realCameraPos = pos;
-		}
-		velocity += diffSpeed * FrameTime::oneFrame;
-		realCameraPos += velocity * FrameTime::oneFrame;
+		//vec3 diffDis = realCameraPos - pos;
+		//vec3 diffSpeed = -diffDis - 2.0f * velocity;
+		//if (length(diffDis) < 0.01)
+		//{
+		//	diffSpeed = vec3(0);
+		//	realCameraPos = pos;
+		//}
+		//velocity += diffSpeed * FrameTime::oneFrame;
+		//realCameraPos += velocity * FrameTime::oneFrame;
 
 
-		view = lookAt(realCameraPos, dir, cameraUp);
+		view = lookAt(pos, dir, cameraUp);
 
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 	}
@@ -112,10 +112,10 @@ void Camera::Info()
 
 void Camera::LookAtView(float speed)
 {
-	vec3 diff = normalize(realCameraPos - cameraDirection) * speed * FrameTime::oneFrame * vec3(100);
+	vec3 diff = normalize(cameraPos - cameraDirection) * speed * FrameTime::oneFrame * vec3(100);
 
 	cameraPos += diff;
 	
-	diff *= target_Pos->worldScale * target_Pos->localScale;
-	realCameraPos += diff;
+	//diff *= target_Pos->worldScale * target_Pos->localScale;
+	//realCameraPos += diff;
 }

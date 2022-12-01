@@ -255,12 +255,14 @@ void MouseWheel(int wheel, int direction, int x, int y)
 	if (direction < 0)
 	{
 		cout << "Zoom out" << endl;
+		
 		camera.LookAtView(1);
 	}
 	else
 	{
 		cout << "Zoom in " << endl;
-		camera.LookAtView(-1);
+		if (length(camera.cameraPos) > 1)
+			camera.LookAtView(-1);
 	}
 }
 
@@ -274,8 +276,8 @@ void Motion(int x, int y)
 	if (!isMouseRight)
 	{
 		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		//player.transform.worldRotation.y -= diffPos.x;
-		//player.transform.worldRotation.x -= diffPos.y;
+		gameManager->player.transform.worldRotation.y -= diffPos.x;
+		gameManager->player.transform.worldRotation.x -= diffPos.y;
 	}
 
 	StartMouse = { (float)x, (float)y };
@@ -291,7 +293,7 @@ void MouseEntry(int state)
 	{
 		if (!isMouseRight)
 		{
-			//glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
+			glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
 			StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
 			StartMouse = Coordinate(StartMouse);
 			StartMouse.y = -StartMouse.y;

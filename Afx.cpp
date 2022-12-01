@@ -273,8 +273,7 @@ void ReadObj(char* fileName, VertexBlock& block)
 		}
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
-	block.max = max;
-	block.min = min;
+	block.groupCount++;
 	vec3 scale = max - min;
 
 	for (auto& temp : block.vertices)
@@ -282,7 +281,8 @@ void ReadObj(char* fileName, VertexBlock& block)
 		temp = temp - min;
 		temp = ((temp * 2.0f) / scale) - 1.0f;
 	}
-
+	block.max = max;
+	block.min = min;
 
 	//fclose(obj);	// Player 불러올때 에러 나서 잠시 꺼둠 이유는 모름
 }

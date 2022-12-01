@@ -31,7 +31,7 @@ public:
 	void SetActive(bool value);
 	void Info();
 public:
-	mat4& SetMatrix();
+	virtual mat4& SetMatrix();
 
 public:
 	int id;

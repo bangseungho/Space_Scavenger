@@ -36,6 +36,6 @@ void Light::Update()
 	glUniform3f(lightPosLocation, x, y, z); // юс╫ц
 	glUniform3f(lightColorLocation, color.R, color.G, color.B);
 
-	shape.transform.worldPosition = transform.worldPosition;
+	shape.transform = transform;
 	shape.color.SetColor(color);
 }

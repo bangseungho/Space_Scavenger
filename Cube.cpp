@@ -15,7 +15,7 @@ Cube::Cube() : Mesh(this)
 	block = _Block;
 
 	collider.tag = "Cube";
-	collider.SetBox_OBB(block->max - block->min);
+	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
 	Render::meshtRender->AddObject(this, "Cube");
