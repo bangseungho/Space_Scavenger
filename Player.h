@@ -3,6 +3,7 @@
 
 #include "ResourcePool.cpp"
 #include "Iron.h"
+#include "Quest.h"
 class Player : public Object, public Mesh
 {
 public:
@@ -23,8 +24,8 @@ public:
 public:
 	mat4& SetMatrix();
 
-private: // MouseEvent
-	//void MouseWheelEvent(int wheel, int direction, vec2 pos);
+private: 
+	void QuestHandle();
 
 public:
 	Collider collider;

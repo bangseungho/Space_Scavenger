@@ -137,7 +137,10 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="FrameTime.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="GuiObject.cpp" />
     <ClCompile Include="GuiRender.cpp" />
     <ClCompile Include="Iron.cpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Quest.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourcePool.cpp" />
@@ -163,7 +167,10 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Equipment.h" />
     <ClInclude Include="FrameTime.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Gauge.h" />
     <ClInclude Include="GuiObject.h" />
     <ClInclude Include="GuiRender.h" />
     <ClInclude Include="Iron.h" />
@@ -172,6 +179,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Quest.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourcePool.h" />
@@ -184,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <Object Include="Cube.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Harpoon.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="Player.obj">
@@ -200,10 +211,14 @@
     <None Include="Fragment.glsl" />
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />
+    <None Include="Harpoon.mtl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
     <None Include="Vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="chatbox.png" />
+    <Image Include="gauge.png" />
     <Image Include="map.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

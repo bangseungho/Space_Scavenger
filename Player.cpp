@@ -121,3 +121,7 @@ mat4& Player::SetMatrix()
 
 	return transform.model;
 }
+
+void Player::QuestHandle()
+{
+}

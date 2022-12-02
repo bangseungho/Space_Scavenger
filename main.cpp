@@ -1,18 +1,15 @@
-#include "Cube.h"
-#include "Player.h"
-#include "Map.h"
-#include "ChatBox.h"
-//#include "ResourcePool.cpp"	// 템플릿 클래스는 cpp를 인클루드 해야함
-#include "Iron.h"
-#include "Light.h"
+
+#include "GameManager.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
 void KeyBoard(unsigned char key, int x, int y);
 void SpecialKeyBoard(int key, int x, int y);
+void HarpoonLunching(int value);
 void Mouse(int button, int state, int x, int y);
 void MouseWheel(int wheel, int direction, int x, int y);
 void Motion(int x, int y);
+void SpecialKeyboardUp(int key, int x, int y);
 void MouseEntry(int state);
 
 Color windowColor;
@@ -32,23 +29,6 @@ list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<GuiObject*> GuiObject::allGuiObject;
 
-// 임시 클래스
-class GameManager : public Object
-{
-public:
-	Player player;
-	Map map;
-	ChatBox chat_box;
-	Light light;
-
-public:
-	void Init() {
-		fristCamera->target_Pos = &player.transform;
-
-		light.transform.worldPosition.x = 1;
-	};
-};
-
 GameManager* gameManager;
 
 void Init()
@@ -65,6 +45,7 @@ void Init()
 	FrameTime::currentTime = clock();
 
 	windowColor.R = windowColor.G = windowColor.B = 0;
+	Camera::mainCamera = &camera;
 	fristCamera = &camera;
 	camera.name = "Main";
 	camera.cameraPos.z = 10;
@@ -102,9 +83,11 @@ int main(int argc, char** argv)
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(KeyBoard);
 	glutSpecialFunc(SpecialKeyBoard);
+	glutSpecialUpFunc(SpecialKeyboardUp);
 	glutMouseFunc(Mouse);
 	glutMouseWheelFunc(MouseWheel);
 	glutPassiveMotionFunc(Motion);
+	glutTimerFunc(10, HarpoonLunching, 1);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
 }
@@ -148,8 +131,7 @@ void drawScene()
 			continue;
 		collider->GetBox_OBB();
 	}
-	for (const auto& collider : Collider::allCollider)
-		collider->color.SetColor({ 0,0,1,1 });
+
 	// 모든 충돌 처리
 	for (const auto& obj : Object::allObject)
 	{
@@ -229,14 +211,57 @@ void SpecialKeyBoard(int key, int x, int y)
 			glutLeaveFullScreen();
 		isFullScreen = !isFullScreen;
 		break;
+	//case GLUT_KEY_CTRL_L:
+		//fire_start = clock();
+		//gameManager->harpoon.FireSet();
+		break;
 	}
+}
+
+// 리팩토링 필요 state 개념으로 변경 
+// 키보드 입력 도구로 몰아 넣기
+void SpecialKeyboardUp(int key, int x, int y) 
+{
+	switch (key)
+	{
+	//case GLUT_KEY_CTRL_L:
+		//fire_end = clock();
+		//fire_result = static_cast<float>(fire_end - fire_start);
+		//fire_result /= CLOCKS_PER_SEC;
+
+		//if (fire_result > 3)
+		//	fire_result = 3;
+		//cout << fire_result << endl;
+
+		//gameManager->harpoon.max_strength = fire_result * 10;
+		//gameManager->harpoon.firing = true;
+		//gameManager->harpoon.charging = false;
+		//gameManager->gauge.transform.localScale.x = 0;
+	}
+}
+
+void HarpoonLunching(int value)
+{
+	//gameManager->harpoon.Fire();
+
+	//if (gameManager->harpoon.charging) {
+	//	gauge_end = clock();
+	//	double charging_gauge = static_cast<float>(gauge_end - fire_start);
+	//	charging_gauge /= CLOCKS_PER_SEC;
+
+	//	if (charging_gauge > 3)
+	//		charging_gauge = 3;
+	//	gameManager->gauge.transform.localScale.x = charging_gauge;
+	//}
+
+	glutTimerFunc(10, HarpoonLunching, 1);
 }
 
 void Mouse(int button, int state, int x, int y)
 {
 	StartMouse = { (float)x, (float)y };
 	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;\
+	StartMouse.y = -StartMouse.y;
 
 	vec2 realStartMouse = RealPosition(StartMouse);
 
@@ -254,14 +279,12 @@ void MouseWheel(int wheel, int direction, int x, int y)
 	if (direction < 0)
 	{
 		cout << "Zoom out" << endl;
-		
 		camera.LookAtView(1);
 	}
 	else
 	{
 		cout << "Zoom in " << endl;
-		if (length(camera.cameraPos) > 1)
-			camera.LookAtView(-1);
+		camera.LookAtView(-1);
 	}
 }
 
@@ -275,8 +298,8 @@ void Motion(int x, int y)
 	if (!isMouseRight)
 	{
 		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		gameManager->player.transform.worldRotation.y -= diffPos.x;
-		gameManager->player.transform.worldRotation.x -= diffPos.y;
+		//player.transform.worldRotation.y -= diffPos.x;
+		//player.transform.worldRotation.x -= diffPos.y;
 	}
 
 	StartMouse = { (float)x, (float)y };
@@ -292,7 +315,7 @@ void MouseEntry(int state)
 	{
 		if (!isMouseRight)
 		{
-			glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
+			//glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
 			StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
 			StartMouse = Coordinate(StartMouse);
 			StartMouse.y = -StartMouse.y;

@@ -30,9 +30,6 @@
     <Filter Include="GuiObject">
       <UniqueIdentifier>{9ae96dcc-1a60-4d6c-8f5f-98d7b0a31ec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\image">
-      <UniqueIdentifier>{283aa283-98ae-424c-b5d5-c38e4eacc727}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FramWork">
       <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
     </Filter>
@@ -54,24 +51,27 @@
     <Filter Include="리소스 파일\GLSL">
       <UniqueIdentifier>{efc56c93-c7cf-4517-8557-0b26bbfc7aca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Quest">
+      <UniqueIdentifier>{bc3efa6c-abff-4848-a44b-48a098f697ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\image">
+      <UniqueIdentifier>{283aa283-98ae-424c-b5d5-c38e4eacc727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{bd34b8d3-3439-439e-bf9e-f6e693348891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Equipment">
+      <UniqueIdentifier>{76c8b3c8-07da-4db5-86c9-88972e78009a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Quest\Contain">
+      <UniqueIdentifier>{1e73bdb9-f67b-44bc-a4c2-c20ca0e8bf56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FrameTime.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
     <ClCompile Include="Afx.cpp">
-      <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
@@ -125,24 +125,36 @@
     <ClCompile Include="Light.cpp">
       <Filter>FramWork\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTime.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Equipment.cpp">
+      <Filter>Object\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="Gauge.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
     <ClCompile Include="Xlsx.cpp">
+      <Filter>FramWork\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Quest.cpp">
+      <Filter>Object\Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameTime.h">
-      <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
@@ -199,7 +211,31 @@
     <ClInclude Include="ResourcePool.h">
       <Filter>Object\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Xlsx.h" />
+    <ClInclude Include="Transform.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameTime.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Object\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauge.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Xlsx.h">
+      <Filter>FramWork\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Quest.h">
+      <Filter>Object\Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -213,6 +249,9 @@
     </None>
     <None Include="Vertex.glsl">
       <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="Harpoon.mtl">
+      <Filter>리소스 파일\obj</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -228,12 +267,18 @@
     <Object Include="SPACESHIP_1.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
+    <Object Include="Harpoon.obj">
+      <Filter>리소스 파일\obj</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="map.png">
       <Filter>리소스 파일\image</Filter>
     </Image>
     <Image Include="chatbox.png">
+      <Filter>리소스 파일\image</Filter>
+    </Image>
+    <Image Include="gauge.png">
       <Filter>리소스 파일\image</Filter>
     </Image>
   </ItemGroup>
