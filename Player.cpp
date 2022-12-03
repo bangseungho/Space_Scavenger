@@ -15,7 +15,7 @@ Player::Player() : Mesh(this)
 
 	block = _Block;
 	ironPool.InitPool(5, 1, 1.0f, &transform);
-
+	equipment = new Harpoon();
 	Render::meshtRender->AddObject(this);
 }
 
@@ -63,7 +63,11 @@ void Player::Handle_Evnet(int specialKey)
 {
 	switch (specialKey)
 	{
-	default:
+	case GLUT_KEY_CTRL_L:
+		if (equipment->GetType() == EqType::HARPOON)
+		{
+
+		}
 		break;
 	}
 }
@@ -110,7 +114,7 @@ mat4& Player::SetMatrix()
 	worldModel = scale(worldModel, transform.worldScale);
 
 	transform.model = localModel * worldModel;
-
+	
 	return transform.model;
 }
 
