@@ -25,9 +25,11 @@ Player::~Player()
 
 void Player::Init()
 {
-	collider.tag = "player";
+	collider.tag = "Player";
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
+
+	equipment.targetPos = &transform;
 }
 
 
@@ -118,4 +120,12 @@ mat4& Player::SetMatrix()
 
 void Player::QuestHandle()
 {
+}
+
+void Player::FaceMove(const vec2& diffPos)
+{
+	vec2 speed = vec2(3, 2);
+	vec2 fMoveSpeed = diffPos * FrameTime::oneFrame * speed;
+	transform.worldRotation.y -= fMoveSpeed.x;
+	transform.worldRotation.x += fMoveSpeed.y;
 }

@@ -38,6 +38,21 @@ void GameManager::Mouse(int button, int state, int x, int y)
 	}
 }
 
+void GameManager::MouseWheel(int wheel, int direction, int x, int y)
+{
+	if (direction < 0)
+	{
+		cout << "Zoom out" << endl;
+		Camera::mainCamera->LookAtView(1);
+	}
+	else
+	{
+		cout << "Zoom in " << endl;
+		Camera::mainCamera->LookAtView(-1);
+	}
+}
+
+
 void GameManager::Motion(int x, int y)
 {
 	vec2 mouse_Pos = { (float)x, (float)y };
@@ -47,9 +62,11 @@ void GameManager::Motion(int x, int y)
 	//ShowCursor(isMouseRight);
 	if (!isMouseRight)
 	{
-		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		player.transform.worldRotation.y -= diffPos.x;
-		player.transform.worldRotation.x += diffPos.y;
+		vec2 diffPos = (mouse_Pos - StartMouse);
+		player.FaceMove(diffPos);
+		//vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
+		//player.transform.worldRotation.y -= diffPos.x;
+		//player.transform.worldRotation.x += diffPos.y;
 	}
 
 	StartMouse = { (float)x, (float)y };
