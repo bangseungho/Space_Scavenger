@@ -65,17 +65,11 @@ void Transform::ReSet()
 
 void Transform::LookAt(float speed)
 {
-	vec3 ro = worldRotation + localRotation;
-	float x = radians(ro.x);
-	float y = radians(ro.y);
-	float z = radians(ro.z);
+	vec3 pos = model * vec4(0, 0, 0, 1);
+	vec3 dir = translate(model, vec3(0, 0, -1)) * vec4(0, 0, 0, 1);
+	vec3 norm = normalize(dir - pos);
 
-	float s = speed * FrameTime::oneFrame;
-
-	worldPosition.x -= sin(y + z) * s;
-	worldPosition.y -= -sin(z + x) * s;
-	worldPosition.z -= cos(x + y) * s;
-
+	worldPosition += norm * FrameTime::oneFrame * speed;
 }
 
 void Transform::LookAtTarget(const vec3 targetPos)

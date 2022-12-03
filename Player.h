@@ -31,7 +31,7 @@ public:
 
 public:
 	Collider collider;
-	Equipment equipment;
+	Equipment* equipment;
 
 public:
 	float speed = 10;
@@ -42,6 +42,6 @@ private:
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
-	Equipment* equipment;
+
 };
 

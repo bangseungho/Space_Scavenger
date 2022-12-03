@@ -1,5 +1,14 @@
 #include "GameManager.h"
 
+GameManager::GameManager()
+{
+
+}
+GameManager::~GameManager()
+{
+
+}
+
 void GameManager::Init()
 {
 	StartMouse = vec2(0);
@@ -9,6 +18,9 @@ void GameManager::Init()
 	Camera::mainCamera->target_Pos = &player.transform;
 	cube_Obj.transform.worldScale *= 0.1;
 	light.transform.worldPosition.x = 1;
+
+	bgm.Load("Sound/ItemEarn.wav");
+	bgm.RepetPlay();
 }
 
 void GameManager::Update()
