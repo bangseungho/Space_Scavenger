@@ -58,20 +58,25 @@ void Camera::Draw()
 	}
 	else if (isPitch)
 	{
-		vec3 dir = translate(target_Pos->model, cameraDirection) * vec4(0, 0, 0, 1);
 		vec3 pos = translate(target_Pos->model, cameraPos) * vec4(0, 0, 0, 1);
+		vec3 dir = translate(target_Pos->model, cameraDirection) * vec4(0, 0, 0, 1);
+		mat4 worldModel = mat4(1.0);
+		mat4 localModel = mat4(1.0);
 
-		//vec3 diffDis = realCameraPos - pos;
-		//vec3 diffSpeed = -diffDis - 2.0f * velocity;
-		//if (length(diffDis) < 0.01)
-		//{
-		//	diffSpeed = vec3(0);
-		//	realCameraPos = pos;
-		//}
-		//velocity += diffSpeed * FrameTime::oneFrame;
-		//realCameraPos += velocity * FrameTime::oneFrame;
+		localModel = rotate(localModel, radians(target_Pos->localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
+		localModel = rotate(localModel, radians(target_Pos->localRotation.x), vec3(1.0, 0, 0));
+		localModel = rotate(localModel, radians(target_Pos->localRotation.z), vec3(0, 0, 1.0));
+														  
+		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.y), vec3(0, 1.0, 0));
+		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.x), vec3(1.0, 0, 0));
+		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.z), vec3(0, 0, 1.0));
 
-		view = lookAt(pos, dir, cameraUp);
+		mat4 model = localModel * worldModel;
+
+		vec3 up = translate(model, cameraUp) * vec4(0, 0, 0, 1);
+		up = normalize(up);
+
+		view = lookAt(pos, dir, up);
 
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 	}

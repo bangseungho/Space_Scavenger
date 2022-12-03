@@ -46,12 +46,16 @@ void Iron::OnCollision()
 
 		if (!other->OBBCollision(collider, *other))
 			continue;
-		SetActive(false);
-		amountData++;
 
-		// 임시
-		sheet->writeNum(1, 1, amountData);
-		book->errorMessage();
-		book->save(L"Data/PlayerData.xlsx");
+		if (other->tag == "Player")
+		{
+			SetActive(false);
+			amountData++;
+
+			// 임시
+			sheet->writeNum(1, 1, amountData);
+			book->errorMessage();
+			book->save(L"Data/PlayerData.xlsx");
+		}
 	}
 }

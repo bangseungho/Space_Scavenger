@@ -169,6 +169,8 @@ void drawScene()
 		gui_objectRender.Draw();
 	}
 
+	Camera::mainCamera = fristCamera;
+
 	Object::key = -1;
 	Object::specialKey = -1;
 	Object::specialKeyUp = -1;
@@ -227,15 +229,19 @@ void SpecialKeyBoard(int key, int x, int y)
 // 키보드 입력 도구로 몰아 넣기
 void SpecialKeyboardUp(int key, int x, int y) 
 {
+<<<<<<< HEAD
 	Object::specialKeyUp = key;
 
 	switch (key)
 	{
 	}
+=======
+>>>>>>> main
 }
 
 void TimerFunc(int value)
 {
+<<<<<<< HEAD
 	for (const auto& obj : Object::allObject)
 	{
 		if (!obj->ActiveSelf())
@@ -245,58 +251,26 @@ void TimerFunc(int value)
 	}
 
 	glutTimerFunc(10, TimerFunc, 1);
+=======
+	glutTimerFunc(10, HarpoonLunching, 1);
+>>>>>>> main
 }
 
 void Mouse(int button, int state, int x, int y)
 {
 	gameManager->Mouse(button, state, x, y);
-	//StartMouse = { (float)x, (float)y };
-	//StartMouse = Coordinate(StartMouse);
-	//StartMouse.y = -StartMouse.y;
-
-	//vec2 realStartMouse = RealPosition(StartMouse);
-
-	//if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-	//{
-	//	isMouseRight = !isMouseRight;
-	//}
-
 	
 	glutPostRedisplay();
 }
 
 void MouseWheel(int wheel, int direction, int x, int y)
 {
-	if (direction < 0)
-	{
-		cout << "Zoom out" << endl;
-		camera.LookAtView(1);
-	}
-	else
-	{
-		cout << "Zoom in " << endl;
-		camera.LookAtView(-1);
-	}
+	gameManager->MouseWheel(wheel, direction, x, y);
 }
 
 void Motion(int x, int y)
 {
 	gameManager->Motion(x, y);
-	//vec2 mouse_Pos = { (float)x, (float)y };
-	//mouse_Pos = Coordinate(mouse_Pos);
-	//mouse_Pos.y = -mouse_Pos.y;
-
-	////ShowCursor(isMouseRight);
-	//if (!isMouseRight)
-	//{
-	//	vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-	//	gameManager->player.transform.worldRotation.y -= diffPos.x;
-	//	gameManager->player.transform.worldRotation.x += diffPos.y;
-	//}
-
-	//StartMouse = { (float)x, (float)y };
-	//StartMouse = Coordinate(StartMouse);
-	//StartMouse.y = -StartMouse.y;
 
 	glutPostRedisplay();
 }
@@ -304,14 +278,5 @@ void Motion(int x, int y)
 void MouseEntry(int state)
 {
 	gameManager->MouseEntry(state);
-	//if (state == GLUT_LEFT)
-	//{
-	//	if (!isMouseRight)
-	//	{
-	//		glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
-	//		StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
-	//		StartMouse = Coordinate(StartMouse);
-	//		StartMouse.y = -StartMouse.y;
-	//	}
-	//}
+
 }
