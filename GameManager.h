@@ -28,7 +28,6 @@ public:
 	Map map;
 	ChatBox chat_box;
 	Light light;
-	//Equipment harpoon;
 	//Gauge gauge;
 
 private:

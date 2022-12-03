@@ -1,9 +1,10 @@
 #pragma once
 #include "Collider.h"
-
 #include "ResourcePool.cpp"
 #include "Iron.h"
 #include "Quest.h"
+#include "Harpoon.h"
+
 class Player : public Object, public Mesh
 {
 public:
@@ -35,5 +36,6 @@ private:
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
+	Equipment* equipment;
 };
 
