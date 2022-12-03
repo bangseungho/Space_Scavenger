@@ -5,7 +5,7 @@ void drawScene();
 GLvoid Reshape(int w, int h);
 void KeyBoard(unsigned char key, int x, int y);
 void SpecialKeyBoard(int key, int x, int y);
-void HarpoonLunching(int value);
+void TimerFunc(int value);
 void Mouse(int button, int state, int x, int y);
 void MouseWheel(int wheel, int direction, int x, int y);
 void Motion(int x, int y);
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(Mouse);
 	glutMouseWheelFunc(MouseWheel);
 	glutPassiveMotionFunc(Motion);
-	glutTimerFunc(10, HarpoonLunching, 1);
+	glutTimerFunc(10, TimerFunc, 1);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
 }
@@ -171,6 +171,7 @@ void drawScene()
 
 	Object::key = -1;
 	Object::specialKey = -1;
+	Object::specialKeyUp = -1;
 
 	FrameTime::oneFrame = (clock() - FrameTime::currentTime) / 1000.0f;
 	FrameTime::currentTime += FrameTime::oneFrame * 1000.0f;
@@ -193,6 +194,7 @@ GLvoid Reshape(int w, int h)
 void KeyBoard(unsigned char key, int x, int y)	
 {
 	Object::key = key;
+
 	switch (key)
 	{
 	//case 'q':
@@ -218,10 +220,6 @@ void SpecialKeyBoard(int key, int x, int y)
 			glutLeaveFullScreen();
 		isFullScreen = !isFullScreen;
 		break;
-	//case GLUT_KEY_CTRL_L:
-		//fire_start = clock();
-		//gameManager->harpoon.FireSet();
-		break;
 	}
 }
 
@@ -229,39 +227,24 @@ void SpecialKeyBoard(int key, int x, int y)
 // 키보드 입력 도구로 몰아 넣기
 void SpecialKeyboardUp(int key, int x, int y) 
 {
+	Object::specialKeyUp = key;
+
 	switch (key)
 	{
-	//case GLUT_KEY_CTRL_L:
-		//fire_end = clock();
-		//fire_result = static_cast<float>(fire_end - fire_start);
-		//fire_result /= CLOCKS_PER_SEC;
-
-		//if (fire_result > 3)
-		//	fire_result = 3;
-		//cout << fire_result << endl;
-
-		//gameManager->harpoon.max_strength = fire_result * 10;
-		//gameManager->harpoon.firing = true;
-		//gameManager->harpoon.charging = false;
-		//gameManager->gauge.transform.localScale.x = 0;
 	}
 }
 
-void HarpoonLunching(int value)
+void TimerFunc(int value)
 {
-	//gameManager->harpoon.Fire();
+	for (const auto& obj : Object::allObject)
+	{
+		if (!obj->ActiveSelf())
+			continue;
 
-	//if (gameManager->harpoon.charging) {
-	//	gauge_end = clock();
-	//	double charging_gauge = static_cast<float>(gauge_end - fire_start);
-	//	charging_gauge /= CLOCKS_PER_SEC;
+		obj->MyTimer();
+	}
 
-	//	if (charging_gauge > 3)
-	//		charging_gauge = 3;
-	//	gameManager->gauge.transform.localScale.x = charging_gauge;
-	//}
-
-	glutTimerFunc(10, HarpoonLunching, 1);
+	glutTimerFunc(10, TimerFunc, 1);
 }
 
 void Mouse(int button, int state, int x, int y)

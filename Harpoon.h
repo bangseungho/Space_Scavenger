@@ -11,20 +11,21 @@ public:
 
 public:
 	void Init();
-
-	void ChargeEnergy();
-
-	void Fire();
 	void Update();
-
+	void ChargingEnergy();
+	void FinishCharging();
+	void MyTimer();
+	void Fire();
 public:
 	Transform* targetPos;
-	bool firing = false;
-	bool charging = false;
+public:
 
 public:
-	int strength = 0;
-	int max_strength = 0;
-	float speed = 100;
+	double startTime;
+	double endTime;
+	int curEnergy;
+	int chargedEnergy;
+	float speed;
+	const int maxEnergy = 3;
 };
 

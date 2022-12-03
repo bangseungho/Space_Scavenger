@@ -3,7 +3,9 @@
 //list<Object*> Object::allObject;	//main.cpp 에서 전역변수로 Object 호출시 static 부분 무시함 (이유는 모름)
 int Object::ID_Count = 0;
 unsigned char Object::key;
+unsigned char Object::keyUp;
 int Object::specialKey;
+int Object::specialKeyUp;
 
 unsigned int Object::meterialBlockLoaction;
 
@@ -41,6 +43,10 @@ void Object::SetActive(bool value)
 void Object::Info()
 {
 	cout << id << " : " << name << endl;
+}
+
+void Object::MyTimer()
+{
 }
 
 mat4& Object::SetMatrix()

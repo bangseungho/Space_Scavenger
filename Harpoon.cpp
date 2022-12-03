@@ -21,51 +21,83 @@ Harpoon::Harpoon()
 	Render::meshtRender->AddObject(this, "Harpoon");
 }
 
-void Harpoon::Init()
-{
-	SetType(EqType::HARPOON);
-	color.SetRandomColor();
-	transform.worldScale *= 0.5;
-}
-
-void Harpoon::ChargeEnergy()
-{
-	cout << "Fire_Harpoon!!" << endl;
-	firing = true;
-	charging = true;
-	strength = 0;
-	Fire();
-}
-
 Harpoon::~Harpoon()
 {
 }
 
-void Harpoon::Update()
+void Harpoon::Init()
 {
+	SetType(EqType::HARPOON);
+	curEnergy = 0;
+	chargedEnergy = 0;
+	speed = 100;
+	color.SetRandomColor();
+	transform.worldScale *= 0.5;
 }
 
+void Harpoon::Update()
+{
+
+}
+
+void Harpoon::ChargingEnergy()
+{
+	startTime = clock();
+
+	cout << "Charging energy..." << endl;
+
+	curEnergy = 0;
+	chargedEnergy = 0;
+
+	SetState(State::CHARGING);
+}
+
+void Harpoon::FinishCharging()
+{
+	endTime = clock();
+
+	cout << "Finish Charging" << endl;
+	double chargingTime = (endTime - startTime) / CLOCKS_PER_SEC;
+	if (chargingTime > maxEnergy) chargingTime = maxEnergy;
+	cout << "Charging Time : " << chargingTime << endl;
+
+	chargedEnergy = chargingTime * 10;
+
+	SetState(State::FIRING);
+}
+
+void Harpoon::MyTimer()
+{
+	switch (GetState()) {
+	case State::IDLE:
+		break;
+	case State::CHARGING:
+		break;
+	case State::FIRING:
+		Fire();
+		break;
+	}
+}
 
 void Harpoon::Fire()
 {
 	float frameSpeed = speed * FrameTime::oneFrame;
 
-	if (firing) {
-		if (strength < max_strength)
-		{
-			transform.localPosition.z -= frameSpeed * max_strength / 30.0;
-			transform.worldScale.z += frameSpeed * max_strength / 30.0;
-		}
-		else if (strength < max_strength * 2) {
-			transform.localPosition.z += frameSpeed * max_strength / 30.0;
-			transform.worldScale.z -= frameSpeed * max_strength / 30.0;
-		}
-		else {
+	if (curEnergy < chargedEnergy)
+	{
+		transform.localPosition.z -= frameSpeed * chargedEnergy / 30.0;
+		transform.worldScale.z += frameSpeed * chargedEnergy / 30.0;
+	}
+	else {
+		transform.localPosition.z += frameSpeed * chargedEnergy / 150.0;
+		transform.worldScale.z -= frameSpeed * chargedEnergy / 150.0;
+
+		if (transform.worldScale.z < 0.5) {
 			transform.localPosition.z = 0;
 			transform.worldScale.z = 0.5;
-			firing = false;
-			max_strength = 0;
+			chargedEnergy = 0;
+			SetState(State::IDLE);
 		}
-		strength++;
 	}
+	curEnergy++;
 }

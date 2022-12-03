@@ -1,5 +1,15 @@
 #include "Equipment.h"
 
+Equipment::Equipment() : Mesh(this)
+{
+	myType = EqType::HARPOON;
+	myState = State::IDLE;
+}
+
+Equipment::~Equipment()
+{
+}
+
 void Equipment::SetType(EqType type)
 {
 	myType = type;
@@ -10,15 +20,27 @@ EqType Equipment::GetType()
 	return this->myType;
 }
 
-Equipment::Equipment() : Mesh(this)
+void Equipment::SetState(State state)
 {
+	myState = state;
+}
+
+State Equipment::GetState()
+{
+	return myState;
 }
 
 void Equipment::Init()
 {
 }
 
-Equipment::~Equipment()
+
+
+void Equipment::ChargingEnergy()
+{
+}
+
+void Equipment::FinishCharging()
 {
 }
 

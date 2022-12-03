@@ -9,7 +9,9 @@ public:
 	static list<Object*> allObject;
 
 	static unsigned char key;
+	static unsigned char keyUp;
 	static int specialKey;
+	static int specialKeyUp;
 
 	static unsigned int meterialBlockLoaction;
 
@@ -23,8 +25,7 @@ public:
 	virtual void Update();
 	virtual void Init();
 	virtual void OnCollision() {};
-
-	//virtual void Handle_Evnet();
+	virtual void MyTimer();
 
 public:
 	bool ActiveSelf() { return isActive; };
