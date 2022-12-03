@@ -17,11 +17,9 @@ Color windowColor;
 bool is_Polygon = false;
 bool is_CullFace = false;
 
-// ¸¶¿ì½º
-bool isMouseRight = false;
-
 Camera* fristCamera;
 Camera camera;
+Camera uiCamera;
 Render objectRender;
 guiRender gui_objectRender;
 
@@ -51,6 +49,8 @@ void Init()
 	camera.cameraPos.z = 10;
 	camera.isPitch = true;
 
+	uiCamera.isProjection_XY = true;
+
 	gameManager = new GameManager;
 
 	for (const auto& gui_obj : GuiObject::allGuiObject)
@@ -78,6 +78,9 @@ int main(int argc, char** argv)
 
 	InitShader();
 	Init();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
@@ -129,6 +132,7 @@ void drawScene()
 	{
 		if (!collider->isCollide)
 			continue;
+		collider->color.SetColor({ 0,0,1,1 });
 		collider->GetBox_OBB();
 	}
 
@@ -151,15 +155,18 @@ void drawScene()
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
 
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
 		objectRender.Draw();
-		gui_objectRender.Draw();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		for (const auto& collider : Collider::allCollider)
 			collider->DrawBox();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
+	{	//UI Viewport
+		glViewport(0, 0, windowSize_W, windowSize_H);
+		Camera::mainCamera = &uiCamera;
+		gui_objectRender.Draw();
 	}
 
 	Object::key = -1;
@@ -259,16 +266,17 @@ void HarpoonLunching(int value)
 
 void Mouse(int button, int state, int x, int y)
 {
-	StartMouse = { (float)x, (float)y };
-	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
+	gameManager->Mouse(button, state, x, y);
+	//StartMouse = { (float)x, (float)y };
+	//StartMouse = Coordinate(StartMouse);
+	//StartMouse.y = -StartMouse.y;
 
-	vec2 realStartMouse = RealPosition(StartMouse);
+	//vec2 realStartMouse = RealPosition(StartMouse);
 
-	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-	{
-		isMouseRight = !isMouseRight;
-	}
+	//if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	//{
+	//	isMouseRight = !isMouseRight;
+	//}
 
 	
 	glutPostRedisplay();
@@ -290,35 +298,37 @@ void MouseWheel(int wheel, int direction, int x, int y)
 
 void Motion(int x, int y)
 {
-	vec2 mouse_Pos = { (float)x, (float)y };
-	mouse_Pos = Coordinate(mouse_Pos);
-	mouse_Pos.y = -mouse_Pos.y;
+	gameManager->Motion(x, y);
+	//vec2 mouse_Pos = { (float)x, (float)y };
+	//mouse_Pos = Coordinate(mouse_Pos);
+	//mouse_Pos.y = -mouse_Pos.y;
 
-	//ShowCursor(isMouseRight);
-	if (!isMouseRight)
-	{
-		vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		//player.transform.worldRotation.y -= diffPos.x;
-		//player.transform.worldRotation.x -= diffPos.y;
-	}
+	////ShowCursor(isMouseRight);
+	//if (!isMouseRight)
+	//{
+	//	vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
+	//	gameManager->player.transform.worldRotation.y -= diffPos.x;
+	//	gameManager->player.transform.worldRotation.x += diffPos.y;
+	//}
 
-	StartMouse = { (float)x, (float)y };
-	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
+	//StartMouse = { (float)x, (float)y };
+	//StartMouse = Coordinate(StartMouse);
+	//StartMouse.y = -StartMouse.y;
 
 	glutPostRedisplay();
 }
 
 void MouseEntry(int state)
 {
-	if (state == GLUT_LEFT)
-	{
-		if (!isMouseRight)
-		{
-			//glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
-			StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
-			StartMouse = Coordinate(StartMouse);
-			StartMouse.y = -StartMouse.y;
-		}
-	}
+	gameManager->MouseEntry(state);
+	//if (state == GLUT_LEFT)
+	//{
+	//	if (!isMouseRight)
+	//	{
+	//		glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
+	//		StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
+	//		StartMouse = Coordinate(StartMouse);
+	//		StartMouse.y = -StartMouse.y;
+	//	}
+	//}
 }

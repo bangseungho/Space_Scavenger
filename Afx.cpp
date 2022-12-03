@@ -62,8 +62,6 @@ bool operator== (const vec3 my, const float other)
 	return true;
 }
 
-vec2 StartMouse = vec2(0);
-
 #pragma endregion
 
 

@@ -71,7 +71,6 @@ void Camera::Draw()
 		//velocity += diffSpeed * FrameTime::oneFrame;
 		//realCameraPos += velocity * FrameTime::oneFrame;
 
-
 		view = lookAt(pos, dir, cameraUp);
 
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);

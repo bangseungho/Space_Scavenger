@@ -16,6 +16,8 @@ Render::~Render()
 void Render::Draw()
 {
 	glUseProgram(s_program);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
 
 	Camera::mainCamera->Draw();
 	for (auto& layer : renderList)
