@@ -53,6 +53,5 @@ void Iron::OnCollision()
 		sheet->writeNum(1, 1, amountData);
 		book->errorMessage();
 		book->save(L"Data/PlayerData.xlsx");
-		book->release();
 	}
 }

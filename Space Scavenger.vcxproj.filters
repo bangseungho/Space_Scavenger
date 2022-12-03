@@ -63,9 +63,6 @@
     <Filter Include="Object\Equipment">
       <UniqueIdentifier>{76c8b3c8-07da-4db5-86c9-88972e78009a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Quest\Contain">
-      <UniqueIdentifier>{1e73bdb9-f67b-44bc-a4c2-c20ca0e8bf56}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

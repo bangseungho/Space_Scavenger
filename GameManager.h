@@ -8,8 +8,20 @@
 #include "Light.h"
 #include "Equipment.h"
 #include "Gauge.h"
+
 class GameManager : public Object
 {
+public:
+	void Init();
+	void Update();
+	void KeyBoard(unsigned char key, int x, int y);
+	void SpecialKeyBoard(int key, int x, int y);
+	void SpecialKeyboardUp(int key, int x, int y);
+	void Mouse(int button, int state, int x, int y);
+	void MouseWheel(int wheel, int direction, int x, int y);
+	void Motion(int x, int y);
+	void MouseEntry(int state);
+
 public:
 	Cube cube_Obj;
 	Player player;
@@ -19,9 +31,9 @@ public:
 	//Equipment harpoon;
 	//Gauge gauge;
 
-public:
-	void Init();
+private:
+	bool isMouseRight;
+	vec2 StartMouse;
 
-	void Update();
 };
 

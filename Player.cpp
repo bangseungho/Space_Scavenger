@@ -42,16 +42,6 @@ void Player::Handle_Evnet(unsigned char key)
 	float frameSpeed = speed * FrameTime::oneFrame;
 	switch (key)
 	{
-	case 'a':
-		transform.worldRotation.y += 90;
-		transform.LookAt(speed);
-		transform.worldRotation.y -= 90;
-		break;
-	case 'd':
-		transform.worldRotation.y -= 90;
-		transform.LookAt(speed);
-		transform.worldRotation.y += 90;
-		break;
 	case 'w':
 		transform.LookAt(speed);
 		break;

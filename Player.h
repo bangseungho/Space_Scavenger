@@ -24,12 +24,15 @@ public:
 public:
 	mat4& SetMatrix();
 
-private: 
 	void QuestHandle();
 
 public:
 	Collider collider;
-	float speed = 1;
+	float speed = 10;
+
+private:
+	Quest quset;
+
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
 };
