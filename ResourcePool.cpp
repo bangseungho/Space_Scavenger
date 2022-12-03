@@ -7,7 +7,6 @@ ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationT
 	pool = new ROS[_MaxCount];
 	spawnTimer.durationTime = _DurationTime;
 	target_Transform = _Target;
-
 	distance_Min = distance_Max = 10;	// юс╫ц
 }
 
