@@ -6,6 +6,7 @@
 #include "Iron.h"
 #include "Quest.h"
 #include "Harpoon.h"
+class Harpoon;
 
 class Player : public Object, public Mesh
 {
@@ -20,8 +21,9 @@ public:
 public:
 	void Init();
 	void Update();
-	void Handle_Evnet(unsigned char key);
-	void Handle_Evnet(int specialKey);
+	void Handle_Event(unsigned char key);
+	void Handle_Event(int specialKey);
+	void Handle_Event_Up(int specialKeyUp);
 	void OnCollision();
 
 public:

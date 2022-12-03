@@ -33,11 +33,12 @@ void Player::Init()
 
 void Player::Update()
 {
-	Handle_Evnet(key);
-	Handle_Evnet(specialKey);
+	Handle_Event(key);
+	Handle_Event(specialKey);
+	Handle_Event_Up(specialKeyUp);
 }
 
-void Player::Handle_Evnet(unsigned char key)
+void Player::Handle_Event(unsigned char key)
 {
 	float frameSpeed = speed * FrameTime::oneFrame;
 	switch (key)
@@ -57,14 +58,28 @@ void Player::Handle_Evnet(unsigned char key)
 	}
 }
 
-void Player::Handle_Evnet(int specialKey)
+void Player::Handle_Event(int specialKey)
 {
 	switch (specialKey)
 	{
 	case GLUT_KEY_CTRL_L:
+		if (equipment->GetType() == EqType::HARPOON && 
+			equipment->GetState() == State::IDLE)
+		{
+			equipment->ChargingEnergy();
+		}
+		break;
+	}
+}
+
+void Player::Handle_Event_Up(int specialKeyUp)
+{
+	switch (specialKeyUp)
+	{
+	case GLUT_KEY_CTRL_L:
 		if (equipment->GetType() == EqType::HARPOON)
 		{
-
+			equipment->FinishCharging();
 		}
 		break;
 	}

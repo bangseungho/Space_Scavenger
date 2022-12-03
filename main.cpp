@@ -5,7 +5,7 @@ void drawScene();
 GLvoid Reshape(int w, int h);
 void KeyBoard(unsigned char key, int x, int y);
 void SpecialKeyBoard(int key, int x, int y);
-void HarpoonLunching(int value);
+void TimerFunc(int value);
 void Mouse(int button, int state, int x, int y);
 void MouseWheel(int wheel, int direction, int x, int y);
 void Motion(int x, int y);
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(Mouse);
 	glutMouseWheelFunc(MouseWheel);
 	glutPassiveMotionFunc(Motion);
-	glutTimerFunc(10, HarpoonLunching, 1);
+	glutTimerFunc(10, TimerFunc, 1);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
 }
@@ -173,6 +173,7 @@ void drawScene()
 
 	Object::key = -1;
 	Object::specialKey = -1;
+	Object::specialKeyUp = -1;
 
 	FrameTime::oneFrame = (clock() - FrameTime::currentTime) / 1000.0f;
 	FrameTime::currentTime += FrameTime::oneFrame * 1000.0f;
@@ -195,6 +196,7 @@ GLvoid Reshape(int w, int h)
 void KeyBoard(unsigned char key, int x, int y)	
 {
 	Object::key = key;
+
 	switch (key)
 	{
 	//case 'q':
@@ -227,11 +229,31 @@ void SpecialKeyBoard(int key, int x, int y)
 // 키보드 입력 도구로 몰아 넣기
 void SpecialKeyboardUp(int key, int x, int y) 
 {
+<<<<<<< HEAD
+	Object::specialKeyUp = key;
+
+	switch (key)
+	{
+	}
+=======
+>>>>>>> main
 }
 
-void HarpoonLunching(int value)
+void TimerFunc(int value)
 {
+<<<<<<< HEAD
+	for (const auto& obj : Object::allObject)
+	{
+		if (!obj->ActiveSelf())
+			continue;
+
+		obj->MyTimer();
+	}
+
+	glutTimerFunc(10, TimerFunc, 1);
+=======
 	glutTimerFunc(10, HarpoonLunching, 1);
+>>>>>>> main
 }
 
 void Mouse(int button, int state, int x, int y)
