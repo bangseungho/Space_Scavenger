@@ -28,8 +28,6 @@ void Player::Init()
 	collider.tag = "Player";
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
-
-	equipment.targetPos = &transform;
 }
 
 
