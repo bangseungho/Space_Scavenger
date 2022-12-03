@@ -1,6 +1,8 @@
 #pragma once
 #include "Collider.h"
 
+#include "Equipment.h"
+
 #include "ResourcePool.cpp"
 #include "Iron.h"
 #include "Quest.h"
@@ -23,14 +25,18 @@ public:
 
 public:
 	mat4& SetMatrix();
-
 	void QuestHandle();
+	void FaceMove(const vec2& diffPos);
 
 public:
 	Collider collider;
+	Equipment equipment;
+
+public:
 	float speed = 10;
 
 private:
+
 	Quest quset;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool

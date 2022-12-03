@@ -12,6 +12,8 @@ Resource::Resource() : Mesh(this)
 		sheet = book->getSheet(0);
 	}
 
+	SetActive(false);
+
 	collider.tag = "Resource";
 	collider.object = this;
 
@@ -27,5 +29,5 @@ Resource::~Resource()
 
 void Resource::Init()
 {
-	SetActive(false);
+	
 }

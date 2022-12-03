@@ -16,20 +16,23 @@ public:
 
 public:
 	void Init();
-	void Fire();
 	void Update();
+	void Fire();
 	void Handle_Evnet(int specialKey);
 	void FireSet();
 
 public:
 	Collider collider;
-	int strength = 0;
-	int max_strength = 0;
-	float speed = 100;
+
+	Transform* targetPos;
+
 	bool firing = false;
 	bool charging = false;
 
 public:
+	int strength = 0;
+	int max_strength = 0;
+	float speed = 100;
 };
 
 
