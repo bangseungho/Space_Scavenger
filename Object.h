@@ -22,22 +22,25 @@ public:
 public:
 	virtual void Enable() {};
 	virtual void Disable() {};
-	virtual void Update();
 	virtual void Init();
+	virtual void Update();
 	virtual void OnCollision() {};
 	virtual void MyTimer();
+	virtual mat4& SetMatrix();
 
 public:
 	bool ActiveSelf() { return isActive; };
 	void SetActive(bool value);
+
+	void CallEvent();
 	void Info();
-public:
-	virtual mat4& SetMatrix();
 
 public:
 	int id;
 	string name;
 	Transform transform;
+	vector<void> (*Event)();
+
 	bool isDraw = true;
 
 private:

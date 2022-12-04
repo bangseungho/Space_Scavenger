@@ -40,6 +40,14 @@ void Object::SetActive(bool value)
 	this->isActive = value;
 }
 
+void Object::CallEvent()
+{
+	for (auto& f : Event)
+	{
+
+	}
+}
+
 void Object::Info()
 {
 	cout << id << " : " << name << endl;

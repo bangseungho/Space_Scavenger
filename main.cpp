@@ -144,8 +144,6 @@ void drawScene()
 		obj->OnCollision();
 	}
 
-
-
 	// 충돌한 물체들의 밀림 처리
 	//for (const auto& collider : Collider::allCollider)
 	//	collider->OnTrigger();
@@ -229,19 +227,15 @@ void SpecialKeyBoard(int key, int x, int y)
 // 키보드 입력 도구로 몰아 넣기
 void SpecialKeyboardUp(int key, int x, int y) 
 {
-<<<<<<< HEAD
 	Object::specialKeyUp = key;
 
 	switch (key)
 	{
 	}
-=======
->>>>>>> main
 }
 
 void TimerFunc(int value)
 {
-<<<<<<< HEAD
 	for (const auto& obj : Object::allObject)
 	{
 		if (!obj->ActiveSelf())
@@ -251,9 +245,6 @@ void TimerFunc(int value)
 	}
 
 	glutTimerFunc(10, TimerFunc, 1);
-=======
-	glutTimerFunc(10, HarpoonLunching, 1);
->>>>>>> main
 }
 
 void Mouse(int button, int state, int x, int y)

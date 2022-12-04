@@ -72,7 +72,12 @@ void Transform::LookAt(float speed)
 	worldPosition += norm * FrameTime::oneFrame * speed;
 }
 
-void Transform::LookAtTarget(const vec3 targetPos)
+// 목표하는 Target에 Speed 만큼 전진
+void Transform::LookAtTarget(const Transform& _Target, const float _Speed)
 {
+	vec3 myPos = model * vec4(0, 0, 0, 1);
+	vec3 targetPos = _Target.model * vec4(0, 0, 0, 1);
+	vec3 dir = normalize(targetPos - myPos);
 
+	worldPosition += dir * FrameTime::oneFrame * _Speed;
 }

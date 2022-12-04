@@ -38,6 +38,5 @@ private:
 	vec2 StartMouse;
 
 	Sound bgm;	// юс╫ц
-
 };
 

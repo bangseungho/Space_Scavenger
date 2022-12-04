@@ -145,6 +145,7 @@
     <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Guidance.cpp" />
     <ClCompile Include="GuiObject.cpp" />
     <ClCompile Include="GuiRender.cpp" />
     <ClCompile Include="Harpoon.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="FrameTime.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Guidance.h" />
     <ClInclude Include="GuiObject.h" />
     <ClInclude Include="GuiRender.h" />
     <ClInclude Include="Harpoon.h" />
@@ -203,6 +205,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="Harpoon.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Obj\Resource\R3.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Obj\Resource\Iron.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="Obj\Resource\R2.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="Player.obj">

@@ -6,7 +6,7 @@
 enum class EqType {
 	HARPOON,
 	NET,
-	MAGNETIC,
+	GUIDANCE, // À¯µµ
 };
 
 enum class State {
@@ -17,10 +17,6 @@ enum class State {
 
 class Equipment :public Object, public Mesh
 {
-private:
-	EqType myType;
-	State myState;
-
 public:
 	Equipment();
 	~Equipment();
@@ -43,17 +39,16 @@ public:
 
 public:
 	Collider collider;
-<<<<<<< HEAD
 
-=======
 	int strength = 0;
 	int max_strength = 0;
 	float speed = 100;
 	bool firing = false;
 	bool charging = false;
 
-public:
->>>>>>> main
+protected:
+	EqType myType;
+	State myState;
 };
 
 

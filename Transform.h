@@ -16,7 +16,7 @@ public:
 	void ReSet();
 public:
 	void LookAt(float speed);
-	void LookAtTarget(const vec3 targetPos);
+	void LookAtTarget(const Transform& _Target, const float _Speed);
 public:
 	vec3 worldPosition;
 	vec3 localPosition;

@@ -19,7 +19,8 @@ Resource::Resource() : Mesh(this)
 
 	amount = 0;
 	velocity = vec3(0);
-
+	
+	isDragged = false;
 	Render::meshtRender->AddObject(this, "Resource");
 }
 
@@ -30,4 +31,29 @@ Resource::~Resource()
 void Resource::Init()
 {
 	
+}
+
+void Resource::Update()
+{
+	Dragged();
+}
+
+void Resource::OnCollision()
+{
+}
+
+
+void Resource::OnDragged(Transform* _Target)
+{
+	isDragged = true;
+	target = _Target;
+}
+
+//Target¿¡ ²ø·Á°¨
+void Resource::Dragged()
+{
+	if (!isDragged)
+		return;
+
+	transform.LookAtTarget(*target, 10);
 }

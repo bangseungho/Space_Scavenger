@@ -9,10 +9,4 @@ public:
 public:
 	Iron();
 	~Iron();
-
-public:
-	void Init();
-
-	void OnCollision();
-
 };

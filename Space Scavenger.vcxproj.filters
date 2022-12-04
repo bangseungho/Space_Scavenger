@@ -63,6 +63,12 @@
     <Filter Include="Object\Equipment">
       <UniqueIdentifier>{76c8b3c8-07da-4db5-86c9-88972e78009a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\obj\Resource">
+      <UniqueIdentifier>{316c82e6-2d46-4b57-9b05-db8197b001d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Equipment\Contain">
+      <UniqueIdentifier>{86f3aaf4-f826-437a-9f40-e67945a92381}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +161,9 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Guidance.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -244,7 +253,10 @@
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h" />
+    <ClInclude Include="Sound.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Guidance.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -278,6 +290,15 @@
     </Object>
     <Object Include="Harpoon.obj">
       <Filter>리소스 파일\obj</Filter>
+    </Object>
+    <Object Include="Obj\Resource\R3.obj">
+      <Filter>리소스 파일\obj\Resource</Filter>
+    </Object>
+    <Object Include="Obj\Resource\Iron.obj">
+      <Filter>리소스 파일\obj\Resource</Filter>
+    </Object>
+    <Object Include="Obj\Resource\R2.obj">
+      <Filter>리소스 파일\obj\Resource</Filter>
     </Object>
   </ItemGroup>
   <ItemGroup>
