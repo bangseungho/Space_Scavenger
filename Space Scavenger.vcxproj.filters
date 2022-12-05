@@ -164,6 +164,9 @@
     <ClCompile Include="Guidance.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>FramWork\소스</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -257,6 +260,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Guidance.h" />
+    <ClInclude Include="Random.h">
+      <Filter>FramWork\헤더</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

@@ -15,7 +15,8 @@ Player::Player() : Mesh(this)
 
 	block = _Block;
 	ironPool.InitPool(5, 1, 1.0f, &transform);
-	equipment = new Harpoon();
+	//equipment = new Harpoon();
+	equipment = new Guidance;
 	Render::meshtRender->AddObject(this);
 }
 
@@ -101,8 +102,9 @@ void Player::OnCollision()
 
 		if (other->tag == "Resource")
 		{
-			cout << "Ãæµ¹ " << endl;
-			cout << other->tag << endl;
+			Resource* resource = reinterpret_cast<Resource*>(other->object);
+			if (resource->isDragged)
+				equipment->isDragged = false;
 		}
 	}
 }

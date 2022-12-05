@@ -1,7 +1,7 @@
 #pragma once
 #include "FrameTime.h"
+#include "Random.h"
 #include <iostream>
-#include <random>
 #include <vector>
 #include <list>
 #include <map>
@@ -18,7 +18,6 @@
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace std;
 using namespace glm;
 
 #pragma warning(disable:4996)
@@ -81,8 +80,6 @@ ostream& operator<< (ostream& outputStream, const Face& my);
 bool operator== (const vec3 my, const float other);
 
 extern vec2 StartMouse;
-
-float RandomFloat(float first, float second);
 
 char* filetobuf(const char* file);
 void make_vertexShaders();

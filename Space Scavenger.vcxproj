@@ -157,6 +157,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quest.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourcePool.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Quest.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourcePool.h" />

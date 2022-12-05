@@ -123,12 +123,7 @@ void Collider::GetBox_OBB()
 	}
 }
 
-
-// TODO
-// 충돌 체크가 제데로 안됨
-// 아마 Vec3Dot 쪽의 문제인듯 함
-// dis와 axis 초기화 문제도 있는 듯
-bool Collider::OBBCollision(const Collider& a,const Collider& b)
+bool Collider::OBBCollision(Collider& a,Collider& b)
 {
 	if (!a.isCollide || !b.isCollide)
 		return false;
@@ -234,6 +229,7 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 			return false;
 	}
 
-	color.SetColor({ 1, 0, 0, 1 });
+	a.color.SetColor({ 1, 0, 0, 1 });
+	b.color.SetColor({ 1, 0, 0, 1 });
 	return true;
 }

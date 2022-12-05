@@ -17,8 +17,8 @@ public:
 	void MyTimer();
 	void Fire();
 public:
+	Collider collider;
 	Transform* targetPos;
-public:
 
 public:
 	double startTime;

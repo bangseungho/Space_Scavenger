@@ -32,19 +32,18 @@ public:
 	State GetState();
 
 public:
-	void Init();
-	void Update();
+	virtual void Init();
+	virtual void Update();
 	void Handle_Evnet(int specialKey);
 	void FireSet();
 
 public:
-	Collider collider;
-
 	int strength = 0;
 	int max_strength = 0;
 	float speed = 100;
 	bool firing = false;
 	bool charging = false;
+	bool isDragged; // 현재 자원을 끓어오고 있는지 체크
 
 protected:
 	EqType myType;

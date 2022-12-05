@@ -65,14 +65,7 @@ bool operator== (const vec3 my, const float other)
 #pragma endregion
 
 
-float RandomFloat(float first, float second)
-{
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_real_distribution<GLclampf> randomFloat(first, second);
 
-	return randomFloat(gen);
-}
 
 #pragma region Defualt_Funtion
 
@@ -282,7 +275,7 @@ void ReadObj(char* fileName, VertexBlock& block)
 	block.max = max;
 	block.min = min;
 
-	//fclose(obj);	// Player 불러올때 에러 나서 잠시 꺼둠 이유는 모름
+	fclose(obj);	// Player 불러올때 에러 나서 잠시 꺼둠 이유는 모름
 }
 
 #pragma endregion

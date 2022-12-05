@@ -32,16 +32,12 @@ public:
 	bool ActiveSelf() { return isActive; };
 	void SetActive(bool value);
 
-	void CallEvent();
 	void Info();
 
 public:
 	int id;
 	string name;
 	Transform transform;
-	vector<void> (*Event)();
-
-	bool isDraw = true;
 
 private:
 	bool isActive;

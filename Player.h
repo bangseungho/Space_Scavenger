@@ -6,8 +6,7 @@
 #include "Iron.h"
 #include "Quest.h"
 #include "Harpoon.h"
-class Harpoon;
-
+#include "Guidance.h"
 class Player : public Object, public Mesh
 {
 public:

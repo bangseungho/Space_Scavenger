@@ -8,6 +8,7 @@ public:
 	static VertexBlock* _Block;
 	static bool isPrint;
 
+	static bool OBBCollision(Collider& a,Collider& b);
 public:
 	Collider();
 	~Collider();
@@ -19,7 +20,6 @@ public:
 public:
 	void SetBox_OBB(const vec3& d);
 	void GetBox_OBB();
-	bool OBBCollision(const Collider& a,const Collider& b);
 
 public:
 	string tag;

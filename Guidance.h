@@ -13,16 +13,13 @@ public:
 
 public:
 	void Update();
-	void OnCollision();
 
 public:
 	void SerchResource();	// 주변에 Resource가 있는지 확인
 public:
-	Collider collider;
-
-	map<string, bool> resourceType;
+	map<string, bool> resourceType;	// 가져올 자원 리스트		(추후 설정된 자원만 끓고 오게 변경)
 
 public:
-	float serchDistnace;
+	float serchDistnace;	// 찾을 자원의 최대 범위
 };
 

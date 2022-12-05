@@ -3,12 +3,13 @@
 Guidance::Guidance()
 {
 	myType = EqType::GUIDANCE;
+	{	//임시
+		block = new VertexBlock;
+		ReadObj((char*)"Cube.obj", *block);
+		isDraw = false;
+	}
 
-	collider.SetBox_OBB(vec3(2));
-	collider.object = this;
-	collider.tag = "Guidance";
-
-	serchDistnace = 100;
+	serchDistnace = 1000;
 }
 
 Guidance::~Guidance()
@@ -20,33 +21,11 @@ void Guidance::Update()
 	SerchResource();
 }
 
-void Guidance::OnCollision()
-{
-	for (auto& other : Collider::allCollider)
-	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-
-		if (!other->OBBCollision(collider, *other))
-			continue;
-
-		//if (other->tag == "Resource")
-		//{
-		//	if (resourceType.find(other->object->name) != resourceType.end())
-		//	{
-		//		collider.isCollide = false;
-		//		return;
-		//	}
-		//}
-	}
-}
-
 void Guidance::SerchResource()
 {
+	if (isDragged)	//이미 선택한 자원이 있으면 리턴
+		return;
+
 	vec3 myPos = transform.model * vec4(0, 0, 0, 1);
 	for (auto& other : Collider::allCollider)
 	{
@@ -54,24 +33,24 @@ void Guidance::SerchResource()
 			continue;
 		if (!other->isCollide)
 			continue;
-		if (other->object->id == id)
-			continue;
 
 		if (other->tag != "Resource")
 			continue;
 
+		// 자원과 장비 사이의 거리 측정
 		vec3 targetPos = other->object->transform.model * vec4(0, 0, 0, 1);
 		float dis = length(myPos - targetPos);
 
 		if (dis > serchDistnace)
 			continue;
 
+		// 찾은 자원의 함수를 사용하기 위해 형변환
 		Resource* resource = reinterpret_cast<Resource*>(other->object);
 
 		if (resource)
 		{
-			collider.isCollide = false;
-			resource->OnDragged(&transform);
+			resource->OnDragged(&transform, 10);
+			isDragged = true;
 		}
 		else
 		{
