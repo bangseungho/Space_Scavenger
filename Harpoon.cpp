@@ -1,21 +1,21 @@
 #include "Harpoon.h"
 
-VertexBlock* Harpoon::_Block = nullptr;
+OBJ* Harpoon::_Obj = nullptr;
 
 Harpoon::Harpoon()
 {
 	name = "Harpoon";
 
-	if (_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		_Block = new VertexBlock;
-		ReadObj((char*)"Harpoon.obj", *_Block);
+		_Obj = new OBJ;
+		_Obj->ReadObj((char*)"Harpoon.obj");
 	}
 
-	block = _Block;
+	obj = _Obj;
 
 	collider.tag = "Harpoon";
-	collider.SetBox_OBB(block->max - block->min);
+	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
 	Render::meshtRender->AddObject(this, "Harpoon");

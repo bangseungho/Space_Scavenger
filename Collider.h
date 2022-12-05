@@ -5,7 +5,7 @@
 class Collider {
 public:
 	static vector<Collider*> allCollider;
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 	static bool isPrint;
 
 	static bool OBBCollision(Collider& a,Collider& b);
@@ -39,7 +39,7 @@ private:
 	float axisLen[3];
 	vec3 defaultAxis[3];
 
-	VertexBlock* block;
+	OBJ* obj;
 	GLuint VAO;
 	GLuint VAO_VERTICES;
 	GLuint VAO_VERTICES_INDEX;

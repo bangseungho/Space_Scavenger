@@ -17,6 +17,9 @@ Color windowColor;
 bool is_Polygon = false;
 bool is_CullFace = false;
 
+Shader objectShader("Object");
+Shader uiShader("UI");
+
 Camera* fristCamera;
 Camera camera;
 Camera uiCamera;
@@ -29,17 +32,39 @@ list<GuiObject*> GuiObject::allGuiObject;
 
 GameManager* gameManager;
 
+void InitShader()
+{
+	objectShader.CreatVertexShader("Vertex.glsl");
+	objectShader.CreatFragmentShader("Fragment.glsl");
+	objectShader.CreatProgram();
+
+	OBJ::MaterialBlockLocation = glGetUniformLocation(objectShader.program, "mBlock");
+	Light::lightColorLocation = glGetUniformLocation(objectShader.program, "lightColor");
+	Light::lightPosLocation = glGetUniformLocation(objectShader.program, "lightPos");
+
+	Mesh::vertexLocation = glGetAttribLocation(objectShader.program, "vPos");
+	Mesh::uvLoaction = glGetAttribLocation(objectShader.program, "vUV");
+	Mesh::normalLocation = glGetAttribLocation(objectShader.program, "vNormal");
+	Mesh::modelLocation = glGetUniformLocation(objectShader.program, "modelTransform");
+	Mesh::vColorLocation = glGetUniformLocation(objectShader.program, "vColor");
+	Object::meterialBlockLoaction = glGetUniformBlockIndex(objectShader.program,"meterial");
+	Camera::viewLocation = glGetUniformLocation(objectShader.program, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+	Camera::projectionLocation = glGetUniformLocation(objectShader.program, "projectionTransform");
+	Camera::viewPosLocation = glGetUniformLocation(objectShader.program, "viewPos");
+
+	uiShader.CreatVertexShader("GuiVertex.glsl");
+	uiShader.CreatFragmentShader("GuiFragment.glsl");
+	uiShader.CreatProgram();
+
+	GuiObject::ortho_projection = glGetUniformLocation(uiShader.program, "projectionTransform");
+	GuiObject::texture1_Location = glGetUniformLocation(uiShader.program, "texture1");
+}
+
 void Init()
 {
 	Render::meshtRender = &objectRender;
 	guiRender::gui_objectRender = &gui_objectRender;
 
-	Light::lightColorLocation = glGetUniformLocation(s_program, "lightColor");
-	Light::lightPosLocation = glGetUniformLocation(s_program, "lightPos");
-	Camera::viewPosLocation = glGetUniformLocation(s_program, "viewPos");
-	Mesh::modelLocation = glGetUniformLocation(s_program, "modelTransform");
-	Mesh::vColorLocation = glGetUniformLocation(s_program, "vColor");
-	Object::meterialBlockLoaction = glGetUniformBlockIndex(s_program,"meterial");
 	FrameTime::currentTime = clock();
 
 	windowColor.R = windowColor.G = windowColor.B = 0;
@@ -53,8 +78,10 @@ void Init()
 
 	gameManager = new GameManager;
 
+	glUseProgram(*Shader::allProgram.find("UI")->second);
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
+	glUseProgram(*Shader::allProgram.find("Object")->second);
 	for (const auto& mesh : Mesh::allMesh)
 		mesh->MeshInit();
 	for (const auto& obj : Object::allObject)
@@ -172,6 +199,7 @@ void drawScene()
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
 
+		glUseProgram(*Shader::allProgram.find("Object")->second);
 		objectRender.Draw();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -183,6 +211,7 @@ void drawScene()
 	{	//UI Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = &uiCamera;
+		glUseProgram(*Shader::allProgram.find("UI")->second);
 		gui_objectRender.Draw();
 	}
 

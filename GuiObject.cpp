@@ -3,6 +3,9 @@
 #include "stb_image.h"
 
 int GuiObject::Gui_ID_Count = 0;
+unsigned int GuiObject::ortho_projection;
+unsigned int GuiObject::texture1_Location;
+
 unsigned int GuiObject::modelLocation;
 unsigned int GuiObject::vColorLocation;
 
@@ -96,13 +99,11 @@ void GuiObject::Init()
 void GuiObject::ObjectDraw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	unsigned int ortho_projection = glGetUniformLocation(gui_s_program, "projectionTransform");
 	projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, &projection[0][0]);
 
-	glUseProgram(gui_s_program);
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
-	glUniform1i(glGetUniformLocation(gui_s_program, "texture1"), 0);
+	glUniform1i(texture1_Location, 0);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, my_texture);

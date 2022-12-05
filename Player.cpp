@@ -1,19 +1,19 @@
 #include "Player.h"
 
 Player* Player::Instance = nullptr;
-VertexBlock* Player::_Block = nullptr;
+OBJ* Player::_Obj = nullptr;
 
 Player::Player() : Mesh(this)
 {
 	name = "Player";
 
-	if (_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		_Block = new VertexBlock;
-		ReadObj((char*)"SPACESHIP_1.obj", *_Block);
+		_Obj = new OBJ;
+		_Obj->ReadObj((char*)"Obj/Player/SpaceShip.obj");
 	}
 
-	block = _Block;
+	obj = _Obj;
 	ironPool.InitPool(5, 1, 1.0f, &transform);
 	//equipment = new Harpoon();
 	equipment = new Guidance;

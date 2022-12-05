@@ -4,7 +4,7 @@
 class Sphere : public Object, public Mesh
 {
 public:
-	static VertexBlock* sphere_Block;
+	static OBJ* _Obj;
 public:
 	Sphere();
 	~Sphere();

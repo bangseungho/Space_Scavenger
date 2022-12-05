@@ -1,6 +1,7 @@
 #version 330 core
 
 in vec3 FragPos;
+in vec2 UV;
 in vec3 Normal;
 
 uniform vec4 vColor;	// object ÄÃ·¯

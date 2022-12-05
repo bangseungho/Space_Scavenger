@@ -56,7 +56,7 @@ mat4& Object::SetMatrix()
 	localModel = translate(localModel, transform.localPivot);
 	localModel = translate(localModel, transform.localPosition);
 	localModel = rotate(localModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
-	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
+	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));
 	localModel = rotate(localModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
 	localModel = scale(localModel, transform.localScale);
 

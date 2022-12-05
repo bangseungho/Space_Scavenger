@@ -3,7 +3,7 @@
 
 class Harpoon : public Equipment
 {
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 
 public:
 	Harpoon();

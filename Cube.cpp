@@ -1,18 +1,18 @@
 #include "Cube.h"
 
-VertexBlock* Cube::_Block = nullptr;
+OBJ* Cube::_Obj = nullptr;
 
 Cube::Cube() : Mesh(this)
 {
 	name = "Cube";
 
-	if (_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		_Block = new VertexBlock;
-		ReadObj((char*)"Cube.obj", *_Block);
+		_Obj = new OBJ;
+		_Obj->ReadObj((char*)"Cube.obj");
 	}
 
-	block = _Block;
+	obj = _Obj;
 
 	collider.tag = "Cube";
 	collider.SetBox_OBB(vec3(2));

@@ -11,7 +11,7 @@ class Player : public Object, public Mesh
 {
 public:
 	static Player* Instance;
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 
 public:
 	Player();

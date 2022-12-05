@@ -69,6 +69,9 @@
     <Filter Include="Object\Equipment\Contain">
       <UniqueIdentifier>{86f3aaf4-f826-437a-9f40-e67945a92381}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\obj\Player">
+      <UniqueIdentifier>{b4118c93-6f77-48a8-b7a0-364ebb5f2e6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,11 +164,17 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Guidance.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>FramWork\소스</Filter>
+    </ClCompile>
+    <ClCompile Include="Guidance.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJ.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>FramWork\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,9 +268,17 @@
     <ClInclude Include="Sound.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Guidance.h" />
     <ClInclude Include="Random.h">
       <Filter>FramWork\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Guidance.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJ.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>FramWork\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,30 +297,30 @@
     <None Include="Harpoon.mtl">
       <Filter>리소스 파일\obj</Filter>
     </None>
+    <None Include="Obj\Player\SpaceShip.mtl">
+      <Filter>리소스 파일\obj\Player</Filter>
+    </None>
+    <None Include="Obj\Resource\Iron.mtl">
+      <Filter>리소스 파일\obj\Resource</Filter>
+    </None>
+    <None Include="Fragment_MAX.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Cube.obj">
       <Filter>리소스 파일\obj\Default</Filter>
     </Object>
-    <Object Include="Player.obj">
-      <Filter>리소스 파일\obj\Default</Filter>
-    </Object>
     <Object Include="Sphere.obj">
       <Filter>리소스 파일\obj\Default</Filter>
-    </Object>
-    <Object Include="SPACESHIP_1.obj">
-      <Filter>리소스 파일\obj</Filter>
     </Object>
     <Object Include="Harpoon.obj">
       <Filter>리소스 파일\obj</Filter>
     </Object>
-    <Object Include="Obj\Resource\R3.obj">
-      <Filter>리소스 파일\obj\Resource</Filter>
+    <Object Include="Obj\Player\SpaceShip.obj">
+      <Filter>리소스 파일\obj\Player</Filter>
     </Object>
     <Object Include="Obj\Resource\Iron.obj">
-      <Filter>리소스 파일\obj\Resource</Filter>
-    </Object>
-    <Object Include="Obj\Resource\R2.obj">
       <Filter>리소스 파일\obj\Resource</Filter>
     </Object>
   </ItemGroup>

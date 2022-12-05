@@ -5,7 +5,7 @@
 class Cube :public Object, public Mesh
 {
 public:
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 
 public:
 	Cube();

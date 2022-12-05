@@ -5,6 +5,7 @@ layout (location = 1) in vec2 vUV;
 layout (location = 2) in vec3 vNormal;
 
 out vec3 FragPos;
+out vec2 UV;
 out vec3 Normal;
 
 uniform mat4 modelTransform; //--- 모델링 변환 행렬: uniform 변수로 선언

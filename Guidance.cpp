@@ -4,8 +4,8 @@ Guidance::Guidance()
 {
 	myType = EqType::GUIDANCE;
 	{	//юс╫ц
-		block = new VertexBlock;
-		ReadObj((char*)"Cube.obj", *block);
+		obj = new OBJ;
+		obj->ReadObj((char*)"Cube.obj");
 		isDraw = false;
 	}
 
