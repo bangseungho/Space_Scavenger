@@ -10,7 +10,7 @@ Player::Player() : Mesh(this)
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Obj/Player/SpaceShip.obj");
+		_Obj->ReadObj("Obj/Player/", "SpaceShip.obj");
 	}
 
 	obj = _Obj;

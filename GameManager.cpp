@@ -16,7 +16,6 @@ void GameManager::Init()
 	isMouseRight = false;
 
 	Camera::mainCamera->target_Pos = &player.transform;
-	cube_Obj.transform.worldScale *= 0.1;
 	light.transform.worldPosition.x = 1;
 
 	bgm.Load("Sound/ItemEarn.wav");

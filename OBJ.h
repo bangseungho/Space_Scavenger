@@ -1,5 +1,6 @@
 #pragma once
 #include "Afx.h"
+#include <string>
 
 typedef struct VertexBlock {
 	vector<Face>* vertexIndices, * uvIndices, * normalIndices;
@@ -8,10 +9,10 @@ typedef struct VertexBlock {
 	vector<vec3> vertices_normals;
 	vec3 max, min;
 	int groupCount;
+	string* usemtlName;
 }VertexBlock;
 
 typedef struct MaterialBlock {
-	char name[32];
 // 모델링 프로그램에 따른 변수
 #ifdef _MAX
 	vec3 Kd;
@@ -41,17 +42,22 @@ public:
 	OBJ();
 	~OBJ();
 public:
-	void ReadObj(char* fileName);
-	void ReadMaterial(char* mtlName);
+	void ReadObj(char* fileName) { ReadObj("", fileName); };
+	void ReadObj(string path, string objFileName);
+	void ReadMaterial(string mtlName);
+
+private: // 공용
+	void SkipCommand(FILE* f);
 
 private:	// obj 관련
 	void PushVertex(FILE* obj);
 	void PushUV(FILE* obj);
 	void PushNormal(FILE* obj);
 	void PushFaceIndex(FILE* obj);
+	void PushusemtlName(FILE* obj);
 
 private:	// mtl 관련
-	void PushMTLName(FILE* obj, MaterialBlock& _Material);
+	void PushMTLName(FILE* obj, string& usemtlName);
 	void PushMTLNs(FILE* obj, MaterialBlock& _Material);
 	void PushMTLNi(FILE* obj, MaterialBlock& _Material);
 	void PushMTLd(FILE* obj, MaterialBlock& _Material);
@@ -69,7 +75,8 @@ private:	// mtl 관련
 
 public:
 	VertexBlock vBlock;
-	vector<MaterialBlock> mBlock;
+	map<string, MaterialBlock> mBlock;
+	bool isOnMTL;
 
 private:
 	string objName;

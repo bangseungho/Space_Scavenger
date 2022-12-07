@@ -303,9 +303,6 @@
     <None Include="Obj\Resource\Iron.mtl">
       <Filter>리소스 파일\obj\Resource</Filter>
     </None>
-    <None Include="Fragment_MAX.glsl">
-      <Filter>리소스 파일\GLSL</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Object Include="Cube.obj">

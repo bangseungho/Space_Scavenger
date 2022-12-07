@@ -10,7 +10,7 @@ Iron::Iron()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Obj/Resource/Iron.obj");	// 이름 변경 필수
+		_Obj->ReadObj("Obj/Resource/", "Iron.obj");	// 이름 변경 필수
 	}
 
 	obj = _Obj;

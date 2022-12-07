@@ -225,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
-    <None Include="Fragment_MAX.glsl" />
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />
     <None Include="Harpoon.mtl">

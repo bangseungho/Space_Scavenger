@@ -4,42 +4,51 @@ unsigned int OBJ::MaterialBlockLocation;
 
 OBJ::OBJ()
 {
+	isOnMTL = false;
 }
 
 OBJ::~OBJ()
 {
 }
 
-void OBJ::ReadObj(char* fileName)
+void OBJ::ReadObj(string path, string objFileName)
 {
 	FILE* obj;
-	FILE* mtl;
 	char lineHeader[1000];
 	int groupNum = 0;
-	char mtlName[100];
+	string fileName = path + objFileName;
 
-	obj = fopen(fileName, "r");
+	obj = fopen(fileName.c_str(), "r");
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
 		if (strcmp(lineHeader, "g") == 0) groupNum++;
-		//else if(strcmp(lineHeader, "mtllib") == 0) fscanf(obj, "%s", mtlName);
+		else if (strcmp(lineHeader, "mtllib") == 0)
+		{
+			char mtlName[1000];
+			fscanf(obj, "%s", mtlName);
+			string mtlFileName = path + mtlName;
+			ReadMaterial(mtlFileName);
+			isOnMTL = true;
+		}
 	}
-	//mtl = fopen(mtlName, "r");
 
 	vBlock.vertexIndices = new vector<Face>[groupNum];
 	vBlock.normalIndices = new vector<Face>[groupNum];
 	vBlock.uvIndices = new vector<Face>[groupNum];
 	vBlock.groupCount = -1;
 	vBlock.min = vec3(10000); vBlock.max = vec3(-10000);
+	vBlock.usemtlName = new string[groupNum];
 
 	rewind(obj);
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
-		if (strcmp(lineHeader, "v") == 0) PushVertex(obj);
+		if (strcmp("#", lineHeader) == 0)SkipCommand(obj);
+		else if (strcmp(lineHeader, "v") == 0) PushVertex(obj);
 		else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
 		else if (strcmp(lineHeader, "vn") == 0) PushNormal(obj);
 		else if (strcmp(lineHeader, "f") == 0) PushFaceIndex(obj);
 		else if (strcmp(lineHeader, "g") == 0) vBlock.groupCount++;
+		else if (strcmp(lineHeader, "usemtl") == 0) PushusemtlName(obj);
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
 	vBlock.groupCount++;
@@ -55,36 +64,38 @@ void OBJ::ReadObj(char* fileName)
 	fclose(obj);
 }
 
-void OBJ::ReadMaterial(char* mtlName)
+void OBJ::ReadMaterial(string mtlName)
 {
-	FILE* obj;
+	FILE* mtl;
 	char lineHeader[1000];
 	MaterialBlock mterial;
+	string usemtlName;
 	int newMTLNum = -1;
-	obj = fopen(mtlName, "r");
-	while (!feof(obj))
+	mtl = fopen(mtlName.c_str(), "r");
+	while (!feof(mtl))
 	{
-		fscanf(obj, "%s", lineHeader);
-		if (strcmp("newmtl", lineHeader) == 0)
+		fscanf(mtl, "%s", lineHeader);
+		if (strcmp("#", lineHeader) == 0)SkipCommand(mtl);
+		else if (strcmp("newmtl", lineHeader) == 0)
 		{
 			newMTLNum++;
-			mBlock.push_back(mterial);
-			PushMTLName(obj, mBlock[newMTLNum]);
+			//mBlock.push_back(mterial);
+			PushMTLName(mtl, usemtlName);
 		}
 // 모델링 프로그램에 따른 함수 사용
 #ifdef _MAX
-		else if (strcmp("Kd", lineHeader) == 0) PushMTLKd(obj, mBlock[newMTLNum]);
-		else if (strcmp("Ks", lineHeader) == 0) PushMTLKs(obj, mBlock[newMTLNum]);
-		else if (strcmp("Tr", lineHeader) == 0) PushMTLTr(obj, mBlock[newMTLNum]);
-		else if (strcmp("d", lineHeader) == 0) PushMTLd(obj, mBlock[newMTLNum]);
-		else if (strcmp("Tf", lineHeader) == 0) PushMTLTf(obj, mBlock[newMTLNum]);
-		else if (strcmp("Pr", lineHeader) == 0) PushMTLPr(obj, mBlock[newMTLNum]);
-		else if (strcmp("Pm", lineHeader) == 0) PushMTLPm(obj, mBlock[newMTLNum]);
-		else if (strcmp("Pc", lineHeader) == 0) PushMTLPc(obj, mBlock[newMTLNum]);
-		else if (strcmp("Pcr", lineHeader) == 0) PushMTLPcr(obj, mBlock[newMTLNum]);
-		else if (strcmp("Ni", lineHeader) == 0) PushMTLNi(obj, mBlock[newMTLNum]);
-		else if (strcmp("Ke", lineHeader) == 0) PushMTLKe(obj, mBlock[newMTLNum]);
-		else if (strcmp("illum", lineHeader) == 0) PushMTLillum(obj, mBlock[newMTLNum]);
+		else if (strcmp("Kd", lineHeader) == 0) PushMTLKd(mtl, mBlock[usemtlName]);
+		else if (strcmp("Ks", lineHeader) == 0) PushMTLKs(mtl, mBlock[usemtlName]);
+		else if (strcmp("Tr", lineHeader) == 0) PushMTLTr(mtl, mBlock[usemtlName]);
+		else if (strcmp("d", lineHeader) == 0) PushMTLd(mtl, mBlock[usemtlName]);
+		else if (strcmp("Tf", lineHeader) == 0) PushMTLTf(mtl, mBlock[usemtlName]);
+		else if (strcmp("Pr", lineHeader) == 0) PushMTLPr(mtl, mBlock[usemtlName]);
+		else if (strcmp("Pm", lineHeader) == 0) PushMTLPm(mtl, mBlock[usemtlName]);
+		else if (strcmp("Pc", lineHeader) == 0) PushMTLPc(mtl, mBlock[usemtlName]);
+		else if (strcmp("Pcr", lineHeader) == 0) PushMTLPcr(mtl, mBlock[usemtlName]);
+		else if (strcmp("Ni", lineHeader) == 0) PushMTLNi(mtl, mBlock[usemtlName]);
+		else if (strcmp("Ke", lineHeader) == 0) PushMTLKe(mtl, mBlock[usemtlName]);
+		else if (strcmp("illum", lineHeader) == 0) PushMTLillum(mtl, mBlock[usemtlName]);
 #endif // _MAX
 
 		//else if (strcmp("Ns", lineHeader) == 0) PushMTLNs(obj, mBlock[newMTLNum]);
@@ -99,6 +110,13 @@ void OBJ::ReadMaterial(char* mtlName)
 		//else if (strcmp("Ke", lineHeader) == 0) PushMTLKe(obj, mBlock[newMTLNum]);
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
+	fclose(mtl);
+}
+
+void OBJ::SkipCommand(FILE* f)
+{
+	char buffer[256];
+	fgets(buffer, 256, f);
 }
 
 void OBJ::PushVertex(FILE* obj)
@@ -149,9 +167,18 @@ void OBJ::PushFaceIndex(FILE* obj)
 	vBlock.normalIndices[vBlock.groupCount].push_back(normalIndex - 1);
 }
 
-void OBJ::PushMTLName(FILE* obj, MaterialBlock& _Material)
+void OBJ::PushusemtlName(FILE* obj)
 {
-	fscanf(obj, "%s", _Material.name);
+	char name[255];
+	fscanf(obj, "%s", &name);
+	vBlock.usemtlName[vBlock.groupCount] = name;
+}
+
+void OBJ::PushMTLName(FILE* obj, string& usemtlName)
+{
+	char name[255];
+	fscanf(obj, "%s", &name);
+	usemtlName = name;
 }
 
 void OBJ::PushMTLNs(FILE* obj, MaterialBlock& _Material)

@@ -47,7 +47,8 @@ void InitShader()
 	Mesh::normalLocation = glGetAttribLocation(objectShader.program, "vNormal");
 	Mesh::modelLocation = glGetUniformLocation(objectShader.program, "modelTransform");
 	Mesh::vColorLocation = glGetUniformLocation(objectShader.program, "vColor");
-	Object::meterialBlockLoaction = glGetUniformBlockIndex(objectShader.program,"meterial");
+	Mesh::mBlockLocation = glGetUniformBlockIndex(objectShader.program, "mBlock");
+	glUniformBlockBinding(objectShader.program, Mesh::mBlockLocation, 0);
 	Camera::viewLocation = glGetUniformLocation(objectShader.program, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
 	Camera::projectionLocation = glGetUniformLocation(objectShader.program, "projectionTransform");
 	Camera::viewPosLocation = glGetUniformLocation(objectShader.program, "viewPos");
