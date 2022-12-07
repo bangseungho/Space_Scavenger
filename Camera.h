@@ -5,6 +5,8 @@ class Camera {
 public:
  	static Camera* mainCamera;
 
+	static unsigned int viewLocation;
+	static unsigned int projectionLocation;
 	static unsigned int viewPosLocation;
 
 public:

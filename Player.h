@@ -6,13 +6,12 @@
 #include "Iron.h"
 #include "Quest.h"
 #include "Harpoon.h"
-class Harpoon;
-
+#include "Guidance.h"
 class Player : public Object, public Mesh
 {
 public:
 	static Player* Instance;
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 
 public:
 	Player();

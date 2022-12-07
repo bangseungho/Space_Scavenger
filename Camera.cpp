@@ -2,6 +2,8 @@
 
 Camera* Camera::mainCamera = nullptr;
 
+unsigned int Camera::viewLocation;
+unsigned int Camera::projectionLocation;
 unsigned int Camera::viewPosLocation;
 
 
@@ -80,9 +82,6 @@ void Camera::Draw()
 
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 	}
-
-	unsigned int viewLocation = glGetUniformLocation(s_program, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
-	unsigned int projectionLocation = glGetUniformLocation(s_program, "projectionTransform");
 
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);

@@ -1,18 +1,18 @@
 #include "Sphere.h"
 
-VertexBlock* Sphere::sphere_Block = nullptr;
+OBJ* Sphere::_Obj = nullptr;
 
 Sphere::Sphere() : Mesh(this)
 {
 	name = "Shpere";
 
-	if (sphere_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		sphere_Block = new VertexBlock;
-		ReadObj((char*)"Sphere.obj", *sphere_Block);
+		_Obj = new OBJ;
+		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 
-	block = sphere_Block;
+	obj = _Obj;
 
 	Render::meshtRender->AddObject(this, "Sphere");
 }

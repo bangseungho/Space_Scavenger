@@ -17,6 +17,9 @@ Color windowColor;
 bool is_Polygon = false;
 bool is_CullFace = false;
 
+Shader objectShader("Object");
+Shader uiShader("UI");
+
 Camera* fristCamera;
 Camera camera;
 Camera uiCamera;
@@ -29,17 +32,40 @@ list<GuiObject*> GuiObject::allGuiObject;
 
 GameManager* gameManager;
 
+void InitShader()
+{
+	objectShader.CreatVertexShader("Vertex.glsl");
+	objectShader.CreatFragmentShader("Fragment.glsl");
+	objectShader.CreatProgram();
+
+	OBJ::MaterialBlockLocation = glGetUniformLocation(objectShader.program, "mBlock");
+	Light::lightColorLocation = glGetUniformLocation(objectShader.program, "lightColor");
+	Light::lightPosLocation = glGetUniformLocation(objectShader.program, "lightPos");
+
+	Mesh::vertexLocation = glGetAttribLocation(objectShader.program, "vPos");
+	Mesh::uvLoaction = glGetAttribLocation(objectShader.program, "vUV");
+	Mesh::normalLocation = glGetAttribLocation(objectShader.program, "vNormal");
+	Mesh::modelLocation = glGetUniformLocation(objectShader.program, "modelTransform");
+	Mesh::vColorLocation = glGetUniformLocation(objectShader.program, "vColor");
+	Mesh::mBlockLocation = glGetUniformBlockIndex(objectShader.program, "mBlock");
+	glUniformBlockBinding(objectShader.program, Mesh::mBlockLocation, 0);
+	Camera::viewLocation = glGetUniformLocation(objectShader.program, "viewTransform"); //--- 뷰잉 변환 설정
+	Camera::projectionLocation = glGetUniformLocation(objectShader.program, "projectionTransform");
+	Camera::viewPosLocation = glGetUniformLocation(objectShader.program, "viewPos");
+
+	uiShader.CreatVertexShader("GuiVertex.glsl");
+	uiShader.CreatFragmentShader("GuiFragment.glsl");
+	uiShader.CreatProgram();
+
+	GuiObject::ortho_projection = glGetUniformLocation(uiShader.program, "projectionTransform");
+	GuiObject::texture1_Location = glGetUniformLocation(uiShader.program, "texture1");
+}
+
 void Init()
 {
 	Render::meshtRender = &objectRender;
 	guiRender::gui_objectRender = &gui_objectRender;
 
-	Light::lightColorLocation = glGetUniformLocation(s_program, "lightColor");
-	Light::lightPosLocation = glGetUniformLocation(s_program, "lightPos");
-	Camera::viewPosLocation = glGetUniformLocation(s_program, "viewPos");
-	Mesh::modelLocation = glGetUniformLocation(s_program, "modelTransform");
-	Mesh::vColorLocation = glGetUniformLocation(s_program, "vColor");
-	Object::meterialBlockLoaction = glGetUniformBlockIndex(s_program,"meterial");
 	FrameTime::currentTime = clock();
 
 	windowColor.R = windowColor.G = windowColor.B = 0;
@@ -53,8 +79,10 @@ void Init()
 
 	gameManager = new GameManager;
 
+	glUseProgram(*Shader::allProgram.find("UI")->second);
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
+	glUseProgram(*Shader::allProgram.find("Object")->second);
 	for (const auto& mesh : Mesh::allMesh)
 		mesh->MeshInit();
 	for (const auto& obj : Object::allObject)
@@ -143,8 +171,25 @@ void drawScene()
 			continue;
 		obj->OnCollision();
 	}
+	//for (auto i = 0; i < Collider::allCollider.size() - 1; i++)
+	//{
+	//	Collider* a = Collider::allCollider[i];
+	//	for (auto j = i + 1; j < Collider::allCollider.size(); j++)
+	//	{
+	//		if (!a->object->ActiveSelf() || !a->isCollide)
+	//			break;
+	//		Collider* b = Collider::allCollider[j];
 
+	//		if (!b->object->ActiveSelf() || !b->isCollide)
+	//			continue;
 
+	//		if (!Collider::OBBCollision(*a, *b))
+	//			continue;
+
+	//		a->object->OnCollision(b->object);
+	//		b->object->OnCollision(a->object);
+	//	}
+	//}
 
 	// 충돌한 물체들의 밀림 처리
 	//for (const auto& collider : Collider::allCollider)
@@ -155,6 +200,7 @@ void drawScene()
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
 
+		glUseProgram(*Shader::allProgram.find("Object")->second);
 		objectRender.Draw();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -166,6 +212,7 @@ void drawScene()
 	{	//UI Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = &uiCamera;
+		glUseProgram(*Shader::allProgram.find("UI")->second);
 		gui_objectRender.Draw();
 	}
 
@@ -229,19 +276,15 @@ void SpecialKeyBoard(int key, int x, int y)
 // 키보드 입력 도구로 몰아 넣기
 void SpecialKeyboardUp(int key, int x, int y) 
 {
-<<<<<<< HEAD
 	Object::specialKeyUp = key;
 
 	switch (key)
 	{
 	}
-=======
->>>>>>> main
 }
 
 void TimerFunc(int value)
 {
-<<<<<<< HEAD
 	for (const auto& obj : Object::allObject)
 	{
 		if (!obj->ActiveSelf())
@@ -251,9 +294,6 @@ void TimerFunc(int value)
 	}
 
 	glutTimerFunc(10, TimerFunc, 1);
-=======
-	glutTimerFunc(10, HarpoonLunching, 1);
->>>>>>> main
 }
 
 void Mouse(int button, int state, int x, int y)

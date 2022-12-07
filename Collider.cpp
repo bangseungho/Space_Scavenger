@@ -1,19 +1,19 @@
 #include "Collider.h"
 
-VertexBlock* Collider::_Block = nullptr;
+OBJ* Collider::_Obj = nullptr;
 vector<Collider*> Collider::allCollider;
 bool Collider::isPrint = false;
 
 Collider::Collider()
 {
 
-	if (_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		_Block = new VertexBlock;
-		ReadObj((char*)"Cube.obj", *_Block);
+		_Obj = new OBJ;
+		_Obj->ReadObj((char*)"Cube.obj");
 	}
 
-	block = _Block;
+	obj = _Obj;
 
 	tag = "NULL";
 	color.R = 0;
@@ -34,25 +34,21 @@ Collider::~Collider()
 
 void Collider::Init()
 {
-	glUseProgram(s_program);
-
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VAO_VERTICES);
 	glGenBuffers(1, &VAO_VERTICES_INDEX);
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VAO_VERTICES);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * block->vertices.size(), &block->vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices.size(), &obj->vBlock.vertices[0], GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VAO_VERTICES_INDEX); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * block->vertexIndices[0].size(), &block->vertexIndices[0][0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertexIndices[0].size(), &obj->vBlock.vertexIndices[0][0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 }
 
 void Collider::DrawBox()
 {
-	glUseProgram(s_program);
-
 	if (!isCollide)
 		return;
 
@@ -68,7 +64,7 @@ void Collider::DrawBox()
 
 	//glPointSize(5.0f);
 	//glDrawArrays(GL_POINTS, 0, cBlock.vertices.size());
-	glDrawElements(GL_TRIANGLES, block->vertexIndices[0].size() * 3, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, obj->vBlock.vertexIndices[0].size() * 3, GL_UNSIGNED_SHORT, 0);
 }
 // Right Front Top 점을 정해주면 된다.
 // 즉 가로 세로 높이의 크기를 정해주면 된다.
@@ -123,12 +119,7 @@ void Collider::GetBox_OBB()
 	}
 }
 
-
-// TODO
-// 충돌 체크가 제데로 안됨
-// 아마 Vec3Dot 쪽의 문제인듯 함
-// dis와 axis 초기화 문제도 있는 듯
-bool Collider::OBBCollision(const Collider& a,const Collider& b)
+bool Collider::OBBCollision(Collider& a,Collider& b)
 {
 	if (!a.isCollide || !b.isCollide)
 		return false;
@@ -234,6 +225,7 @@ bool Collider::OBBCollision(const Collider& a,const Collider& b)
 			return false;
 	}
 
-	color.SetColor({ 1, 0, 0, 1 });
+	a.color.SetColor({ 1, 0, 0, 1 });
+	b.color.SetColor({ 1, 0, 0, 1 });
 	return true;
 }

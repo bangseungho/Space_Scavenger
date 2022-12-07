@@ -6,14 +6,14 @@
 class GuiObject
 {
 public:
-	const char* image_file;
 	static int Gui_ID_Count;
 	static list<GuiObject*> allGuiObject;
 
+	static unsigned int ortho_projection;
+	static unsigned int texture1_Location;
+	// 이 아래 두개 쓰는건가요?
 	static unsigned int modelLocation;
 	static unsigned int vColorLocation;
-	unsigned int my_texture;
-
 public:
 	GuiObject();
 	~GuiObject();
@@ -33,7 +33,8 @@ public:
 	string name;
 
 public:
-
+	const char* image_file;
+	unsigned int my_texture;
 
 protected:
 	unsigned int VBO, VAO, EBO;

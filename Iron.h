@@ -3,16 +3,10 @@
 class Iron : public Resource
 {
 public:
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 	static int amountData;
 
 public:
 	Iron();
 	~Iron();
-
-public:
-	void Init();
-
-	void OnCollision();
-
 };

@@ -26,7 +26,6 @@ public:
 	void MouseEntry(int state);
 
 public:
-	Cube cube_Obj;
 	Player player;
 	Map map;
 	ChatBox chat_box;
@@ -38,6 +37,5 @@ private:
 	vec2 StartMouse;
 
 	Sound bgm;	// юс╫ц
-
 };
 

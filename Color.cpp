@@ -36,3 +36,11 @@ void Color::SetColor(Color color)
 	B = color.B;
 	A = color.A;
 }
+
+void Color::SetColor(GLclampf i[])
+{
+	R = i[0];
+	G = i[1];
+	B = i[2];
+	A = i[3];
+}

@@ -15,7 +15,7 @@ guiRender::~guiRender()
 
 void guiRender::Draw()
 {
-	glUseProgram(gui_s_program);
+	//glUseProgram(gui_s_program);
 	glDisable(GL_DEPTH_TEST);
 
 	for (auto& layer : gui_renderList)

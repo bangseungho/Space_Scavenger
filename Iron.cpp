@@ -1,31 +1,21 @@
 #include "Iron.h"
 
-VertexBlock* Iron::_Block = nullptr;
+OBJ* Iron::_Obj = nullptr;
 int Iron::amountData = -1;
 
 Iron::Iron()
 {
 	name = "Iron";
 
-	if (_Block == nullptr)
+	if (_Obj == nullptr)
 	{
-		_Block = new VertexBlock;
-		ReadObj((char*)"Cube.obj", *_Block);	// 이름 변경 필수
+		_Obj = new OBJ;
+		_Obj->ReadObj("Obj/Resource/", "Iron.obj");	// 이름 변경 필수
 	}
 
-	block = _Block;
+	obj = _Obj;
 
 	collider.SetBox_OBB(vec3(2));
-
-}
-
-Iron::~Iron()
-{
-}
-
-void Iron::Init()
-{
-	Resource::Init();
 
 	if (amountData == -1)
 	{
@@ -33,29 +23,6 @@ void Iron::Init()
 	}
 }
 
-void Iron::OnCollision()
+Iron::~Iron()
 {
-	for (auto& other : Collider::allCollider)
-	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-
-		if (!other->OBBCollision(collider, *other))
-			continue;
-
-		if (other->tag == "Player")
-		{
-			SetActive(false);
-			amountData++;
-
-			// 임시
-			sheet->writeNum(1, 1, amountData);
-			book->errorMessage();
-			book->save(L"Data/PlayerData.xlsx");
-		}
-	}
 }

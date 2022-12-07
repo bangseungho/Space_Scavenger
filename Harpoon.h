@@ -3,7 +3,7 @@
 
 class Harpoon : public Equipment
 {
-	static VertexBlock* _Block;
+	static OBJ* _Obj;
 
 public:
 	Harpoon();
@@ -17,8 +17,8 @@ public:
 	void MyTimer();
 	void Fire();
 public:
+	Collider collider;
 	Transform* targetPos;
-public:
 
 public:
 	double startTime;

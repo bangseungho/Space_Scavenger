@@ -4,6 +4,8 @@ Equipment::Equipment() : Mesh(this)
 {
 	myType = EqType::HARPOON;
 	myState = State::IDLE;
+
+	isDragged = false;
 }
 
 Equipment::~Equipment()
