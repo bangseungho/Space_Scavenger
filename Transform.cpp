@@ -13,6 +13,22 @@ Transform::~Transform()
 {
 }
 
+Transform& Transform::operator=(const Transform& other)
+{
+	worldPosition = other.worldPosition;
+	localPosition = other.localPosition;
+
+	worldRotation.x = other.worldRotation.x;
+	worldRotation.y = other.worldRotation.y;
+	localRotation.x = other.localRotation.x;
+	localRotation.y = other.localRotation.y;
+
+	worldPivot = other.worldPivot;
+	localPivot = other.worldPivot;
+
+	return *this;
+}
+
 void Transform::Update()
 {
 

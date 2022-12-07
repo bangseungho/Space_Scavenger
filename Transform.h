@@ -8,6 +8,9 @@ public:
 	~Transform();
 
 public:
+	Transform& operator=(const Transform&);
+
+public:
 	void Update();
 	void SetScale(); // 랜덤 스케일
 	void SetRandomRotate();

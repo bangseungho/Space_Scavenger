@@ -7,7 +7,7 @@
 #include "Iron.h"
 #include "Light.h"
 #include "Gauge.h"
-#include "Sound.h"
+//#include "Sound.h"
 
 class GameManager : public Object
 {
@@ -36,6 +36,6 @@ private:
 	bool isMouseRight;
 	vec2 StartMouse;
 
-	Sound bgm;	// 임시
+	//Sound bgm;	// 임시
 };
 

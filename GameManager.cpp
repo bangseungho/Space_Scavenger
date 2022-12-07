@@ -18,8 +18,8 @@ void GameManager::Init()
 	Camera::mainCamera->target_Pos = &player.transform;
 	light.transform.worldPosition.x = 1;
 
-	bgm.Load("Sound/ItemEarn.wav");
-	bgm.RepetPlay();
+	//bgm.Load("Sound/ItemEarn.wav");
+	//bgm.RepetPlay();
 }
 
 void GameManager::Update()

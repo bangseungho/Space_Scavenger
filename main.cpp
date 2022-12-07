@@ -117,6 +117,7 @@ int main(int argc, char** argv)
 	glutSpecialUpFunc(SpecialKeyboardUp);
 	glutMouseFunc(Mouse);
 	glutMouseWheelFunc(MouseWheel);
+	//glutSetCursor(GLUT_CURSOR_NONE); // 마우스 커서 없애기
 	glutPassiveMotionFunc(Motion);
 	glutTimerFunc(10, TimerFunc, 1);
 	glutEntryFunc(MouseEntry);
@@ -246,9 +247,9 @@ void KeyBoard(unsigned char key, int x, int y)
 
 	switch (key)
 	{
-	//case 'q':
-	//	exit(1);
-	//	break;
+	case '0':
+		exit(1);
+		break;
 	}
 
 	glutPostRedisplay();

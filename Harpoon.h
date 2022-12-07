@@ -1,6 +1,10 @@
 #pragma once
 #include "Equipment.h"
 
+// todo 
+// 자원 끌어오기 
+// 플레이어 이동 및 변환시 함께 변환 = 우주선 작살 부착
+
 class Harpoon : public Equipment
 {
 	static OBJ* _Obj;
@@ -18,7 +22,6 @@ public:
 	void Fire();
 public:
 	Collider collider;
-	Transform* targetPos;
 
 public:
 	double startTime;

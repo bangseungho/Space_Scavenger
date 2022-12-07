@@ -4,6 +4,7 @@ OBJ* Harpoon::_Obj = nullptr;
 
 Harpoon::Harpoon()
 {
+	SetType(EqType::HARPOON);
 	name = "Harpoon";
 
 	if (_Obj == nullptr)
@@ -27,7 +28,6 @@ Harpoon::~Harpoon()
 
 void Harpoon::Init()
 {
-	SetType(EqType::HARPOON);
 	curEnergy = 0;
 	chargedEnergy = 0;
 	speed = 100;

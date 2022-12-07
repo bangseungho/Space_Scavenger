@@ -4,9 +4,10 @@
 #include "Gauge.h"
 
 enum class EqType {
-	HARPOON,
-	NET,
-	GUIDANCE, // 유도
+	HARPOON,	// 작살
+	LOWGUN,		// 총
+	BULLET,		// 총알
+	GUIDANCE,	// 유도
 };
 
 enum class State {
@@ -34,6 +35,7 @@ public:
 public:
 	virtual void Init();
 	virtual void Update();
+	virtual void Fire();
 	void Handle_Evnet(int specialKey);
 	void FireSet();
 
@@ -44,6 +46,7 @@ public:
 	bool firing = false;
 	bool charging = false;
 	bool isDragged; // 현재 자원을 끓어오고 있는지 체크
+	Transform targetPos;
 
 protected:
 	EqType myType;

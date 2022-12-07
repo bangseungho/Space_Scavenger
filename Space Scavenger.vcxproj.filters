@@ -158,9 +158,6 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Harpoon.cpp">
-      <Filter>Object\Equipment</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -175,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Harpoon.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="LowGun.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,9 +265,6 @@
     <ClInclude Include="Quest.h">
       <Filter>Object\Quest</Filter>
     </ClInclude>
-    <ClInclude Include="Harpoon.h">
-      <Filter>Object\Equipment</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
@@ -279,6 +282,15 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Harpoon.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="LowGun.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

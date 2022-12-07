@@ -2,8 +2,7 @@
 
 Equipment::Equipment() : Mesh(this)
 {
-	myType = EqType::HARPOON;
-	myState = State::IDLE;
+	SetState(State::IDLE);
 
 	isDragged = false;
 }
@@ -37,7 +36,6 @@ void Equipment::Init()
 }
 
 
-
 void Equipment::ChargingEnergy()
 {
 }
@@ -47,5 +45,18 @@ void Equipment::FinishCharging()
 }
 
 void Equipment::Update()
+{
+	
+}
+
+void Equipment::Handle_Evnet(int specialKey)
+{
+}
+
+void Equipment::FireSet()
+{
+}
+
+void Equipment::Fire()
 {
 }

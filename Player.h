@@ -1,12 +1,14 @@
 #pragma once
 #include "Collider.h"
-
 #include "Equipment.h"
 #include "ResourcePool.cpp"
 #include "Iron.h"
 #include "Quest.h"
 #include "Harpoon.h"
+#include "LowGun.h"
+#include "Bullet.h"
 #include "Guidance.h"
+
 class Player : public Object, public Mesh
 {
 public:

@@ -15,8 +15,9 @@ Player::Player() : Mesh(this)
 
 	obj = _Obj;
 	ironPool.InitPool(5, 1, 1.0f, &transform);
-	//equipment = new Harpoon();
-	equipment = new Guidance;
+	//equipment = new Harpoon;
+	equipment = new LowGun;
+	//equipment = new Guidance;
 	Render::meshtRender->AddObject(this);
 }
 
@@ -57,6 +58,7 @@ void Player::Handle_Event(unsigned char key)
 		transform.worldRotation.y--;
 		break;
 	}
+
 }
 
 void Player::Handle_Event(int specialKey)
@@ -64,12 +66,16 @@ void Player::Handle_Event(int specialKey)
 	switch (specialKey)
 	{
 	case GLUT_KEY_CTRL_L:
-		if (equipment->GetType() == EqType::HARPOON && 
-			equipment->GetState() == State::IDLE)
-		{
-			equipment->ChargingEnergy();
+		switch (equipment->GetType()) {
+		case EqType::HARPOON:
+			if (equipment->GetState() == State::IDLE) {
+				equipment->ChargingEnergy();
+			}
+			break;
+		case EqType::LOWGUN:
+			equipment->Fire();
+			break;
 		}
-		break;
 	}
 }
 
@@ -129,7 +135,10 @@ mat4& Player::SetMatrix()
 	worldModel = scale(worldModel, transform.worldScale);
 
 	transform.model = localModel * worldModel;
-	
+
+	equipment->transform = transform;
+	equipment->transform.worldPosition.y += 2;
+
 	return transform.model;
 }
 
