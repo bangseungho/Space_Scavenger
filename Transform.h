@@ -19,6 +19,9 @@ public:
 	Transform();
 	~Transform();
 public:
+	Transform& operator=(const Transform&);
+
+public:
 	void Update();
 
 public:

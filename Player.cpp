@@ -7,7 +7,7 @@ Player::Player() : Mesh(this)
 {
 	name = "Player";
 
-	// Mesh ÃÊ±âÈ­
+	// Mesh ï¿½Ê±ï¿½È­
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
@@ -15,17 +15,18 @@ Player::Player() : Mesh(this)
 	}
 	obj = _Obj;
 
-	// Collider ÃÊ±âÈ­
+	// Collider ï¿½Ê±ï¿½È­
 	collider.tag = "Player";
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
-	// Object ÃÊ±âÈ­
+	// Object ï¿½Ê±ï¿½È­
 	ironPool.InitPool(5, 1, 1.0f, &transform);
-	//equipment = new Harpoon();
-	equipment = new Guidance;
-	
 
+	equipment = new Harpoon;
+	//equipment = new LowGun;
+	//equipment = new Guidance;
+	
 	Render::meshtRender->AddObject(this);
 }
 
@@ -33,9 +34,10 @@ Player::~Player()
 {
 }
 
+
 void Player::Init()
 {
-	// ObjectµéÀÇ Transform ÃÊ±âÈ­
+	// Objectï¿½ï¿½ï¿½ï¿½ Transform ï¿½Ê±ï¿½È­
 	for (const auto& world : transform.world)
 	{
 		equipment->transform.world.push_back(world);
@@ -49,27 +51,24 @@ void Player::Update()
 {
 	Handle_Event(key);
 	Handle_Event(specialKey);
+	Handle_Event_Up(key);
 	Handle_Event_Up(specialKeyUp);
 }
 
 void Player::Handle_Event(unsigned char key)
 {
 	float frameSpeed = speed * FrameTime::oneFrame;
+
 	switch (key)
 	{
 	case 'w':
-		transform.LookAt(-speed);
+		move_front = true;
 		break;
 	case 's':
-		transform.LookAt(speed);
-		break;
-	case 'q':
-		transform.local->rotation.y++;
-		break;
-	case 'e':
-		transform.local->rotation.y--;
+		move_back = true;
 		break;
 	}
+
 }
 
 void Player::Handle_Event(int specialKey)
@@ -77,11 +76,28 @@ void Player::Handle_Event(int specialKey)
 	switch (specialKey)
 	{
 	case GLUT_KEY_CTRL_L:
-		if (equipment->GetType() == EqType::HARPOON && 
-			equipment->GetState() == State::IDLE)
-		{
-			equipment->ChargingEnergy();
+		switch (equipment->GetType()) {
+		case EqType::HARPOON:
+			if (equipment->GetState() == State::IDLE) {
+				dynamic_cast<Harpoon*>(equipment)->ChargingEnergy();
+			}
+			break;
+		case EqType::LOWGUN:
+			dynamic_cast<LowGun*>(equipment)->Fire();
+			break;
 		}
+	}
+}
+
+void Player::Handle_Event_Up(unsigned char key)
+{
+	switch (key)
+	{
+	case 'w':
+		move_front = false;
+		break;
+	case 's':
+		move_back = false;
 		break;
 	}
 }
@@ -93,9 +109,19 @@ void Player::Handle_Event_Up(int specialKeyUp)
 	case GLUT_KEY_CTRL_L:
 		if (equipment->GetType() == EqType::HARPOON)
 		{
-			equipment->FinishCharging();
+			dynamic_cast<Harpoon*>(equipment)->FinishCharging();
 		}
 		break;
+	}
+}
+
+void Player::MyTimer()
+{
+	if (move_front) {
+		transform.LookAt(speed);
+	}
+	if (move_back) {
+		transform.LookAt(-speed);
 	}
 }
 
@@ -115,6 +141,7 @@ void Player::OnCollision()
 
 		if (other->tag == "Resource")
 		{
+			cout << "RESOURCE PLAYER COLLIDER!!!" << endl;
 			Resource* resource = reinterpret_cast<Resource*>(other->object);
 			if (resource->isDragged)
 				equipment->isDragged = false;

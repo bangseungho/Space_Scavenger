@@ -63,10 +63,21 @@ void Resource::OnCollision()
 		if (!Collider::OBBCollision(collider, *other))
 			continue;
 
-		if (other->tag == "Player")
+		if (other->tag == "Player" && level == 1)
 		{
 			SetActive(false);
 		}
+
+		if (other->tag == "Bullet")
+		{
+			other->object->SetActive(false);
+			if (level > 1) {
+				level -= 1;
+			}
+			cout << level << endl;
+		}
+
+
 	}
 }
 

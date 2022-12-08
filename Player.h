@@ -1,12 +1,14 @@
 #pragma once
 #include "Collider.h"
-
 #include "Equipment.h"
 #include "ResourcePool.cpp"
 #include "Iron.h"
 #include "Quest.h"
 #include "Harpoon.h"
+#include "LowGun.h"
+#include "Bullet.h"
 #include "Guidance.h"
+
 class Player : public Object, public Mesh
 {
 public:
@@ -22,7 +24,9 @@ public:
 	void Update();
 	void Handle_Event(unsigned char key);
 	void Handle_Event(int specialKey);
+	void Handle_Event_Up(unsigned char key);
 	void Handle_Event_Up(int specialKeyUp);
+	void MyTimer();
 	void OnCollision();
 
 public:
@@ -35,7 +39,9 @@ public:
 	Equipment* equipment;
 
 public:
-	float speed = 10;
+	float speed = 100;
+	bool move_front;
+	bool move_back;
 
 private:
 	Quest quset;

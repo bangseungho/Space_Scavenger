@@ -26,6 +26,7 @@ private:
 
 	int maxCount;
 	int spawnCount;
+
 	Timer spawnTimer;
 };
 

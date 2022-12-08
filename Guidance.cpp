@@ -2,7 +2,7 @@
 
 Guidance::Guidance()
 {
-	myType = EqType::GUIDANCE;
+	SetType(EqType::GUIDANCE);
 	{	//юс╫ц
 		obj = new OBJ;
 		obj->ReadObj((char*)"Cube.obj");

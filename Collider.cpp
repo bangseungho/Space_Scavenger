@@ -108,7 +108,6 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 {
 	if (!a.isCollide || !b.isCollide)
 		return false;
-
 	vec3 dis; // a, b¿« ∞≈∏Æ
 	double c[3][3];
 	double absC[3][3];
@@ -210,5 +209,7 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 
 	a.color.SetColor({ 1, 0, 0, 1 });
 	b.color.SetColor({ 1, 0, 0, 1 });
+
 	return true;
+
 }

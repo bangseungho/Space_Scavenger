@@ -181,6 +181,14 @@
     </ClCompile>
     <ClCompile Include="CubeMap.cpp">
       <Filter>소스 파일</Filter>
+    <ClCompile Include="Harpoon.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="LowGun.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +264,6 @@
     <ClInclude Include="Quest.h">
       <Filter>Object\Quest</Filter>
     </ClInclude>
-    <ClInclude Include="Harpoon.h">
-      <Filter>Object\Equipment</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
@@ -290,6 +295,15 @@
       <Filter>소스 파일\미완성</Filter>
     </ClInclude>
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="Harpoon.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="LowGun.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
