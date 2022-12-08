@@ -18,17 +18,17 @@ void GameManager::Init()
 	Camera::mainCamera->target_Pos = &player.transform;
 	light.transform.local->position.x = 1;
 
-	//bgm.Load("Sound/ItemEarn.wav");
-	//bgm.RepetPlay();
+	bgm.Load("Sound/bgm.mp3", true);
+	effect.Load("Sound/ItemEarn.wav", false);
+
+	all_sound.push_back(&bgm);
+	all_sound.push_back(&effect);
+
+	bgm.Play();
 }
 
 void GameManager::Update()
 {
-	//if (!harpoon.firing) {
-	//	harpoon.transform.worldPosition = Camera::mainCamera->cameraPos;
-	//	harpoon.transform.worldPosition.z -= 2.5;
-	//	harpoon.transform.worldPosition.y -= 1;
-	//}
 }
 
 void GameManager::SpecialKeyboard(int key, int x, int y)
@@ -39,7 +39,20 @@ void GameManager::SpecialKeyboard(int key, int x, int y)
 		isALT_L = true;
 		Camera::mainCamera->cameraDirection = vec3(0);
 		break;
-	default:
+	case GLUT_KEY_F1:
+		effect.Play();
+		break;
+	case GLUT_KEY_F2:
+		for (auto a : all_sound) a->Stop();
+		break;
+	case GLUT_KEY_F3:
+		for (auto a : all_sound) a->Play();
+		break;
+	case GLUT_KEY_F5:
+		for (auto a : all_sound) a->SetVolum(-0.1);
+		break;
+	case GLUT_KEY_F6:
+		for (auto a : all_sound) a->SetVolum(0.1);
 		break;
 	}
 }
