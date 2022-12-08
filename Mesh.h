@@ -14,7 +14,9 @@ public:
 	static unsigned int modelLocation;
 	static unsigned int vColorLocation;
 		
-	static unsigned int mBlockLocation;	// 머테리얼 블록
+	static unsigned int KdLocation;	// 머테리얼 블록
+	static unsigned int KsLocation;	// 머테리얼 블록
+	static unsigned int dLocation;	// 머테리얼 블록
 
 public:
 	Mesh(Object* obj);
@@ -32,7 +34,7 @@ public:
 	bool isDraw;
 
 protected:
-	GLuint* VAO, *VBO, *EBO, *MTLBO;
+	GLuint* VAO, *VBO, *EBO;
 
 };
 
