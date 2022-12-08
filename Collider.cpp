@@ -55,7 +55,7 @@ void Collider::DrawBox()
 	if (!object->ActiveSelf())
 		return;
 
-	mat4 collideModel = scale(*object->transform.model, vec3(1.00001));
+	mat4 collideModel = scale(object->transform.model, vec3(1.00001));
 
 	glUniformMatrix4fv(Mesh::modelLocation, 1, GL_FALSE, value_ptr(collideModel));
 	glUniform4f(Mesh::vColorLocation, color.R, color.G, color.B, color.A);
@@ -85,29 +85,29 @@ void Collider::SetBox_OBB(const vec3& d)
 
 void Collider::GetBox_OBB()
 {
-	//mat4 worldModel = mat4(1.0);
-	//mat4 localModel = mat4(1.0);
+	mat4 worldModel = mat4(1.0);
+	mat4 localModel = mat4(1.0);
 
-	//localModel = rotate(localModel, radians(object->transform.localRotation.x), vec3(1.0, 0, 0));
-	//localModel = rotate(localModel, radians(object->transform.localRotation.y), vec3(0, 1.0, 0));
-	//localModel = rotate(localModel, radians(object->transform.localRotation.z), vec3(0, 0, 1.0));
-	//localModel = scale(localModel, object->transform.localScale);
+	localModel = rotate(localModel, radians(object->transform.localRotation.x), vec3(1.0, 0, 0));
+	localModel = rotate(localModel, radians(object->transform.localRotation.y), vec3(0, 1.0, 0));
+	localModel = rotate(localModel, radians(object->transform.localRotation.z), vec3(0, 0, 1.0));
+	localModel = scale(localModel, object->transform.localScale);
 
-	//worldModel = rotate(worldModel, radians(object->transform.worldRotation.x), vec3(1.0, 0, 0));
-	//worldModel = rotate(worldModel, radians(object->transform.worldRotation.y), vec3(0, 1.0, 0));
-	//worldModel = rotate(worldModel, radians(object->transform.worldRotation.z), vec3(0, 0, 1.0));
-	//worldModel = scale(worldModel, object->transform.worldScale);
+	worldModel = rotate(worldModel, radians(object->transform.worldRotation.x), vec3(1.0, 0, 0));
+	worldModel = rotate(worldModel, radians(object->transform.worldRotation.y), vec3(0, 1.0, 0));
+	worldModel = rotate(worldModel, radians(object->transform.worldRotation.z), vec3(0, 0, 1.0));
+	worldModel = scale(worldModel, object->transform.worldScale);
 
-	//mat4 model = worldModel * localModel;
+	mat4 model = localModel * worldModel;
 
-	vec3 statePoint = *object->transform.model * vec4(0, 0, 0, 1);
 	for (int i = 0; i < 3; i++)
 	{
-		axis[i] = *object->transform.model * vec4(defaultAxis[i],1);
-		axis[i] -= statePoint;
+		//axis[i] = defaultAxis[i];
+		axis[i] = model * vec4(defaultAxis[i],1);
 		axisLen[i] = length(axis[i]);
 		axis[i] = normalize(axis[i]);
 	}
+		//axis[i] = object->transform.model * vec4(defaultAxis[i], 1);
 
 	if (isPrint)
 	{
@@ -133,7 +133,7 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	bool isExitsParallelPair = false;
 
 	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
-	dis = b.object->transform.localPosition - a.object->transform.localPosition;
+	dis = b.object->transform.worldPosition - a.object->transform.worldPosition;
 
 	for (int n = 0; n < 3; n++)
 	{

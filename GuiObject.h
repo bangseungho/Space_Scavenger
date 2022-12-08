@@ -17,35 +17,27 @@ public:
 public:
 	GuiObject();
 	~GuiObject();
-	void ReadImage(string _FileName);
 
 public:
-	virtual void Enable() {};
-	virtual void Disable() {};
 	virtual void Update();
 	virtual void Init();
 	virtual void ObjectDraw();
-	virtual mat4& SetMatrix();
 
 public:
-	bool ActiveSelf() { return isActive; };
-	void SetActive(bool value);
+	mat4& SetMatrix();
 
 public:
 	int id;
 	Transform transform;
 	Color color;
 	string name;
-	bool isDraw;
 
 public:
-	string image_file;
+	const char* image_file;
 	unsigned int my_texture;
-
-private:
-	bool isActive;
 
 protected:
 	unsigned int VBO, VAO, EBO;
+
 };
 

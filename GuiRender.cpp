@@ -15,15 +15,14 @@ guiRender::~guiRender()
 
 void guiRender::Draw()
 {
+	//glUseProgram(gui_s_program);
 	glDisable(GL_DEPTH_TEST);
 
 	for (auto& layer : gui_renderList)
 	{
-		for (auto& ui : layer.second)
+		for (auto& obj : layer.second)
 		{
-			if (!ui->ActiveSelf())
-				continue;
-			ui->ObjectDraw();
+			obj->ObjectDraw();
 		}
 	}
 }

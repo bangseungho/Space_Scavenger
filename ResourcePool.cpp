@@ -36,7 +36,7 @@ void ResourcePool<ROS>::Spawn(float _Min, float _Max)
 		float dis = RandomFloat(_Min, _Max);
 		float radian = radians(RandomFloat(0, 360));
 		vec3 pos{ dis * sin(radian), dis * cos(radian), dis * tan(radian) };
-		pool[i].transform.localPosition = pos + target_Transform->localPosition;
+		pool[i].transform.worldPosition = pos + target_Transform->worldPosition;
 		pool[i].SetActive(true);
 
 		if (++count >= spawnCount)

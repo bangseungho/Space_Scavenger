@@ -50,17 +50,24 @@ void Object::MyTimer()
 
 mat4& Object::SetMatrix()
 {
-	mat4 lModel = mat4(1.0);
+	mat4 worldModel = mat4(1.0);
+	mat4 localModel = mat4(1.0);
 
-	lModel = translate(lModel, transform.localPivot);
-	lModel = translate(lModel, transform.localPosition);
-	lModel = rotate(lModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
-	lModel = rotate(lModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));
-	lModel = rotate(lModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
-	lModel = scale(lModel, transform.localScale);
+	localModel = translate(localModel, transform.localPivot);
+	localModel = translate(localModel, transform.localPosition);
+	localModel = rotate(localModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
+	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));
+	localModel = rotate(localModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
+	localModel = scale(localModel, transform.localScale);
 
-	*transform.localModel = lModel;
-	*transform.model = (*transform.worldModel) * (lModel);
+	worldModel = translate(worldModel, transform.worldPivot);
+	worldModel = translate(worldModel, transform.worldPosition);
+	worldModel = rotate(worldModel, radians(transform.worldRotation.x), vec3(1.0, 0, 0));
+	worldModel = rotate(worldModel, radians(transform.worldRotation.y), vec3(0, 1.0, 0));
+	worldModel = rotate(worldModel, radians(transform.worldRotation.z), vec3(0, 0, 1.0));
+	worldModel = scale(worldModel, transform.worldScale);
 
-	return *transform.model;
+	transform.model = localModel * worldModel;
+
+	return transform.model;
 }

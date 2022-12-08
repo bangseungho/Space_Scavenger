@@ -3,7 +3,11 @@
 class Map : public GuiObject
 {
 public:
+
+public:
 	Map();
 	~Map();
+public:
+	void Init();
 };
 
