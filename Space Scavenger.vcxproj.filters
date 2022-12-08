@@ -27,9 +27,6 @@
     <Filter Include="Object\Resource\Contain">
       <UniqueIdentifier>{98b2ad9c-4c8e-4b92-850a-f91dc933ac71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GuiObject">
-      <UniqueIdentifier>{9ae96dcc-1a60-4d6c-8f5f-98d7b0a31ec7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FramWork">
       <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,9 @@
     <Filter Include="리소스 파일\obj\Player">
       <UniqueIdentifier>{b4118c93-6f77-48a8-b7a0-364ebb5f2e6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\미완성">
+      <UniqueIdentifier>{512fb67a-1e40-4054-bc47-0cc176c50991}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,12 +97,6 @@
     </ClCompile>
     <ClCompile Include="Iron.cpp">
       <Filter>Object\Resource\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>GuiObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ChatBox.cpp">
-      <Filter>GuiObject</Filter>
     </ClCompile>
     <ClCompile Include="ResourcePool.cpp">
       <Filter>Object\Resource</Filter>
@@ -146,9 +140,6 @@
     <ClCompile Include="Equipment.cpp">
       <Filter>Object\Equipment</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="Xlsx.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
@@ -161,9 +152,6 @@
     <ClCompile Include="Harpoon.cpp">
       <Filter>Object\Equipment</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
@@ -175,6 +163,24 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>소스 파일\미완성</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Gauge.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>소스 파일\미완성</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMap.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,12 +207,6 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>GuiObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ChatBox.h">
-      <Filter>GuiObject</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>FramWork\헤더</Filter>
@@ -250,9 +250,6 @@
     <ClInclude Include="Equipment.h">
       <Filter>Object\Equipment</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="Xlsx.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
@@ -263,9 +260,6 @@
       <Filter>Object\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
@@ -280,6 +274,22 @@
     <ClInclude Include="Shader.h">
       <Filter>FramWork\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>소스 파일\미완성</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauge.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>소스 파일\미완성</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -302,6 +312,12 @@
     </None>
     <None Include="Obj\Resource\Iron.mtl">
       <Filter>리소스 파일\obj\Resource</Filter>
+    </None>
+    <None Include="CubeMap_Vertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="CubeMap_Fragment.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

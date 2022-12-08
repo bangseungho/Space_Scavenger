@@ -218,7 +218,7 @@ void OBJ::PushMTLTf(FILE* obj, MaterialBlock& _Material)
 
 void OBJ::PushMTLillum(FILE* obj, MaterialBlock& _Material)
 {
-	float illum;
+	int illum;
 	fscanf(obj, "%d", &illum);
 	_Material.illum = illum;
 }

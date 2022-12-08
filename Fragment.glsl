@@ -16,26 +16,16 @@ out vec4 FragColor; //--- 프레임 버퍼로 출력
 #endif
 
 #ifdef _Max
-layout (std140) uniform MaterialBlock{
-    vec3 Kd;
-	vec3 Ks;
-	float Tr;
-	float d;
-	vec3 Tf;
-	float Pr;
-	float Pm;
-	float Pc;
-	float Pcr;
-	float Ni;
-	vec3 Ke;
-	int illum;
-};
+uniform vec3 Ka;
+uniform vec3 Kd;
+uniform vec3 Ks;
+uniform float d;
 #endif
 
 void main()
 {
-    float ambientLenth = 0.5f;
-    vec3 ambient = ambientLenth * vec3(vColor);
+    float ambientLenth = 1.5f;
+    vec3 ambient = ambientLenth * vec3(vColor) * Ka;
     // diffuse 
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(lightPos - FragPos);

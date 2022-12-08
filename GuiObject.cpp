@@ -1,6 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
 #include "GuiObject.h"
-#include "stb_image.h"
 
 int GuiObject::Gui_ID_Count = 0;
 unsigned int GuiObject::ortho_projection;
@@ -77,11 +75,11 @@ void GuiObject::Init()
 	float ratio;
 	if (width > height) {
 		ratio = static_cast<float>(height) / width;
-		transform.worldScale.y *= ratio;
+		transform.local->scale.y *= ratio;
 	}
 	else {
 		ratio = static_cast<float>(width) / height;
-		transform.worldScale.x *= ratio;
+		transform.local->scale.x *= ratio;
 	}
 
 	if (data)
@@ -114,24 +112,40 @@ void GuiObject::ObjectDraw()
 
 mat4& GuiObject::SetMatrix()
 {
-	mat4 worldModel = mat4(1.0);
 	mat4 localModel = mat4(1.0);
+	mat4 worldModel = mat4(1.0);
 
-	localModel = translate(localModel, transform.localPosition);
-	localModel = rotate(localModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
-	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
-	localModel = rotate(localModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
-	localModel = translate(localModel, transform.localPivot);
-	localModel = scale(localModel, transform.localScale);
+	for (auto& world : transform.world)
+	{
+		worldModel = translate(worldModel, world->pivot);
+		worldModel = translate(worldModel, world->position);
+		worldModel = rotate(worldModel, radians(world->rotation.x), vec3(1.0, 0, 0));
+		worldModel = rotate(worldModel, radians(world->rotation.y), vec3(0, 1.0, 0));
+		worldModel = rotate(worldModel, radians(world->rotation.z), vec3(0, 0, 1.0));
+		worldModel = scale(worldModel, world->scale);
+	}
 
-	worldModel = translate(worldModel, transform.worldPosition);
-	worldModel = rotate(worldModel, radians(transform.worldRotation.x), vec3(1.0, 0, 0));
-	worldModel = rotate(worldModel, radians(transform.worldRotation.y), vec3(0, 1.0, 0));
-	worldModel = rotate(worldModel, radians(transform.worldRotation.z), vec3(0, 0, 1.0));
-	worldModel = translate(worldModel, transform.worldPivot);
-	worldModel = scale(worldModel, transform.worldScale);
+	localModel = translate(localModel, transform.local->pivot);
+	localModel = translate(localModel, transform.local->position);
+	localModel = rotate(localModel, radians(transform.local->rotation.x), vec3(1.0, 0, 0));
+	localModel = rotate(localModel, radians(transform.local->rotation.y), vec3(0, 1.0, 0));
+	localModel = rotate(localModel, radians(transform.local->rotation.z), vec3(0, 0, 1.0));
+	localModel = scale(localModel, transform.local->scale);
 
-	transform.model =  worldModel * localModel;
+	transform.localModel = localModel;
+	transform.worldModel = worldModel;
+	transform.model = worldModel * localModel;
 
 	return transform.model;
+}
+
+
+void GuiObject::SetActive(bool value)
+{
+	if (this->isActive == false && value == true)
+		this->Enable();
+	else if (this->isActive == true && value == false)
+		this->Disable();
+
+	this->isActive = value;
 }

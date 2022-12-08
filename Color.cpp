@@ -2,7 +2,8 @@
 
 Color::Color()
 {
-	R = G = B = A = 1;
+	R = G = B = 1;
+	A = 1;
 }
 
 Color::Color(float r,float g, float b, float a)

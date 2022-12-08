@@ -2,33 +2,36 @@
 
 #include "Vector_AFX.h"
 
+class TransformBlock {
+public:
+	TransformBlock();
+	~TransformBlock();
+
+public:
+	vec3 pivot;
+	vec3 position;
+	vec3 rotation;
+	vec3 scale;
+};
+
 class Transform {
 public:
 	Transform();
 	~Transform();
-
 public:
 	void Update();
+
+public:
 	void SetScale(); // ·£´ý ½ºÄÉÀÏ
 	void SetRandomRotate();
-
-	void Info();
-	void ReSet();
-public:
 	void LookAt(float speed);
 	void LookAtTarget(const Transform& _Target, const float _Speed);
+	void Info();
 public:
-	vec3 worldPosition;
-	vec3 localPosition;
+	vector<TransformBlock*> world;
+	TransformBlock* local;
 
-	vec3 worldScale;
-	vec3 localScale;
-
-	vec3 worldRotation;
-	vec3 localRotation;
-
-	vec3 worldPivot;
-	vec3 localPivot;
-
+	mat4 worldModel;
+	mat4 localModel;
 	mat4 model;
 };

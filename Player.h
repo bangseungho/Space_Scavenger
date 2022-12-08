@@ -38,7 +38,6 @@ public:
 	float speed = 10;
 
 private:
-
 	Quest quset;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool

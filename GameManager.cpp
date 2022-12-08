@@ -16,7 +16,7 @@ void GameManager::Init()
 	isMouseRight = false;
 
 	Camera::mainCamera->target_Pos = &player.transform;
-	light.transform.worldPosition.x = 1;
+	light.transform.local->position.x = 1;
 
 	bgm.Load("Sound/ItemEarn.wav");
 	bgm.RepetPlay();

@@ -32,7 +32,7 @@ void Harpoon::Init()
 	chargedEnergy = 0;
 	speed = 100;
 	color.SetRandomColor();
-	transform.worldScale *= 0.5;
+	transform.local->scale *= 0.5;
 }
 
 void Harpoon::Update()
@@ -85,16 +85,16 @@ void Harpoon::Fire()
 
 	if (curEnergy < chargedEnergy)
 	{
-		transform.localPosition.z -= frameSpeed * chargedEnergy / 30.0;
-		transform.worldScale.z += frameSpeed * chargedEnergy / 30.0;
+		transform.local->position.z -= frameSpeed * chargedEnergy / 30.0;
+		transform.local->scale.z += frameSpeed * chargedEnergy / 30.0;
 	}
 	else {
-		transform.localPosition.z += frameSpeed * chargedEnergy / 150.0;
-		transform.worldScale.z -= frameSpeed * chargedEnergy / 150.0;
+		transform.local->position.z += frameSpeed * chargedEnergy / 150.0;
+		transform.local->scale.z -= frameSpeed * chargedEnergy / 150.0;
 
-		if (transform.worldScale.z < 0.5) {
-			transform.localPosition.z = 0;
-			transform.worldScale.z = 0.5;
+		if (transform.local->scale.z < 0.5) {
+			transform.local->position.z = 0;
+			transform.local->scale.z = 0.5;
 			chargedEnergy = 0;
 			SetState(State::IDLE);
 		}

@@ -6,7 +6,11 @@ unsigned int Mesh::normalLocation;
 
 unsigned int Mesh::modelLocation;
 unsigned int Mesh::vColorLocation;
-unsigned int Mesh::mBlockLocation;
+
+unsigned int Mesh::KaLocation;
+unsigned int Mesh::KdLocation;
+unsigned int Mesh::KsLocation;
+unsigned int Mesh::dLocation;
 
 Mesh::Mesh(Object* obj) : object(obj)
 {
@@ -34,18 +38,19 @@ void Mesh::MeshInit()
 	{
 		glBindVertexArray(VAO[i]);
 
-		if (obj->isOnMTL)
-		{
-			glBindBuffer(GL_UNIFORM_BUFFER, VBO[i]);
-			glBufferData(GL_UNIFORM_BUFFER,
-				(sizeof(MaterialBlock) - 16),
-				&obj->mBlock.find(obj->vBlock.usemtlName[i])->second,
-				GL_STATIC_DRAW);
-			//glBindBufferBase(GL_UNIFORM_BUFFER, 0, VBO[i]);
-			//glBindBuffer(GL_UNIFORM_BUFFER, 0);
-			//glBindBuffer(GL_UNIFORM_BUFFER, VBO[i]);
-			//glBindBuffer(GL_UNIFORM_BUFFER, 0);
-		}
+		//if (obj->isOnMTL)
+		//{
+		//	MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
+		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+		//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Kd, GL_STATIC_DRAW);
+		//	glEnableVertexAttribArray(KdLocation);
+		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+		//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Ks, GL_STATIC_DRAW);
+		//	glEnableVertexAttribArray(KsLocation);
+		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+		//	glBufferData(GL_ARRAY_BUFFER, sizeof(float), &mBlock.d, GL_STATIC_DRAW);
+		//	glEnableVertexAttribArray(dLocation);
+		//}
 
 		//glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
 		//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * obj->vBlock.vertices_uvs.size(), &obj->vBlock.vertices_uvs[0], GL_STATIC_DRAW);
@@ -78,6 +83,15 @@ void Mesh::Draw()
 
 	for (int i = 0; i < obj->vBlock.groupCount; i++)
 	{
+		if (obj->isOnMTL)
+		{
+			MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
+			glUniform3f(KdLocation, mBlock.Ka.x, mBlock.Ka.y, mBlock.Ka.z);
+			glUniform3f(KdLocation, mBlock.Kd.x, mBlock.Kd.y, mBlock.Kd.z);
+			glUniform3f(KsLocation, mBlock.Ks.x, mBlock.Ks.y, mBlock.Ks.z);
+			glUniform1f(dLocation, mBlock.d);
+		}
+
 		glBindVertexArray(VAO[i]);
 
 		//glPointSize(5.0f);

@@ -30,8 +30,8 @@ Camera::~Camera()
 
 void Camera::Draw()
 {
-	mat4 view = mat4(1.0f);
-	mat4 projection = mat4(1.0f);
+	view = mat4(1.0f);
+	projection = mat4(1.0f);
 	float size = 2.0f;
 	if (isProjection_XY)	// 직각 투영
 	{
@@ -48,15 +48,17 @@ void Camera::Draw()
 
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
 
-		projection = translate(projection, transform.localPosition);
-		projection = rotate(projection, radians(transform.localRotation.x), vec3(1.0, 0.0, 0.0));
-		projection = rotate(projection, radians(transform.localRotation.y), vec3(0.0, 1.0, 0.0));
-		projection = rotate(projection, radians(transform.localRotation.z), vec3(0.0, 0.0, 1.0));
-
-		projection = translate(projection, transform.worldPosition);
-		projection = rotate(projection, radians(transform.worldRotation.x), vec3(1.0, 0.0, 0.0));
-		projection = rotate(projection, radians(transform.worldRotation.y), vec3(0.0, 1.0, 0.0));
-		projection = rotate(projection, radians(transform.worldRotation.z), vec3(0.0, 0.0, 1.0));
+		for (auto& world : transform.world)
+		{
+			projection = translate(projection, world->position);
+			projection = rotate(projection, radians(world->rotation.x), vec3(1.0, 0.0, 0.0));
+			projection = rotate(projection, radians(world->rotation.y), vec3(0.0, 1.0, 0.0));
+			projection = rotate(projection, radians(world->rotation.z), vec3(0.0, 0.0, 1.0));
+		}
+		projection = translate(projection, transform.local->position);
+		projection = rotate(projection, radians(transform.local->rotation.x), vec3(1.0, 0.0, 0.0));
+		projection = rotate(projection, radians(transform.local->rotation.y), vec3(0.0, 1.0, 0.0));
+		projection = rotate(projection, radians(transform.local->rotation.z), vec3(0.0, 0.0, 1.0));
 	}
 	else if (isPitch)
 	{
@@ -65,13 +67,16 @@ void Camera::Draw()
 		mat4 worldModel = mat4(1.0);
 		mat4 localModel = mat4(1.0);
 
-		localModel = rotate(localModel, radians(target_Pos->localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
-		localModel = rotate(localModel, radians(target_Pos->localRotation.x), vec3(1.0, 0, 0));
-		localModel = rotate(localModel, radians(target_Pos->localRotation.z), vec3(0, 0, 1.0));
-														  
-		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.y), vec3(0, 1.0, 0));
-		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.x), vec3(1.0, 0, 0));
-		worldModel = rotate(worldModel, radians(target_Pos->worldRotation.z), vec3(0, 0, 1.0));
+		for (auto& world : target_Pos->world)
+		{
+			localModel = rotate(localModel, radians(world->rotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
+			localModel = rotate(localModel, radians(world->rotation.x), vec3(1.0, 0, 0));
+			localModel = rotate(localModel, radians(world->rotation.z), vec3(0, 0, 1.0));
+		}
+
+		worldModel = rotate(worldModel, radians(target_Pos->local->rotation.y), vec3(0, 1.0, 0));
+		worldModel = rotate(worldModel, radians(target_Pos->local->rotation.x), vec3(1.0, 0, 0));
+		worldModel = rotate(worldModel, radians(target_Pos->local->rotation.z), vec3(0, 0, 1.0));
 
 		mat4 model = localModel * worldModel;
 
@@ -80,7 +85,7 @@ void Camera::Draw()
 
 		view = lookAt(pos, dir, up);
 
-		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 50.0f);
+		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 1000.0f);
 	}
 
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);

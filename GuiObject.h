@@ -1,8 +1,9 @@
 #pragma once
-
 #include "Transform.h"
 #include "Color.h"
 #include "Camera.h"
+#include "stb_image.h"
+#define STB_IMAGE_IMPLEMENTATION
 class GuiObject
 {
 public:
@@ -19,12 +20,16 @@ public:
 	~GuiObject();
 
 public:
+	virtual void Enable() {};
+	virtual void Disable() {};
 	virtual void Update();
 	virtual void Init();
 	virtual void ObjectDraw();
+	virtual mat4& SetMatrix();
 
 public:
-	mat4& SetMatrix();
+	bool ActiveSelf() { return isActive; };
+	void SetActive(bool value);
 
 public:
 	int id;
@@ -38,6 +43,9 @@ public:
 
 protected:
 	unsigned int VBO, VAO, EBO;
+
+private:
+	bool isActive;
 
 };
 
