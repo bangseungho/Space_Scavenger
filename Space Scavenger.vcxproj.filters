@@ -72,6 +72,9 @@
     <Filter Include="리소스 파일\obj\Player">
       <UniqueIdentifier>{b4118c93-6f77-48a8-b7a0-364ebb5f2e6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FramWork\GameObject\new">
+      <UniqueIdentifier>{4a08cfb6-14c3-4f3a-a1dc-a49b9272fd98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
