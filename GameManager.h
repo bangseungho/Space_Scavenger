@@ -7,7 +7,7 @@
 #include "Iron.h"
 #include "Light.h"
 #include "Gauge.h"
-//#include "Sound.h"
+#include "Sound.h"
 
 class GameManager : public Object
 {
@@ -30,6 +30,7 @@ public:
 	Map map;
 	ChatBox chat_box;
 	Light light;
+	vector<Sound*> all_sound;
 	//Gauge gauge;
 
 private:
@@ -39,6 +40,7 @@ private:
 	// Special Key
 	bool isALT_L;
 
-	//Sound bgm;	// юс╫ц
+	Sound bgm;
+	Sound effect;
 };
 
