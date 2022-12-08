@@ -62,7 +62,8 @@ void Camera::Draw()
 	}
 	else if (isPitch)
 	{
-		vec3 pos = translate(target_Pos->model, cameraPos) * vec4(0, 0, 0, 1);
+		vec3 pos = translate(transform.model, cameraPos) * vec4(0, 0, 0, 1);
+		pos = translate(target_Pos->model, pos) * vec4(0, 0, 0, 1);
 		vec3 dir = translate(target_Pos->model, cameraDirection) * vec4(0, 0, 0, 1);
 		mat4 worldModel = mat4(1.0);
 		mat4 localModel = mat4(1.0);
@@ -88,8 +89,8 @@ void Camera::Draw()
 		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 1000.0f);
 	}
 
-	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
-	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(view));
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(projection));
 	glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 }
 void Camera::ProcessInput(int specialKey)

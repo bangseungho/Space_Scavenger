@@ -1,7 +1,7 @@
 #pragma once
-#include "Transform.h"
+#include "Object.h"
 
-class Camera {
+class Camera : public Object {
 public:
  	static Camera* mainCamera;
 
@@ -22,8 +22,6 @@ public:
 	void LookAtView(float speed);
 
 public:
-	string name;
-	Transform transform;
 	Transform* target_Pos;
 
 	mat4 view;

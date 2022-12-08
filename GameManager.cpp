@@ -31,9 +31,33 @@ void GameManager::Update()
 	//}
 }
 
+void GameManager::SpecialKeyboard(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_ALT_L:
+		isALT_L = true;
+		Camera::mainCamera->cameraDirection = vec3(0);
+		break;
+	default:
+		break;
+	}
+}
+
 void GameManager::SpecialKeyboardUp(int key, int x, int y)
 {
+	switch (key)
+	{
+	case GLUT_KEY_ALT_L:
+		isALT_L = false;
+		Camera::mainCamera->transform.local->ReSet();
+		Camera::mainCamera->cameraDirection.z = 4;
+		break;
+	default:
+		break;
+	}
 }
+
 
 void GameManager::Mouse(int button, int state, int x, int y)
 {
@@ -78,7 +102,15 @@ void GameManager::Motion(int x, int y)
 		//vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
 		//player.transform.worldRotation.y -= diffPos.x;
 		//player.transform.worldRotation.x += diffPos.y;
+		if (isALT_L)
+		{
+			vec2 speed = vec2(15, 10);
+			vec2 fMoveSpeed = diffPos * FrameTime::oneFrame * speed;
+			Camera::mainCamera->transform.local->rotation.x -= fMoveSpeed.y;
+			Camera::mainCamera->transform.local->rotation.y -= fMoveSpeed.x;
+		}
 	}
+
 
 	StartMouse = { (float)x, (float)y };
 	StartMouse = Coordinate(StartMouse);

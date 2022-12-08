@@ -18,7 +18,7 @@ public:
 	void Init();
 	void Update();
 	void KeyBoard(unsigned char key, int x, int y);
-	void SpecialKeyBoard(int key, int x, int y);
+	void SpecialKeyboard(int key, int x, int y);
 	void SpecialKeyboardUp(int key, int x, int y);
 	void Mouse(int button, int state, int x, int y);
 	void MouseWheel(int wheel, int direction, int x, int y);
@@ -35,6 +35,9 @@ public:
 private:
 	bool isMouseRight;
 	vec2 StartMouse;
+
+	// Special Key
+	bool isALT_L;
 
 	//Sound bgm;	// юс╫ц
 };
