@@ -14,11 +14,12 @@ Bullet::Bullet()
 		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 
+	collider.tag = "Bullet";
+	collider.object = this;
+
 	obj = _Obj;
 	transform.worldScale = vec3(0.1);
-	collider.tag = "Bullet";
 	collider.SetBox_OBB(vec3(2));
-	collider.object = this;
 
 	Render::meshtRender->AddObject(this, "Bullet");
 }
@@ -36,14 +37,20 @@ void Bullet::Update()
 
 void Bullet::OnCollision()
 {
-	//for (auto& other : Collider::allCollider)
-	//{
-	//	if (!other->isCollide)
-	//		continue;
+	for (auto& other : Collider::allCollider)
+	{
+		if (!other->isCollide)
+			continue;
 
-	//	if (other->tag != "Resource")
-	//		continue;
+		if (other->tag != "Resource")
+			continue;
 
-	//	cout << "RESOURCE COLLIDER" << endl;
-	//}
+		if (!other->OBBCollision(collider, *other))
+			continue;
+
+		if (other->tag == "Resource")
+		{
+			// Bullet이 Resouce에 맞으면 Resouce에서 삭제
+		}
+	}
 }

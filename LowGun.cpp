@@ -31,4 +31,5 @@ void LowGun::Fire()
 {
 	cout << "FIRED!!!" << endl;
 	bullet.transform = transform;
+	bullet.SetActive(true);
 }

@@ -14,6 +14,7 @@ Iron::Iron()
 	}
 
 	obj = _Obj;
+	level = 3;
 
 	collider.SetBox_OBB(vec3(2));
 

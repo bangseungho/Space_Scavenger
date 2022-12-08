@@ -37,7 +37,7 @@ public:
 	Equipment* equipment;
 
 public:
-	float speed = 10;
+	float speed = 100;
 
 private:
 

@@ -14,9 +14,9 @@ Player::Player() : Mesh(this)
 	}
 
 	obj = _Obj;
-	ironPool.InitPool(5, 1, 1, 1.0f, &transform);
-	//equipment = new Harpoon;
-	equipment = new LowGun;
+	ironPool.InitPool(5, 1, 1.0f, &transform);
+	equipment = new Harpoon;
+	//equipment = new LowGun;
 	//equipment = new Guidance;
 	Render::meshtRender->AddObject(this);
 }
@@ -43,6 +43,7 @@ void Player::Update()
 void Player::Handle_Event(unsigned char key)
 {
 	float frameSpeed = speed * FrameTime::oneFrame;
+
 	switch (key)
 	{
 	case 'w':
@@ -108,6 +109,7 @@ void Player::OnCollision()
 
 		if (other->tag == "Resource")
 		{
+			cout << "RESOURCE PLAYER COLLIDER!!!" << endl;
 			Resource* resource = reinterpret_cast<Resource*>(other->object);
 			if (resource->isDragged)
 				equipment->isDragged = false;

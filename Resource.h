@@ -38,4 +38,7 @@ private:
 
 	Transform* target;
 	float draggedSpeed;
+
+public:
+	int level;
 };
