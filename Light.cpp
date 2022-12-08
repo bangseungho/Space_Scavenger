@@ -25,14 +25,14 @@ void Light::Disable()
 
 void Light::Init()
 {
-	transform.worldScale *= 0.1;
+	transform.localScale *= 0.1;
 }
 
 void Light::Update()
 {
-	float x = transform.worldPosition.x;
-	float y = transform.worldPosition.y;
-	float z = transform.worldPosition.z;
+	float x = transform.localPosition.x;
+	float y = transform.localPosition.y;
+	float z = transform.localPosition.z;
 	glUniform3f(lightPosLocation, x, y, z); // юс╫ц
 	glUniform3f(lightColorLocation, color.R, color.G, color.B);
 

@@ -3,20 +3,16 @@
 Map::Map()
 {
 	name = "Map";
-	image_file = "map.png";
+	ReadImage("map.png");
+	//image_file = "map.png";
 
 	// 초기 위치, 크기 설정
-	transform.worldPosition.x -= 0.5;
-	transform.worldPosition.y -= 0.7;
+	transform.localPosition.x -= 0.5;
+	transform.localPosition.y -= 0.7;
 
+	guiRender::gui_objectRender->AddObject(this);
 }
 
 Map::~Map()
 {
-}
-
-void Map::Init()
-{
-	GuiObject::Init();
-	guiRender::gui_objectRender->AddObject(this);
 }

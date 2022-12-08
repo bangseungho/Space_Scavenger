@@ -26,7 +26,7 @@ void Guidance::SerchResource()
 	if (isDragged)	//이미 선택한 자원이 있으면 리턴
 		return;
 
-	vec3 myPos = transform.model * vec4(0, 0, 0, 1);
+	vec3 myPos = *transform.model * vec4(0, 0, 0, 1);
 	for (auto& other : Collider::allCollider)
 	{
 		if (!other->object->ActiveSelf())
@@ -38,7 +38,7 @@ void Guidance::SerchResource()
 			continue;
 
 		// 자원과 장비 사이의 거리 측정
-		vec3 targetPos = other->object->transform.model * vec4(0, 0, 0, 1);
+		vec3 targetPos = *other->object->transform.model * vec4(0, 0, 0, 1);
 		float dis = length(myPos - targetPos);
 
 		if (dis > serchDistnace)

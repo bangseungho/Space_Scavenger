@@ -14,7 +14,11 @@ GuiObject::GuiObject() : transform(), color()
 	id = Gui_ID_Count++;
 	name = "UnName";
 
+	isDraw = true;
+	isActive = true;
+
 	allGuiObject.push_back(this);
+
 }
 
 GuiObject::~GuiObject()
@@ -22,12 +26,10 @@ GuiObject::~GuiObject()
 	allGuiObject.erase(remove(allGuiObject.begin(), allGuiObject.end(), this), allGuiObject.end());
 }
 
-void GuiObject::Update()
+void GuiObject::ReadImage(string _FileName)
 {
-}
+	image_file = _FileName;
 
-void GuiObject::Init()
-{
 	float vertices[] = {
 		// positions          // colors           // texture coords
 		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -40,7 +42,7 @@ void GuiObject::Init()
 		2, 1, 3,
 	};
 
-	glGenVertexArrays(1, &VAO); 
+	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
 	glGenBuffers(1, &VBO);
@@ -71,7 +73,7 @@ void GuiObject::Init()
 	stbi_set_flip_vertically_on_load(true);
 
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load(image_file.c_str(), &width, &height, &nrChannels, 0);
 
 	// 가로 세로 비율 맞추기
 	float ratio;
@@ -94,6 +96,17 @@ void GuiObject::Init()
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
+
+
+}
+
+void GuiObject::Update()
+{
+}
+
+void GuiObject::Init()
+{
+
 }
 
 void GuiObject::ObjectDraw()
@@ -114,24 +127,27 @@ void GuiObject::ObjectDraw()
 
 mat4& GuiObject::SetMatrix()
 {
-	mat4 worldModel = mat4(1.0);
-	mat4 localModel = mat4(1.0);
+	mat4 lModel = mat4(1.0);
 
-	localModel = translate(localModel, transform.localPosition);
-	localModel = rotate(localModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
-	localModel = rotate(localModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));	// y축으로 자전 해주고 싶어 처음에 추가
-	localModel = rotate(localModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
-	localModel = translate(localModel, transform.localPivot);
-	localModel = scale(localModel, transform.localScale);
+	lModel = translate(lModel, transform.localPivot);
+	lModel = translate(lModel, transform.localPosition);
+	lModel = rotate(lModel, radians(transform.localRotation.x), vec3(1.0, 0, 0));
+	lModel = rotate(lModel, radians(transform.localRotation.y), vec3(0, 1.0, 0));
+	lModel = rotate(lModel, radians(transform.localRotation.z), vec3(0, 0, 1.0));
+	lModel = scale(lModel, transform.localScale);
 
-	worldModel = translate(worldModel, transform.worldPosition);
-	worldModel = rotate(worldModel, radians(transform.worldRotation.x), vec3(1.0, 0, 0));
-	worldModel = rotate(worldModel, radians(transform.worldRotation.y), vec3(0, 1.0, 0));
-	worldModel = rotate(worldModel, radians(transform.worldRotation.z), vec3(0, 0, 1.0));
-	worldModel = translate(worldModel, transform.worldPivot);
-	worldModel = scale(worldModel, transform.worldScale);
+	*transform.localModel = lModel;
+	*transform.model = (*transform.worldModel) * (lModel);
 
-	transform.model =  worldModel * localModel;
+	return *transform.model;
+}
 
-	return transform.model;
+void GuiObject::SetActive(bool value)
+{
+	if (this->isActive == false && value == true)
+		this->Enable();
+	else if (this->isActive == true && value == false)
+		this->Disable();
+
+	this->isActive = value;
 }

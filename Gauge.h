@@ -8,6 +8,4 @@ public:
 public:
 	Gauge();
 	~Gauge();
-public:
-	void Init();
 };
