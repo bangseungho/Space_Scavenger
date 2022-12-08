@@ -7,6 +7,7 @@ unsigned int Mesh::normalLocation;
 unsigned int Mesh::modelLocation;
 unsigned int Mesh::vColorLocation;
 
+unsigned int Mesh::KaLocation;
 unsigned int Mesh::KdLocation;
 unsigned int Mesh::KsLocation;
 unsigned int Mesh::dLocation;
@@ -85,6 +86,7 @@ void Mesh::Draw()
 		if (obj->isOnMTL)
 		{
 			MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
+			glUniform3f(KdLocation, mBlock.Ka.x, mBlock.Ka.y, mBlock.Ka.z);
 			glUniform3f(KdLocation, mBlock.Kd.x, mBlock.Kd.y, mBlock.Kd.z);
 			glUniform3f(KsLocation, mBlock.Ks.x, mBlock.Ks.y, mBlock.Ks.z);
 			glUniform1f(dLocation, mBlock.d);

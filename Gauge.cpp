@@ -6,10 +6,10 @@ Gauge::Gauge()
 	image_file = "gauge.png";
 
 	// 초기 위치, 크기 설정
-	transform.localScale -= 0.3;
-	transform.localScale.x = 0;
-	transform.worldPosition.x += 0;
-	transform.worldPosition.y += 0.9;
+	transform.local->scale -= 0.3;
+	transform.local->scale.x = 0;
+	transform.local->position.x += 0;
+	transform.local->position.y += 0.9;
 }
 
 Gauge::~Gauge()

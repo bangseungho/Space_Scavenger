@@ -142,6 +142,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubeMap.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="FrameTime.h" />
     <ClInclude Include="GameManager.h" />
@@ -226,6 +228,8 @@
     </Object>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CubeMap_Fragment.glsl" />
+    <None Include="CubeMap_Vertex.glsl" />
     <None Include="Fragment.glsl" />
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />

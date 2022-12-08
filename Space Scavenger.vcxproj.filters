@@ -167,9 +167,6 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일\미완성</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ChatBox.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -178,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>소스 파일\미완성</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMap.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,7 +277,6 @@
     <ClInclude Include="Sound.h">
       <Filter>소스 파일\미완성</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h" />
     <ClInclude Include="ChatBox.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -284,6 +286,10 @@
     <ClInclude Include="Map.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>소스 파일\미완성</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -306,6 +312,12 @@
     </None>
     <None Include="Obj\Resource\Iron.mtl">
       <Filter>리소스 파일\obj\Resource</Filter>
+    </None>
+    <None Include="CubeMap_Vertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="CubeMap_Fragment.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

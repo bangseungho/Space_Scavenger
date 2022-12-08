@@ -1,5 +1,5 @@
-
 #include "GameManager.h"
+#include "CubeMap.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -31,6 +31,7 @@ list<Object*> Object::allObject;
 list<GuiObject*> GuiObject::allGuiObject;
 
 GameManager* gameManager;
+CubeMap* backGround;
 
 void InitShader()
 {
@@ -47,6 +48,7 @@ void InitShader()
 	Mesh::normalLocation = glGetAttribLocation(objectShader.program, "vNormal");
 	Mesh::modelLocation = glGetUniformLocation(objectShader.program, "modelTransform");
 	Mesh::vColorLocation = glGetUniformLocation(objectShader.program, "vColor");
+	Mesh::KaLocation = glGetUniformLocation(objectShader.program, "Ka");
 	Mesh::KdLocation = glGetUniformLocation(objectShader.program, "Kd");
 	Mesh::KsLocation = glGetUniformLocation(objectShader.program, "Ks");
 	Mesh::dLocation = glGetUniformLocation(objectShader.program, "d");
@@ -74,7 +76,7 @@ void Init()
 	Camera::mainCamera = &camera;
 	fristCamera = &camera;
 	camera.name = "Main";
-	camera.cameraPos.z = 10;
+	camera.cameraPos.z = -10;
 	camera.isPitch = true;
 
 	uiCamera.isProjection_XY = true;
@@ -82,6 +84,7 @@ void Init()
 	gameManager = new GameManager;
 
 	glUseProgram(*Shader::allProgram.find("UI")->second);
+	backGround = new CubeMap;
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
 	glUseProgram(*Shader::allProgram.find("Object")->second);
@@ -197,6 +200,11 @@ void drawScene()
 	//for (const auto& collider : Collider::allCollider)
 	//	collider->OnTrigger();
 
+	{	// BackGround
+		Camera::mainCamera = &uiCamera;
+		backGround->Draw();
+	}
+
 	{
 		// ÇöÀç Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
@@ -212,7 +220,6 @@ void drawScene()
 	}
 
 	{	//UI Viewport
-		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = &uiCamera;
 		glUseProgram(*Shader::allProgram.find("UI")->second);
 		gui_objectRender.Draw();

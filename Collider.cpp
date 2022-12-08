@@ -85,29 +85,14 @@ void Collider::SetBox_OBB(const vec3& d)
 
 void Collider::GetBox_OBB()
 {
-	mat4 worldModel = mat4(1.0);
-	mat4 localModel = mat4(1.0);
-
-	localModel = rotate(localModel, radians(object->transform.localRotation.x), vec3(1.0, 0, 0));
-	localModel = rotate(localModel, radians(object->transform.localRotation.y), vec3(0, 1.0, 0));
-	localModel = rotate(localModel, radians(object->transform.localRotation.z), vec3(0, 0, 1.0));
-	localModel = scale(localModel, object->transform.localScale);
-
-	worldModel = rotate(worldModel, radians(object->transform.worldRotation.x), vec3(1.0, 0, 0));
-	worldModel = rotate(worldModel, radians(object->transform.worldRotation.y), vec3(0, 1.0, 0));
-	worldModel = rotate(worldModel, radians(object->transform.worldRotation.z), vec3(0, 0, 1.0));
-	worldModel = scale(worldModel, object->transform.worldScale);
-
-	mat4 model = localModel * worldModel;
-
+	vec3 startPoint = object->transform.model * vec4(0, 0, 0, 1); // 원점에서 이동한 정점
 	for (int i = 0; i < 3; i++)
 	{
-		//axis[i] = defaultAxis[i];
-		axis[i] = model * vec4(defaultAxis[i],1);
+		axis[i] = object->transform.model * vec4(defaultAxis[i],1);
+		axis[i] -= startPoint;
 		axisLen[i] = length(axis[i]);
 		axis[i] = normalize(axis[i]);
 	}
-		//axis[i] = object->transform.model * vec4(defaultAxis[i], 1);
 
 	if (isPrint)
 	{
@@ -133,7 +118,7 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	bool isExitsParallelPair = false;
 
 	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
-	dis = b.object->transform.worldPosition - a.object->transform.worldPosition;
+	dis = b.object->transform.local->position - a.object->transform.local->position;
 
 	for (int n = 0; n < 3; n++)
 	{
@@ -148,7 +133,6 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 		r = abs(d[n]);
 		r1 = a.axisLen[n];
 		r2 = b.axisLen[0] * absC[n][0] + b.axisLen[1] * absC[n][1] + b.axisLen[2] * absC[n][2];
-		//r2 = absC[n][0] + absC[n][1] + absC[n][2];
 		if (r > r1 + r2)
 			return false;
 	}
@@ -156,7 +140,6 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	{
 		r = abs(Vec3Dot(dis, b.axis[n]));
 		r1 = a.axisLen[0] * absC[0][n] + a.axisLen[1] * absC[1][n] + a.axisLen[2] * absC[2][n];
-		//r1 = absC[0][n] + absC[1][n] + absC[2][n];
 		r2 = b.axisLen[n];
 		if (r > r1 + r2)
 			return false;

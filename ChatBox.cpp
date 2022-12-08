@@ -6,9 +6,9 @@ ChatBox::ChatBox()
 	image_file = "chatbox.png";
 
 	// 초기 위치, 크기 설정
-	transform.localScale -= 0.3;
-	transform.worldPosition.x += 0.6;
-	transform.worldPosition.y -= 0.5;
+	transform.local->scale -= 0.3;
+	transform.local->position.x += 0.6;
+	transform.local->position.y -= 0.5;
 }
 
 ChatBox::~ChatBox()

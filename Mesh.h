@@ -14,6 +14,7 @@ public:
 	static unsigned int modelLocation;
 	static unsigned int vColorLocation;
 		
+	static unsigned int KaLocation;	// 머테리얼 블록
 	static unsigned int KdLocation;	// 머테리얼 블록
 	static unsigned int KsLocation;	// 머테리얼 블록
 	static unsigned int dLocation;	// 머테리얼 블록

@@ -2,10 +2,9 @@
 
 Transform::Transform()
 {
-	worldPivot = localPivot = vec3(0);
-	worldPosition = localPosition = vec3(0);
-	worldRotation = localRotation = vec3(0);
-	worldScale = localScale = vec3(1);
+	local = new TransformBlock;
+	worldModel = mat4(1);
+	localModel = mat4(1);
 	model = mat4(1);
 }
 
@@ -26,12 +25,12 @@ void Transform::SetScale()
 
 	vec3 randomSacle = { (float)randomPos(gen), (float)randomPos(gen),  (float)randomPos(gen) };
 
-	randomSacle = randomSacle + worldScale;
+	randomSacle = randomSacle + local->scale;
 
 	randomSacle.x = (randomSacle.x <= 0) ? 1 : randomSacle.x;
 	randomSacle.y = (randomSacle.y <= 0) ? 1 : randomSacle.y;
 
-	worldScale = randomSacle;
+	local->scale = randomSacle;
 }
 
 void Transform::SetRandomRotate()
@@ -40,28 +39,16 @@ void Transform::SetRandomRotate()
 	mt19937 gen(rd());
 	uniform_int_distribution<int> randomPos(0, 360);
 
-	worldRotation = { (float)randomPos(gen), 0 , 0};
+	local->rotation = { (float)randomPos(gen), 0 , 0};
 }
 
 void Transform::Info()
 {
-	cout << worldPivot << " : worldPivot" << endl;
-	cout << worldPosition << " : worldPosition" << endl;
-	cout << worldRotation << " : worldRotation" << endl;
-	cout << worldScale << " : worldScale" << endl;
+	cout << local->pivot << " : local Pivot" << endl;
+	cout << local->position << " : local Position" << endl;
+	cout << local->rotation << " : local Rotation" << endl;
+	cout << local->scale << " : local Scale" << endl;
 }
-
-void Transform::ReSet()
-{
-	worldPosition = localPosition = vec3(0, 0, 0);
-
-	worldScale = localScale = vec3(1, 1, 1);
-
-	worldRotation = localRotation = vec3(0, 0, 0);
-
-	worldPivot = localPivot = vec3(0, 0, 0);
-}
-
 
 void Transform::LookAt(float speed)
 {
@@ -69,7 +56,7 @@ void Transform::LookAt(float speed)
 	vec3 dir = translate(model, vec3(0, 0, -1)) * vec4(0, 0, 0, 1);
 	vec3 norm = normalize(dir - pos);
 
-	worldPosition += norm * FrameTime::oneFrame * speed;
+	local->position += norm * FrameTime::oneFrame * speed;
 }
 
 // 목표하는 Target에 Speed 만큼 전진
@@ -79,5 +66,17 @@ void Transform::LookAtTarget(const Transform& _Target, const float _Speed)
 	vec3 targetPos = _Target.model * vec4(0, 0, 0, 1);
 	vec3 dir = normalize(targetPos - myPos);
 
-	worldPosition += dir * FrameTime::oneFrame * _Speed;
+	local->position += dir * FrameTime::oneFrame * _Speed;
+}
+
+TransformBlock::TransformBlock()
+{
+	pivot = vec3(0);
+	position = vec3(0);
+	rotation = vec3(0);
+	scale = vec3(1);
+}
+
+TransformBlock::~TransformBlock()
+{
 }

@@ -16,6 +16,7 @@ out vec4 FragColor; //--- 프레임 버퍼로 출력
 #endif
 
 #ifdef _Max
+uniform vec3 Ka;
 uniform vec3 Kd;
 uniform vec3 Ks;
 uniform float d;
@@ -23,13 +24,13 @@ uniform float d;
 
 void main()
 {
-    float ambientLenth = 0.5f;
-    vec3 ambient = ambientLenth * vec3(vColor) * Kd;
+    float ambientLenth = 1.5f;
+    vec3 ambient = ambientLenth * vec3(vColor) * Ka;
     // diffuse 
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(lightPos - FragPos);
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = lightColor * diff;
+    vec3 diffuse = lightColor * diff * Kd;
     
     // specular
     float shininess = 128;
