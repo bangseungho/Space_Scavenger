@@ -25,6 +25,7 @@ Player::~Player()
 {
 }
 
+
 void Player::Init()
 {
 	collider.tag = "Player";
@@ -37,6 +38,7 @@ void Player::Update()
 {
 	Handle_Event(key);
 	Handle_Event(specialKey);
+	Handle_Event_Up(key);
 	Handle_Event_Up(specialKeyUp);
 }
 
@@ -47,16 +49,10 @@ void Player::Handle_Event(unsigned char key)
 	switch (key)
 	{
 	case 'w':
-		transform.LookAt(speed);
+		move_front = true;
 		break;
 	case 's':
-		transform.LookAt(-speed);
-		break;
-	case 'q':
-		transform.worldRotation.y++;
-		break;
-	case 'e':
-		transform.worldRotation.y--;
+		move_back = true;
 		break;
 	}
 
@@ -80,6 +76,19 @@ void Player::Handle_Event(int specialKey)
 	}
 }
 
+void Player::Handle_Event_Up(unsigned char key)
+{
+	switch (key)
+	{
+	case 'w':
+		move_front = false;
+		break;
+	case 's':
+		move_back = false;
+		break;
+	}
+}
+
 void Player::Handle_Event_Up(int specialKeyUp)
 {
 	switch (specialKeyUp)
@@ -90,6 +99,16 @@ void Player::Handle_Event_Up(int specialKeyUp)
 			dynamic_cast<Harpoon*>(equipment)->FinishCharging();
 		}
 		break;
+	}
+}
+
+void Player::MyTimer()
+{
+	if (move_front) {
+		transform.LookAt(speed);
+	}
+	if (move_back) {
+		transform.LookAt(-speed);
 	}
 }
 

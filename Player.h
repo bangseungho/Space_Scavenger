@@ -24,7 +24,9 @@ public:
 	void Update();
 	void Handle_Event(unsigned char key);
 	void Handle_Event(int specialKey);
+	void Handle_Event_Up(unsigned char key);
 	void Handle_Event_Up(int specialKeyUp);
+	void MyTimer();
 	void OnCollision();
 
 public:
@@ -38,6 +40,8 @@ public:
 
 public:
 	float speed = 100;
+	bool move_front;
+	bool move_back;
 
 private:
 
