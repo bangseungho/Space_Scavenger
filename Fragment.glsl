@@ -24,7 +24,7 @@ uniform float d;
 
 void main()
 {
-    float ambientLenth = 1.5f;
+    float ambientLenth = 2.0f;
     vec3 ambient = ambientLenth * vec3(vColor) * Ka;
     // diffuse 
     vec3 norm = normalize(Normal);

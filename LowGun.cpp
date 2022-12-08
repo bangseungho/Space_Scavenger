@@ -13,7 +13,7 @@ LowGun::LowGun()
 		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 	
-	transform.worldScale = vec3(0.1);
+	transform.local->scale = vec3(0.1);
 	obj = _Obj;
 
 	Render::meshtRender->AddObject(this, "Lowgun");

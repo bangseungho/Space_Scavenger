@@ -8,6 +8,9 @@ public:
 	~TransformBlock();
 
 public:
+	void ReSet();
+
+public:
 	vec3 pivot;
 	vec3 position;
 	vec3 rotation;
@@ -18,11 +21,6 @@ class Transform {
 public:
 	Transform();
 	~Transform();
-public:
-	Transform& operator=(const Transform&);
-
-public:
-	void Update();
 
 public:
 	void SetScale(); // 랜덤 스케일

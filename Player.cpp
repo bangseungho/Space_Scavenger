@@ -11,6 +11,7 @@ Player::Player() : Mesh(this)
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
+		//_Obj->ReadObj("Obj/Default/", "Cube.obj");
 		_Obj->ReadObj("Obj/Player/", "SpaceShip.obj");
 	}
 	obj = _Obj;
@@ -37,7 +38,6 @@ Player::~Player()
 
 void Player::Init()
 {
-	// Object���� Transform �ʱ�ȭ
 	for (const auto& world : transform.world)
 	{
 		equipment->transform.world.push_back(world);
@@ -51,7 +51,7 @@ void Player::Update()
 {
 	Handle_Event(key);
 	Handle_Event(specialKey);
-	Handle_Event_Up(key);
+	Handle_Event_Up(keyUp);
 	Handle_Event_Up(specialKeyUp);
 }
 
@@ -68,7 +68,6 @@ void Player::Handle_Event(unsigned char key)
 		move_back = true;
 		break;
 	}
-
 }
 
 void Player::Handle_Event(int specialKey)
@@ -118,10 +117,10 @@ void Player::Handle_Event_Up(int specialKeyUp)
 void Player::MyTimer()
 {
 	if (move_front) {
-		transform.LookAt(speed);
+		transform.LookAt(-speed);
 	}
 	if (move_back) {
-		transform.LookAt(-speed);
+		transform.LookAt(speed);
 	}
 }
 

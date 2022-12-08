@@ -222,10 +222,10 @@
     <ClInclude Include="Xlsx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Cube.obj">
+    <Object Include="Harpoon.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="Harpoon.obj">
+    <Object Include="Obj\Default\Cube.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Object>
     <Object Include="Obj\Player\SpaceShip.obj">
@@ -245,6 +245,9 @@
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />
     <None Include="Harpoon.mtl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Obj\Default\Cube.mtl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="Obj\Player\SpaceShip.mtl">

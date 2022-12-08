@@ -4,18 +4,23 @@
 void drawScene();
 GLvoid Reshape(int w, int h);
 void KeyBoard(unsigned char key, int x, int y);
+void KeyBoardUp(unsigned char key, int x, int y);
 void SpecialKeyBoard(int key, int x, int y);
+void SpecialKeyboardUp(int key, int x, int y);
 void TimerFunc(int value);
 void Mouse(int button, int state, int x, int y);
 void MouseWheel(int wheel, int direction, int x, int y);
 void Motion(int x, int y);
-void SpecialKeyboardUp(int key, int x, int y);
 void MouseEntry(int state);
 
 Color windowColor;
 
 bool is_Polygon = false;
 bool is_CullFace = false;
+
+list<Mesh*> Mesh::allMesh;
+list<Object*> Object::allObject;
+list<GuiObject*> GuiObject::allGuiObject;
 
 Shader objectShader("Object");
 Shader uiShader("UI");
@@ -25,10 +30,6 @@ Camera camera;
 Camera uiCamera;
 Render objectRender;
 guiRender gui_objectRender;
-
-list<Mesh*> Mesh::allMesh;
-list<Object*> Object::allObject;
-list<GuiObject*> GuiObject::allGuiObject;
 
 GameManager* gameManager;
 CubeMap* backGround;
@@ -76,7 +77,9 @@ void Init()
 	Camera::mainCamera = &camera;
 	fristCamera = &camera;
 	camera.name = "Main";
+	camera.cameraPos.y = 3;
 	camera.cameraPos.z = -10;
+	camera.cameraDirection.z = 4;
 	camera.isPitch = true;
 
 	uiCamera.isProjection_XY = true;
@@ -118,6 +121,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(KeyBoard);
+	glutKeyboardUpFunc(KeyBoardUp);
 	glutSpecialFunc(SpecialKeyBoard);
 	glutSpecialUpFunc(SpecialKeyboardUp);
 	glutMouseFunc(Mouse);
@@ -202,8 +206,8 @@ void drawScene()
 	//	collider->OnTrigger();
 
 	{	// BackGround
-		Camera::mainCamera = &uiCamera;
-		backGround->Draw();
+		//Camera::mainCamera = &uiCamera;
+		//backGround->Draw();
 	}
 
 	{
@@ -229,6 +233,7 @@ void drawScene()
 	Camera::mainCamera = fristCamera;
 
 	Object::key = -1;
+	Object::keyUp = 0;
 	Object::specialKey = -1;
 	Object::specialKeyUp = -1;
 
@@ -264,6 +269,15 @@ void KeyBoard(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+
+void KeyBoardUp(unsigned char key, int x, int y)
+{
+	Object::keyUp = key;
+
+	glutPostRedisplay();
+}
+
+
 void SpecialKeyBoard(int key, int x, int y)
 {
 	Object::specialKey = key;
@@ -280,6 +294,8 @@ void SpecialKeyBoard(int key, int x, int y)
 		isFullScreen = !isFullScreen;
 		break;
 	}
+
+	gameManager->SpecialKeyboard(key, x, y);
 }
 
 // 리팩토링 필요 state 개념으로 변경 
@@ -287,10 +303,7 @@ void SpecialKeyBoard(int key, int x, int y)
 void SpecialKeyboardUp(int key, int x, int y) 
 {
 	Object::specialKeyUp = key;
-
-	switch (key)
-	{
-	}
+	gameManager->SpecialKeyboardUp(key, x, y);
 }
 
 void TimerFunc(int value)

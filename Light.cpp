@@ -25,7 +25,7 @@ void Light::Disable()
 
 void Light::Init()
 {
-	transform.local->scale *= 0.1;
+	transform.local->scale *= 1;
 }
 
 void Light::Update()

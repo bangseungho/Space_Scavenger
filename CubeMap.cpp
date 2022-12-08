@@ -81,6 +81,7 @@ void CubeMap::Draw()
 {
     glUseProgram(shader.program);
     Camera::mainCamera->Draw();
+    glFrontFace(GL_CW);
     glDepthFunc(GL_LEQUAL);
     glm::mat4 model;
     model = glm::translate(model, glm::vec3(0.0, -0.1, 0.0));

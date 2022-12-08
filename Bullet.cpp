@@ -18,7 +18,7 @@ Bullet::Bullet()
 	collider.object = this;
 
 	obj = _Obj;
-	transform.worldScale = vec3(0.1);
+	transform.local->scale = vec3(0.1);
 	collider.SetBox_OBB(vec3(2));
 
 	Render::meshtRender->AddObject(this, "Bullet");

@@ -27,6 +27,7 @@ public:
 	EqType GetType();
 	void SetState(State state);
 	State GetState();
+	mat4& SetMatrix();
 
 public:
 	virtual void Init();

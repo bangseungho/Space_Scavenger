@@ -98,7 +98,7 @@ void GuiObject::ObjectDraw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
-	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, &projection[0][0]);
+	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
 	glUniform1i(texture1_Location, 0);

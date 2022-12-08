@@ -38,3 +38,18 @@ void Render::AddObject(Mesh* mesh, string layoutName)
 {
 	renderList[layoutName].push_back(mesh);
 }
+
+void Render::RemoveObject(Object* obj)
+{
+	for (auto& layer : renderList)
+	{
+		for (auto& mesh : layer.second)
+		{
+			if (mesh->object->id != obj->id)
+				continue;
+
+			layer.second.remove(mesh);
+			return;
+		}
+	}
+}

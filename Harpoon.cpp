@@ -85,12 +85,12 @@ void Harpoon::Fire()
 
 	if (curEnergy < chargedEnergy)
 	{
-		transform.local->position.z -= frameSpeed * chargedEnergy / 30.0;
-		transform.local->scale.z += frameSpeed * chargedEnergy / 30.0;
+		transform.local->position.z += frameSpeed * chargedEnergy / 30.0;
+		transform.local->scale.z -= frameSpeed * chargedEnergy / 30.0;
 	}
 	else {
-		transform.local->position.z += frameSpeed * chargedEnergy / 150.0;
-		transform.local->scale.z -= frameSpeed * chargedEnergy / 150.0;
+		transform.local->position.z -= frameSpeed * chargedEnergy / 150.0;
+		transform.local->scale.z += frameSpeed * chargedEnergy / 150.0;
 
 		if (transform.local->scale.z < 0.5) {
 			transform.local->position.z = 0;

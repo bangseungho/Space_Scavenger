@@ -9,7 +9,7 @@ Cube::Cube() : Mesh(this)
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Cube.obj");
+		_Obj->ReadObj("Obj/Default/", "Cube.obj");
 	}
 
 	obj = _Obj;

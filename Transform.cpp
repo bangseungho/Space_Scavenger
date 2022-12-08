@@ -12,26 +12,6 @@ Transform::~Transform()
 {
 }
 
-Transform& Transform::operator=(const Transform& other)
-{
-	worldPosition = other.worldPosition;
-	localPosition = other.localPosition;
-
-	worldRotation.x = other.worldRotation.x;
-	worldRotation.y = other.worldRotation.y;
-	localRotation.x = other.localRotation.x;
-	localRotation.y = other.localRotation.y;
-
-	worldPivot = other.worldPivot;
-	localPivot = other.worldPivot;
-
-	return *this;
-}
-
-void Transform::Update()
-{
-
-}
 
 void Transform::SetScale()
 {
@@ -84,7 +64,6 @@ void Transform::LookAtTarget(const Transform& _Target, const float _Speed)
 
 	local->position += dir * FrameTime::oneFrame * _Speed;
 }
-
 TransformBlock::TransformBlock()
 {
 	pivot = vec3(0);
@@ -95,4 +74,12 @@ TransformBlock::TransformBlock()
 
 TransformBlock::~TransformBlock()
 {
+}
+
+void TransformBlock::ReSet()
+{
+	pivot = vec3(0);
+	position = vec3(0);
+	rotation = vec3(0);
+	scale = vec3(1);
 }
