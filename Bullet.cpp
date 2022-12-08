@@ -11,7 +11,7 @@ Bullet::Bullet()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Cube.obj");
+		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 
 	obj = _Obj;
@@ -32,4 +32,18 @@ void Bullet::Update()
 	speed = 200;
 	float BulletSpeed = speed * FrameTime::oneFrame * 60;
 	transform.LookAt(BulletSpeed);
+}
+
+void Bullet::OnCollision()
+{
+	//for (auto& other : Collider::allCollider)
+	//{
+	//	if (!other->isCollide)
+	//		continue;
+
+	//	if (other->tag != "Resource")
+	//		continue;
+
+	//	cout << "RESOURCE COLLIDER" << endl;
+	//}
 }

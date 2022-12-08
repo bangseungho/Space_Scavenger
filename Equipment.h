@@ -23,10 +23,6 @@ public:
 	~Equipment();
 
 public:
-	virtual void ChargingEnergy();
-	virtual void FinishCharging();
-
-public:
 	void SetType(EqType type);
 	EqType GetType();
 	void SetState(State state);
@@ -35,9 +31,7 @@ public:
 public:
 	virtual void Init();
 	virtual void Update();
-	virtual void Fire();
 	void Handle_Evnet(int specialKey);
-	void FireSet();
 
 public:
 	int strength = 0;

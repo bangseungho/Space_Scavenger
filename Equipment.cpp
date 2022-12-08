@@ -35,28 +35,11 @@ void Equipment::Init()
 {
 }
 
-
-void Equipment::ChargingEnergy()
-{
-}
-
-void Equipment::FinishCharging()
-{
-}
-
 void Equipment::Update()
 {
 	
 }
 
 void Equipment::Handle_Evnet(int specialKey)
-{
-}
-
-void Equipment::FireSet()
-{
-}
-
-void Equipment::Fire()
 {
 }

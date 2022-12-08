@@ -1,8 +1,8 @@
 #include "ResourcePool.h"
 
 template<class ROS>
-ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target)
-	: maxCount(_MaxCount), spawnCount(_SpawnCount)
+ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, int _level, float _DurationTime, Transform* _Target)
+	: maxCount(_MaxCount), spawnCount(_SpawnCount), level(_level)
 {
 	pool = new ROS[_MaxCount];
 	spawnTimer.durationTime = _DurationTime;
@@ -45,11 +45,12 @@ void ResourcePool<ROS>::Spawn(float _Min, float _Max)
 }
 
 template<class ROS>
-void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target)
+void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, int _level, float _DurationTime, Transform* _Target)
 {
 	pool = new ROS[_MaxCount];
 	maxCount = _MaxCount;
 	spawnCount = _SpawnCount;
+	level = _level;
 
 	spawnTimer.durationTime = _DurationTime;
 	target_Transform = _Target;

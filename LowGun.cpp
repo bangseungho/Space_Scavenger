@@ -10,12 +10,13 @@ LowGun::LowGun()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Cube.obj");
+		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 	
+	transform.worldScale = vec3(0.1);
 	obj = _Obj;
 
-	//Render::meshtRender->AddObject(this, "Lowgun");
+	Render::meshtRender->AddObject(this, "Lowgun");
 }
 
 LowGun::~LowGun()

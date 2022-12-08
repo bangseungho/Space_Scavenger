@@ -7,7 +7,7 @@ class ResourcePool : public Object
 {
 public:
 	ResourcePool() {};
-	ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
+	ResourcePool(int _MaxCount, int _SpawnCount, int _level, float _DurationTime, Transform* _Target);
 	~ResourcePool();
 
 public:
@@ -15,7 +15,7 @@ public:
 	void Spawn(float _Min, float _Max);
 
 public:
-	void InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
+	void InitPool(int _MaxCount, int _SpawnCount, int _level, float _DurationTime, Transform* _Target);
 
 public:
 	Transform* target_Transform;
@@ -26,6 +26,8 @@ private:
 
 	int maxCount;
 	int spawnCount;
+	int level;
+
 	Timer spawnTimer;
 };
 

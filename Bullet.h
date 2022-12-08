@@ -13,6 +13,7 @@ public:
 
 public:
 	void Update();
+	void OnCollision();
 
 public:
 	Collider collider;

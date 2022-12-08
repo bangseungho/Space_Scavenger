@@ -227,6 +227,7 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	a.color.SetColor({ 1, 0, 0, 1 });
 	b.color.SetColor({ 1, 0, 0, 1 });
 	cout << "Collide - " << "<" << a.tag << " : " << b.tag << ">" << endl;
+
 	return true;
 
 }

@@ -20,6 +20,7 @@ public:
 	void FinishCharging();
 	void MyTimer();
 	void Fire();
+
 public:
 	Collider collider;
 

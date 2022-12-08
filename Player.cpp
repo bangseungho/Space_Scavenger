@@ -14,7 +14,7 @@ Player::Player() : Mesh(this)
 	}
 
 	obj = _Obj;
-	ironPool.InitPool(5, 1, 1.0f, &transform);
+	ironPool.InitPool(5, 1, 1, 1.0f, &transform);
 	//equipment = new Harpoon;
 	equipment = new LowGun;
 	//equipment = new Guidance;
@@ -69,11 +69,11 @@ void Player::Handle_Event(int specialKey)
 		switch (equipment->GetType()) {
 		case EqType::HARPOON:
 			if (equipment->GetState() == State::IDLE) {
-				equipment->ChargingEnergy();
+				dynamic_cast<Harpoon*>(equipment)->ChargingEnergy();
 			}
 			break;
 		case EqType::LOWGUN:
-			equipment->Fire();
+			dynamic_cast<LowGun*>(equipment)->Fire();
 			break;
 		}
 	}
@@ -86,7 +86,7 @@ void Player::Handle_Event_Up(int specialKeyUp)
 	case GLUT_KEY_CTRL_L:
 		if (equipment->GetType() == EqType::HARPOON)
 		{
-			equipment->FinishCharging();
+			dynamic_cast<Harpoon*>(equipment)->FinishCharging();
 		}
 		break;
 	}
