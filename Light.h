@@ -1,12 +1,18 @@
 #pragma once
 #include "Sphere.h"
+#include "Shader.h"
 
 class Light : public Object
 {
 public:
+	static Shader* lightShader;
+	static list<Light*> allLight;
+
 	static unsigned int lightPosLocation;
 	static unsigned int lightColorLocation;
-	static unsigned int material;
+
+	static unsigned int lightCount;
+
 public:
 	Light();
 	~Light();
@@ -21,13 +27,11 @@ public:
 	Color color;
 	Transform transform;
 
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-
+private:
+	int light_ID;
 	Sphere shape;
-
-public:
-	float yRotate = 0;
+private:
+	unsigned int PosLocation;
+	unsigned int ColorLocation;
 };
 

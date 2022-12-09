@@ -1,6 +1,6 @@
 #include "Shader.h"
 
-map<string, GLuint*> Shader::allProgram;
+map<string, Shader*> Shader::allProgram;
 
 Shader::Shader(string _Name) : name(_Name)
 {
@@ -75,7 +75,11 @@ void Shader::CreatProgram()
 	//--- Shader Program 사용하기
 	glUseProgram(program);
 
-	allProgram[name] = &program;
+	allProgram[name] = this;
+}
+
+void Shader::SetFloat(string naem, float value)
+{
 }
 
 char* Shader::FileToBuffer(const char* file)

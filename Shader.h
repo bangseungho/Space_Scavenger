@@ -17,7 +17,7 @@ using namespace glm;
 class Shader
 {
 public:
-	static map<string, GLuint*> allProgram;
+	static map<string, Shader*> allProgram;
 public:
 	Shader(string _Name);
 	~Shader();
@@ -25,6 +25,9 @@ public:
 	void CreatVertexShader(string shaderFileName);
 	void CreatFragmentShader(string shaderFileName);
 	void CreatProgram();
+
+public:
+	void SetFloat(string naem, float value);
 
 private:
 	char* FileToBuffer(const char* file);

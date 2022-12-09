@@ -21,6 +21,7 @@ bool is_CullFace = false;
 list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<GuiObject*> GuiObject::allGuiObject;
+list<Light*> Light::allLight;
 
 Shader objectShader("Object");
 Shader uiShader("UI");
@@ -41,8 +42,6 @@ void InitShader()
 	objectShader.CreatProgram();
 
 	OBJ::MaterialBlockLocation = glGetUniformLocation(objectShader.program, "mBlock");
-	Light::lightColorLocation = glGetUniformLocation(objectShader.program, "lightColor");
-	Light::lightPosLocation = glGetUniformLocation(objectShader.program, "lightPos");
 
 	Mesh::vertexLocation = glGetAttribLocation(objectShader.program, "vPos");
 	Mesh::uvLoaction = glGetAttribLocation(objectShader.program, "vUV");
@@ -86,11 +85,11 @@ void Init()
 
 	gameManager = new GameManager;
 
-	glUseProgram(*Shader::allProgram.find("UI")->second);
+	glUseProgram(Shader::allProgram.find("UI")->second->program);
 	backGround = new CubeMap;
 	for (const auto& gui_obj : GuiObject::allGuiObject)
 		gui_obj->Init();
-	glUseProgram(*Shader::allProgram.find("Object")->second);
+	glUseProgram(Shader::allProgram.find("Object")->second->program);
 	for (const auto& mesh : Mesh::allMesh)
 		mesh->MeshInit();
 	for (const auto& obj : Object::allObject)
@@ -215,7 +214,7 @@ void drawScene()
 		Camera::mainCamera = fristCamera;
 		backGround->Draw();
 
-		glUseProgram(*Shader::allProgram.find("Object")->second);
+		glUseProgram(Shader::allProgram.find("Object")->second->program);
 		objectRender.Draw();
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -226,7 +225,7 @@ void drawScene()
 
 	{	//UI Viewport
 		Camera::mainCamera = &uiCamera;
-		glUseProgram(*Shader::allProgram.find("UI")->second);
+		glUseProgram(Shader::allProgram.find("UI")->second->program);
 		gui_objectRender.Draw();
 	}
 

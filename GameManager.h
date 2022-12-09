@@ -30,6 +30,7 @@ public:
 	Map map;
 	ChatBox chat_box;
 	Light light;
+	Light l2;
 	vector<Sound*> all_sound;
 	//Gauge gauge;
 
@@ -40,7 +41,7 @@ private:
 	// Special Key
 	bool isALT_L;
 
-	//Sound bgm;
-	//Sound effect;
+	Sound bgm;
+	Sound effect;
 };
 
