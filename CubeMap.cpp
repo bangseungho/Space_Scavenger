@@ -72,7 +72,6 @@ CubeMap::CubeMap()
     };
     cubemapTexture = loadCubemap(faces);
 
-    posLocation = glGetUniformLocation(shader.program, "model");
     viewLocation = glGetUniformLocation(shader.program, "view");
     projectionLocation = glGetUniformLocation(shader.program, "projection");
 }
@@ -81,17 +80,18 @@ void CubeMap::Draw()
 {
     glUseProgram(shader.program);
     Camera::mainCamera->Draw();
-    glFrontFace(GL_CW);
+    //glFrontFace(GL_CW);
+    //glDisable(GL_CULL_FACE);
+    //glDisable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
-    glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0, -0.1, 0.0));
-    glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(model));
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(Camera::mainCamera->view));
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(Camera::mainCamera->projection));
     glBindVertexArray(skyboxVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LESS);
+    //glFrontFace(GL_CCW);
+
 }
 
 unsigned int CubeMap::loadCubemap(vector<std::string> faces)
@@ -108,7 +108,7 @@ unsigned int CubeMap::loadCubemap(vector<std::string> faces)
         if (data)
         {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+                0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data
             );
             stbi_image_free(data);
         }

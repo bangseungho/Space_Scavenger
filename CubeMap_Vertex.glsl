@@ -5,11 +5,10 @@ out vec3 TexCoords;
 
 uniform mat4 projection;
 uniform mat4 view;
-uniform mat4 model;
 
 void main()
 {
     TexCoords = aPos;
     mat4 v = mat4(mat3(view));
-    gl_Position = projection * v * model * vec4(aPos, 1.0);
+    gl_Position = projection * v * vec4(aPos, 1.0);
 }  

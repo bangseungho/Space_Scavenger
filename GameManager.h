@@ -40,7 +40,7 @@ private:
 	// Special Key
 	bool isALT_L;
 
-	Sound bgm;
-	Sound effect;
+	//Sound bgm;
+	//Sound effect;
 };
 

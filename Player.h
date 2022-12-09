@@ -39,7 +39,7 @@ public:
 	Equipment* equipment;
 
 public:
-	float speed = 100;
+	float speed = 10;
 	bool move_front;
 	bool move_back;
 

@@ -207,13 +207,13 @@ void drawScene()
 
 	{	// BackGround
 		//Camera::mainCamera = &uiCamera;
-		//backGround->Draw();
 	}
 
 	{
 		// ÇöÀç Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
+		backGround->Draw();
 
 		glUseProgram(*Shader::allProgram.find("Object")->second);
 		objectRender.Draw();
