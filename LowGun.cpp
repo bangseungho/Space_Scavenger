@@ -21,6 +21,7 @@ LowGun::LowGun()
 	obj = _Obj;
 	bulletNum = 10;
 
+
 	for (int i = 0; i < bulletNum; ++i) {
 		bullets.push_back(new Bullet);
 	}
@@ -30,7 +31,6 @@ LowGun::LowGun()
 
 LowGun::~LowGun()
 {
-	
 }
 
 void LowGun::Update()

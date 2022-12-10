@@ -32,6 +32,7 @@ public:
 	Light light;
 	Light l2;
 	vector<Sound*> all_sound;
+	//Gauge gauge;
 
 private:
 	bool isMouseRight;

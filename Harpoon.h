@@ -1,6 +1,5 @@
 #pragma once
 #include "Equipment.h"
-#include "Gauge.h"
 
 // todo 
 // 자원 끌어오기 
@@ -29,15 +28,11 @@ public:
 	Collider collider;
 
 public:
-	Gauge* gauge;
-
-public:
 	double startTime;
 	double endTime;
-	double chargingTime;
-	int curEnergy; 
+	int curEnergy;
 	int chargedEnergy;
 	float speed;
-	const unsigned int maxEnergy = 2;
+	const unsigned int maxEnergy = 3;
 };
 

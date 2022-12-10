@@ -19,9 +19,7 @@ Harpoon::Harpoon()
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
-	gauge = new Gauge();
-
-	Render::meshtRender->AddObject(this, "Harpoon");
+	Render::objectRender->AddObject(this, "Harpoon");
 }
 
 Harpoon::~Harpoon()
@@ -56,8 +54,11 @@ void Harpoon::ChargingEnergy()
 
 void Harpoon::FinishCharging()
 {
+	endTime = clock();
+
 	cout << "Finish Charging" << endl;
-	
+	double chargingTime = (endTime - startTime) / CLOCKS_PER_SEC;
+	if (chargingTime > maxEnergy) chargingTime = maxEnergy;
 	cout << "Charging Time : " << chargingTime << endl;
 
 	chargedEnergy = chargingTime * 10;
@@ -67,16 +68,10 @@ void Harpoon::FinishCharging()
 
 void Harpoon::MyTimer()
 {
-	endTime = clock();
-	chargingTime = (endTime - startTime) / CLOCKS_PER_SEC;
-	if (chargingTime > maxEnergy) chargingTime = maxEnergy;
-
 	switch (GetState()) {
 	case State::IDLE:
-		gauge->transform.local->scale.x = 0;
 		break;
 	case State::CHARGING:
-		gauge->transform.local->scale.x = chargingTime;
 		break;
 	case State::FIRING:
 		Fire();
@@ -97,7 +92,7 @@ void Harpoon::Fire()
 		transform.local->position.z -= frameSpeed * chargedEnergy / 150.0;
 		transform.local->scale.z += frameSpeed * chargedEnergy / 150.0;
 
-		if (transform.local->scale.z > 0) {
+		if (transform.local->scale.z < 0.5) {
 			transform.local->position.z = 0;
 			transform.local->scale.z = 0.5;
 			chargedEnergy = 0;
