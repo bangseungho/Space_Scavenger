@@ -27,9 +27,6 @@
     <Filter Include="Object\Resource\Contain">
       <UniqueIdentifier>{98b2ad9c-4c8e-4b92-850a-f91dc933ac71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GuiObject">
-      <UniqueIdentifier>{9ae96dcc-1a60-4d6c-8f5f-98d7b0a31ec7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FramWork">
       <UniqueIdentifier>{f4b18ee2-3bac-487e-9ba3-93983cb8380b}</UniqueIdentifier>
     </Filter>
@@ -100,12 +97,6 @@
     </ClCompile>
     <ClCompile Include="Iron.cpp">
       <Filter>Object\Resource\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>GuiObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ChatBox.cpp">
-      <Filter>GuiObject</Filter>
     </ClCompile>
     <ClCompile Include="ResourcePool.cpp">
       <Filter>Object\Resource</Filter>
@@ -191,6 +182,12 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일\미완성</Filter>
     </ClCompile>
+    <ClCompile Include="ChatBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -216,12 +213,6 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>GuiObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ChatBox.h">
-      <Filter>GuiObject</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>FramWork\헤더</Filter>
@@ -306,6 +297,12 @@
     </ClInclude>
     <ClInclude Include="CubeMap.h">
       <Filter>소스 파일\미완성</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

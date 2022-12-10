@@ -26,12 +26,21 @@ void GuiObject::Update()
 
 void GuiObject::Init()
 {
+	// 이미지 뒤집기 안하면 거꾸로 나옴
+	stbi_set_flip_vertically_on_load(true);
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
+
+	float vertice_x = static_cast<float>(width) / windowSize_W;
+	float vertice_y = static_cast<float>(height) / windowSize_H;
+
 	float vertices[] = {
 		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		 vertice_x,  vertice_y, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 vertice_x, -vertice_y, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-vertice_x, -vertice_y, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-vertice_x,  vertice_y, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 	};
 	unsigned int indices[] = {
 		1, 0, 3,
@@ -65,21 +74,15 @@ void GuiObject::Init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// 이미지 뒤집기 안하면 거꾸로 나옴
-	stbi_set_flip_vertically_on_load(true);
-
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
 
 	// 가로 세로 비율 맞추기
 	float ratio;
 	if (width > height) {
-		ratio = static_cast<float>(height) / width;
-		transform.local->scale.y *= ratio;
-	}
-	else {
-		ratio = static_cast<float>(width) / height;
-		transform.local->scale.x *= ratio;
+		//ratio = static_cast<float>(width) / windowSize_W;
+		//transform.local->scale.x *= ratio;
+
+		//ratio = static_cast<float>(height) / windowSize_H;
+		//transform.local->scale.y *= ratio;
 	}
 
 	if (data)
@@ -97,7 +100,8 @@ void GuiObject::Init()
 void GuiObject::ObjectDraw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
+	//projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
+	projection = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
