@@ -14,7 +14,19 @@ public:
 public:
 	void Update();
 	void OnCollision();
+	float getDistance();
+
+public:
+	vec3 trajectory; // ±ËÀû
+	vec3 gunPos;
 
 public:
 	Collider collider;
+
+public:
+	float distance;
+	bool isUse;
+
+private:
+	const int range = 200;
 };

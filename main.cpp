@@ -75,6 +75,7 @@ void Init()
 	camera.cameraPos.y = 3;
 	camera.cameraPos.z = -10;
 	camera.cameraDirection.z = 4;
+	camera.cameraDirection.y = 1;
 	camera.isPitch = true;
 
 	uiCamera.isProjection_XY = true;

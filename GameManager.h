@@ -42,5 +42,6 @@ private:
 
 	Sound bgm;
 	Sound effect;
+
 };
 

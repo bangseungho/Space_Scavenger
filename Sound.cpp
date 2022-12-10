@@ -30,7 +30,7 @@ void Sound::Load(string _FileName, bool _IsLoop)
 
 void Sound::Play()
 {
-	FMOD_Channel_Stop(MUSIC_CHANNER);
+	//FMOD_Channel_Stop(MUSIC_CHANNER);
 
 	if (false == isLoop)
 	{

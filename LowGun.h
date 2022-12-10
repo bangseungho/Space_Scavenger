@@ -2,6 +2,7 @@
 #include "Equipment.h"
 #include "Object.h"
 #include "Bullet.h"
+#include "Sound.h"
 
 class LowGun : public Equipment
 {
@@ -13,9 +14,17 @@ public:
 
 public:
 	void Update();
-	void Fire();
+	int Fire(const Transform& transform);
+	void ReLoad();
 
 public:
-	Bullet bullet;
+	vector<Bullet*> bullets;
 
+private:
+	int bulletNum;
+	int fireCount;
+
+private:
+	Sound fireSound;
+	Sound loadSound;
 };
