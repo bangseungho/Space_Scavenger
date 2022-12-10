@@ -25,9 +25,11 @@ public:
 public:
 	void SetScale(); // 랜덤 스케일
 	void SetRandomRotate();
+	void CurrentFront();
 	void LookAt(float speed);
 	void LookAtTarget(const Transform& _Target, const float _Speed);
 	void Info();
+
 public:
 	vector<TransformBlock*> world;
 	TransformBlock* local;
@@ -35,4 +37,6 @@ public:
 	mat4 worldModel;
 	mat4 localModel;
 	mat4 model;
+
+	vec3 front;
 };

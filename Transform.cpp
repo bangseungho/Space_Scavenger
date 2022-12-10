@@ -46,6 +46,16 @@ void Transform::Info()
 	cout << local->scale << " : local Scale" << endl;
 }
 
+void Transform::CurrentFront()
+{
+	vec3 pos = model * vec4(0, 0, 0, 1);
+	vec3 dir = translate(model, vec3(0, 0, -1)) * vec4(0, 0, 0, 1);
+	vec3 norm = normalize(dir - pos);
+
+
+	front = norm;
+}
+
 void Transform::LookAt(float speed)
 {
 	vec3 pos = model * vec4(0, 0, 0, 1);
@@ -64,6 +74,7 @@ void Transform::LookAtTarget(const Transform& _Target, const float _Speed)
 
 	local->position += dir * FrameTime::oneFrame * _Speed;
 }
+
 TransformBlock::TransformBlock()
 {
 	pivot = vec3(0);

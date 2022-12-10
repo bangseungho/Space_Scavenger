@@ -17,6 +17,9 @@ Bullet::Bullet()
 	collider.tag = "Bullet";
 	collider.object = this;
 
+	speed = 200;
+	isUse = false;
+
 	obj = _Obj;
 	transform.local->scale = vec3(0.1);
 	collider.SetBox_OBB(vec3(2));
@@ -30,9 +33,8 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	speed = 200;
 	float BulletSpeed = speed * FrameTime::oneFrame * 60;
-	transform.LookAt(BulletSpeed);
+	transform.local->position -= trajectory;
 }
 
 void Bullet::OnCollision()
