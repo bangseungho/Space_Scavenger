@@ -8,6 +8,9 @@ double aspect_ratio = windowSize_W / windowSize_H;
 bool isFullScreen = false;
 bool isOnTimer = false;
 
+vec2 StartMouse;
+vec2 mouse_Pos;
+
 #pragma region VectorFuntion
 
 Face operator-(const Face my, int other)
@@ -18,14 +21,6 @@ Face operator-(const Face my, int other)
 	result.c = my.c - other;
 	return result;
 }
-
-
-ostream& operator<< (ostream& outputStream, const Vector2& my)
-{
-	cout << my.x << ", " << my.y;
-	return outputStream;
-}
-
 
 ostream& operator<< (ostream& outputStream, const vec3& my)
 {

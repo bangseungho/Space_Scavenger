@@ -14,7 +14,7 @@ Sphere::Sphere() : Mesh(this)
 
 	obj = _Obj;
 
-	Render::meshtRender->AddObject(this, "Sphere");
+	Render::objectRender->AddObject(this, "Light");
 }
 
 Sphere::~Sphere()

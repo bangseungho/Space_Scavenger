@@ -28,7 +28,7 @@ Player::Player() : Mesh(this)
 	//equipment = new LowGun;
 	//equipment = new Guidance;
 	
-	Render::meshtRender->AddObject(this);
+	Render::objectRender->AddObject(this);
 }
 
 Player::~Player()

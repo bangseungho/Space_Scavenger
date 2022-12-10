@@ -22,7 +22,7 @@ Resource::Resource() : Mesh(this)
 	
 	draggedSpeed = 1;
 	isDragged = false;
-	Render::meshtRender->AddObject(this, "Resource");
+	Render::objectRender->AddObject(this, "Resource");
 }
 
 Resource::~Resource()

@@ -75,6 +75,15 @@
     <Filter Include="소스 파일\미완성">
       <UniqueIdentifier>{9df73862-055a-46f0-abe4-a02a3312e31e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FramWork\GameObject\Object">
+      <UniqueIdentifier>{381d173c-1359-45e7-add7-65d65cd421aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FramWork\GameObject\UI">
+      <UniqueIdentifier>{afd38a50-bf1f-4148-b3e1-99b9d661c57d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FramWork\GameObject\Default">
+      <UniqueIdentifier>{0a5f28c1-bddc-4c3f-a4e7-7c33919c9980}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -113,37 +122,7 @@
     <ClCompile Include="Timer.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GuiRender.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GuiObject.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Render.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameTime.cpp">
       <Filter>FramWork\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
@@ -167,12 +146,6 @@
     <ClCompile Include="Guidance.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
-    <ClCompile Include="OBJ.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>FramWork\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Harpoon.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
@@ -185,11 +158,44 @@
     <ClCompile Include="Button.cpp">
       <Filter>소스 파일\미완성</Filter>
     </ClCompile>
-    <ClCompile Include="CubeMap.cpp">
-      <Filter>소스 파일\미완성</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일\미완성</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMap.cpp">
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTime.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJ.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMesh.cpp">
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,38 +232,8 @@
     <ClInclude Include="Timer.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="GuiRender.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="GuiObject.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="ResourcePool.h">
       <Filter>Object\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameTime.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>FramWork\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>FramWork\GameObject</Filter>
@@ -283,12 +259,6 @@
     <ClInclude Include="Guidance.h">
       <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
-    <ClInclude Include="OBJ.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>FramWork\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Harpoon.h">
       <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
@@ -304,8 +274,41 @@
     <ClInclude Include="Button.h">
       <Filter>소스 파일\미완성</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
     <ClInclude Include="CubeMap.h">
-      <Filter>소스 파일\미완성</Filter>
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameTime.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJ.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMesh.h">
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

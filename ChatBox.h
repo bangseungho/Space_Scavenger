@@ -1,12 +1,8 @@
-#include "GuiRender.h"
+#include "Render.h"
 
-class ChatBox : public GuiObject
+class ChatBox : public Object, public UIMesh
 {
-public:
-
 public:
 	ChatBox();
 	~ChatBox();
-public:
-	void Init();
 };

@@ -1,6 +1,6 @@
 #include "Gauge.h"
 
-Gauge::Gauge()
+Gauge::Gauge() : UIMesh(this)
 {
 	name = "Gauge";
 	image_file = "gauge.png";
@@ -10,14 +10,10 @@ Gauge::Gauge()
 	transform.local->scale.x = 0;
 	transform.local->position.x += 0;
 	transform.local->position.y += 0.9;
+
+	Render::uiRender->AddObject(this);
 }
 
 Gauge::~Gauge()
 {
-}
-
-void Gauge::Init()
-{
-	GuiObject::Init();
-	guiRender::gui_objectRender->AddObject(this);
 }

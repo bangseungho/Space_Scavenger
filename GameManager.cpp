@@ -75,10 +75,6 @@ void GameManager::SpecialKeyboardUp(int key, int x, int y)
 
 void GameManager::Mouse(int button, int state, int x, int y)
 {
-	StartMouse = { (float)x, (float)y };
-	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
-
 	vec2 realStartMouse = RealPosition(StartMouse);
 
 	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
@@ -104,18 +100,11 @@ void GameManager::MouseWheel(int wheel, int direction, int x, int y)
 
 void GameManager::Motion(int x, int y)
 {
-	vec2 mouse_Pos = { (float)x, (float)y };
-	mouse_Pos = Coordinate(mouse_Pos);
-	mouse_Pos.y = -mouse_Pos.y;
-
 	//ShowCursor(isMouseRight);
 	if (!isMouseRight)
 	{
 		vec2 diffPos = (mouse_Pos - StartMouse);
 		player.FaceMove(diffPos);
-		//vec2 diffPos = (mouse_Pos - StartMouse) * FrameTime::oneFrame;
-		//player.transform.worldRotation.y -= diffPos.x;
-		//player.transform.worldRotation.x += diffPos.y;
 		if (isALT_L)
 		{
 			vec2 speed = vec2(15, 10);
@@ -124,11 +113,6 @@ void GameManager::Motion(int x, int y)
 			Camera::mainCamera->transform.local->rotation.y -= fMoveSpeed.x;
 		}
 	}
-
-
-	StartMouse = { (float)x, (float)y };
-	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
 }
 
 void GameManager::MouseEntry(int state)

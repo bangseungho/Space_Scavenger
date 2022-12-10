@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map()
+Map::Map() : UIMesh(this)
 {
 	name = "Map";
 	image_file = "map.png";
@@ -9,14 +9,9 @@ Map::Map()
 	transform.local->position.x -= 0.5;
 	transform.local->position.y -= 0.7;
 
+	Render::uiRender->AddObject(this);
 }
 
 Map::~Map()
 {
-}
-
-void Map::Init()
-{
-	GuiObject::Init();
-	guiRender::gui_objectRender->AddObject(this);
 }

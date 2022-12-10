@@ -16,7 +16,7 @@ LowGun::LowGun()
 	transform.local->scale = vec3(0.1);
 	obj = _Obj;
 
-	Render::meshtRender->AddObject(this, "Lowgun");
+	Render::objectRender->AddObject(this, "Lowgun");
 }
 
 LowGun::~LowGun()

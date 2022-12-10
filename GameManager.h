@@ -36,7 +36,6 @@ public:
 
 private:
 	bool isMouseRight;
-	vec2 StartMouse;
 
 	// Special Key
 	bool isALT_L;

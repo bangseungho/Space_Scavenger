@@ -24,8 +24,8 @@ public:
 	~Mesh();
 
 public:
-	void MeshInit();
-	void Draw();
+	virtual void MeshInit();
+	virtual void Draw();
 
 public:
 	OBJ* obj;

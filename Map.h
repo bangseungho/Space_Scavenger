@@ -1,13 +1,10 @@
-#include "GuiRender.h"
+#pragma once
+#include "Render.h"
 
-class Map : public GuiObject
+class Map : public Object, public UIMesh
 {
-public:
-
 public:
 	Map();
 	~Map();
-public:
-	void Init();
 };
 

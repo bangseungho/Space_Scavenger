@@ -21,21 +21,8 @@ extern double aspect_ratio;
 
 extern bool isFullScreen;
 
-typedef struct Vector2 {
-	GLfloat x;
-	GLfloat y;
-}Vector2;
-
-typedef struct Vector3 {
-	GLfloat x;
-	GLfloat y;
-	GLfloat z;
-}Vector3;
-
-typedef struct Position2 {
-	int x;
-	int y;
-}Position2;
+extern vec2 StartMouse;
+extern vec2 mouse_Pos;
 
 typedef struct Face {
 	unsigned short a;

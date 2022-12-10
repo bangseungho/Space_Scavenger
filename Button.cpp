@@ -28,12 +28,20 @@ void Button::CheckClick()
 	// 클릭했을때 위치가 맞다면 Mark 의 Active를 On/Off 해준다.
 }
 
-ButtonMark::ButtonMark()
+ButtonMark::ButtonMark() : UIMesh(this)
 {
-	name = "Button Mark";
-	SetActive(false);
+	//name = "Button Mark";
+	//SetActive(false);
 }
 
 ButtonMark::~ButtonMark()
+{
+}
+
+ButtonUnMark::ButtonUnMark() : UIMesh(this)
+{
+}
+
+ButtonUnMark::~ButtonUnMark()
 {
 }

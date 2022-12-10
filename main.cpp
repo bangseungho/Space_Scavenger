@@ -20,7 +20,6 @@ bool is_CullFace = false;
 
 list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
-list<GuiObject*> GuiObject::allGuiObject;
 list<Light*> Light::allLight;
 
 Shader objectShader("Object");
@@ -30,7 +29,7 @@ Camera* fristCamera;
 Camera camera;
 Camera uiCamera;
 Render objectRender;
-guiRender gui_objectRender;
+Render uiRender;
 
 GameManager* gameManager;
 CubeMap* backGround;
@@ -60,15 +59,12 @@ void InitShader()
 	uiShader.CreatVertexShader("GuiVertex.glsl");
 	uiShader.CreatFragmentShader("GuiFragment.glsl");
 	uiShader.CreatProgram();
-
-	GuiObject::ortho_projection = glGetUniformLocation(uiShader.program, "projectionTransform");
-	GuiObject::texture1_Location = glGetUniformLocation(uiShader.program, "texture1");
 }
 
 void Init()
 {
-	Render::meshtRender = &objectRender;
-	guiRender::gui_objectRender = &gui_objectRender;
+	Render::objectRender = &objectRender;
+	Render::uiRender = &uiRender;
 
 	FrameTime::currentTime = clock();
 
@@ -84,11 +80,8 @@ void Init()
 	uiCamera.isProjection_XY = true;
 
 	gameManager = new GameManager;
-
-	glUseProgram(Shader::allProgram.find("UI")->second->program);
 	backGround = new CubeMap;
-	for (const auto& gui_obj : GuiObject::allGuiObject)
-		gui_obj->Init();
+
 	glUseProgram(Shader::allProgram.find("Object")->second->program);
 	for (const auto& mesh : Mesh::allMesh)
 		mesh->MeshInit();
@@ -152,18 +145,6 @@ void drawScene()
 		obj->SetMatrix();
 	}
 
-	// GUI 모든 오브젝트 업데이트
-	for (const auto& gui_obj : GuiObject::allGuiObject)
-	{
-		gui_obj->Update();
-	}
-
-	// GUI 모든 오브젝트 세팅
-	for (const auto& gui_obj : GuiObject::allGuiObject)
-	{
-		gui_obj->SetMatrix();
-	}
-
 	// 모든 콜라이더 위치 업데이트
 	for (const auto& collider : Collider::allCollider)
 	{
@@ -204,10 +185,6 @@ void drawScene()
 	//for (const auto& collider : Collider::allCollider)
 	//	collider->OnTrigger();
 
-	{	// BackGround
-		//Camera::mainCamera = &uiCamera;
-	}
-
 	{
 		// 현재 Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
@@ -226,7 +203,7 @@ void drawScene()
 	{	//UI Viewport
 		Camera::mainCamera = &uiCamera;
 		glUseProgram(Shader::allProgram.find("UI")->second->program);
-		gui_objectRender.Draw();
+		uiRender.UIDraw();
 	}
 
 	Camera::mainCamera = fristCamera;
@@ -320,8 +297,14 @@ void TimerFunc(int value)
 
 void Mouse(int button, int state, int x, int y)
 {
+	mouse_Pos = { (float)x, (float)y };
+	mouse_Pos = Coordinate(mouse_Pos);
+	mouse_Pos.y = -mouse_Pos.y;
+
 	gameManager->Mouse(button, state, x, y);
-	
+
+
+
 	glutPostRedisplay();
 }
 
@@ -332,7 +315,15 @@ void MouseWheel(int wheel, int direction, int x, int y)
 
 void Motion(int x, int y)
 {
+	mouse_Pos = { (float)x, (float)y };
+	mouse_Pos = Coordinate(mouse_Pos);
+	mouse_Pos.y = -mouse_Pos.y;
+
 	gameManager->Motion(x, y);
+
+	StartMouse = { (float)x, (float)y };
+	StartMouse = Coordinate(StartMouse);
+	StartMouse.y = -StartMouse.y;
 
 	glutPostRedisplay();
 }

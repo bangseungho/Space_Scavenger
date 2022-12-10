@@ -18,7 +18,7 @@ Cube::Cube() : Mesh(this)
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
-	Render::meshtRender->AddObject(this, "Cube");
+	Render::objectRender->AddObject(this, "Cube");
 }
 
 Cube::~Cube()

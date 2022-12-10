@@ -1,6 +1,7 @@
 #include "Render.h"
 
-Render* Render::meshtRender = nullptr;
+Render* Render::objectRender = nullptr;
+Render* Render::uiRender = nullptr;
 
 Render::Render()
 {
@@ -30,6 +31,25 @@ void Render::Draw()
 				continue;
 
 			mesh->Draw();
+		}
+	}
+}
+
+void Render::UIDraw()
+{
+	glDisable(GL_DEPTH_TEST);
+
+	for (auto& layer : renderList)
+	{
+		for (auto& uiMesh : layer.second)
+		{
+			if (!uiMesh->isDraw)
+				continue;
+
+			if (!uiMesh->object->ActiveSelf())
+				continue;
+
+			uiMesh->Draw();
 		}
 	}
 }

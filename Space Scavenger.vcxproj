@@ -156,8 +156,6 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="Guidance.cpp" />
-    <ClCompile Include="GuiObject.cpp" />
-    <ClCompile Include="GuiRender.cpp" />
     <ClCompile Include="Harpoon.cpp" />
     <ClCompile Include="Iron.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -178,6 +176,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UIMesh.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
     <ClCompile Include="Xlsx.cpp" />
   </ItemGroup>
@@ -196,8 +195,6 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gauge.h" />
     <ClInclude Include="Guidance.h" />
-    <ClInclude Include="GuiObject.h" />
-    <ClInclude Include="GuiRender.h" />
     <ClInclude Include="Harpoon.h" />
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
@@ -218,6 +215,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UIMesh.h" />
     <ClInclude Include="Vector_AFX.h" />
     <ClInclude Include="Xlsx.h" />
   </ItemGroup>

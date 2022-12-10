@@ -1,15 +1,21 @@
 #pragma once
-#include "GuiRender.h"
+#include "UIMesh.h"
 
-class ButtonMark : public GuiObject
+class ButtonMark : public Object, public UIMesh
 {
 public:
 	ButtonMark();
 	~ButtonMark();
-
 };
 
-class Button : public GuiObject
+class ButtonUnMark : public Object, public UIMesh
+{
+public:
+	ButtonUnMark();
+	~ButtonUnMark();
+};
+
+class Button : public Object
 {
 public:
 	Button();

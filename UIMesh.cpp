@@ -1,31 +1,33 @@
-#include "GuiObject.h"
+#include "UIMesh.h"
 
-int GuiObject::Gui_ID_Count = 0;
-unsigned int GuiObject::ortho_projection;
-unsigned int GuiObject::texture1_Location;
+Shader* UIMesh::uiShader = nullptr;
 
-unsigned int GuiObject::modelLocation;
-unsigned int GuiObject::vColorLocation;
+unsigned int UIMesh::ortho_projection;
+unsigned int UIMesh::texture1_Location;
 
-GuiObject::GuiObject() : transform(), color()
+unsigned int UIMesh::modelLocation;
+unsigned int UIMesh::vColorLocation;
+
+UIMesh::UIMesh(Object* obj) : Mesh(obj)
 {
-	id = Gui_ID_Count++;
-	name = "UnName";
-
-	allGuiObject.push_back(this);
+	if (uiShader == nullptr)
+	{
+		uiShader = Shader::allProgram.find("UI")->second;
+		ortho_projection = glGetUniformLocation(uiShader->program, "projectionTransform");
+		texture1_Location = glGetUniformLocation(uiShader->program, "texture1");
+	}
 }
 
-GuiObject::~GuiObject()
-{
-	allGuiObject.erase(remove(allGuiObject.begin(), allGuiObject.end(), this), allGuiObject.end());
-}
-
-void GuiObject::Update()
+UIMesh::~UIMesh()
 {
 }
 
-void GuiObject::Init()
+void UIMesh::MeshInit()
 {
+	VAO = new GLuint;
+	VBO = new GLuint;
+	EBO = new GLuint;
+
 	float vertices[] = {
 		// positions          // colors           // texture coords
 		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -38,17 +40,17 @@ void GuiObject::Init()
 		2, 1, 3,
 	};
 
-	glGenVertexArrays(1, &VAO); 
-	glBindVertexArray(VAO);
+	glGenVertexArrays(1, VAO);
+	glBindVertexArray(VAO[0]);
 
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, VBO);
 
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glGenBuffers(1, EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[0]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
@@ -75,11 +77,11 @@ void GuiObject::Init()
 	float ratio;
 	if (width > height) {
 		ratio = static_cast<float>(height) / width;
-		transform.local->scale.y *= ratio;
+		object->transform.local->scale.y *= ratio;
 	}
 	else {
 		ratio = static_cast<float>(width) / height;
-		transform.local->scale.x *= ratio;
+		object->transform.local->scale.x *= ratio;
 	}
 
 	if (data)
@@ -94,58 +96,18 @@ void GuiObject::Init()
 	stbi_image_free(data);
 }
 
-void GuiObject::ObjectDraw()
+void UIMesh::Draw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(transform.model));
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(object->transform.model));
 	glUniform1i(texture1_Location, 0);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, my_texture);
 
-	glBindVertexArray(VAO);
+	glBindVertexArray(VAO[0]);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}
-
-mat4& GuiObject::SetMatrix()
-{
-	mat4 localModel = mat4(1.0);
-	mat4 worldModel = mat4(1.0);
-
-	for (auto& world : transform.world)
-	{
-		worldModel = translate(worldModel, world->pivot);
-		worldModel = translate(worldModel, world->position);
-		worldModel = rotate(worldModel, radians(world->rotation.x), vec3(1.0, 0, 0));
-		worldModel = rotate(worldModel, radians(world->rotation.y), vec3(0, 1.0, 0));
-		worldModel = rotate(worldModel, radians(world->rotation.z), vec3(0, 0, 1.0));
-		worldModel = scale(worldModel, world->scale);
-	}
-
-	localModel = translate(localModel, transform.local->pivot);
-	localModel = translate(localModel, transform.local->position);
-	localModel = rotate(localModel, radians(transform.local->rotation.x), vec3(1.0, 0, 0));
-	localModel = rotate(localModel, radians(transform.local->rotation.y), vec3(0, 1.0, 0));
-	localModel = rotate(localModel, radians(transform.local->rotation.z), vec3(0, 0, 1.0));
-	localModel = scale(localModel, transform.local->scale);
-
-	transform.localModel = localModel;
-	transform.worldModel = worldModel;
-	transform.model = worldModel * localModel;
-
-	return transform.model;
-}
-
-
-void GuiObject::SetActive(bool value)
-{
-	if (this->isActive == false && value == true)
-		this->Enable();
-	else if (this->isActive == true && value == false)
-		this->Disable();
-
-	this->isActive = value;
 }

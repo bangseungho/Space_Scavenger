@@ -19,7 +19,7 @@ Harpoon::Harpoon()
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
-	Render::meshtRender->AddObject(this, "Harpoon");
+	Render::objectRender->AddObject(this, "Harpoon");
 }
 
 Harpoon::~Harpoon()

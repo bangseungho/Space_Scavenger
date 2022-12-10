@@ -1,13 +1,9 @@
 #pragma once
-#include "GuiRender.h"
+#include "Render.h"
 
-class Gauge : public GuiObject
+class Gauge : public Object, public UIMesh
 {
-public:
-
 public:
 	Gauge();
 	~Gauge();
-public:
-	void Init();
 };
