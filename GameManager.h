@@ -1,13 +1,12 @@
 #pragma once
-#include "Cube.h"
 #include "Player.h"
 #include "Map.h"
 #include "ChatBox.h"
-//#include "ResourcePool.cpp"	// 템플릿 클래스는 cpp를 인클루드 해야함
 #include "Iron.h"
 #include "Light.h"
 #include "Gauge.h"
 #include "Sound.h"
+#include "Button.h"
 
 class GameManager : public Object
 {
@@ -33,6 +32,7 @@ public:
 	Light l2;
 	vector<Sound*> all_sound;
 	//Gauge gauge;
+	Button button[2];
 
 private:
 	bool isMouseRight;

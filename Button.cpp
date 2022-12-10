@@ -3,10 +3,23 @@
 Button::Button() 
 {
 	name = "Button";
+
+	isToggle = false;
 }
 
 Button::~Button()
 {
+}
+
+void Button::Init()
+{
+	for (const auto& world : transform.world)
+	{
+		unMark.transform.world.push_back(world);
+		mark.transform.world.push_back(world);
+	}
+	unMark.transform.world.push_back(transform.local);
+	mark.transform.world.push_back(transform.local);
 }
 
 void Button::Update()
@@ -28,10 +41,15 @@ void Button::CheckClick()
 	// 클릭했을때 위치가 맞다면 Mark 의 Active를 On/Off 해준다.
 }
 
+#pragma region Button_Image
+
 ButtonMark::ButtonMark() : UIMesh(this)
 {
-	//name = "Button Mark";
-	//SetActive(false);
+	name = "Button Mark";
+	image_file = "UI/Button/Mark.png";
+	SetActive(false);
+
+	Render::uiRender->AddObject(this);
 }
 
 ButtonMark::~ButtonMark()
@@ -40,8 +58,14 @@ ButtonMark::~ButtonMark()
 
 ButtonUnMark::ButtonUnMark() : UIMesh(this)
 {
+	name = "Button UnMark";
+	image_file = "UI/Button/UnMark.png";
+
+	Render::uiRender->AddObject(this);
 }
 
 ButtonUnMark::~ButtonUnMark()
 {
 }
+
+#pragma endregion

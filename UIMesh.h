@@ -23,5 +23,9 @@ public:
 public:
 	const char* image_file;
 	unsigned int my_texture;
+
+public:
+	int width;
+	int height;
 };
 

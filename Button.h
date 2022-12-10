@@ -1,5 +1,5 @@
 #pragma once
-#include "UIMesh.h"
+#include "Render.h"
 
 class ButtonMark : public Object, public UIMesh
 {
@@ -22,6 +22,7 @@ public:
 	~Button();
 
 public:
+	void Init();
 	void Update();
 
 public:
@@ -29,6 +30,10 @@ public:
 	void CheckClick();
 
 public:
+	bool isToggle;
+
+private:
+	ButtonUnMark unMark;
 	ButtonMark mark;
 
 };

@@ -70,7 +70,7 @@ void UIMesh::MeshInit()
 	// 이미지 뒤집기 안하면 거꾸로 나옴
 	stbi_set_flip_vertically_on_load(true);
 
-	int width, height, nrChannels;
+	int nrChannels;
 	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
 
 	// 가로 세로 비율 맞추기
