@@ -8,6 +8,7 @@
 #include "LowGun.h"
 #include "Bullet.h"
 #include "Guidance.h"
+#include "Sound.h"
 
 class Player : public Object, public Mesh
 {

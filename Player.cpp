@@ -7,7 +7,7 @@ Player::Player() : Mesh(this)
 {
 	name = "Player";
 
-	// Mesh �ʱ�ȭ
+	// Mesh
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
@@ -16,12 +16,12 @@ Player::Player() : Mesh(this)
 	}
 	obj = _Obj;
 
-	// Collider �ʱ�ȭ
+	// Collider
 	collider.tag = "Player";
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
 
-	// Object �ʱ�ȭ
+	// Object
 	ironPool.InitPool(5, 1, 1.0f, &transform);
 
 	equipment = new Harpoon;
@@ -67,22 +67,32 @@ void Player::Handle_Event(unsigned char key)
 	case 's':
 		move_back = true;
 		break;
+	case 'r':
+		if (equipment->GetType() == EqType::LOWGUN) {
+			dynamic_cast<LowGun*>(equipment)->ReLoad();
+		};
+		break;
 	}
 }
 
 void Player::Handle_Event(int specialKey)
 {
+	Harpoon* _harpoon; LowGun* _lowgun;
 	switch (specialKey)
 	{
 	case GLUT_KEY_CTRL_L:
 		switch (equipment->GetType()) {
 		case EqType::HARPOON:
 			if (equipment->GetState() == State::IDLE) {
-				dynamic_cast<Harpoon*>(equipment)->ChargingEnergy();
+				if (_harpoon = dynamic_cast<Harpoon*>(equipment))
+					_harpoon->ChargingEnergy();
 			}
 			break;
 		case EqType::LOWGUN:
-			dynamic_cast<LowGun*>(equipment)->Fire();
+			if (_lowgun = dynamic_cast<LowGun*>(equipment)) {
+				int firedBulletNum = _lowgun->Fire(transform);
+				cout << "Fired Bulled Num : " << firedBulletNum << endl;
+			}
 			break;
 		}
 	}
@@ -140,7 +150,6 @@ void Player::OnCollision()
 
 		if (other->tag == "Resource")
 		{
-			cout << "RESOURCE PLAYER COLLIDER!!!" << endl;
 			Resource* resource = reinterpret_cast<Resource*>(other->object);
 			if (resource->isDragged)
 				equipment->isDragged = false;
@@ -187,4 +196,5 @@ void Player::FaceMove(const vec2& diffPos)
 	vec2 fMoveSpeed = diffPos * FrameTime::oneFrame * speed;
 	transform.local->rotation.y -= fMoveSpeed.x;
 	transform.local->rotation.x -= fMoveSpeed.y;
+	transform.CurrentFront();
 }

@@ -27,13 +27,21 @@ void UIMesh::MeshInit()
 	VAO = new GLuint;
 	VBO = new GLuint;
 	EBO = new GLuint;
+	
+	stbi_set_flip_vertically_on_load(true);
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
+
+	float vertice_x = static_cast<float>(width) / windowSize_W;
+	float vertice_y = static_cast<float>(height) / windowSize_H;
 
 	float vertices[] = {
 		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		 vertice_x,  vertice_y, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 vertice_x, -vertice_y, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-vertice_x, -vertice_y, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-vertice_x,  vertice_y, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 	};
 	unsigned int indices[] = {
 		1, 0, 3,
@@ -67,13 +75,13 @@ void UIMesh::MeshInit()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// ÀÌ¹ÌÁö µÚÁý±â ¾ÈÇÏ¸é °Å²Ù·Î ³ª¿È
+	// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Å²Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	stbi_set_flip_vertically_on_load(true);
 
 	int nrChannels;
 	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
 
-	// °¡·Î ¼¼·Î ºñÀ² ¸ÂÃß±â
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
 	float ratio;
 	if (width > height) {
 		ratio = static_cast<float>(height) / width;
@@ -99,7 +107,8 @@ void UIMesh::MeshInit()
 void UIMesh::Draw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
-	projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
+	//projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
+	projection = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(object->transform.model));
