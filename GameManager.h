@@ -7,6 +7,7 @@
 #include "Gauge.h"
 #include "Sound.h"
 #include "Button.h"
+#include "PlanetManager.h"
 
 class GameManager : public Object
 {
@@ -25,11 +26,11 @@ public:
 	void MouseEntry(int state);
 
 public:
+	PlanetManager planetManager;
+public:
 	Player player;
 	Map map;
 	ChatBox chat_box;
-	Light light;
-	Light l2;
 	vector<Sound*> all_sound;
 	//Gauge gauge;
 

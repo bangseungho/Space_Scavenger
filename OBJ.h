@@ -77,8 +77,8 @@ private:	// mtl ฐüทร
 public:
 	VertexBlock vBlock;
 	map<string, MaterialBlock> mBlock;
-	bool isOnMTL;
 
+	bool isOnMTL;
 private:
 	string objName;
 	string materialName;

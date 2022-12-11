@@ -52,13 +52,18 @@ void OBJ::ReadObj(string path, string objFileName)
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}
 	vBlock.groupCount++;
-	vec3 scale = vBlock.max - vBlock.min;
-
+	vec3 pivot = (vBlock.max + vBlock.min) / vec3(2.0f);
 	for (auto& temp : vBlock.vertices)
 	{
-		temp = temp - vBlock.min;
-		temp = ((temp * 2.0f) / scale) - 1.0f;
+		temp -= pivot;
 	}
+	//vec3 scale = vBlock.max - vBlock.min;
+
+	//for (auto& temp : vBlock.vertices)
+	//{
+	//	temp = temp - vBlock.min;
+	//	temp = ((temp * 2.0f) / scale) - 1.0f;
+	//}
 
 	objName = fileName;
 	fclose(obj);

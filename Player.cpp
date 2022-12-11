@@ -11,20 +11,24 @@ Player::Player() : Mesh(this)
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		//_Obj->ReadObj("Obj/Default/", "Cube.obj");
 		_Obj->ReadObj("Obj/Player/", "SpaceShip.obj");
 	}
 	obj = _Obj;
 
+	// Tranform
+	transform.local->scale *= 0.001;
+
 	// Collider
 	collider.tag = "Player";
-	collider.SetBox_OBB(vec3(2));
+	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));
 	collider.object = this;
 
 	// Object
 	upgrade = new UpgradeControl(this);
 
+	// Resource Init
 	ironPool.InitPool(5, 1, 1.0f, &transform);
+	mineralPool.InitPool(5, 1, 1.0f, &transform);
 
 	// Equipment Init
 	equipment["Harpoon"] = new Harpoon;

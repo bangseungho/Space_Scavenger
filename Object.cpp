@@ -55,7 +55,7 @@ mat4& Object::SetMatrix()
 
 	for (auto& world : transform.world)
 	{
-		worldModel = translate(worldModel, world->pivot);
+		//worldModel = translate(worldModel, world->pivot);
 		worldModel = translate(worldModel, world->position);
 		worldModel = rotate(worldModel, radians(world->rotation.x), vec3(1.0, 0, 0));
 		worldModel = rotate(worldModel, radians(world->rotation.y), vec3(0, 1.0, 0));

@@ -18,6 +18,7 @@ Resource::Resource() : Mesh(this)
 
 	collider.tag = "Resource";
 	collider.object = this;
+	transform.local->scale *= 0.01;
 
 	amount = 0;
 	velocity = vec3(0);

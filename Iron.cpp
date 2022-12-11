@@ -12,11 +12,11 @@ Iron::Iron()
 		_Obj = new OBJ;
 		_Obj->ReadObj(filePath, "Iron.obj");	// 이름 변경 필수
 	}
-
 	obj = _Obj;
+
 	level = 3;
 
-	collider.SetBox_OBB(vec3(2));
+	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));
 
 	if (amountData == -1)
 	{

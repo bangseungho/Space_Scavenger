@@ -6,7 +6,7 @@ struct DirLight {
 };  
 
 //#define NR_POINT_LIGHTS 4 
-#define RIGHT_NUMBER 5
+#define RIGHT_NUMBER 20
 
 uniform int LightCount;
 

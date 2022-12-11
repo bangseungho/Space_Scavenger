@@ -7,6 +7,7 @@
 // Resource
 #include "ResourcePool.cpp"
 #include "Iron.h"
+#include "Mineral.h"
 
 // Equipment
 #include "Harpoon.h"
@@ -46,7 +47,7 @@ public:
 	map<string, Equipment*> equipment;
 
 public: // Upgrade 관련
-	float speed = 1;
+	float speed = 0.1f;
 
 private:
 	bool move_front;
@@ -58,6 +59,7 @@ private:
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
+	ResourcePool<Mineral> mineralPool;
 
 };
 

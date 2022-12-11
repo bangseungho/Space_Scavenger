@@ -85,7 +85,7 @@ void GameManager::Mouse(int button, int state, int x, int y)
 
 void GameManager::MouseWheel(int wheel, int direction, int x, int y)
 {
-	if (direction < 0)
+	if (direction < 1)
 	{
 		cout << "Zoom out" << endl;
 		Camera::mainCamera->LookAtView(1);

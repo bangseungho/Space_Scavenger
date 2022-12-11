@@ -167,6 +167,8 @@
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="OBJ.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="PlanetManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quest.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -208,6 +210,8 @@
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="OBJ.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Planet.h" />
+    <ClInclude Include="PlanetManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Quest.h" />
     <ClInclude Include="Random.h" />

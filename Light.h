@@ -27,9 +27,9 @@ public:
 	Color color;
 	Transform transform;
 
+	Sphere shape;
 private:
 	int light_ID;
-	Sphere shape;
 private:
 	unsigned int PosLocation;
 	unsigned int ColorLocation;

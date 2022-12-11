@@ -3,9 +3,9 @@
 UpgradeControl::UpgradeControl(Player* _Player) : player(_Player)
 {
 	upgradeButtons["Speed"].name += "Speed";
-	upgradeButtons["Speed"].transform.local->position.x = 10;
+	upgradeButtons["Speed"].transform.local->position.x = 500;
 	upgradeButtons["GuidanceDistance"].name += "GuidanceDistance";
-	upgradeButtons["GuidanceDistance"].transform.local->position.x = -10;
+	upgradeButtons["GuidanceDistance"].transform.local->position.x = -500;
 }
 UpgradeControl::~UpgradeControl()
 {

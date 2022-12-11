@@ -16,7 +16,7 @@ Mineral::Mineral()
 	obj = _Obj;
 	level = 3;
 
-	collider.SetBox_OBB(vec3(2));
+	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));
 
 	if (amountData == -1)
 	{

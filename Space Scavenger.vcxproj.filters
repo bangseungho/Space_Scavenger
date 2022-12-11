@@ -84,6 +84,9 @@
     <Filter Include="UI\Default">
       <UniqueIdentifier>{8f1b041d-be35-4bcf-b61d-7140ec5c1dca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Planet">
+      <UniqueIdentifier>{85124ba1-1037-497a-946d-27fa2ca59655}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,9 +118,6 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>FramWork\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
       <Filter>Object\Equipment</Filter>
@@ -203,8 +203,17 @@
     <ClCompile Include="Button.cpp">
       <Filter>UI\Default</Filter>
     </ClCompile>
+    <ClCompile Include="Planet.cpp">
+      <Filter>Object\Planet</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\미완성</Filter>
+    </ClCompile>
+    <ClCompile Include="PlanetManager.cpp">
+      <Filter>Object\Planet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +246,6 @@
     </ClInclude>
     <ClInclude Include="ResourcePool.h">
       <Filter>Object\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>FramWork\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Equipment.h">
       <Filter>Object\Equipment</Filter>
@@ -322,7 +328,18 @@
     <ClInclude Include="Button.h">
       <Filter>UI\Default</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Planet.h">
+      <Filter>Object\Planet</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>소스 파일\미완성</Filter>
+    </ClInclude>
+    <ClInclude Include="PlanetManager.h">
+      <Filter>Object\Planet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
