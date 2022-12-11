@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Afx.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />

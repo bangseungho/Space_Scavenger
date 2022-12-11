@@ -81,6 +81,9 @@
     <Filter Include="FramWork\GameObject\Default">
       <UniqueIdentifier>{0a5f28c1-bddc-4c3f-a4e7-7c33919c9980}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Default">
+      <UniqueIdentifier>{8f1b041d-be35-4bcf-b61d-7140ec5c1dca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,9 +149,6 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>소스 파일\미완성</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일\미완성</Filter>
     </ClCompile>
@@ -199,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="Mineral.cpp">
       <Filter>Object\Resource\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UI\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,9 +274,6 @@
     <ClInclude Include="Sound.h">
       <Filter>소스 파일\미완성</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>소스 파일\미완성</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
@@ -316,6 +319,10 @@
     <ClInclude Include="Mineral.h">
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UI\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

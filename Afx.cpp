@@ -1,7 +1,7 @@
 #include "Afx.h"
 
-int windowSize_W = 1600;
-int windowSize_H = 900;
+double windowSize_W = 1600;
+double windowSize_H = 900;
 
 double aspect_ratio = windowSize_W / windowSize_H;
 

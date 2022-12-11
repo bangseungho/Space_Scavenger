@@ -60,7 +60,7 @@ void Button::CheckClick()
 		return;
 
 	isClick = false;
-	if (state == GLUT_DOWN)
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		if (!CheckInMouse())
 			return;

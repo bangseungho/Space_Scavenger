@@ -2,6 +2,7 @@
 #include "Sound.h"
 #include "Button.h"
 #include "Quest.h"
+#include "BackGround.h"
 
 // Resource
 #include "ResourcePool.cpp"
@@ -73,5 +74,6 @@ public:
 	Player* player;
 
 private:
+	//BackGround background{ "UI/", "Frame.png"};
 	map<string, Button> upgradeButtons;
 };

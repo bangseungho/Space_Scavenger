@@ -35,8 +35,11 @@ void UIMesh::MeshInit()
 	int nrChannels;
 	unsigned char* data = stbi_load(image_file.c_str(), &width, &height, &nrChannels, 0);
 
-	float vertice_x = static_cast<float>(width) / windowSize_W;
-	float vertice_y = static_cast<float>(height) / windowSize_H;
+	//float vertice_x = static_cast<float>(width) / windowSize_W;
+	//float vertice_y = static_cast<float>(height) / windowSize_H;
+
+	float vertice_x = static_cast<float>(width/2);
+	float vertice_y = static_cast<float>(height/2);
 
 	float vertices[] = {
 		// positions          // colors           // texture coords
@@ -93,7 +96,7 @@ void UIMesh::Draw()
 {
 	glm::mat4 projection = glm::mat4(1.0f);
 	//projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
-	projection = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	projection = ortho(-windowSize_W/2, windowSize_W/2, -windowSize_H/2, windowSize_H/2, -1.0, 1.0);
 	glUniform4f(ColorLocation, color.R, color.G, color.B, color.A);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(object->transform.model));

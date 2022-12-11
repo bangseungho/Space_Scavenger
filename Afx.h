@@ -15,8 +15,8 @@
 #define _MAX
 #endif
 
-extern int windowSize_W;
-extern int windowSize_H;
+extern double windowSize_W;
+extern double windowSize_H;
 extern double aspect_ratio;
 
 extern bool isFullScreen;
