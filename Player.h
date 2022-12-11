@@ -45,7 +45,7 @@ public:
 	map<string, Equipment*> equipment;
 
 public: // Upgrade ฐüทร
-	float speed = 10;
+	float speed = 1;
 
 private:
 	bool move_front;

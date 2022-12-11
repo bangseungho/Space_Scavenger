@@ -62,6 +62,8 @@ void Player::Update()
 	Handle_Event(specialKey);
 	Handle_Event_Up(keyUp);
 	Handle_Event_Up(specialKeyUp);
+
+	cout << speed << endl;
 }
 
 void Player::Handle_Event(unsigned char key)

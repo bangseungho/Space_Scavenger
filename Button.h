@@ -46,6 +46,7 @@ public:
 public:
 	void CheckOnMouse();
 	void CheckClick();
+	bool CheckInMouse();
 public:
 	bool isClick;
 	bool isToggle;

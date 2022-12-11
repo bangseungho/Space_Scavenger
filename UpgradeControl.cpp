@@ -13,6 +13,7 @@ void UpgradeControl::Update()
 	if (upgradeButtons.find("Speed")->second.isClick)
 	{
 		player->speed += 1;
+		cout << "Call" << endl;
 	}
 	else if (upgradeButtons.find("GuidanceDistance")->second.isClick)
 	{

@@ -213,8 +213,8 @@ void drawScene()
 	Object::keyUp = 0;
 	Object::specialKey = -1;
 	Object::specialKeyUp = -1;
-	//button = -1;
-	//state = -1;
+	button = -1;
+	state = -1;
 
 	FrameTime::oneFrame = (clock() - FrameTime::currentTime) / 1000.0f;
 	FrameTime::currentTime += FrameTime::oneFrame * 1000.0f;
