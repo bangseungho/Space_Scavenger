@@ -22,11 +22,18 @@ Player::Player() : Mesh(this)
 	collider.object = this;
 
 	// Object
+	upgrade = new UpgradeControl(this);
+
 	ironPool.InitPool(5, 1, 1.0f, &transform);
 
-	equipment = new Harpoon;
-	//equipment = new LowGun;
-	//equipment = new Guidance;
+	// Equipment Init
+	equipment["Harpoon"] = new Harpoon;
+	equipment["LowGun"] = new LowGun;
+	equipment["Guidance"] = new Guidance;
+	
+	for (auto& eq : equipment)
+		eq.second->SetActive(false);
+	equipment.find("Harpoon")->second->SetActive(true);
 	
 	Render::objectRender->AddObject(this);
 }
@@ -40,10 +47,12 @@ void Player::Init()
 {
 	for (const auto& world : transform.world)
 	{
-		equipment->transform.world.push_back(world);
+		for (auto& eq : equipment)
+			eq.second->transform.world.push_back(world);
 	}
 
-	equipment->transform.world.push_back(transform.local);
+	for (auto& eq : equipment)
+		eq.second->transform.world.push_back(transform.local);
 }
 
 
@@ -68,33 +77,35 @@ void Player::Handle_Event(unsigned char key)
 		move_back = true;
 		break;
 	case 'r':
-		if (equipment->GetType() == EqType::LOWGUN) {
-			dynamic_cast<LowGun*>(equipment)->ReLoad();
-		};
+		dynamic_cast<LowGun*>(equipment.find("LowGun")->second)->ReLoad();
+		//if (equipment->GetType() == EqType::LOWGUN) {
+		//	dynamic_cast<LowGun*>(equipment)->ReLoad();
+		//	return;
+		//};
 		break;
 	}
 }
 
 void Player::Handle_Event(int specialKey)
 {
-	Harpoon* _harpoon; LowGun* _lowgun;
+	//Harpoon* _harpoon; LowGun* _lowgun;
 	switch (specialKey)
 	{
-	case GLUT_KEY_CTRL_L:
-		switch (equipment->GetType()) {
-		case EqType::HARPOON:
-			if (equipment->GetState() == State::IDLE) {
-				if (_harpoon = dynamic_cast<Harpoon*>(equipment))
-					_harpoon->ChargingEnergy();
-			}
-			break;
-		case EqType::LOWGUN:
-			if (_lowgun = dynamic_cast<LowGun*>(equipment)) {
-				int firedBulletNum = _lowgun->Fire(transform);
-				cout << "Fired Bulled Num : " << firedBulletNum << endl;
-			}
-			break;
-		}
+	//case GLUT_KEY_CTRL_L:
+		//switch (equipment->GetType()) {
+		//case EqType::HARPOON:
+		//	if (equipment->GetState() == State::IDLE) {
+		//		if (_harpoon = dynamic_cast<Harpoon*>(equipment))
+		//			_harpoon->ChargingEnergy();
+		//	}
+		//	break;
+		//case EqType::LOWGUN:
+		//	if (_lowgun = dynamic_cast<LowGun*>(equipment)) {
+		//		int firedBulletNum = _lowgun->Fire(transform);
+		//		cout << "Fired Bulled Num : " << firedBulletNum << endl;
+		//	}
+		//	break;
+		//}
 	}
 }
 
@@ -116,10 +127,10 @@ void Player::Handle_Event_Up(int specialKeyUp)
 	switch (specialKeyUp)
 	{
 	case GLUT_KEY_CTRL_L:
-		if (equipment->GetType() == EqType::HARPOON)
-		{
-			dynamic_cast<Harpoon*>(equipment)->FinishCharging();
-		}
+		//if (equipment->GetType() == EqType::HARPOON)
+		//{
+		//	dynamic_cast<Harpoon*>(equipment)->FinishCharging();
+		//}
 		break;
 	}
 }
@@ -152,7 +163,7 @@ void Player::OnCollision()
 		{
 			Resource* resource = reinterpret_cast<Resource*>(other->object);
 			if (resource->isDragged)
-				equipment->isDragged = false;
+				equipment.find("Guidance")->second->isDragged = false;
 		}
 	}
 }

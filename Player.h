@@ -1,14 +1,19 @@
 #pragma once
-#include "Collider.h"
-#include "Equipment.h"
+#include "Sound.h"
+#include "Button.h"
+#include "Quest.h"
+
+// Resource
 #include "ResourcePool.cpp"
 #include "Iron.h"
-#include "Quest.h"
+
+// Equipment
 #include "Harpoon.h"
 #include "LowGun.h"
 #include "Bullet.h"
 #include "Guidance.h"
-#include "Sound.h"
+
+class UpgradeControl;
 
 class Player : public Object, public Mesh
 {
@@ -37,14 +42,17 @@ public:
 
 public:
 	Collider collider;
-	Equipment* equipment;
+	map<string, Equipment*> equipment;
 
-public:
+public: // Upgrade 관련
 	float speed = 10;
+
+private:
 	bool move_front;
 	bool move_back;
 
 private:
+	UpgradeControl* upgrade;
 	Quest quset;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
@@ -52,3 +60,18 @@ private:	// 플레이어 주위에서 spawn 될 자원 pool
 
 };
 
+class UpgradeControl : public Object
+{
+public:
+	UpgradeControl(Player* _Player);
+	~UpgradeControl();
+	
+public:
+	void Update();
+
+public:
+	Player* player;
+
+private:
+	map<string, Button> upgradeButtons;
+};
