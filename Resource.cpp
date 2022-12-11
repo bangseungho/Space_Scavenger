@@ -3,6 +3,8 @@
 libxl::Book* Resource::book = nullptr;
 libxl::Sheet* Resource::sheet = nullptr;
 
+string Resource::filePath = "Obj/Resource/";
+
 Resource::Resource() : Mesh(this)
 {
 	if (book == nullptr)

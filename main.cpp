@@ -213,6 +213,8 @@ void drawScene()
 	Object::keyUp = 0;
 	Object::specialKey = -1;
 	Object::specialKeyUp = -1;
+	//button = -1;
+	//state = -1;
 
 	FrameTime::oneFrame = (clock() - FrameTime::currentTime) / 1000.0f;
 	FrameTime::currentTime += FrameTime::oneFrame * 1000.0f;
@@ -296,15 +298,16 @@ void TimerFunc(int value)
 	glutTimerFunc(10, TimerFunc, 1);
 }
 
-void Mouse(int button, int state, int x, int y)
+void Mouse(int _Button, int _State, int x, int y)
 {
 	mouse_Pos = { (float)x, (float)y };
 	mouse_Pos = Coordinate(mouse_Pos);
 	mouse_Pos.y = -mouse_Pos.y;
 
-	gameManager->Mouse(button, state, x, y);
+	button = _Button;
+	state = _State;
 
-
+	gameManager->Mouse(_Button, _State, x, y);
 
 	glutPostRedisplay();
 }

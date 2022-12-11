@@ -194,6 +194,12 @@
     <ClCompile Include="Map.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="UpgradeControl.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Mineral.cpp">
+      <Filter>Object\Resource\Contain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -306,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Mineral.h">
+      <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

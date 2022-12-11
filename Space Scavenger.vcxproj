@@ -163,6 +163,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="OBJ.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIMesh.cpp" />
+    <ClCompile Include="UpgradeControl.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
     <ClCompile Include="Xlsx.cpp" />
   </ItemGroup>
@@ -201,6 +203,7 @@
     <ClInclude Include="LowGun.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mineral.h" />
     <ClInclude Include="OBJ.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />

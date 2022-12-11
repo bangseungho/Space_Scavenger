@@ -8,6 +8,7 @@ class UIMesh : public Mesh
 
 	static unsigned int ortho_projection;
 	static unsigned int texture1_Location;
+	static unsigned int ColorLocation;
 	// 이 아래 두개 쓰는건가요?
 	static unsigned int modelLocation;
 	static unsigned int vColorLocation;
@@ -21,7 +22,7 @@ public:
 	void Draw();
 
 public:
-	const char* image_file;
+	string image_file;
 	unsigned int my_texture;
 
 public:

@@ -9,6 +9,8 @@ class Resource : public Object, public Mesh
 public:
 	static libxl::Book* book;
 	static libxl::Sheet* sheet;
+
+	static string filePath;
 public:
 	Resource();
 	~Resource();

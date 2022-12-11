@@ -1,16 +1,16 @@
-#include "Iron.h"
+#include "Mineral.h"
 
-OBJ* Iron::_Obj = nullptr;
-int Iron::amountData = -1;
+OBJ* Mineral::_Obj = nullptr;
+int Mineral::amountData = -1;
 
-Iron::Iron()
+Mineral::Mineral()
 {
-	name = "Iron";
+	name = "Mineral";
 
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj(filePath, "Iron.obj");	// 이름 변경 필수
+		_Obj->ReadObj(filePath, "Mineral.obj");
 	}
 
 	obj = _Obj;
@@ -24,6 +24,6 @@ Iron::Iron()
 	}
 }
 
-Iron::~Iron()
+Mineral::~Mineral()
 {
 }

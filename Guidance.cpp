@@ -5,11 +5,11 @@ Guidance::Guidance()
 	SetType(EqType::GUIDANCE);
 	{	//юс╫ц
 		obj = new OBJ;
-		obj->ReadObj((char*)"Cube.obj");
+		obj->ReadObj("Obj/Default/" , "Cube.obj");
 		isDraw = false;
 	}
 
-	serchDistnace = 1000;
+	serchDistnace = 10;
 }
 
 Guidance::~Guidance()

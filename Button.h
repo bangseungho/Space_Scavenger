@@ -1,24 +1,42 @@
 #pragma once
 #include "Render.h"
 
-class ButtonMark : public Object, public UIMesh
+#pragma region Image
+class ButtonDefualt : public Object, public UIMesh
 {
 public:
-	ButtonMark();
-	~ButtonMark();
+	ButtonDefualt() : UIMesh(this) {
+		name += " Default";
+		Render::uiRender->AddObject(this);
+	}
 };
 
-class ButtonUnMark : public Object, public UIMesh
+class ButtonOnMouse : public Object, public UIMesh
 {
 public:
-	ButtonUnMark();
-	~ButtonUnMark();
+	ButtonOnMouse() : UIMesh(this) {
+		name += " Default";
+		SetActive(false);
+		Render::uiRender->AddObject(this);
+	}
 };
+class ButtonClick : public Object, public UIMesh
+{
+public:
+	ButtonClick() : UIMesh(this) {
+		name += " Default";
+		SetActive(false);
+		Render::uiRender->AddObject(this);
+	}
+};
+#pragma endregion
+
 
 class Button : public Object
 {
 public:
-	Button();
+	Button() : Button("UI/Button/Default/") {};
+	Button(string path);
 	~Button();
 
 public:
@@ -28,13 +46,15 @@ public:
 public:
 	void CheckOnMouse();
 	void CheckClick();
-
 public:
+	bool isClick;
 	bool isToggle;
-
 private:
-	ButtonUnMark unMark;
-	ButtonMark mark;
+	ButtonDefualt ui_Defualt;
+	ButtonOnMouse ui_OnMouse;
+	ButtonClick ui_Click;
 
+	int width;
+	int height;
 };
 

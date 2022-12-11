@@ -10,6 +10,8 @@ bool isOnTimer = false;
 
 vec2 StartMouse;
 vec2 mouse_Pos;
+int button;
+int state;
 
 #pragma region VectorFuntion
 
@@ -21,6 +23,13 @@ Face operator-(const Face my, int other)
 	result.c = my.c - other;
 	return result;
 }
+
+ostream& operator<< (ostream& outputStream, const vec2& my)
+{
+	cout << my.x << ", " << my.y;
+	return outputStream;
+}
+
 
 ostream& operator<< (ostream& outputStream, const vec3& my)
 {

@@ -23,6 +23,8 @@ extern bool isFullScreen;
 
 extern vec2 StartMouse;
 extern vec2 mouse_Pos;
+extern int button;
+extern int state;
 
 typedef struct Face {
 	unsigned short a;
@@ -33,6 +35,7 @@ typedef struct Face {
 
 Face operator- (const Face my, int other);
 
+ostream& operator<< (ostream& outputStream, const vec2& my);
 ostream& operator<< (ostream& outputStream, const vec3& my);
 ostream& operator<< (ostream& outputStream, const Face& my);
 bool operator== (const vec3 my, const float other);

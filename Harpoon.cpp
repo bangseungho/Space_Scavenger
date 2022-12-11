@@ -21,7 +21,7 @@ Harpoon::Harpoon()
 
 	gauge = new Gauge();
 
-	Render::meshtRender->AddObject(this, "Harpoon");
+	Render::objectRender->AddObject(this, "Harpoon");
 }
 
 Harpoon::~Harpoon()

@@ -43,6 +43,7 @@ public:
 	~OBJ();
 public:
 	void ReadObj(char* fileName) { ReadObj("", fileName); };
+	void ReadObj(string fileName) { ReadObj("", fileName); };
 	void ReadObj(string path, string objFileName);
 	void ReadMaterial(string mtlName);
 

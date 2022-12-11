@@ -26,8 +26,6 @@ void GameManager::Init()
 	all_sound.push_back(&effect);
 
 	//bgm.Play();
-
-	button[1].transform.local->position.x = 1;
 }
 
 void GameManager::Update()

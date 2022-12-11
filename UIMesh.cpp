@@ -4,6 +4,7 @@ Shader* UIMesh::uiShader = nullptr;
 
 unsigned int UIMesh::ortho_projection;
 unsigned int UIMesh::texture1_Location;
+unsigned int UIMesh::ColorLocation;
 
 unsigned int UIMesh::modelLocation;
 unsigned int UIMesh::vColorLocation;
@@ -15,6 +16,7 @@ UIMesh::UIMesh(Object* obj) : Mesh(obj)
 		uiShader = Shader::allProgram.find("UI")->second;
 		ortho_projection = glGetUniformLocation(uiShader->program, "projectionTransform");
 		texture1_Location = glGetUniformLocation(uiShader->program, "texture1");
+		ColorLocation = glGetUniformLocation(uiShader->program, "vColor");
 	}
 }
 
@@ -30,8 +32,8 @@ void UIMesh::MeshInit()
 	
 	stbi_set_flip_vertically_on_load(true);
 
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
+	int nrChannels;
+	unsigned char* data = stbi_load(image_file.c_str(), &width, &height, &nrChannels, 0);
 
 	float vertice_x = static_cast<float>(width) / windowSize_W;
 	float vertice_y = static_cast<float>(height) / windowSize_H;
@@ -75,23 +77,6 @@ void UIMesh::MeshInit()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// �̹��� ������ ���ϸ� �Ųٷ� ����
-	stbi_set_flip_vertically_on_load(true);
-
-	int nrChannels;
-	unsigned char* data = stbi_load(image_file, &width, &height, &nrChannels, 0);
-
-	// ���� ���� ���� ���߱�
-	float ratio;
-	if (width > height) {
-		ratio = static_cast<float>(height) / width;
-		object->transform.local->scale.y *= ratio;
-	}
-	else {
-		ratio = static_cast<float>(width) / height;
-		object->transform.local->scale.x *= ratio;
-	}
-
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -109,8 +94,8 @@ void UIMesh::Draw()
 	glm::mat4 projection = glm::mat4(1.0f);
 	//projection = ortho(-aspect_ratio, aspect_ratio, -1.0, 1.0, -1.0, 1.0);
 	projection = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	glUniform4f(ColorLocation, color.R, color.G, color.B, color.A);
 	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
-
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(object->transform.model));
 	glUniform1i(texture1_Location, 0);
 
