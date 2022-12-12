@@ -20,8 +20,9 @@ Resource::Resource() : Mesh(this)
 	collider.object = this;
 	transform.local->scale *= 0.01;
 
-	amount = 0;
-	velocity = vec3(0);
+	amount = RandomInt(1, 3);
+	velocity = vec3(RandomFloat(-1,1), RandomFloat(-1, 1), RandomFloat(-1, 1));
+	velocity = normalize(velocity);
 	
 	draggedSpeed = 1;
 	isDragged = false;
@@ -35,6 +36,9 @@ Resource::~Resource()
 
 void Resource::Enable()
 {
+	amount = RandomInt(1,3);
+	velocity = vec3(RandomFloat(-1, 1), RandomFloat(-1, 1), RandomFloat(-1, 1));
+	velocity = normalize(velocity);
 }
 
 void Resource::Disable()
@@ -49,6 +53,7 @@ void Resource::Init()
 
 void Resource::Update()
 {
+	MoveMent();
 	Dragged();
 }
 
@@ -79,8 +84,6 @@ void Resource::OnCollision()
 			}
 			cout << level << endl;
 		}
-
-
 	}
 }
 
@@ -99,4 +102,14 @@ void Resource::Dragged()
 		return;
 
 	transform.LookAtTarget(*target, draggedSpeed);
+}
+
+void Resource::MoveMent()
+{
+	if (isDragged)
+		return;
+
+	vec3 speed = velocity * FrameTime::oneFrame;
+	transform.local->position += speed * vec3(0.2);
+	transform.local->rotation += speed * vec3(10);
 }

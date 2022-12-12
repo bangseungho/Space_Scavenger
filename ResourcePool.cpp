@@ -56,3 +56,18 @@ void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, float _Duration
 
 	distance_Min = distance_Max = 10;	// юс╫ц
 }
+
+template<class ROS>
+void ResourcePool<ROS>::CheckDistance()
+{
+	for (int i = 0; i < maxCount; i++)
+	{
+		if (!pool[i].ActiveSelf())
+			continue;
+
+		float dis = length(target_Transform->local->position - pool[i].transform.local->position);
+
+		if (dis > 100)
+			pool[i].SetActive(false);
+	}
+}

@@ -27,6 +27,7 @@ public:
 
 private:
 	void Dragged();
+	void MoveMent();
 
 public:
 	Collider collider;

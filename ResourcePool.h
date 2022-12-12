@@ -6,7 +6,7 @@ template <class ROS>
 class ResourcePool : public Object
 {
 public:
-	ResourcePool() {};
+	ResourcePool(){};
 	ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
 	~ResourcePool();
 
@@ -16,6 +16,9 @@ public:
 
 public:
 	void InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
+
+private:
+	void CheckDistance();
 
 public:
 	Transform* target_Transform;
