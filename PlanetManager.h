@@ -1,5 +1,6 @@
 #pragma once
 #include "Planet.h"
+#include "Star.h"
 
 class PlanetManager : public Object
 {
@@ -10,10 +11,12 @@ public:
 public:
 
 
-private:
+private: // Planet
 	Planet earth{"Earth.obj"};
 	Planet moon{"Moon.obj"};
 	Planet saturn{"Saturn.obj"};
-	Planet sun{"Sun.obj"};
+
+private: //Star
+	Star sun{"Sun.obj"};
 };
 

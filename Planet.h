@@ -1,12 +1,9 @@
 #pragma once
-#include "Light.h"
+#include "Render.h"
 class Planet : public Object, public Mesh
 {
 public:
 	Planet(string objName);
 	~Planet();
-
-private:
-	Light light;
 };
 

@@ -71,7 +71,7 @@ void Resource::OnCollision()
 		if (!Collider::OBBCollision(collider, *other))
 			continue;
 
-		if (other->tag == "Player" && level == 1)
+		if (other->tag == "Player" && level <= 1)
 		{
 			SetActive(false);
 		}

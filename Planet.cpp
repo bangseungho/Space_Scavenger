@@ -7,7 +7,6 @@ Planet::Planet(string objName) : Mesh(this)
 	obj = new OBJ;
 	obj->ReadObj("Obj/Planet/", objName);
 
-	light.shape.SetActive(false);
 	Render::objectRender->AddObject(this);
 }
 

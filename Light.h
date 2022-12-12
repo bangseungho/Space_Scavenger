@@ -2,7 +2,7 @@
 #include "Sphere.h"
 #include "Shader.h"
 
-class Light : public Object
+class Light : public Sphere
 {
 public:
 	static Shader* lightShader;
@@ -24,10 +24,10 @@ public:
 	void Update();
 
 public:
-	Color color;
-	Transform transform;
+	//Color color;
+	//Transform transform;
 
-	Sphere shape;
+	//Sphere shape;
 private:
 	int light_ID;
 private:

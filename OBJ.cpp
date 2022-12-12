@@ -47,7 +47,7 @@ void OBJ::ReadObj(string path, string objFileName)
 		else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
 		else if (strcmp(lineHeader, "vn") == 0) PushNormal(obj);
 		else if (strcmp(lineHeader, "f") == 0) PushFaceIndex(obj);
-		else if (strcmp(lineHeader, "g") == 0) 
+		else if (strcmp(lineHeader, "g") == 0)
 		{
 			vBlock.groupCount++;
 			vBlock.usemtlName[vBlock.groupCount] = "NULL";
@@ -91,8 +91,9 @@ void OBJ::ReadMaterial(string mtlName)
 			//mBlock.push_back(mterial);
 			PushMTLName(mtl, usemtlName);
 		}
-// 모델링 프로그램에 따른 함수 사용
+		// 모델링 프로그램에 따른 함수 사용
 #ifdef _MAX
+		else if (strcmp("Ka", lineHeader) == 0) PushMTLKa(mtl, mBlock[usemtlName]);
 		else if (strcmp("Kd", lineHeader) == 0) PushMTLKd(mtl, mBlock[usemtlName]);
 		else if (strcmp("Ks", lineHeader) == 0) PushMTLKs(mtl, mBlock[usemtlName]);
 		else if (strcmp("Tr", lineHeader) == 0) PushMTLTr(mtl, mBlock[usemtlName]);

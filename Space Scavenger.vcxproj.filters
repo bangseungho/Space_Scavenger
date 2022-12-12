@@ -72,9 +72,6 @@
     <Filter Include="소스 파일\미완성">
       <UniqueIdentifier>{9df73862-055a-46f0-abe4-a02a3312e31e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FramWork\GameObject\Object">
-      <UniqueIdentifier>{381d173c-1359-45e7-add7-65d65cd421aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FramWork\GameObject\UI">
       <UniqueIdentifier>{afd38a50-bf1f-4148-b3e1-99b9d661c57d}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,9 @@
     </Filter>
     <Filter Include="Object\Player\UI">
       <UniqueIdentifier>{a629f2a5-ad02-4109-bb8d-4bf33d1dce62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FramWork\GameObject\Object">
+      <UniqueIdentifier>{8b154d24-5a63-4aef-8835-450b3fb94fb0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -155,17 +155,8 @@
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일\미완성</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClCompile>
     <ClCompile Include="CubeMap.cpp">
       <Filter>FramWork\GameObject\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>FramWork\GameObject\Default</Filter>
@@ -188,9 +179,6 @@
     <ClCompile Include="UIMesh.cpp">
       <Filter>FramWork\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClCompile>
     <ClCompile Include="ChatBox.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -208,9 +196,6 @@
     </ClCompile>
     <ClCompile Include="Planet.cpp">
       <Filter>Object\Planet</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
     <ClCompile Include="PlanetManager.cpp">
       <Filter>Object\Planet</Filter>
@@ -235,6 +220,24 @@
     </ClCompile>
     <ClCompile Include="Emerald.cpp">
       <Filter>Object\Resource\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,17 +304,8 @@
     <ClInclude Include="Sound.h">
       <Filter>소스 파일\미완성</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClInclude>
     <ClInclude Include="CubeMap.h">
       <Filter>FramWork\GameObject\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>FramWork\GameObject\Default</Filter>
@@ -334,9 +328,6 @@
     <ClInclude Include="UIMesh.h">
       <Filter>FramWork\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClInclude>
     <ClInclude Include="ChatBox.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -351,9 +342,6 @@
     </ClInclude>
     <ClInclude Include="Planet.h">
       <Filter>Object\Planet</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
     <ClInclude Include="PlanetManager.h">
       <Filter>Object\Planet</Filter>
@@ -377,6 +365,22 @@
     <ClInclude Include="Emerald.h">
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>FramWork\GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

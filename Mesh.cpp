@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+Shader* Mesh::objectShader = nullptr;
 unsigned int Mesh::vertexLocation;
 unsigned int Mesh::uvLoaction;
 unsigned int Mesh::normalLocation;
@@ -12,8 +13,30 @@ unsigned int Mesh::KdLocation;
 unsigned int Mesh::KsLocation;
 unsigned int Mesh::dLocation;
 
+unsigned int Mesh::lightTypeIndexLocation;
+
 Mesh::Mesh(Object* obj) : object(obj)
 {
+	if (objectShader == nullptr)
+	{
+		objectShader = Shader::allProgram.find("Object")->second;
+		vertexLocation = glGetAttribLocation(objectShader->program, "vPos");
+		uvLoaction = glGetAttribLocation(objectShader->program, "vUV");
+		normalLocation = glGetAttribLocation(objectShader->program, "vNormal");
+
+		modelLocation = glGetUniformLocation(objectShader->program, "modelTransform");
+		vColorLocation = glGetUniformLocation(objectShader->program, "vColor");
+
+		KaLocation = glGetUniformLocation(objectShader->program, "Ka");
+		KdLocation = glGetUniformLocation(objectShader->program, "Kd");
+		KsLocation = glGetUniformLocation(objectShader->program, "Ks");
+		dLocation = glGetUniformLocation(objectShader->program, "d");
+
+		lightTypeIndexLocation = glGetUniformLocation(objectShader->program, "lightTypeIndex");
+	}
+
+	lightTypeIndex = 0;
+
 	allMesh.push_back(this);
 	isDraw = true;
 }
@@ -78,6 +101,7 @@ void Mesh::MeshInit()
 
 void Mesh::Draw()
 {
+	glUniform1i(lightTypeIndexLocation, lightTypeIndex);
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(object->transform.model));
 	glUniform4f(vColorLocation, color.R, color.G, color.B, color.A);
 
@@ -94,7 +118,7 @@ void Mesh::Draw()
 				mBlock.d = 1.5f;
 			}
 			else  mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
-			glUniform3f(KdLocation, mBlock.Ka.x, mBlock.Ka.y, mBlock.Ka.z);
+			glUniform3f(KaLocation, mBlock.Ka.x, mBlock.Ka.y, mBlock.Ka.z);
 			glUniform3f(KdLocation, mBlock.Kd.x, mBlock.Kd.y, mBlock.Kd.z);
 			glUniform3f(KsLocation, mBlock.Ks.x, mBlock.Ks.y, mBlock.Ks.z);
 			glUniform1f(dLocation, mBlock.d);
@@ -102,8 +126,6 @@ void Mesh::Draw()
 
 		glBindVertexArray(VAO[i]);
 
-		//glPointSize(5.0f);
-		//glDrawArrays(GL_POINTS, 0, block.vertices->size());
 		glDrawElements(GL_TRIANGLES, obj->vBlock.vertexIndices[i].size() * 3, GL_UNSIGNED_SHORT, 0);
 	}
 	

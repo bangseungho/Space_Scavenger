@@ -55,15 +55,22 @@ void Collider::DrawBox()
 	if (!object->ActiveSelf())
 		return;
 
-	mat4 collideModel = scale(object->transform.model, vec3(1.00001));
+	glUniform1i(Mesh::lightTypeIndexLocation, 1);
+	glUniform3f(Mesh::KaLocation, 1, 1, 1);
+	glUniform3f(Mesh::KdLocation, 1, 1, 1);
+	glUniform3f(Mesh::KsLocation, 1, 1, 1);
+	glUniform1f(Mesh::dLocation, 1);
+
+	mat4 collideModel = scale(object->transform.model, size);
+	collideModel = scale(collideModel, vec3(1.00001));
 
 	glUniformMatrix4fv(Mesh::modelLocation, 1, GL_FALSE, value_ptr(collideModel));
 	glUniform4f(Mesh::vColorLocation, color.R, color.G, color.B, color.A);
 
 	glBindVertexArray(VAO);
 
-	//glPointSize(5.0f);
-	//glDrawArrays(GL_POINTS, 0, cBlock.vertices.size());
+	glPointSize(5.0f);
+	glDrawArrays(GL_POINTS, 0, obj->vBlock.vertexIndices[0].size());
 	glDrawElements(GL_TRIANGLES, obj->vBlock.vertexIndices[0].size() * 3, GL_UNSIGNED_SHORT, 0);
 }
 // Right Front Top 점을 정해주면 된다.
@@ -77,9 +84,9 @@ void Collider::SetBox_OBB(const vec3& d)
 		axisLen[i] = 0;
 	}
 
-	defaultAxis[0].x = axisLen[0] = d.x / 2;
-	defaultAxis[1].y = axisLen[1] = d.y / 2;
-	defaultAxis[2].z = axisLen[2] = d.z / 2;
+	defaultAxis[0].x = axisLen[0] = d.x / 2.0f;
+	defaultAxis[1].y = axisLen[1] = d.y / 2.0f;
+	defaultAxis[2].z = axisLen[2] = d.z / 2.0f;
 }
 
 
@@ -117,7 +124,8 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	bool isExitsParallelPair = false;
 
 	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
-	dis = b.object->transform.local->position - a.object->transform.local->position;
+	//dis = b.object->transform.local->position - a.object->transform.local->position;
+	dis = (b.object->transform.model - a.object->transform.model) * vec4(0, 0, 0, 1);
 
 	for (int n = 0; n < 3; n++)
 	{

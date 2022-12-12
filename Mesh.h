@@ -6,6 +6,7 @@
 class Mesh
 {
 public:
+	static Shader* objectShader;
 	static list<Mesh*> allMesh;
 	static unsigned int vertexLocation;
 	static unsigned int uvLoaction;
@@ -18,6 +19,8 @@ public:
 	static unsigned int KdLocation;	// 머테리얼 블록
 	static unsigned int KsLocation;	// 머테리얼 블록
 	static unsigned int dLocation;	// 머테리얼 블록
+
+	static unsigned int lightTypeIndexLocation;
 
 public:
 	Mesh(Object* obj);
@@ -33,6 +36,7 @@ public:
 	Object* object;
 
 	bool isDraw;
+	int lightTypeIndex;
 
 protected:
 	GLuint* VAO, *VBO, *EBO;
