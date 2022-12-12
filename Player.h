@@ -8,12 +8,17 @@
 #include "ResourcePool.cpp"
 #include "Iron.h"
 #include "Mineral.h"
+#include "Emerald.h"
+#include "Uranium.h"
 
 // Equipment
 #include "Harpoon.h"
 #include "LowGun.h"
 #include "Bullet.h"
 #include "Guidance.h"
+
+// UI
+#include "SpeedGauge.h"
 
 class UpgradeControl;
 
@@ -47,7 +52,7 @@ public:
 	map<string, Equipment*> equipment;
 
 public: // Upgrade 관련
-	float speed = 0.1f;
+	SpeedBlock speedBlock;
 
 private:
 	bool move_front;
@@ -60,7 +65,11 @@ private:
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
 	ResourcePool<Mineral> mineralPool;
+	//ResourcePool<Emerald> emeraldlPool;
+	//ResourcePool<Uranium> uraniumPool;
 
+private:	// UI
+	SpeedGauge speedGauge{ &speedBlock };
 };
 
 class UpgradeControl : public Object

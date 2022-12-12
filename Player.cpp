@@ -15,6 +15,11 @@ Player::Player() : Mesh(this)
 	}
 	obj = _Obj;
 
+	// Speed
+	speedBlock.current = 0;
+	speedBlock.max = 10;
+	speedBlock.accelerat = 1;
+
 	// Tranform
 	transform.local->scale *= 0.001;
 
@@ -29,6 +34,8 @@ Player::Player() : Mesh(this)
 	// Resource Init
 	ironPool.InitPool(5, 1, 1.0f, &transform);
 	mineralPool.InitPool(5, 1, 1.0f, &transform);
+	//emeraldlPool.InitPool(5, 1, 1.0f, &transform);
+	//uraniumPool.InitPool(5, 1, 1.0f, &transform);
 
 	// Equipment Init
 	equipment["Harpoon"] = new Harpoon;
@@ -70,7 +77,8 @@ void Player::Update()
 
 void Player::Handle_Event(unsigned char key)
 {
-	float frameSpeed = speed * FrameTime::oneFrame;
+	float frameSpeed = speedBlock.current * FrameTime::oneFrame;
+	LowGun* lowGun;
 
 	switch (key)
 	{
@@ -81,13 +89,11 @@ void Player::Handle_Event(unsigned char key)
 		move_back = true;
 		break;
 	case 'r':
-		dynamic_cast<LowGun*>(equipment.find("LowGun")->second)->ReLoad();
-		//if (equipment->GetType() == EqType::LOWGUN) {
-		//	dynamic_cast<LowGun*>(equipment)->ReLoad();
-		//	return;
-		//};
+		lowGun = reinterpret_cast<LowGun*>(equipment.find("LowGun")->second);
+		if (!lowGun)
+			return;
+		lowGun->ReLoad();
 		break;
-
 	case 'e':
 		upgrade->SetActive(!upgrade->ActiveSelf());
 		break;
@@ -99,21 +105,15 @@ void Player::Handle_Event(int specialKey)
 	//Harpoon* _harpoon; LowGun* _lowgun;
 	switch (specialKey)
 	{
-	//case GLUT_KEY_CTRL_L:
-		//switch (equipment->GetType()) {
-		//case EqType::HARPOON:
-		//	if (equipment->GetState() == State::IDLE) {
-		//		if (_harpoon = dynamic_cast<Harpoon*>(equipment))
-		//			_harpoon->ChargingEnergy();
-		//	}
-		//	break;
-		//case EqType::LOWGUN:
-		//	if (_lowgun = dynamic_cast<LowGun*>(equipment)) {
-		//		int firedBulletNum = _lowgun->Fire(transform);
-		//		cout << "Fired Bulled Num : " << firedBulletNum << endl;
-		//	}
-		//	break;
-		//}
+	case GLUT_KEY_CTRL_L:
+		Harpoon* harpoon = reinterpret_cast<Harpoon*>(equipment.find("Harpoon")->second);
+		LowGun* lowGun = reinterpret_cast<LowGun*>(equipment.find("LowGun")->second);
+		Guidance* guidance = reinterpret_cast<Guidance*>(equipment.find("Guidance")->second);
+
+		if (harpoon->ActiveSelf())
+		{
+			harpoon->ChargingEnergy();
+		}
 	}
 }
 
@@ -135,10 +135,8 @@ void Player::Handle_Event_Up(int specialKeyUp)
 	switch (specialKeyUp)
 	{
 	case GLUT_KEY_CTRL_L:
-		//if (equipment->GetType() == EqType::HARPOON)
-		//{
-		//	dynamic_cast<Harpoon*>(equipment)->FinishCharging();
-		//}
+		Harpoon* harpoon = reinterpret_cast<Harpoon*>(equipment.find("Harpoon")->second);
+		harpoon->FinishCharging();
 		break;
 	}
 }
@@ -146,11 +144,16 @@ void Player::Handle_Event_Up(int specialKeyUp)
 void Player::MyTimer()
 {
 	if (move_front) {
-		transform.LookAt(-speed);
+		speedBlock.current += speedBlock.accelerat * FrameTime::oneFrame;
+		if (speedBlock.current > speedBlock.max)
+			speedBlock.current = speedBlock.max;
 	}
-	if (move_back) {
-		transform.LookAt(speed);
+	else if (move_back) {
+		speedBlock.current -= speedBlock.accelerat* FrameTime::oneFrame;
+		if (speedBlock.current < 0)
+			speedBlock.current = 0;
 	}
+	transform.LookAt(speedBlock.current);
 }
 
 void Player::OnCollision()
