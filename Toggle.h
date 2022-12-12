@@ -37,6 +37,7 @@ private:
 	bool CheckInMouse();
 
 public:
+	Color color;
 	bool isToggle;
 
 private:

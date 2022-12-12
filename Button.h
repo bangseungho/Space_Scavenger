@@ -51,6 +51,7 @@ private:
 	void CheckClick();
 
 public:
+	Color color;
 	bool isClick;
 private:
 	ButtonDefualt ui_Defualt;

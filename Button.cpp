@@ -45,6 +45,9 @@ void Button::Init()
 
 void Button::Update()
 {
+	ui_Defualt.color = color;
+	ui_OnMouse.color = color;
+	ui_Click.color = color;
 	CheckOnMouse();
 	CheckClick();
 }
@@ -84,9 +87,9 @@ void Button::CheckClick()
 
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
+		ui_Click.SetActive(false);
 		if (CheckInMouse())
 		{
-			ui_Click.SetActive(false);
 			isClick = true;
 		}
 	}

@@ -42,6 +42,8 @@ void Toggle::Init()
 
 void Toggle::Update()
 {
+	ui_UnMark.color = color;
+	ui_Mark.color = color;
 	if (!CheckInMouse())
 		return;
 
