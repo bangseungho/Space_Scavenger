@@ -70,12 +70,14 @@ public:
 	~UpgradeControl();
 	
 public:
+	void Enable();
+	void Disable();
 	void Update();
 
 public:
 	Player* player;
 
 private:
-	//BackGround background{ "UI/", "Frame.png"};
+	BackGround background{ "UI/", "Frame.png"};
 	map<string, Button> upgradeButtons;
 };

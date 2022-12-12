@@ -10,12 +10,23 @@ UpgradeControl::UpgradeControl(Player* _Player) : player(_Player)
 UpgradeControl::~UpgradeControl()
 {
 }
+void UpgradeControl::Enable()
+{
+	for (auto& button : upgradeButtons)
+		button.second.SetActive(true);
+	background.SetActive(true);
+}
+void UpgradeControl::Disable()
+{
+	for (auto& button : upgradeButtons)
+		button.second.SetActive(false);
+	background.SetActive(false);
+}
 void UpgradeControl::Update()
 {
 	if (upgradeButtons.find("Speed")->second.isClick)
 	{
 		player->speed += 1;
-		cout << "Call" << endl;
 	}
 	else if (upgradeButtons.find("GuidanceDistance")->second.isClick)
 	{

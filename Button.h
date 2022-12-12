@@ -40,16 +40,18 @@ public:
 	~Button();
 
 public:
+	void Enable();
+	void Disable();
 	void Init();
 	void Update();
 
-public:
+private:
+	bool CheckInMouse();
 	void CheckOnMouse();
 	void CheckClick();
-	bool CheckInMouse();
+
 public:
 	bool isClick;
-	bool isToggle;
 private:
 	ButtonDefualt ui_Defualt;
 	ButtonOnMouse ui_OnMouse;

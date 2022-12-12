@@ -215,6 +215,9 @@
     <ClCompile Include="PlanetManager.cpp">
       <Filter>Object\Planet</Filter>
     </ClCompile>
+    <ClCompile Include="Toggle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -340,6 +343,7 @@
     <ClInclude Include="PlanetManager.h">
       <Filter>Object\Planet</Filter>
     </ClInclude>
+    <ClInclude Include="Toggle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

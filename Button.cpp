@@ -4,7 +4,6 @@ Button::Button(string path)
 	name = "Button";
 
 	isClick = false;
-	isToggle = false;
 
 	ui_Defualt.image_file = path + "Default.png";
 	ui_OnMouse.image_file = path + "OnMouse.png";
@@ -13,6 +12,19 @@ Button::Button(string path)
 
 Button::~Button()
 {
+}
+
+void Button::Enable()
+{
+	ui_Defualt.SetActive(true);
+}
+
+void Button::Disable()
+{
+	ui_Defualt.SetActive(false);
+	ui_OnMouse.SetActive(false);
+	ui_Click.SetActive(false);
+	isClick = false;
 }
 
 void Button::Init()

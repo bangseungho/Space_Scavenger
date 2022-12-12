@@ -16,8 +16,6 @@ void GameManager::Init()
 	isMouseRight = false;
 
 	Camera::mainCamera->target_Pos = &player.transform;
-	light.transform.local->position.x = 1;
-	l2.transform.local->position.x = -10;
 
 	bgm.Load("Sound/bgm.mp3", true);
 	effect.Load("Sound/ItemEarn.wav", false);

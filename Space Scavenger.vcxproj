@@ -179,6 +179,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Toggle.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIMesh.cpp" />
     <ClCompile Include="UpgradeControl.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Toggle.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIMesh.h" />
     <ClInclude Include="Vector_AFX.h" />
