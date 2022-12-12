@@ -152,10 +152,13 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMap.cpp" />
+    <ClCompile Include="Emerald.cpp" />
     <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Guidance.cpp" />
     <ClCompile Include="Harpoon.cpp" />
     <ClCompile Include="Iron.cpp" />
@@ -177,12 +180,14 @@
     <ClCompile Include="ResourcePool.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpeedGauge.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Toggle.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIMesh.cpp" />
     <ClCompile Include="UpgradeControl.cpp" />
+    <ClCompile Include="Uranium.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
     <ClCompile Include="Xlsx.cpp" />
   </ItemGroup>
@@ -197,10 +202,13 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="Emerald.h" />
     <ClInclude Include="Equipment.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="FrameTime.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Gold.h" />
     <ClInclude Include="Guidance.h" />
     <ClInclude Include="Harpoon.h" />
     <ClInclude Include="Iron.h" />
@@ -221,12 +229,14 @@
     <ClInclude Include="ResourcePool.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SpeedGauge.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Toggle.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIMesh.h" />
+    <ClInclude Include="Uranium.h" />
     <ClInclude Include="Vector_AFX.h" />
     <ClInclude Include="Xlsx.h" />
   </ItemGroup>

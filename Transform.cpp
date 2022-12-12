@@ -59,7 +59,7 @@ void Transform::CurrentFront()
 void Transform::LookAt(float speed)
 {
 	vec3 pos = model * vec4(0, 0, 0, 1);
-	vec3 dir = translate(model, vec3(0, 0, -1)) * vec4(0, 0, 0, 1);
+	vec3 dir = translate(model, vec3(0, 0, 1)) * vec4(0, 0, 0, 1);
 	vec3 norm = normalize(dir - pos);
 
 	local->position += norm * FrameTime::oneFrame * speed;

@@ -29,8 +29,8 @@ public:
 	PlanetManager planetManager;
 public:
 	Player player;
-	Map map;
-	ChatBox chat_box;
+	//Map map;
+	//ChatBox chat_box;
 	vector<Sound*> all_sound;
 	//Gauge gauge;
 

@@ -47,7 +47,11 @@ void OBJ::ReadObj(string path, string objFileName)
 		else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
 		else if (strcmp(lineHeader, "vn") == 0) PushNormal(obj);
 		else if (strcmp(lineHeader, "f") == 0) PushFaceIndex(obj);
-		else if (strcmp(lineHeader, "g") == 0) vBlock.groupCount++;
+		else if (strcmp(lineHeader, "g") == 0) 
+		{
+			vBlock.groupCount++;
+			vBlock.usemtlName[vBlock.groupCount] = "NULL";
+		}
 		else if (strcmp(lineHeader, "usemtl") == 0) PushusemtlName(obj);
 		memset(lineHeader, '\0', sizeof(lineHeader));
 	}

@@ -83,14 +83,17 @@ void GameManager::Mouse(int button, int state, int x, int y)
 
 void GameManager::MouseWheel(int wheel, int direction, int x, int y)
 {
-	if (direction < 1)
+	if (direction < 0)
 	{
-		cout << "Zoom out" << endl;
+		//cout << "Zoom out" << endl;
 		Camera::mainCamera->LookAtView(1);
 	}
 	else
 	{
-		cout << "Zoom in " << endl;
+		vec3 cameraPos = (Camera::mainCamera->transform.local->position + Camera::mainCamera->cameraPos) * Camera::mainCamera->target_Pos->local->scale;
+		if (length(cameraPos - Camera::mainCamera->cameraDirection) < 7)
+			return;
+		//cout << "Zoom in " << endl;
 		Camera::mainCamera->LookAtView(-1);
 	}
 }

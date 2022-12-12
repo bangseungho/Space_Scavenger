@@ -85,7 +85,15 @@ void Mesh::Draw()
 	{
 		if (obj->isOnMTL)
 		{
-			MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
+			MaterialBlock mBlock;
+			if (obj->vBlock.usemtlName[i] == "NULL")
+			{
+				mBlock.Ka = vec3(1);
+				mBlock.Kd = vec3(1);
+				mBlock.Ks = vec3(1);
+				mBlock.d = 1.5f;
+			}
+			else  mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
 			glUniform3f(KdLocation, mBlock.Ka.x, mBlock.Ka.y, mBlock.Ka.z);
 			glUniform3f(KdLocation, mBlock.Kd.x, mBlock.Kd.y, mBlock.Kd.z);
 			glUniform3f(KsLocation, mBlock.Ks.x, mBlock.Ks.y, mBlock.Ks.z);
