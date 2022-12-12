@@ -90,6 +90,9 @@
     <Filter Include="FramWork\GameObject\Object">
       <UniqueIdentifier>{8b154d24-5a63-4aef-8835-450b3fb94fb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\obj\Planet">
+      <UniqueIdentifier>{f702dae2-9d78-4a55-9a70-1897f8799d1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -429,6 +432,9 @@
     </Object>
     <Object Include="Obj\Default\Cube.obj">
       <Filter>리소스 파일\obj\Default</Filter>
+    </Object>
+    <Object Include="Obj\Planet\Earth.obj">
+      <Filter>리소스 파일\obj\Planet</Filter>
     </Object>
   </ItemGroup>
   <ItemGroup>

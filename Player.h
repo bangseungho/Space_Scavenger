@@ -10,6 +10,7 @@
 #include "Mineral.h"
 #include "Emerald.h"
 #include "Uranium.h"
+#include "Gold.h"
 
 // Equipment
 #include "Harpoon.h"
@@ -64,8 +65,9 @@ private:
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
+	ResourcePool<Gold> goldPool;
 	ResourcePool<Mineral> mineralPool;
-	//ResourcePool<Emerald> emeraldlPool;
+	ResourcePool<Emerald> emeraldlPool;
 	//ResourcePool<Uranium> uraniumPool;
 
 private:	// UI

@@ -18,7 +18,6 @@ Resource::Resource() : Mesh(this)
 
 	collider.tag = "Resource";
 	collider.object = this;
-	transform.local->scale *= 0.01;
 
 	amount = RandomInt(1, 3);
 	velocity = vec3(RandomFloat(-1,1), RandomFloat(-1, 1), RandomFloat(-1, 1));

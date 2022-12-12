@@ -86,7 +86,7 @@ void Camera::Draw()
 
 		view = lookAt(pos, dir, up);
 
-		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 1000.0f);
+		projection = perspective(radians(45.0f), static_cast<float>(aspect_ratio), 0.1f, 100000.0f);
 	}
 
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(view));

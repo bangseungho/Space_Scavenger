@@ -33,8 +33,9 @@ Player::Player() : Mesh(this)
 
 	// Resource Init
 	ironPool.InitPool(5, 1, 1.0f, &transform);
+	goldPool.InitPool(5, 1, 1.0f, &transform);
 	mineralPool.InitPool(5, 1, 1.0f, &transform);
-	//emeraldlPool.InitPool(5, 1, 1.0f, &transform);
+	emeraldlPool.InitPool(5, 1, 1.0f, &transform);
 	//uraniumPool.InitPool(5, 1, 1.0f, &transform);
 
 	// Equipment Init
