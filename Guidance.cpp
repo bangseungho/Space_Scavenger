@@ -10,6 +10,8 @@ Guidance::Guidance()
 	}
 
 	serchDistnace = 10;
+
+	sound_Dragged.Load("Sound/Player/Dragged.mp3");
 }
 
 Guidance::~Guidance()
@@ -25,6 +27,8 @@ void Guidance::SerchResource()
 {
 	if (isDragged)	//이미 선택한 자원이 있으면 리턴
 		return;
+
+	sound_Dragged.Stop();
 
 	vec3 myPos = transform.model * vec4(0, 0, 0, 1);
 	for (auto& other : Collider::allCollider)
@@ -51,6 +55,7 @@ void Guidance::SerchResource()
 		{
 			resource->OnDragged(&transform, 10);
 			isDragged = true;
+			sound_Dragged.RepeatPlay();
 		}
 		else
 		{
