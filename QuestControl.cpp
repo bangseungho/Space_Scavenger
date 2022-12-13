@@ -2,8 +2,12 @@
 
 QuestControl::QuestControl(Player* _Player) : player(_Player)
 {
-	seccseButton[L"작살을 얻자"].name += " Quest 작살을 얻자";
-	seccseButton[L"작살을 얻자"].transform.local->position.y = -200;
+	nowToggle = nullptr;
+
+	seccseButton.transform.local->position.y = -200;
+	questToggles[L"작살을 얻자"] = new Toggle("UI/Toggle/Window/");
+	questToggles[L"작살을 얻자"]->name += " 작살을 얻자";
+	//questToggles[L"작살을 얻자"].transform.local->position.y = -200;
 }
 
 QuestControl::~QuestControl()
@@ -12,23 +16,39 @@ QuestControl::~QuestControl()
 
 void QuestControl::Enable()
 {
-	for (auto& button : seccseButton)
-		button.second.SetActive(true);
+	seccseButton.SetActive(true);
+	questToggles
 }
 
 void QuestControl::Disable()
 {
-	for (auto& button : seccseButton)
-		button.second.SetActive(false);
+	seccseButton.SetActive(false);
 }
 
 void QuestControl::Update()
 {
-	for (auto& button : seccseButton)
+	for (auto& toggle : questToggles)
 	{
-		if (!button.second.isClick)
+		if (!toggle.second->ActiveSelf())
 			continue;
-		ClickQuestSeccse(button.first);
+
+		if (toggle.second == nowToggle)
+			continue;
+
+		if (nowToggle != nullptr)
+			nowToggle->ToggleClick();
+
+		nowToggle = toggle.second;
+	}
+
+	if (!seccseButton.isClick)
+		return;
+
+	for (auto& toggle : questToggles)
+	{
+		if (!toggle.second->isToggle)
+			continue;
+		ClickQuestSeccse(toggle.first);
 		return;
 	}
 }

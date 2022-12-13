@@ -115,5 +115,7 @@ private:
 private:
 	Player* player;
 	Quest quest;
-	map<wstring, Button> seccseButton;
+	Button seccseButton;
+	Toggle* nowToggle;
+	map<wstring, Toggle*> questToggles;
 };
