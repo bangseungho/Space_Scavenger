@@ -1,4 +1,6 @@
 #pragma once
 #include "PlayerData.h"
+#include "ResourceData.h"
 
-PlayerData p;
+PlayerData playerdata;
+ResourceData resourcedata;
