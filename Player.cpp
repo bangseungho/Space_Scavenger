@@ -30,6 +30,7 @@ Player::Player() : Mesh(this)
 
 	// Object
 	upgrade = new UpgradeControl(this);
+	questControl = new QuestControl(this);
 
 	// Resource Init
 	ironPool.InitPool(5, 1, 1.0f, &transform);
@@ -45,15 +46,16 @@ Player::Player() : Mesh(this)
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	equipment.find("Harpoon")->second->SetActive(true);
+	//equipment.find("Harpoon")->second->SetActive(true);
 	
+	// Data Setting
+	GetDate();
 	Render::objectRender->AddObject(this);
 }
 
 Player::~Player()
 {
 }
-
 
 void Player::Init()
 {
@@ -95,7 +97,12 @@ void Player::Handle_Event(unsigned char key)
 			return;
 		lowGun->ReLoad();
 		break;
+	case 'q':
+		questControl->SetActive(!questControl->ActiveSelf());
+		upgrade->SetActive(false);
+		break;
 	case 'e':
+		questControl->SetActive(false);
 		upgrade->SetActive(!upgrade->ActiveSelf());
 		break;
 	}
@@ -209,10 +216,6 @@ mat4& Player::SetMatrix()
 	return transform.model;
 }
 
-void Player::QuestHandle()
-{
-}
-
 void Player::FaceMove(const vec2& diffPos)
 {
 	vec2 speed = vec2(15, 10);
@@ -220,4 +223,14 @@ void Player::FaceMove(const vec2& diffPos)
 	transform.local->rotation.y -= fMoveSpeed.x;
 	transform.local->rotation.x -= fMoveSpeed.y;
 	transform.CurrentFront();
+}
+
+void Player::GetDate()
+{
+	PlayerData* data = PlayerData::Instance;
+	int count = data->sheet->readNum(1, 0);
+	for (int i = 0; i < count; i++)
+	{
+		resourceCount[data->sheet->readStr(i + 5, 2)] = data->sheet->readNum(i + 5, 3);
+	}
 }

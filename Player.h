@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerData.h"
 #include "Sound.h"
 #include "Button.h"
 #include "Quest.h"
@@ -21,6 +22,7 @@
 // UI
 #include "SpeedGauge.h"
 
+class QuestControl;
 class UpgradeControl;
 
 class Player : public Object, public Mesh
@@ -45,8 +47,10 @@ public:
 
 public:
 	mat4& SetMatrix();
-	void QuestHandle();
 	void FaceMove(const vec2& diffPos);
+
+private:
+	void GetDate();
 
 public:
 	Collider collider;
@@ -54,6 +58,7 @@ public:
 
 public: // Upgrade 관련
 	SpeedBlock speedBlock;
+	map<wstring, int> resourceCount;
 
 private:
 	bool move_front;
@@ -61,7 +66,7 @@ private:
 
 private:
 	UpgradeControl* upgrade;
-	Quest quset;
+	QuestControl* questControl;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
 	ResourcePool<Iron> ironPool;
@@ -91,4 +96,24 @@ public:
 private:
 	BackGround background{ "UI/", "Frame.png"};
 	map<string, Button> upgradeButtons;
+};
+
+class QuestControl : public Object {
+public:
+	QuestControl(Player* _Player);
+	~QuestControl();
+
+public:
+	void Enable();
+	void Disable();
+	void Update();
+
+private:
+	void ClickQuestSeccse(wstring questName);
+	void QuestReward(QuestNode* node);
+
+private:
+	Player* player;
+	Quest quest;
+	map<wstring, Button> seccseButton;
 };
