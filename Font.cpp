@@ -1,29 +1,23 @@
 #include "Font.h"
 
-void Font::Init()
+Font::Font(string _Name) : Mesh(this)
 {
-//    HFONT   font;     // Windows Font ID
-//    HFONT   oldfont;  // Used For Good House Keeping
-//
-//    base = glGenLists(96);  // Storage For 96 Characters
-//
-//    font = CreateFont(-size, // Height Of Fonts
-//        0,              // Width Of Font
-//        0,              // Angle Of Escapement
-//        0,              // Orientation Angle
-//        FW_BOLD,        // Font Weight
-//        FALSE,          // Italic     (취소선)
-//        FALSE,          // Underline (밑줄)
-//        FALSE,          // Strikeout (취소선)
-//        ANSI_CHARSET,   // Character Set Identifier
-//        OUT_TT_PRECIS,  // Output Precision
-//        CLIP_DEFAULT_PRECIS,        // Clipping Precision
-//        ANTIALIASED_QUALITY,        // Output Quality
-//        FF_DONTCARE | DEFAULT_PITCH,  // Family And Pitch
-//        fileName);         // Font Name
-//
-//    oldfont = (HFONT)SelectObject(hDC, font); // Selects The Font We Want
-//    wglUseFontBitmaps(hDC, 32, 96, base);     // Builds 96 Characters Starting At Character 32
-//    SelectObject(hDC, oldfont);               // Selects The Font We Want
-//    DeleteObject(font);
+	name = "Font";
+	text = "";
+
+	Render::fontRender->AddObject(this, _Name);
+}
+
+Font::~Font()
+{
+}
+
+void Font::Draw()
+{
+	vec2 pos = transform.model * vec4(0, 0, 0, 1);
+
+	glColor4f(color.R, color.G, color.B, color.A);
+	glRasterPos2f(pos.x, pos.y);
+
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str());
 }
