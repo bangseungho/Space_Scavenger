@@ -75,6 +75,23 @@ void Transform::LookAtTarget(const Transform& _Target, const float _Speed)
 	local->position += dir * FrameTime::oneFrame * _Speed;
 }
 
+void Transform::RotateAtTarget(const Transform& _Target, const float _Speed)
+{
+	// TODO	
+	// 다시 만들어야함
+	vec3 pos = (_Target.model - model) * vec4(0, 0, 0, 1);
+	if (length(pos) == 0)
+		return;
+	pos = normalize(pos);
+
+	vec3 theta;
+	theta.x = degrees(acos(pos.x));
+	theta.y = degrees(acos(pos.y));
+	theta.z = degrees(acos(pos.z));
+
+	local->rotation = theta;
+}
+
 TransformBlock::TransformBlock()
 {
 	pivot = vec3(0);

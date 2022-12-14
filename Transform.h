@@ -28,6 +28,7 @@ public:
 	void CurrentFront();
 	void LookAt(float speed);
 	void LookAtTarget(const Transform& _Target, const float _Speed);
+	void RotateAtTarget(const Transform& _Target, const float _Speed);
 	void Info();
 
 public:
