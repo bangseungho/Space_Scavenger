@@ -10,13 +10,17 @@ public:
 	QuestNode();
 	~QuestNode();
 public:
-	const wchar_t* name;
-	const wchar_t* explain;
-	const wchar_t* reward;
-
-	int collectCount;
-
 	bool isSeccse;
+	wstring name;
+	wstring explain;
+	wstring reward;
+
+	struct NeedItem {
+		wstring name;
+		int count;
+	};
+
+	vector<NeedItem> needItems;
 };
 
 class Quest : public Object
@@ -29,6 +33,6 @@ public:
 	~Quest();
 
 public:
-	vector<QuestNode*> nodeList;
+	map<wstring, QuestNode*> nodeList;
 };
 

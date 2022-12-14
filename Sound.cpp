@@ -5,11 +5,14 @@ float Sound::musicVolum = 1;
 
 Sound::Sound()
 {
+	SetActive(false);
 	if (SOUND_SYSTEM == nullptr)
 	{
+		SetActive(true);
 		FMOD_System_Create(&SOUND_SYSTEM);
 		FMOD_System_Init(SOUND_SYSTEM, 10, FMOD_INIT_NORMAL, NULL);
 	}
+	FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
 }
 
 Sound::~Sound()
@@ -26,24 +29,33 @@ void Sound::Load(string _FileName, bool _IsLoop)
 {
 	fileName = _FileName;
 	isLoop = _IsLoop;
+
+	if (isLoop) FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_LOOP_NORMAL, 0, &sound);
+	else FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_DEFAULT, 0, &sound);
 }
 
 void Sound::Play()
 {
-	//FMOD_Channel_Stop(MUSIC_CHANNER);
-
-	if (false == isLoop)
+	if (isLoop)
 	{
+		isLoop = false;
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_DEFAULT, 0, &sound);
-		FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
 	}
-	else if (true == isLoop)
+	
+	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
+	FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
+}
+
+void Sound::RepeatPlay()
+{
+	if (!isLoop)
 	{
+		isLoop = true;
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_LOOP_NORMAL, 0, &sound);
-		FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
 	}
+
+	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
+	FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
 }
 
 void Sound::Stop()

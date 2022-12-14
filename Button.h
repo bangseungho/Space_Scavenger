@@ -1,5 +1,7 @@
 #pragma once
 #include "Render.h"
+#include "Sound.h"
+#include "Font.h"
 
 #pragma region Image
 class ButtonDefualt : public Object, public UIMesh
@@ -51,12 +53,16 @@ private:
 	void CheckClick();
 
 public:
+	Font font;
 	Color color;
 	bool isClick;
 private:
 	ButtonDefualt ui_Defualt;
 	ButtonOnMouse ui_OnMouse;
 	ButtonClick ui_Click;
+
+	Sound sound_OnMouse;
+	Sound sound_Click;
 
 	int width;
 	int height;

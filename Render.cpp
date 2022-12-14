@@ -2,6 +2,7 @@
 
 Render* Render::objectRender = nullptr;
 Render* Render::uiRender = nullptr;
+Render* Render::fontRender = nullptr;
 
 Render::Render()
 {
@@ -52,6 +53,28 @@ void Render::UIDraw()
 			uiMesh->Draw();
 		}
 	}
+}
+
+void Render::FontDraw()
+{
+	for (auto& layer : renderList)
+	{
+		for (auto& font : layer.second)
+		{
+			if (!font->isDraw)
+				continue;
+
+			if (!font->object->ActiveSelf())
+				continue;
+
+			font->Draw();
+		}
+	}
+}
+
+void Render::SetLayou(string layou[])
+{
+
 }
 
 void Render::AddObject(Mesh* mesh, string layoutName)

@@ -8,6 +8,9 @@ Button::Button(string path)
 	ui_Defualt.image_file = path + "Default.png";
 	ui_OnMouse.image_file = path + "OnMouse.png";
 	ui_Click.image_file = path + "Click.png";
+
+	sound_Click.Load("Sound/Button/Default/Click.wav");
+	sound_OnMouse.Load("Sound/Button/Default/OnMouse.wav");
 }
 
 Button::~Button()
@@ -57,12 +60,16 @@ void Button::CheckOnMouse()
 	if (ui_Click.ActiveSelf())
 		return;
 
-	ui_Defualt.SetActive(true);
-	ui_OnMouse.SetActive(false);
-	ui_Click.SetActive(false);
-
 	if (!CheckInMouse())
+	{
+		ui_Defualt.SetActive(true);
+		ui_OnMouse.SetActive(false);
+		ui_Click.SetActive(false);
 		return;
+	}
+
+	if (!ui_OnMouse.ActiveSelf())
+		sound_OnMouse.Play();
 
 	ui_Defualt.SetActive(false);
 	ui_OnMouse.SetActive(true);
@@ -80,6 +87,7 @@ void Button::CheckClick()
 		if (!CheckInMouse())
 			return;
 
+		sound_Click.Play();
 		ui_Defualt.SetActive(false);
 		ui_OnMouse.SetActive(false);
 		ui_Click.SetActive(true);

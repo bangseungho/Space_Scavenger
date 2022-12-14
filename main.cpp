@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Data.h"
 #include "CubeMap.h"
 
 void drawScene();

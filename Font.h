@@ -1,17 +1,16 @@
 #pragma once
 #include "Render.h"
-class Font : public Object
+class Font : public Object, public Mesh
 {
 public:
-	void Init();
+	Font() : Font("Default") {};
+	Font(string _Name);
+	~Font();
 
 public:
-	int size;
-	string fileName;
-private:
-	HDC hDC;              // Private GDI Device Context
-	HGLRC hRC;            // Permanent Rendering Context
-	HWND hWnd;            // Holds Our Window Handle
-	HINSTANCE hInstance;
-	GLuint base;
+	void MeshInit() {};
+	void Draw();
+	
+public:
+	string text;
 };
