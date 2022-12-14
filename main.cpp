@@ -26,6 +26,7 @@ list<Light*> Light::allLight;
 
 Shader objectShader("Object");
 Shader uiShader("UI");
+Shader fontShader("Font");
 
 Camera* fristCamera;
 Camera camera;
@@ -52,13 +53,25 @@ void InitShader()
 	uiShader.CreatVertexShader("GuiVertex.glsl");
 	uiShader.CreatFragmentShader("GuiFragment.glsl");
 	uiShader.CreatProgram();
+
+	fontShader.CreatVertexShader("Font_Vertex.glsl");
+	fontShader.CreatFragmentShader("Font_Fragment.glsl");
+	fontShader.CreatProgram();
 }
 
-void Init()
+void InitRender()
 {
 	Render::objectRender = &objectRender;
 	Render::uiRender = &uiRender;
 	Render::fontRender = &fontRender;
+
+	string uiLayer[] = { "Default" , "Resource", "Plaayer", "Equipment" };
+	uiRender.SetLayer(*uiLayer);
+}
+
+void Init()
+{
+	InitRender();
 
 	FrameTime::currentTime = clock();
 
@@ -205,6 +218,7 @@ void drawScene()
 	}
 
 	{	// Font
+		glUseProgram(fontShader.program);
 		fontRender.FontDraw();
 	}
 
