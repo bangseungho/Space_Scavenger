@@ -5,13 +5,35 @@
 #include "BackGround.h"
 #include "ResourceData.h"
 
+class Resource;
+
 class Guidance : public Equipment
 {
+	class Wave : public Object, public Mesh
+	{
+	public:
+		static OBJ* _Obj;
+	public:
+		Wave();
+		~Wave();
+	public:
+		void Disable();
+		void Update();
+		mat4& SetMatrix();
+	public:
+		Resource* resource;
+	};
+
+public:
+	static OBJ* _Obj;
 public:
 	Guidance();
 	~Guidance();
 
 public:
+	void Enable();
+	void Disable();
+	void Init();
 	void Update();
 
 public:
@@ -22,13 +44,14 @@ public:
 
 private:
 	Sound sound_Dragged;
+	Wave wave;
 };
 
-class GuidacnePopUp : public Object
+class GuidanceControl : public Object
 {
 public:
-	GuidacnePopUp(Guidance* _Guidance);
-	~GuidacnePopUp();
+	GuidanceControl(Guidance* _Guidance);
+	~GuidanceControl();
 
 public:
 	void Enable();
@@ -37,6 +60,6 @@ public:
 public:
 	Guidance* guidance;
 private:
-	//BackGround background;
-	map<string, Toggle> resourceToggles;
+	BackGround background{"UI/BackGround/", "GuidanceBackground.png"};
+	map<string, Toggle*> resourceToggles;
 };
