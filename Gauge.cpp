@@ -9,9 +9,13 @@ Gauge::Gauge() : UIMesh(this)
 	transform.local->scale -= 0.3;
 	transform.local->scale.x = 0;
 	transform.local->position.x += 0;
-	transform.local->position.y += 0.9;
+	transform.local->position.y = 0.9;
+
+	//transform.model *= vec4(0, 0.9, 0, 1); // bottom left
+
 
 	Render::uiRender->AddObject(this);
+
 }
 
 Gauge::~Gauge()

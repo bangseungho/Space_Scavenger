@@ -10,15 +10,17 @@ LowGun::LowGun()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Sphere.obj");
+		_Obj->ReadObj((char*)"Harpoon.obj");
 	}
 
 	fireSound.Load("Sound/fire_bullet.mp3", false);
 	loadSound.Load("Sound/load_bullet.mp3", false);
 
-	transform.local->scale = vec3(0.1);
-	transform.local->position.y += 3;
 	obj = _Obj;
+
+	transform.local->scale = vec3(2);
+	transform.local->position.y += 3;
+	transform.local->rotation.y = -90;
 	bulletNum = 10;
 
 	for (int i = 0; i < bulletNum; ++i) {

@@ -16,8 +16,8 @@ Player::Player() : Mesh(this)
 	obj = _Obj;
 
 	// Speed
-	speedBlock.current = 0;
-	speedBlock.max = 10;
+	speedBlock.current = 10;
+	speedBlock.max = 100;
 	speedBlock.accelerat = 1;
 
 	// Tranform
@@ -114,6 +114,11 @@ void Player::Handle_Event(int specialKey)
 		if (harpoon->ActiveSelf())
 		{
 			harpoon->ChargingEnergy();
+		}
+
+		if (lowGun->ActiveSelf())
+		{
+			lowGun->Fire(transform);
 		}
 	}
 }

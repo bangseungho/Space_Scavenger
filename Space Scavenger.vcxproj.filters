@@ -242,6 +242,9 @@
     <ClCompile Include="Star.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -384,6 +387,9 @@
       <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
     <ClInclude Include="Star.h" />
+    <ClInclude Include="Particle.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

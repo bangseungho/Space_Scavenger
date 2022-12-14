@@ -34,7 +34,6 @@ void Harpoon::Init()
 	chargedEnergy = 0;
 	speed = 100;
 	color.SetRandomColor();
-	transform.local->scale *= 0.5;
 }
 
 void Harpoon::Update()

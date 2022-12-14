@@ -25,6 +25,9 @@ Resource::Resource() : Mesh(this)
 	
 	draggedSpeed = 1;
 	isDragged = false;
+
+	particles = new Particle();
+
 	Render::objectRender->AddObject(this, "Resource");
 }
 
@@ -47,7 +50,6 @@ void Resource::Disable()
 
 void Resource::Init()
 {
-	
 }
 
 void Resource::Update()
@@ -78,6 +80,10 @@ void Resource::OnCollision()
 		if (other->tag == "Bullet")
 		{
 			other->object->SetActive(false);
+
+			//if (level > 1)
+			//	particles = new Particle();
+
 			if (level > 1) {
 				level -= 1;
 			}
