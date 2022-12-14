@@ -33,6 +33,8 @@ public:
 	void Init();
 	void Update();
 
+public:
+	void ToggleClick();
 private:
 	bool CheckInMouse();
 

@@ -93,27 +93,35 @@ void Camera::Draw()
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(projection));
 	glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 }
-void Camera::ProcessInput(int specialKey)
+
+mat4& Camera::SetMatrix()
 {
-	//float cameraSpeed = speed * FrameTime::oneFrame;
-	//switch (specialKey)
-	//{
-	//case GLUT_KEY_LEFT:
-	//	cameraPos -= glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
-	//	break;
-	//case GLUT_KEY_RIGHT:
-	//	cameraPos += glm::normalize(glm::cross(cameraDirection, cameraUp)) * cameraSpeed;
-	//	break;
-	//case GLUT_KEY_UP:
-	//	cameraPos += cameraSpeed * cameraDirection;
-	//	break;
-	//case GLUT_KEY_DOWN:
-	//	cameraPos -= cameraSpeed * cameraDirection;
-	//	break;
-	//}
+	mat4 localModel = mat4(1.0);
+	mat4 worldModel = mat4(1.0);
+
+	for (auto& world : transform.world)
+	{
+		//worldModel = translate(worldModel, world->pivot);
+		worldModel = translate(worldModel, world->position);
+		worldModel = rotate(worldModel, radians(world->rotation.y), vec3(0, 1.0, 0));
+		worldModel = rotate(worldModel, radians(world->rotation.x), vec3(1.0, 0, 0));
+		worldModel = rotate(worldModel, radians(world->rotation.z), vec3(0, 0, 1.0));
+		worldModel = scale(worldModel, world->scale);
+	}
+
+	localModel = translate(localModel, transform.local->pivot);
+	localModel = translate(localModel, transform.local->position);
+	localModel = rotate(localModel, radians(transform.local->rotation.y), vec3(0, 1.0, 0));
+	localModel = rotate(localModel, radians(transform.local->rotation.x), vec3(1.0, 0, 0));
+	localModel = rotate(localModel, radians(transform.local->rotation.z), vec3(0, 0, 1.0));
+	localModel = scale(localModel, transform.local->scale);
+
+	transform.localModel = localModel;
+	transform.worldModel = worldModel;
+	transform.model = worldModel * localModel;
+
+	return transform.model;
 }
-
-
 void Camera::Info()
 {
 	cout << "Camera : " << name << endl;

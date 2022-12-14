@@ -9,6 +9,7 @@ public:
 
 public:
 	void Init();
+	void Update();
 
 private:
 	Light light;

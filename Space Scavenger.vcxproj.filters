@@ -93,6 +93,15 @@
     <Filter Include="리소스 파일\obj\Planet">
       <UniqueIdentifier>{f702dae2-9d78-4a55-9a70-1897f8799d1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Star">
+      <UniqueIdentifier>{451b859c-7594-46bb-b9cf-55246ee326c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Equipment\Contain\Guidance">
+      <UniqueIdentifier>{7976f2c4-1c1f-472a-b90f-b184bd531564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Contain">
+      <UniqueIdentifier>{99a3b06e-5967-45ce-bb09-fa88245c47fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,9 +152,6 @@
     <ClCompile Include="Random.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
-    <ClCompile Include="Guidance.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
     <ClCompile Include="Harpoon.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
@@ -154,9 +160,6 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>소스 파일\미완성</Filter>
     </ClCompile>
     <ClCompile Include="CubeMap.cpp">
       <Filter>FramWork\GameObject\UI</Filter>
@@ -218,9 +221,6 @@
     <ClCompile Include="Uranium.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
-    <ClCompile Include="SpeedGauge.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Emerald.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
@@ -239,8 +239,32 @@
     <ClCompile Include="Collider.cpp">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
+    <ClCompile Include="SpeedGauge.cpp">
+      <Filter>Object\Player\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Star.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Object\Star</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestControl.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Guidance.cpp">
+      <Filter>Object\Equipment\Contain\Guidance</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidanceControl.cpp">
+      <Filter>Object\Equipment\Contain\Guidance</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerData.cpp">
+      <Filter>Data\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceData.cpp">
+      <Filter>Data\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>FramWork\GameObject\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,9 +316,6 @@
     <ClInclude Include="Random.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
-    <ClInclude Include="Guidance.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
     <ClInclude Include="Harpoon.h">
       <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
@@ -303,9 +324,6 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>소스 파일\미완성</Filter>
     </ClInclude>
     <ClInclude Include="CubeMap.h">
       <Filter>FramWork\GameObject\UI</Filter>
@@ -364,7 +382,6 @@
     <ClInclude Include="Uranium.h">
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
-    <ClInclude Include="SpeedGauge.h" />
     <ClInclude Include="Emerald.h">
       <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
@@ -383,7 +400,27 @@
     <ClInclude Include="Collider.h">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Star.h" />
+    <ClInclude Include="SpeedGauge.h">
+      <Filter>Object\Player\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Object\Star</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Guidance.h">
+      <Filter>Object\Equipment\Contain\Guidance</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Data\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceData.h">
+      <Filter>Data\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -435,6 +472,9 @@
     </Object>
     <Object Include="Obj\Planet\Earth.obj">
       <Filter>리소스 파일\obj\Planet</Filter>
+    </Object>
+    <Object Include="Obj\Resource\Uranium.obj">
+      <Filter>리소스 파일\obj\Resource</Filter>
     </Object>
   </ItemGroup>
   <ItemGroup>

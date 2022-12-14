@@ -20,10 +20,7 @@ void GameManager::Init()
 	bgm.Load("Sound/bgm.mp3", true);
 	effect.Load("Sound/ItemEarn.wav", false);
 
-	all_sound.push_back(&bgm);
-	all_sound.push_back(&effect);
-
-	//bgm.Play();
+	bgm.RepeatPlay();
 }
 
 void GameManager::Update()
@@ -40,18 +37,6 @@ void GameManager::SpecialKeyboard(int key, int x, int y)
 		break;
 	case GLUT_KEY_F1:
 		effect.Play();
-		break;
-	case GLUT_KEY_F2:
-		for (auto a : all_sound) a->Stop();
-		break;
-	case GLUT_KEY_F3:
-		for (auto a : all_sound) a->Play();
-		break;
-	case GLUT_KEY_F5:
-		for (auto a : all_sound) a->SetVolum(-0.1);
-		break;
-	case GLUT_KEY_F6:
-		for (auto a : all_sound) a->SetVolum(0.1);
 		break;
 	}
 }
@@ -86,7 +71,7 @@ void GameManager::MouseWheel(int wheel, int direction, int x, int y)
 	if (direction < 0)
 	{
 		//cout << "Zoom out" << endl;
-		Camera::mainCamera->LookAtView(1);
+		Camera::mainCamera->LookAtView(3);
 	}
 	else
 	{
@@ -94,7 +79,7 @@ void GameManager::MouseWheel(int wheel, int direction, int x, int y)
 		if (length(cameraPos - Camera::mainCamera->cameraDirection) < 7)
 			return;
 		//cout << "Zoom in " << endl;
-		Camera::mainCamera->LookAtView(-1);
+		Camera::mainCamera->LookAtView(-3);
 	}
 }
 
@@ -113,19 +98,13 @@ void GameManager::Motion(int x, int y)
 			Camera::mainCamera->transform.local->rotation.x -= fMoveSpeed.y;
 			Camera::mainCamera->transform.local->rotation.y -= fMoveSpeed.x;
 		}
+		mouse_Pos = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
+		mouse_Pos = Coordinate(mouse_Pos);
+		mouse_Pos.y = -mouse_Pos.y;
+		glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
 	}
 }
 
 void GameManager::MouseEntry(int state)
 {
-	if (state == GLUT_LEFT)
-	{
-		if (!isMouseRight)
-		{
-			glutWarpPointer(windowSize_W / 2, windowSize_H / 2);
-			StartMouse = { (float)windowSize_W / 2, (float)windowSize_H / 2 };
-			StartMouse = Coordinate(StartMouse);
-			StartMouse.y = -StartMouse.y;
-		}
-	}
 }

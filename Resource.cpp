@@ -92,6 +92,7 @@ void Resource::OnDragged(Transform* _Target, float _Speed)
 	isDragged = true;
 	target = _Target;
 	draggedSpeed = _Speed;
+	level = 0;
 }
 
 //Target¿¡ ²ø·Á°¨

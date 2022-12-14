@@ -21,33 +21,34 @@ Player::Player() : Mesh(this)
 	speedBlock.accelerat = 1;
 
 	// Tranform
-	transform.local->scale *= 0.001;
 
 	// Collider
 	collider.tag = "Player";
 	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));
 	collider.object = this;
 
-	// Object
-	upgrade = new UpgradeControl(this);
-	questControl = new QuestControl(this);
-
 	// Resource Init
-	ironPool.InitPool(5, 1, 1.0f, &transform);
+	//ironPool.InitPool(5, 1, 1.0f, &transform);
 	goldPool.InitPool(5, 1, 1.0f, &transform);
 	mineralPool.InitPool(5, 1, 1.0f, &transform);
 	emeraldlPool.InitPool(5, 1, 1.0f, &transform);
-	//uraniumPool.InitPool(5, 1, 1.0f, &transform);
+	uraniumPool.InitPool(5, 1, 1.0f, &transform);
 
 	// Equipment Init
 	equipment["Harpoon"] = new Harpoon;
 	equipment["LowGun"] = new LowGun;
-	equipment["Guidance"] = new Guidance;
+	Guidance* guidance = new Guidance;
+	equipment["Guidance"] = guidance;
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	//equipment.find("Harpoon")->second->SetActive(true);
+	guidance->SetActive(true);
 	
+	// Object
+	upgrade = new UpgradeControl(this);
+	questControl = new QuestControl(this);
+	guidanceControl = new GuidanceControl(guidance);
+
 	// Data Setting
 	GetDate();
 	Render::objectRender->AddObject(this);
@@ -100,10 +101,17 @@ void Player::Handle_Event(unsigned char key)
 	case 'q':
 		questControl->SetActive(!questControl->ActiveSelf());
 		upgrade->SetActive(false);
+		guidanceControl->SetActive(false);
 		break;
 	case 'e':
 		questControl->SetActive(false);
 		upgrade->SetActive(!upgrade->ActiveSelf());
+		guidanceControl->SetActive(false);
+		break;
+	case 'g':
+		questControl->SetActive(false);
+		upgrade->SetActive(false);
+		guidanceControl->SetActive(!guidanceControl->ActiveSelf());
 		break;
 	}
 }

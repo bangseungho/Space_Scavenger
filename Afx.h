@@ -9,6 +9,8 @@
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <locale>
+#include <codecvt>
 
 // 모델 사용에 따른 정의
 #ifndef _MAX

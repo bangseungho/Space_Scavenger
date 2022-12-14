@@ -8,6 +8,8 @@ QuestControl::QuestControl(Player* _Player) : player(_Player)
 	questToggles[L"작살을 얻자"] = new Toggle("UI/Toggle/Window/");
 	questToggles[L"작살을 얻자"]->name += " 작살을 얻자";
 	//questToggles[L"작살을 얻자"].transform.local->position.y = -200;
+
+	SetActive(false);
 }
 
 QuestControl::~QuestControl()
@@ -17,12 +19,15 @@ QuestControl::~QuestControl()
 void QuestControl::Enable()
 {
 	seccseButton.SetActive(true);
-	questToggles
+	for (auto& toggle : questToggles)
+		toggle.second->SetActive(true);
 }
 
 void QuestControl::Disable()
 {
 	seccseButton.SetActive(false);
+	for (auto& toggle : questToggles)
+		toggle.second->SetActive(false);
 }
 
 void QuestControl::Update()

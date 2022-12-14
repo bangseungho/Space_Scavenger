@@ -9,7 +9,8 @@ Star::Star(string objName) : Mesh(this)
 
 	lightTypeIndex = 1;
 
-	//light.shape.SetActive(false);
+	// Transform
+	transform.local->rotation.x = RandomFloat(-90, 90);
 
 	Render::objectRender->AddObject(this);
 }
@@ -25,4 +26,9 @@ void Star::Init()
 		light.transform.world.push_back(world);
 	}
 	light.transform.world.push_back(transform.local);
+}
+
+void Star::Update()
+{
+	transform.local->rotation.y += FrameTime::oneFrame;
 }

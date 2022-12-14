@@ -69,8 +69,8 @@ void Collider::DrawBox()
 
 	glBindVertexArray(VAO);
 
-	glPointSize(5.0f);
-	glDrawArrays(GL_POINTS, 0, obj->vBlock.vertexIndices[0].size());
+	//glPointSize(5.0f);
+	//glDrawArrays(GL_POINTS, 0, obj->vBlock.vertexIndices[0].size());
 	glDrawElements(GL_TRIANGLES, obj->vBlock.vertexIndices[0].size() * 3, GL_UNSIGNED_SHORT, 0);
 }
 // Right Front Top 점을 정해주면 된다.

@@ -50,52 +50,76 @@ void Mesh::MeshInit()
 {
 	int num = obj->vBlock.groupCount;
 	VAO = new GLuint[num];
-	VBO = new GLuint[num];
+	VBO = new GLuint[1];
 	EBO = new GLuint[num];
 
 	glGenVertexArrays(num, VAO);
-	glGenBuffers(num, VBO);
+	glGenBuffers(1, VBO);
 	glGenBuffers(num, EBO);
 
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices_normals.size(), &obj->vBlock.vertices_normals[0], GL_STATIC_DRAW);
 	for (int i = 0; i < num; i++)
 	{
 		glBindVertexArray(VAO[i]);
 
-		//if (obj->isOnMTL)
-		//{
-		//	MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
-		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Kd, GL_STATIC_DRAW);
-		//	glEnableVertexAttribArray(KdLocation);
-		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Ks, GL_STATIC_DRAW);
-		//	glEnableVertexAttribArray(KsLocation);
-		//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		//	glBufferData(GL_ARRAY_BUFFER, sizeof(float), &mBlock.d, GL_STATIC_DRAW);
-		//	glEnableVertexAttribArray(dLocation);
-		//}
-
-		//glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * obj->vBlock.vertices_uvs.size(), &obj->vBlock.vertices_uvs[0], GL_STATIC_DRAW);
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]);
-		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.uvIndices[i].size(), &obj->vBlock.uvIndices[i][0], GL_STATIC_DRAW);
-		//glVertexAttribPointer(uvLoaction, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 텍스쳐
-		//glEnableVertexAttribArray(uvLoaction);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices_normals.size(), &obj->vBlock.vertices_normals[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.normalIndices[i].size(), &obj->vBlock.normalIndices[i][0], GL_STATIC_DRAW);
 		glVertexAttribPointer(normalLocation, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 노말 속성
 		glEnableVertexAttribArray(normalLocation);
+	}
 
-		glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices.size(), &obj->vBlock.vertices[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices.size(), &obj->vBlock.vertices[0], GL_STATIC_DRAW);
+	for (int i = 0; i < num; i++)
+	{
+		glBindVertexArray(VAO[i]);
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertexIndices[i].size(), &obj->vBlock.vertexIndices[i][0], GL_STATIC_DRAW);
 		glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
 		glEnableVertexAttribArray(vertexLocation);
 	}
+
+	//for (int i = 0; i < num; i++)
+	//{
+	//	glBindVertexArray(VAO[i]);
+
+	//	//if (obj->isOnMTL)
+	//	//{
+	//	//	MaterialBlock mBlock = obj->mBlock.find(obj->vBlock.usemtlName[i])->second;
+	//	//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Kd, GL_STATIC_DRAW);
+	//	//	glEnableVertexAttribArray(KdLocation);
+	//	//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), &mBlock.Ks, GL_STATIC_DRAW);
+	//	//	glEnableVertexAttribArray(KsLocation);
+	//	//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	//	glBufferData(GL_ARRAY_BUFFER, sizeof(float), &mBlock.d, GL_STATIC_DRAW);
+	//	//	glEnableVertexAttribArray(dLocation);
+	//	//}
+
+	//	//glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	//glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * obj->vBlock.vertices_uvs.size(), &obj->vBlock.vertices_uvs[0], GL_STATIC_DRAW);
+	//	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]);
+	//	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.uvIndices[i].size(), &obj->vBlock.uvIndices[i][0], GL_STATIC_DRAW);
+	//	//glVertexAttribPointer(uvLoaction, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 텍스쳐
+	//	//glEnableVertexAttribArray(uvLoaction);
+
+	//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices_normals.size(), &obj->vBlock.vertices_normals[0], GL_STATIC_DRAW);
+	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]);
+	//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.normalIndices[i].size(), &obj->vBlock.normalIndices[i][0], GL_STATIC_DRAW);
+	//	glVertexAttribPointer(normalLocation, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); //--- 노말 속성
+	//	glEnableVertexAttribArray(normalLocation);
+
+	//	glBindBuffer(GL_ARRAY_BUFFER, VBO[i]);
+	//	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertices.size(), &obj->vBlock.vertices[0], GL_STATIC_DRAW);
+	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[i]); //--- GL_ELEMENT_ARRAY_BUFFER 버퍼 유형으로 바인딩
+	//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vec3) * obj->vBlock.vertexIndices[i].size(), &obj->vBlock.vertexIndices[i][0], GL_STATIC_DRAW);
+	//	glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // 정점
+	//	glEnableVertexAttribArray(vertexLocation);
+	//}
 	
 }
 

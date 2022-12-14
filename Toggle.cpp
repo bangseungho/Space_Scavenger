@@ -6,8 +6,8 @@ Toggle::Toggle(string path)
 
 	isToggle = false;
 
-	ui_UnMark.image_file = path + "Default.png";
-	ui_Mark.image_file = path + "OnMouse.png";
+	ui_Mark.image_file = path + "Mark.png";
+	ui_UnMark.image_file = path + "UnMark.png";
 }
 
 Toggle::~Toggle()
@@ -52,10 +52,15 @@ void Toggle::Update()
 		if (!CheckInMouse())
 			return;
 
-		ui_UnMark.SetActive(!ui_UnMark.ActiveSelf());
-		ui_Mark.SetActive(!ui_Mark.ActiveSelf());
-		isToggle = !isToggle;
+		ToggleClick();
 	}
+}
+
+void Toggle::ToggleClick()
+{
+	ui_UnMark.SetActive(!ui_UnMark.ActiveSelf());
+	ui_Mark.SetActive(!ui_Mark.ActiveSelf());
+	isToggle = !isToggle;
 }
 
 bool Toggle::CheckInMouse()

@@ -18,6 +18,7 @@ Color windowColor;
 
 bool is_Polygon = false;
 bool is_CullFace = false;
+bool is_ColliderDraw = false;
 
 list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
@@ -31,6 +32,7 @@ Camera camera;
 Camera uiCamera;
 Render objectRender;
 Render uiRender;
+Render fontRender;
 
 GameManager* gameManager;
 CubeMap* backGround;
@@ -56,6 +58,7 @@ void Init()
 {
 	Render::objectRender = &objectRender;
 	Render::uiRender = &uiRender;
+	Render::fontRender = &fontRender;
 
 	FrameTime::currentTime = clock();
 
@@ -186,16 +189,23 @@ void drawScene()
 		glUseProgram(Shader::allProgram.find("Object")->second->program);
 		objectRender.Draw();
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		for (const auto& collider : Collider::allCollider)
-			collider->DrawBox();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		if (is_ColliderDraw)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			for (const auto& collider : Collider::allCollider)
+				collider->DrawBox();
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
 	}
 
 	{	//UI Viewport
 		Camera::mainCamera = &uiCamera;
 		glUseProgram(Shader::allProgram.find("UI")->second->program);
 		uiRender.UIDraw();
+	}
+
+	{	// Font
+		fontRender.FontDraw();
 	}
 
 	Camera::mainCamera = fristCamera;
@@ -263,6 +273,9 @@ void SpecialKeyBoard(int key, int x, int y)
 			glutLeaveFullScreen();
 		isFullScreen = !isFullScreen;
 		break;
+	case GLUT_KEY_F12:
+		is_ColliderDraw = !is_ColliderDraw;
+		break;
 	}
 
 	gameManager->SpecialKeyboard(key, x, y);
@@ -316,9 +329,7 @@ void Motion(int x, int y)
 
 	gameManager->Motion(x, y);
 
-	StartMouse = { (float)x, (float)y };
-	StartMouse = Coordinate(StartMouse);
-	StartMouse.y = -StartMouse.y;
+	StartMouse = mouse_Pos;
 
 	glutPostRedisplay();
 }

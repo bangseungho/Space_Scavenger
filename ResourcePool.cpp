@@ -18,6 +18,7 @@ ResourcePool<ROS>::~ResourcePool()
 template<class ROS>
 void ResourcePool<ROS>::Update()
 {
+	CheckDistance();
 	if (!spawnTimer.CheckTimer())
 		return;
 
@@ -65,7 +66,10 @@ void ResourcePool<ROS>::CheckDistance()
 		if (!pool[i].ActiveSelf())
 			continue;
 
-		float dis = length(target_Transform->local->position - pool[i].transform.local->position);
+		if (pool[i].isDragged)
+			continue;
+
+		float dis = length((target_Transform->model - pool[i].transform.model) * vec4(0,0,0,1));
 
 		if (dis > 100)
 			pool[i].SetActive(false);

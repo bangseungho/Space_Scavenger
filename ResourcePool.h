@@ -12,12 +12,12 @@ public:
 
 public:
 	void Update();
-	void Spawn(float _Min, float _Max);
 
 public:
 	void InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
 
 private:
+	void Spawn(float _Min, float _Max);
 	void CheckDistance();
 
 public:

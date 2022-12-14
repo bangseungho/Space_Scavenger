@@ -15,11 +15,11 @@ public:
 
 public:
 	void Draw();
-	void ProcessInput(int specialKey);
+	mat4& SetMatrix();
 
-	void Info();
 public:
 	void LookAtView(float speed);
+	void Info();
 
 public:
 	Transform* target_Pos;

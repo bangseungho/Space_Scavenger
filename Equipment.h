@@ -1,4 +1,5 @@
 #pragma once
+#include "Sound.h"
 #include "Render.h"
 #include "Collider.h"
 #include "Gauge.h"

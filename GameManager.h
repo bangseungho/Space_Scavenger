@@ -29,10 +29,7 @@ public:
 	PlanetManager planetManager;
 public:
 	Player player;
-	//Map map;
-	//ChatBox chat_box;
-	vector<Sound*> all_sound;
-	//Gauge gauge;
+	//Guidance g;
 
 private:
 	bool isMouseRight;

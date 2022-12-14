@@ -14,6 +14,8 @@ UpgradeControl::UpgradeControl(Player* _Player) : player(_Player)
 	upgradeButtons["GuidanceDistance"].name += "GuidanceDistance";
 	upgradeButtons["GuidanceDistance"].transform.local->position.x = -200;
 	upgradeButtons["GuidanceDistance"].color.SetColor({ 1,0,0,1 });
+
+	SetActive(false);
 }
 UpgradeControl::~UpgradeControl()
 {

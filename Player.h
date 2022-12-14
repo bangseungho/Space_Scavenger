@@ -67,13 +67,14 @@ private:
 private:
 	UpgradeControl* upgrade;
 	QuestControl* questControl;
+	GuidanceControl* guidanceControl;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
-	ResourcePool<Iron> ironPool;
+	//ResourcePool<Iron> ironPool;
 	ResourcePool<Gold> goldPool;
 	ResourcePool<Mineral> mineralPool;
 	ResourcePool<Emerald> emeraldlPool;
-	//ResourcePool<Uranium> uraniumPool;
+	ResourcePool<Uranium> uraniumPool;
 
 private:	// UI
 	SpeedGauge speedGauge{ &speedBlock };
@@ -115,6 +116,9 @@ private:
 private:
 	Player* player;
 	Quest quest;
+
+private:
+	//BackGround background{};
 	Button seccseButton;
 	Toggle* nowToggle;
 	map<wstring, Toggle*> questToggles;
