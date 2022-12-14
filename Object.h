@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Transform.h"
-#include "Sound.h"
 
 class Object {
 public:

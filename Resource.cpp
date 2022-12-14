@@ -90,6 +90,10 @@ void Resource::OnCollision()
 
 			if (level > 1) {
 				level -= 1;
+				color.R *= 1 - level * 0.3;
+				color.G *= level * 0.3;
+				color.B *= level * 0.3;
+
 			}
 			cout << level << endl;
 		}

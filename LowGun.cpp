@@ -10,7 +10,7 @@ LowGun::LowGun()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj("Obj/Equipment/", "Gun.obj");
+		_Obj->ReadObj("Obj/Equipment/LowGun/", "Gun.obj");
 	}
 
 	fireSound.Load("Sound/fire_bullet.mp3", false);

@@ -11,7 +11,7 @@ Bullet::Bullet()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj("Obj/Equipment/", "Bullet.obj");
+		_Obj->ReadObj("Obj/Equipment/LowGun/", "Bullet.obj");
 	}
 
 	collider.tag = "Bullet";
