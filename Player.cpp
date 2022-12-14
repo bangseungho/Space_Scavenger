@@ -45,7 +45,7 @@ Player::Player() : Mesh(this)
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	equipment.find("Harpoon")->second->SetActive(true);
+	equipment.find("LowGun")->second->SetActive(true);
 	
 	Render::objectRender->AddObject(this);
 }

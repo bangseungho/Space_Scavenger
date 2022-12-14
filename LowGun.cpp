@@ -10,7 +10,7 @@ LowGun::LowGun()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Harpoon.obj");
+		_Obj->ReadObj("Obj/Equipment/", "Gun.obj");
 	}
 
 	fireSound.Load("Sound/fire_bullet.mp3", false);
@@ -18,9 +18,9 @@ LowGun::LowGun()
 
 	obj = _Obj;
 
-	transform.local->scale = vec3(2);
-	transform.local->position.y += 3;
+	transform.local->scale = vec3(200);
 	transform.local->rotation.y = -90;
+	transform.local->position.y = 600;
 	bulletNum = 10;
 
 	for (int i = 0; i < bulletNum; ++i) {
@@ -46,6 +46,7 @@ int LowGun::Fire(const Transform& transform)
 		bullets[fireCount]->SetActive(true);
 		bullets[fireCount]->transform.local->position = transform.local->position;
 		bullets[fireCount]->trajectory = transform.front;
+		bullets[fireCount]->transform.local->position.y += 0.6;
 		bullets[fireCount]->gunPos = transform.local->position;
 		fireCount++;
 	}

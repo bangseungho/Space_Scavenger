@@ -11,16 +11,16 @@ Bullet::Bullet()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Sphere.obj");
+		_Obj->ReadObj("Obj/Equipment/", "Bullet.obj");
 	}
 
 	collider.tag = "Bullet";
 	collider.object = this;
-
-	speed = 200;
+	speed = 100;
 	isUse = false;
 
 	obj = _Obj;
+	transform.local->rotation.x = -90;
 	transform.local->scale = vec3(0.1);
 	collider.SetBox_OBB(vec3(2));
 

@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
-# File Created: 13.12.2022 20:35:42
+# File Created: 13.12.2022 22:07:13
 
-newmtl uploads_files_1014684_turret_None
+newmtl Gun_uploads_files_1014684_turret_None
 	Ka 0.0000 0.1176 0.4196
 	Kd 0.0000 0.1176 0.4196
 	Ks 1.0000 1.0000 1.0000
@@ -12,6 +12,6 @@ newmtl uploads_files_1014684_turret_None
 	Pm 0.0000
 	Pc 0.0000
 	Pcr 0.0000
-	Ni 1.5200
+	Ni 1.5000
 	Ke 0.0000 0.0000 0.0000
 	illum 2

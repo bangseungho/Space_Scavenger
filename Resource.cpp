@@ -77,12 +77,16 @@ void Resource::OnCollision()
 			SetActive(false);
 		}
 
+		if (other->tag == "Harpoon")
+		{
+			if (level > 1) {
+				level = 1;
+			}
+		}
+
 		if (other->tag == "Bullet")
 		{
 			other->object->SetActive(false);
-
-			//if (level > 1)
-			//	particles = new Particle();
 
 			if (level > 1) {
 				level -= 1;

@@ -33,7 +33,7 @@ void Harpoon::Init()
 	curEnergy = 0;
 	chargedEnergy = 0;
 	speed = 100;
-	color.SetRandomColor();
+	color.A = 1.0;
 }
 
 void Harpoon::Update()
@@ -89,12 +89,12 @@ void Harpoon::Fire()
 
 	if (curEnergy < chargedEnergy)
 	{
-		transform.local->position.z += frameSpeed * chargedEnergy / 30.0;
-		transform.local->scale.z -= frameSpeed * chargedEnergy / 30.0;
+		transform.local->position.z += 1.5 * frameSpeed * chargedEnergy / 30.0 * 400;
+		transform.local->scale.z -= 1.5 * frameSpeed * chargedEnergy / 30.0;
 	}
 	else {
-		transform.local->position.z -= frameSpeed * chargedEnergy / 150.0;
-		transform.local->scale.z += frameSpeed * chargedEnergy / 150.0;
+		transform.local->position.z -= 1.5 * frameSpeed * chargedEnergy / 150.0 * 400;
+		transform.local->scale.z += 1.5 * frameSpeed * chargedEnergy / 150.0;
 
 		if (transform.local->scale.z > 0) {
 			transform.local->position.z = 0;
@@ -104,4 +104,24 @@ void Harpoon::Fire()
 		}
 	}
 	curEnergy++;
+}
+
+void Harpoon::OnCollision()
+{
+	for (auto& other : Collider::allCollider)
+	{
+		if (!other->isCollide)
+			continue;
+
+		if (other->tag != "Resource")
+			continue;
+
+		if (!other->OBBCollision(collider, *other))
+			continue;
+
+		if (other->tag == "Resource")
+		{
+			cout << "DDDDDDDDDD" << endl;
+		}
+	}
 }
