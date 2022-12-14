@@ -72,9 +72,10 @@ void Render::FontDraw()
 	}
 }
 
-void Render::SetLayou(string layou[])
+void Render::SetLayer(string& layer)
 {
-
+	for (auto& l : layer)
+		renderList[layer];
 }
 
 void Render::AddObject(Mesh* mesh, string layoutName)
@@ -82,13 +83,13 @@ void Render::AddObject(Mesh* mesh, string layoutName)
 	renderList[layoutName].push_back(mesh);
 }
 
-void Render::RemoveObject(Object* obj)
+void Render::RemoveObject(Mesh* _Mesh)
 {
 	for (auto& layer : renderList)
 	{
 		for (auto& mesh : layer.second)
 		{
-			if (mesh->object->id != obj->id)
+			if (mesh->object->id != _Mesh->object->id)
 				continue;
 
 			layer.second.remove(mesh);

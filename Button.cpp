@@ -9,6 +9,8 @@ Button::Button(string path)
 	ui_OnMouse.image_file = path + "OnMouse.png";
 	ui_Click.image_file = path + "Click.png";
 
+	font.lineType = 1;
+
 	sound_Click.Load("Sound/Button/Default/Click.wav");
 	sound_OnMouse.Load("Sound/Button/Default/OnMouse.wav");
 }
@@ -20,6 +22,7 @@ Button::~Button()
 void Button::Enable()
 {
 	ui_Defualt.SetActive(true);
+	font.SetActive(true);
 }
 
 void Button::Disable()
@@ -27,6 +30,7 @@ void Button::Disable()
 	ui_Defualt.SetActive(false);
 	ui_OnMouse.SetActive(false);
 	ui_Click.SetActive(false);
+	font.SetActive(false);
 	isClick = false;
 }
 
@@ -37,10 +41,12 @@ void Button::Init()
 		ui_Defualt.transform.world.push_back(world);
 		ui_OnMouse.transform.world.push_back(world);
 		ui_Click.transform.world.push_back(world);
+		font.transform.world.push_back(world);
 	}
 	ui_Defualt.transform.world.push_back(transform.local);
 	ui_OnMouse.transform.world.push_back(transform.local);
 	ui_Click.transform.world.push_back(transform.local);
+	font.transform.world.push_back(transform.local);
 
 	width = ui_Defualt.width;
 	height = ui_Defualt.height;

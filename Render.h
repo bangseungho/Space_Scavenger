@@ -16,10 +16,10 @@ public:
 	void Draw();
 	void UIDraw();
 	void FontDraw();
-	void SetLayou(string layou[]);
+	void SetLayer(string& layer);
 	void AddObject(Mesh* mesh, string layoutName);
 	void AddObject(Mesh* mesh) { AddObject(mesh, "Default"); };
-	void RemoveObject(Object* obj);
+	void RemoveObject(Mesh* _Mesh);
 
 private:
 	map<string, list<Mesh*>> renderList;

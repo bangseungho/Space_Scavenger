@@ -28,9 +28,6 @@ public:
 
 public:
 	bool isCollide;
-	bool isTrigger;
-	bool isMouseCollide;
-	bool isWindowCollide;
 
 private:
 	vec3 size;
@@ -43,5 +40,4 @@ private:
 	GLuint VAO;
 	GLuint VAO_VERTICES;
 	GLuint VAO_VERTICES_INDEX;
-
 };

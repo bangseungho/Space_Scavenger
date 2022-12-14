@@ -280,6 +280,8 @@
   <ItemGroup>
     <None Include="CubeMap_Fragment.glsl" />
     <None Include="CubeMap_Vertex.glsl" />
+    <None Include="Font_Fragment.glsl" />
+    <None Include="Font_Vertex.glsl" />
     <None Include="Fragment.glsl" />
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />

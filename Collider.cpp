@@ -20,9 +20,6 @@ Collider::Collider()
 	color.G = 0;
 
 	isCollide = true;
-	isTrigger = false;
-	isMouseCollide = false;
-	isWindowCollide = false;
 
 	allCollider.push_back(this);
 }

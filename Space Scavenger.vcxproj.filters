@@ -230,9 +230,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClCompile>
@@ -265,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>FramWork\GameObject\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Object\Defualt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -391,9 +391,6 @@
     <ClInclude Include="Camera.h">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>FramWork\GameObject\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>FramWork\GameObject\Object</Filter>
     </ClInclude>
@@ -420,6 +417,9 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>FramWork\GameObject\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Object\Defualt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +451,12 @@
       <Filter>리소스 파일\GLSL</Filter>
     </None>
     <None Include="CubeMap_Vertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="Font_Vertex.glsl">
+      <Filter>리소스 파일\GLSL</Filter>
+    </None>
+    <None Include="Font_Fragment.glsl">
       <Filter>리소스 파일\GLSL</Filter>
     </None>
   </ItemGroup>
