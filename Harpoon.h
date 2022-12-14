@@ -24,6 +24,7 @@ public:
 	void FinishCharging();
 	void MyTimer();
 	void Fire();
+	void OnCollision();
 
 public:
 	Collider collider;

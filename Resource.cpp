@@ -25,6 +25,9 @@ Resource::Resource() : Mesh(this)
 	
 	draggedSpeed = 1;
 	isDragged = false;
+
+	particles = new Particle();
+
 	Render::objectRender->AddObject(this, "Resource");
 }
 
@@ -47,7 +50,6 @@ void Resource::Disable()
 
 void Resource::Init()
 {
-	
 }
 
 void Resource::Update()
@@ -75,11 +77,23 @@ void Resource::OnCollision()
 			SetActive(false);
 		}
 
+		if (other->tag == "Harpoon")
+		{
+			if (level > 1) {
+				level = 1;
+			}
+		}
+
 		if (other->tag == "Bullet")
 		{
 			other->object->SetActive(false);
+
 			if (level > 1) {
 				level -= 1;
+				color.R *= 1 - level * 0.3;
+				color.G *= level * 0.3;
+				color.B *= level * 0.3;
+
 			}
 			cout << level << endl;
 		}
