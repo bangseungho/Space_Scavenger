@@ -64,14 +64,14 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
     float diff = max(dot(normal, lightDir), 0.0);
 
     // specular shading
-    float shininess = 128;
-    vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+    //float shininess = 128;
+    //vec3 reflectDir = reflect(-lightDir, normal);
+    //float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
 
     // combine results
     vec3 _Ambient  = ambient;
     vec3 _Diffuse  = light.Color  * diff * Kd;
-    vec3 _Specular = light.Color * spec * Ks;
+    //vec3 _Specular = light.Color * spec * Ks;
 
-    return (_Ambient + _Diffuse + _Specular);
+    return (_Ambient + _Diffuse);// + _Specular);
 }

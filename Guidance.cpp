@@ -69,20 +69,16 @@ void Guidance::SerchResource()
 	vec3 myPos = transform.model * vec4(0, 0, 0, 1);
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-
-		if (other->tag != "Resource")
-			continue;
+		if (!other->object->ActiveSelf()) continue;
+		if (!other->isCollide) continue;
+		if (other->tag != "Resource") continue;
+		if (!resourceType.find(other->object->name)->second) continue;	
 
 		// 자원과 장비 사이의 거리 측정
 		vec3 targetPos = other->object->transform.model * vec4(0, 0, 0, 1);
 		float dis = length(myPos - targetPos);
 
-		if (dis > serchDistnace)
-			continue;
+		if (dis > serchDistnace) continue;	
 
 		// 찾은 자원의 함수를 사용하기 위해 형변환
 		wave.resource = reinterpret_cast<Resource*>(other->object);
@@ -102,6 +98,21 @@ void Guidance::SerchResource()
 		return;
 	}
 }
+
+void Guidance::GetData()
+{
+	ResourceData* data = ResourceData::Instance;
+	for (auto& type : data->resourceTypes)
+	{
+		string str;
+		static std::locale loc("");
+		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(type);
+
+		resourceType[str] = false;
+	}
+}
+
 OBJ* Guidance::Wave::_Obj = nullptr;
 
 Guidance::Wave::Wave() : Mesh(this)

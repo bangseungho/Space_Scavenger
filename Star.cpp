@@ -1,14 +1,18 @@
 #include "Star.h"
 
-Star::Star(string objName) : Mesh(this)
+OBJ* Star::_Obj = nullptr;
+
+Star::Star() : Mesh(this)
 {
-	name = objName.substr(0, objName.size() - 4);
-
-	obj = new OBJ;
-	obj->ReadObj("Obj/Star/", objName);
-
+	if (_Obj == nullptr)
+	{
+		_Obj = new OBJ;
+		_Obj->ReadObj("Obj/Star/", "Sun.obj");
+	}
+	obj = _Obj;
 	lightTypeIndex = 1;
 
+	name = "Sun";
 	// Transform
 	transform.local->rotation.x = RandomFloat(-90, 90);
 

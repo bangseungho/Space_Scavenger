@@ -58,7 +58,8 @@ public:
 
 public: // Upgrade ฐüทร
 	SpeedBlock speedBlock;
-	map<wstring, int> resourceCount;
+	map<string, int> resourceCount;
+	int hp;
 
 private:
 	bool move_front;

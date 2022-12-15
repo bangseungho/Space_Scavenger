@@ -34,18 +34,15 @@ public:
 	Collider collider;
 
 public:
-	bool isDragged;	// 누군가가 이 자원을 끓고 가고 있는지에 대해 체크
+	int level;
+	int amount;
 
+	bool isDragged;	// 누군가가 이 자원을 끓고 가고 있는지에 대해 체크
 private:
-	unsigned int amount;
 	vec3 velocity;
 
 	Transform* target;
 	float draggedSpeed;
-
 public:
-	int level;
-
-public:
-	Particle* particles;
+	//Particle* particles;
 };

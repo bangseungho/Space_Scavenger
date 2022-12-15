@@ -27,7 +27,6 @@ void Color::SetRandomColor()
 	R = randomcolor(gen);
 	G = randomcolor(gen);
 	B = randomcolor(gen);
-	A = randomcolor(gen);
 }
 
 void Color::SetColor(Color color)

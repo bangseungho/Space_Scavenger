@@ -102,6 +102,9 @@
     <Filter Include="Data\Contain">
       <UniqueIdentifier>{99a3b06e-5967-45ce-bb09-fa88245c47fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Equipment\Contain\Gun">
+      <UniqueIdentifier>{9cb9046a-bf24-4f07-bdf7-82a5152d3e74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -153,12 +156,6 @@
       <Filter>FramWork\소스</Filter>
     </ClCompile>
     <ClCompile Include="Harpoon.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="LowGun.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
     <ClCompile Include="CubeMap.cpp">
@@ -269,6 +266,12 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
+    <ClCompile Include="LowGun.cpp">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -318,15 +321,6 @@
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>FramWork\헤더</Filter>
-    </ClInclude>
-    <ClInclude Include="Harpoon.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
-    <ClInclude Include="LowGun.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
     <ClInclude Include="CubeMap.h">
       <Filter>FramWork\GameObject\UI</Filter>
@@ -423,6 +417,16 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Object\Defualt</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="LowGun.h">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="Harpoon.h">
+      <Filter>Object\Equipment\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
