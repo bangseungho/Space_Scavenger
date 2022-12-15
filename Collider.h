@@ -5,7 +5,6 @@
 class Collider {
 public:
 	static vector<Collider*> allCollider;
-	static vector<Collider*> initCollider;
 	static OBJ* _Obj;
 	static bool isPrint;
 

@@ -5,7 +5,6 @@ class Object {
 public:
 	static int ID_Count;
 	static list<Object*> allObject;
-	static vector<Object*> InitObject;
 
 	static unsigned char key;
 	static unsigned char keyUp;

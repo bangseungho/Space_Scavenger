@@ -13,6 +13,7 @@ LowGun::LowGun()
 		_Obj->ReadObj("Obj/Equipment/LowGun/", "Gun.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	fireSound.Load("Sound/fire_bullet.mp3", false);
 	loadSound.Load("Sound/load_bullet.mp3", false);

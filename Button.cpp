@@ -9,6 +9,10 @@ Button::Button(string path)
 	ui_OnMouse.image_file = path + "OnMouse.png";
 	ui_Click.image_file = path + "Click.png";
 
+	ui_Defualt.MeshInit();
+	ui_OnMouse.MeshInit();
+	ui_Click.MeshInit();
+
 	font.lineType = 1;
 
 	sound_Click.Load("Sound/Button/Default/Click.wav");

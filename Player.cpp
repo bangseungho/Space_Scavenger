@@ -14,6 +14,7 @@ Player::Player() : Mesh(this)
 		_Obj->ReadObj("Obj/Player/", "SpaceShip.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	// Speed
 	speedBlock.current = 10;

@@ -13,6 +13,7 @@ Emerald::Emerald()
 		_Obj->ReadObj(filePath, "Emerald.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	level = 3;
 

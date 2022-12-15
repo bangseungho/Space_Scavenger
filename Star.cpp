@@ -10,6 +10,7 @@ Star::Star() : Mesh(this)
 		_Obj->ReadObj("Obj/Star/", "Sun.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	name = "Sun";
 

@@ -7,7 +7,6 @@ class Mesh
 {
 public:
 	static Shader* objectShader;
-	static vector<Mesh*> initMesh;
 	static unsigned int vertexLocation;
 	static unsigned int uvLoaction;
 	static unsigned int normalLocation;

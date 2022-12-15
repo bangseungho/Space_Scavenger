@@ -4,6 +4,7 @@ ChatBox::ChatBox() : UIMesh(this)
 {
 	name = "ChatBox";
 	image_file = "chatbox.png";
+	MeshInit();
 
 	// 초기 위치, 크기 설정
 	transform.local->position.x += 0.7 * 1600/2;

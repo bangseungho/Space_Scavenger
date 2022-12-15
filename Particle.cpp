@@ -12,6 +12,7 @@ Particle::Particle()
 		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	transform.local->scale = vec3(10);
 
