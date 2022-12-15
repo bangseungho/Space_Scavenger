@@ -18,9 +18,6 @@
     <Filter Include="Object\Player">
       <UniqueIdentifier>{2668cdb6-39dc-44ce-8b38-c789df3ef4b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\obj">
-      <UniqueIdentifier>{f5f77f01-f538-4417-9bba-5c91c23b9b2d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Resource">
       <UniqueIdentifier>{120664d6-fc54-4ffb-970b-859724e5b62c}</UniqueIdentifier>
     </Filter>
@@ -38,9 +35,6 @@
     </Filter>
     <Filter Include="FramWork\GameObject">
       <UniqueIdentifier>{bdac6bbd-2aff-4d96-852e-d6a5fadf5c7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="리소스 파일\obj\Default">
-      <UniqueIdentifier>{6f1cde10-29ad-4d4a-9d9c-c9d78b090591}</UniqueIdentifier>
     </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{7092cb9c-fc0d-45f0-a339-e680a54acb47}</UniqueIdentifier>
@@ -60,14 +54,8 @@
     <Filter Include="Object\Equipment">
       <UniqueIdentifier>{76c8b3c8-07da-4db5-86c9-88972e78009a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\obj\Resource">
-      <UniqueIdentifier>{316c82e6-2d46-4b57-9b05-db8197b001d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Equipment\Contain">
       <UniqueIdentifier>{86f3aaf4-f826-437a-9f40-e67945a92381}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="리소스 파일\obj\Player">
-      <UniqueIdentifier>{b4118c93-6f77-48a8-b7a0-364ebb5f2e6b}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\미완성">
       <UniqueIdentifier>{9df73862-055a-46f0-abe4-a02a3312e31e}</UniqueIdentifier>
@@ -90,9 +78,6 @@
     <Filter Include="FramWork\GameObject\Object">
       <UniqueIdentifier>{8b154d24-5a63-4aef-8835-450b3fb94fb0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일\obj\Planet">
-      <UniqueIdentifier>{f702dae2-9d78-4a55-9a70-1897f8799d1d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Star">
       <UniqueIdentifier>{451b859c-7594-46bb-b9cf-55246ee326c4}</UniqueIdentifier>
     </Filter>
@@ -101,6 +86,9 @@
     </Filter>
     <Filter Include="Data\Contain">
       <UniqueIdentifier>{99a3b06e-5967-45ce-bb09-fa88245c47fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Equipment\Contain\Gun">
+      <UniqueIdentifier>{f4267ac5-7ff1-4b0f-a2cd-3db59901cc42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -155,12 +143,6 @@
     <ClCompile Include="Harpoon.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
-    <ClCompile Include="LowGun.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
     <ClCompile Include="CubeMap.cpp">
       <Filter>FramWork\GameObject\UI</Filter>
     </ClCompile>
@@ -208,9 +190,6 @@
     </ClCompile>
     <ClCompile Include="Toggle.cpp">
       <Filter>UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>소스 파일\미완성</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>UI\Default</Filter>
@@ -269,6 +248,15 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="LowGun.cpp">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>FramWork\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -322,12 +310,6 @@
     <ClInclude Include="Harpoon.h">
       <Filter>Object\Equipment\Contain</Filter>
     </ClInclude>
-    <ClInclude Include="LowGun.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
     <ClInclude Include="CubeMap.h">
       <Filter>FramWork\GameObject\UI</Filter>
     </ClInclude>
@@ -372,9 +354,6 @@
     </ClInclude>
     <ClInclude Include="Toggle.h">
       <Filter>UI\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>소스 파일\미완성</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>UI\Default</Filter>
@@ -424,6 +403,16 @@
     <ClInclude Include="Light.h">
       <Filter>Object\Defualt</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="LowGun.h">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>FramWork\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">
@@ -438,18 +427,6 @@
     <None Include="Vertex.glsl">
       <Filter>리소스 파일\GLSL</Filter>
     </None>
-    <None Include="Harpoon.mtl">
-      <Filter>리소스 파일\obj</Filter>
-    </None>
-    <None Include="Obj\Player\SpaceShip.mtl">
-      <Filter>리소스 파일\obj\Player</Filter>
-    </None>
-    <None Include="Obj\Resource\Iron.mtl">
-      <Filter>리소스 파일\obj\Resource</Filter>
-    </None>
-    <None Include="Obj\Default\Cube.mtl">
-      <Filter>리소스 파일\obj\Default</Filter>
-    </None>
     <None Include="CubeMap_Fragment.glsl">
       <Filter>리소스 파일\GLSL</Filter>
     </None>
@@ -462,29 +439,6 @@
     <None Include="Font_Fragment.glsl">
       <Filter>리소스 파일\GLSL</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Sphere.obj">
-      <Filter>리소스 파일\obj\Default</Filter>
-    </Object>
-    <Object Include="Harpoon.obj">
-      <Filter>리소스 파일\obj</Filter>
-    </Object>
-    <Object Include="Obj\Player\SpaceShip.obj">
-      <Filter>리소스 파일\obj\Player</Filter>
-    </Object>
-    <Object Include="Obj\Resource\Iron.obj">
-      <Filter>리소스 파일\obj\Resource</Filter>
-    </Object>
-    <Object Include="Obj\Default\Cube.obj">
-      <Filter>리소스 파일\obj\Default</Filter>
-    </Object>
-    <Object Include="Obj\Planet\Earth.obj">
-      <Filter>리소스 파일\obj\Planet</Filter>
-    </Object>
-    <Object Include="Obj\Resource\Uranium.obj">
-      <Filter>리소스 파일\obj\Resource</Filter>
-    </Object>
   </ItemGroup>
   <ItemGroup>
     <Image Include="map.png">

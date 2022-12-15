@@ -4,6 +4,8 @@
 
 using namespace std;
 
+int RandomPlusMinus();
+
 template<typename T>
 inline int RandomInt(T first, T second)
 {

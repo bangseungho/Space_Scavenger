@@ -14,6 +14,7 @@ Player::Player() : Mesh(this)
 		_Obj->ReadObj("Obj/Player/", "SpaceShip.obj");
 	}
 	obj = _Obj;
+	MeshInit();
 
 	// Speed
 	speedBlock.current = 10;
@@ -48,6 +49,8 @@ Player::Player() : Mesh(this)
 	upgrade = new UpgradeControl(this);
 	questControl = new QuestControl(this);
 	guidanceControl = new GuidanceControl(guidance);
+
+	hp = 100;
 
 	// Data Setting
 	GetDate();
@@ -196,6 +199,12 @@ void Player::OnCollision()
 			Resource* resource = reinterpret_cast<Resource*>(other->object);
 			if (resource->isDragged)
 				equipment.find("Guidance")->second->isDragged = false;
+
+			hp -= resource->level;
+			resourceCount[resource->name] += resource->amount;
+
+			if (resource->level > 0)
+				speedBlock.current *= 0.7;
 		}
 	}
 }
@@ -244,6 +253,12 @@ void Player::GetDate()
 	int count = data->sheet->readNum(1, 0);
 	for (int i = 0; i < count; i++)
 	{
-		resourceCount[data->sheet->readStr(i + 5, 2)] = data->sheet->readNum(i + 5, 3);
+		wstring rName = data->sheet->readStr(i + 5, 2);
+		string type;
+		static std::locale loc("");
+		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
+		type = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(rName);
+
+		resourceCount[type] = data->sheet->readNum(i + 5, 3);
 	}
 }

@@ -12,8 +12,9 @@ Emerald::Emerald()
 		_Obj = new OBJ;
 		_Obj->ReadObj(filePath, "Emerald.obj");
 	}
-
 	obj = _Obj;
+	MeshInit();
+
 	level = 3;
 
 	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));

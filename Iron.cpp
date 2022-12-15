@@ -13,6 +13,7 @@ Iron::Iron()
 		_Obj->ReadObj(filePath, "Iron.obj");	// 이름 변경 필수
 	}
 	obj = _Obj;
+	MeshInit();
 
 	level = 3;
 

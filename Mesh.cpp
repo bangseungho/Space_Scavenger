@@ -37,13 +37,11 @@ Mesh::Mesh(Object* obj) : object(obj)
 
 	lightTypeIndex = 0;
 
-	allMesh.push_back(this);
 	isDraw = true;
 }
 
 Mesh::~Mesh()
 {
-	allMesh.erase(remove(allMesh.begin(), allMesh.end(), this), allMesh.end());
 }
 
 void Mesh::MeshInit()

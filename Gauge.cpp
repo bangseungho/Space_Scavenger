@@ -3,7 +3,8 @@
 Gauge::Gauge() : UIMesh(this)
 {
 	name = "Gauge";
-	image_file = "gauge.png";
+	image_file = "UI/Equipment/gauge.png";
+	MeshInit();
 
 	// 초기 위치, 크기 설정
 	transform.local->scale -= 0.3;
@@ -12,9 +13,7 @@ Gauge::Gauge() : UIMesh(this)
 
 	//transform.model *= vec4(0, 0.9, 0, 1); // bottom left
 
-
 	Render::uiRender->AddObject(this);
-
 }
 
 Gauge::~Gauge()

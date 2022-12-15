@@ -56,9 +56,11 @@ public:
 	Collider collider;
 	map<string, Equipment*> equipment;
 
+	int hp;
+
 public: // Upgrade ฐüทร
 	SpeedBlock speedBlock;
-	map<wstring, int> resourceCount;
+	map<string, int> resourceCount;
 
 private:
 	bool move_front;

@@ -6,7 +6,7 @@ template <class ROS>
 class ResourcePool : public Object
 {
 public:
-	ResourcePool(){};
+	ResourcePool() { maxCount = 0; };
 	ResourcePool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target);
 	~ResourcePool();
 

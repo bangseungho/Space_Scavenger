@@ -8,17 +8,15 @@ public:
 	PlanetManager();
 	~PlanetManager();
 
-public:
-
 
 private: // Planet
-	Planet earth{"Earth.obj"};
-	Planet blueEarth{"Earth.obj"};
-	Planet moon{"Moon.obj"};
-	Planet yellowMoon{"Moon.obj"};
-	Planet saturn{"Saturn.obj"};
+	//Planet earth{"Earth.obj"};
+	//Planet blueEarth{"Earth.obj"};
+	//Planet moon{"Moon.obj"};
+	//Planet yellowMoon{"Moon.obj"};
+	//Planet saturn{"Saturn.obj"};
 
 private: //Star
-	Star sun{"Sun.obj"};
+	Star suns[1];
 };
 

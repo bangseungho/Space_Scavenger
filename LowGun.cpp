@@ -12,15 +12,15 @@ LowGun::LowGun()
 		_Obj = new OBJ;
 		_Obj->ReadObj("Obj/Equipment/LowGun/", "Gun.obj");
 	}
+	obj = _Obj;
+	MeshInit();
 
 	fireSound.Load("Sound/fire_bullet.mp3", false);
 	loadSound.Load("Sound/load_bullet.mp3", false);
 
-	obj = _Obj;
 
-	transform.local->scale = vec3(200);
 	transform.local->rotation.y = -90;
-	transform.local->position.y = 600;
+	transform.local->position.y = 3;
 	bulletNum = 10;
 
 	for (int i = 0; i < bulletNum; ++i) {

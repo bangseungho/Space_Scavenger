@@ -29,7 +29,6 @@ public:
 	PlanetManager planetManager;
 public:
 	Player player;
-	//Guidance g;
 
 private:
 	bool isMouseRight;
@@ -38,7 +37,5 @@ private:
 	bool isALT_L;
 
 	Sound bgm;
-	Sound effect;
-
 };
 

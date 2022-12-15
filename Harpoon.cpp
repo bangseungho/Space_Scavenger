@@ -10,10 +10,10 @@ Harpoon::Harpoon()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Harpoon.obj");
+		_Obj->ReadObj("Obj/Equipment/Harpoon/", "Harpoon.obj");
 	}
-
 	obj = _Obj;
+	MeshInit();
 
 	collider.tag = "Harpoon";
 	collider.SetBox_OBB(vec3(2));
