@@ -12,7 +12,6 @@ Sphere::Sphere() : Mesh(this)
 		_Obj->ReadObj((char*)"Sphere.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	Render::objectRender->AddObject(this);
 }

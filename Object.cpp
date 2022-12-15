@@ -1,6 +1,6 @@
 #include "Object.h"
 
-//list<Object*> Object::allObject;	//main.cpp 에서 전역변수로 Object 호출시 static 부분 무시함 (이유는 모름)
+vector<Object*> Object::InitObject;
 int Object::ID_Count = 0;
 unsigned char Object::key;
 unsigned char Object::keyUp;
@@ -15,6 +15,7 @@ Object::Object(): transform()
 	name = "UnName";
 	isActive = true;
 
+	InitObject.push_back(this);
 	allObject.push_back(this);
 }
 

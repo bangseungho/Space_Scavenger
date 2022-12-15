@@ -8,9 +8,6 @@ Toggle::Toggle(string path)
 
 	ui_Mark.image_file = path + "Mark.png";
 	ui_UnMark.image_file = path + "UnMark.png";
-
-	ui_Mark.MeshInit();
-	ui_UnMark.MeshInit();
 }
 
 Toggle::~Toggle()

@@ -1,7 +1,9 @@
 #include "Collider.h"
 
-OBJ* Collider::_Obj = nullptr;
 vector<Collider*> Collider::allCollider;
+vector<Collider*> Collider::initCollider;
+
+OBJ* Collider::_Obj = nullptr;
 bool Collider::isPrint = false;
 
 Collider::Collider()
@@ -22,6 +24,7 @@ Collider::Collider()
 	isCollide = true;
 
 	allCollider.push_back(this);
+	initCollider.push_back(this);
 }
 
 Collider::~Collider()

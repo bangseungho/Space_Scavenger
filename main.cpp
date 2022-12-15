@@ -88,12 +88,6 @@ void Init()
 
 	gameManager = new GameManager;
 	backGround = new CubeMap("UI/CubeBox/Default/");
-
-	glUseProgram(Shader::allProgram.find("Object")->second->program);
-	for (const auto& obj : Object::allObject)
-		obj->Init();
-	for (const auto& collider : Collider::allCollider)
-		collider->Init();
 }
 
 
@@ -165,6 +159,26 @@ void drawScene()
 		if (!obj->ActiveSelf())
 			continue;
 		obj->OnCollision();
+	}
+
+
+	{	// Init
+		glUseProgram(Shader::allProgram.find("Object")->second->program);
+		while (!Object::InitObject.empty())
+		{
+			Object::InitObject.back()->Init();
+			Object::InitObject.pop_back();
+		}
+		while (!Mesh::initMesh.empty())
+		{
+			Mesh::initMesh.back()->MeshInit();
+			Mesh::initMesh.pop_back();
+		}
+		while (!Collider::initCollider.empty())
+		{
+			Collider::initCollider.back()->Init();
+			Collider::initCollider.pop_back();
+		}
 	}
 
 	{

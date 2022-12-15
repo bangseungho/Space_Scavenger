@@ -4,7 +4,6 @@ Map::Map() : UIMesh(this)
 {
 	name = "Map";
 	image_file = "map.png";
-	MeshInit();
 
 	transform.local->position.x -= 0.67 * 1600/2;
 	transform.local->position.y -= 0.68 * 900/2;

@@ -13,7 +13,6 @@ Gold::Gold()
 		_Obj->ReadObj(filePath, "Gold.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	level = 3;
 

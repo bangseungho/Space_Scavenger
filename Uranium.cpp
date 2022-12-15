@@ -12,7 +12,6 @@ Uranium::Uranium()
 		_Obj->ReadObj(filePath, "Uranium.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	level = 3;
 

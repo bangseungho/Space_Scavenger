@@ -11,7 +11,6 @@ Bullet::Bullet()
 		_Obj->ReadObj("Obj/Equipment/LowGun/", "Bullet.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	SetType(EqType::BULLET);
 	name = "Bullet";

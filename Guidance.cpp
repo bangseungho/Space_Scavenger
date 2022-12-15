@@ -10,7 +10,6 @@ Guidance::Guidance()
 		_Obj->ReadObj("Obj/Equipment/Guidance/" , "Guidance.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	serchDistnace = 10;
 
@@ -122,7 +121,6 @@ Guidance::Wave::Wave() : Mesh(this)
 		_Obj->ReadObj("Obj/Equipment/Guidance/", "Wave.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	resource = nullptr;
 

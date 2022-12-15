@@ -13,7 +13,6 @@ Mineral::Mineral()
 		_Obj->ReadObj(filePath, "Mineral.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	level = 3;
 
