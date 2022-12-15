@@ -11,9 +11,8 @@ Cube::Cube() : Mesh(this)
 		_Obj = new OBJ;
 		_Obj->ReadObj("Obj/Default/", "Cube.obj");
 	}
-	obj = _Obj;
-	MeshInit();
 
+	obj = _Obj;
 
 	collider.tag = "Cube";
 	collider.SetBox_OBB(vec3(2));

@@ -5,23 +5,23 @@ OBJ* Bullet::_Obj = nullptr;
 
 Bullet::Bullet()
 {
+	SetType(EqType::BULLET);
+	name = "Bullet";
+
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
 		_Obj->ReadObj("Obj/Equipment/LowGun/", "Bullet.obj");
 	}
-	obj = _Obj;
-	MeshInit();
-
-	SetType(EqType::BULLET);
-	name = "Bullet";
 
 	collider.tag = "Bullet";
 	collider.object = this;
 	speed = 100;
 	isUse = false;
 
+	obj = _Obj;
 	transform.local->rotation.x = -90;
+	transform.local->scale = vec3(0.1);
 	collider.SetBox_OBB(vec3(2));
 
 	Render::objectRender->AddObject(this, "Bullet");

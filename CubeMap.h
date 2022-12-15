@@ -5,7 +5,7 @@
 class CubeMap
 {
 public:
-    CubeMap(string _Path);
+    CubeMap();
 public:
     void Draw();
 

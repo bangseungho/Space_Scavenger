@@ -20,6 +20,7 @@ bool is_Polygon = false;
 bool is_CullFace = false;
 bool is_ColliderDraw = false;
 
+list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<Light*> Light::allLight;
 
@@ -87,9 +88,11 @@ void Init()
 	uiCamera.isProjection_XY = true;
 
 	gameManager = new GameManager;
-	backGround = new CubeMap("UI/CubeBox/Default/");
+	backGround = new CubeMap;
 
 	glUseProgram(Shader::allProgram.find("Object")->second->program);
+	for (const auto& mesh : Mesh::allMesh)
+		mesh->MeshInit();
 	for (const auto& obj : Object::allObject)
 		obj->Init();
 	for (const auto& collider : Collider::allCollider)
@@ -166,6 +169,29 @@ void drawScene()
 			continue;
 		obj->OnCollision();
 	}
+	//for (auto i = 0; i < Collider::allCollider.size() - 1; i++)
+	//{
+	//	Collider* a = Collider::allCollider[i];
+	//	for (auto j = i + 1; j < Collider::allCollider.size(); j++)
+	//	{
+	//		if (!a->object->ActiveSelf() || !a->isCollide)
+	//			break;
+	//		Collider* b = Collider::allCollider[j];
+
+	//		if (!b->object->ActiveSelf() || !b->isCollide)
+	//			continue;
+
+	//		if (!Collider::OBBCollision(*a, *b))
+	//			continue;
+
+	//		a->object->OnCollision(b->object);
+	//		b->object->OnCollision(a->object);
+	//	}
+	//}
+
+	// 충돌한 물체들의 밀림 처리
+	//for (const auto& collider : Collider::allCollider)
+	//	collider->OnTrigger();
 
 	{
 		// 현재 Viewport

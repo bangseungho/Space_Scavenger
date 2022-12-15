@@ -60,13 +60,7 @@ Quest::Quest()
 		for (int i = 0; i < nameToken.size(); i++)
 		{
 			QuestNode::NeedItem item;
-
-			string str;
-			static std::locale loc("");
-			auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
-			str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(nameToken[i]);
-
-			item.name = str;
+			item.name = nameToken[i];
 			item.count = stoi(numToken[i]);
 			node->needItems.push_back(item);
 		}

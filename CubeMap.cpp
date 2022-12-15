@@ -1,8 +1,8 @@
 #include "CubeMap.h"
 
-CubeMap::CubeMap(string _Path)
+CubeMap::CubeMap()
 {
-    path = _Path;
+    path = "UI/CubeBox/";
     shader.CreatVertexShader("CubeMap_Vertex.glsl");
     shader.CreatFragmentShader("CubeMap_Fragment.glsl");
     shader.CreatProgram();
@@ -80,6 +80,9 @@ void CubeMap::Draw()
 {
     glUseProgram(shader.program);
     Camera::mainCamera->Draw();
+    //glFrontFace(GL_CW);
+    //glDisable(GL_CULL_FACE);
+    //glDisable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(Camera::mainCamera->view));
     glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(Camera::mainCamera->projection));
@@ -87,6 +90,8 @@ void CubeMap::Draw()
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDepthMask(GL_TRUE);
     glDepthFunc(GL_LESS);
+    //glFrontFace(GL_CCW);
+
 }
 
 unsigned int CubeMap::loadCubemap(vector<std::string> faces)

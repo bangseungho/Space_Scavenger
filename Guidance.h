@@ -38,7 +38,6 @@ public:
 
 public:
 	void SerchResource();	// 주변에 Resource가 있는지 확인
-	void GetData();
 public:
 	map<string, bool> resourceType;	// 가져올 자원 리스트		(추후 설정된 자원만 끓고 오게 변경)
 	float serchDistnace;	// 찾을 자원의 최대 범위
@@ -57,7 +56,6 @@ public:
 public:
 	void Enable();
 	void Disable();
-	void Update();
 
 public:
 	Guidance* guidance;

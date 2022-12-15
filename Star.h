@@ -4,9 +4,7 @@
 class Star : public Object, public Mesh
 {
 public:
-	static OBJ* _Obj;
-public:
-	Star();
+	Star(string objName);
 	~Star();
 
 public:

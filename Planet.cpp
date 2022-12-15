@@ -6,7 +6,6 @@ Planet::Planet(string objName) : Mesh(this)
 
 	obj = new OBJ;
 	obj->ReadObj("Obj/Planet/", objName);
-	MeshInit();
 
 	// Tranform
 	transform.local->rotation.x = RandomFloat(-60, 60);

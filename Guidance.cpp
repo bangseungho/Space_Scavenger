@@ -10,7 +10,6 @@ Guidance::Guidance()
 		_Obj->ReadObj("Obj/Equipment/Guidance/" , "Guidance.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	serchDistnace = 10;
 
@@ -18,7 +17,6 @@ Guidance::Guidance()
 	transform.local->position = vec3(3);
 
 	sound_Dragged.Load("Sound/Player/Dragged.mp3");
-	GetData();
 
 	Render::objectRender->AddObject(this);
 }
@@ -56,6 +54,7 @@ void Guidance::Update()
 		for (const auto& world : transform.world)
 			rotate += world->rotation;
 		transform.local->rotation -= rotate;
+		//transform.local->rotation = -transform.local->rotation;
 	}
 }
 void Guidance::SerchResource()
@@ -70,16 +69,20 @@ void Guidance::SerchResource()
 	vec3 myPos = transform.model * vec4(0, 0, 0, 1);
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf()) continue;
-		if (!other->isCollide) continue;
-		if (other->tag != "Resource") continue;
+		if (!other->object->ActiveSelf())
+			continue;
+		if (!other->isCollide)
+			continue;
 
-		if (!resourceType.find(other->object->name)->second) continue;	// 현재 체크된 자원인지 확인
+		if (other->tag != "Resource")
+			continue;
 
 		// 자원과 장비 사이의 거리 측정
 		vec3 targetPos = other->object->transform.model * vec4(0, 0, 0, 1);
 		float dis = length(myPos - targetPos);
-		if (dis > serchDistnace) continue;
+
+		if (dis > serchDistnace)
+			continue;
 
 		// 찾은 자원의 함수를 사용하기 위해 형변환
 		wave.resource = reinterpret_cast<Resource*>(other->object);
@@ -99,19 +102,6 @@ void Guidance::SerchResource()
 		return;
 	}
 }
-void Guidance::GetData()
-{
-	ResourceData* data = ResourceData::Instance;
-	for (auto& type : data->resourceTypes)
-	{
-		string str;
-		static std::locale loc("");
-		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
-		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(type);
-
-		resourceType[str] = false;
-	}
-}
 OBJ* Guidance::Wave::_Obj = nullptr;
 
 Guidance::Wave::Wave() : Mesh(this)
@@ -122,7 +112,6 @@ Guidance::Wave::Wave() : Mesh(this)
 		_Obj->ReadObj("Obj/Equipment/Guidance/", "Wave.obj");
 	}
 	obj = _Obj;
-	MeshInit();
 
 	resource = nullptr;
 

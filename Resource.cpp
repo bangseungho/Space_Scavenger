@@ -26,7 +26,7 @@ Resource::Resource() : Mesh(this)
 	draggedSpeed = 1;
 	isDragged = false;
 
-	//particles = new Particle();
+	particles = new Particle();
 
 	Render::objectRender->AddObject(this, "Resource");
 }
@@ -72,7 +72,7 @@ void Resource::OnCollision()
 		if (!Collider::OBBCollision(collider, *other))
 			continue;
 
-		if (other->tag == "Player")
+		if (other->tag == "Player" && level <= 1)
 		{
 			SetActive(false);
 		}
@@ -80,7 +80,7 @@ void Resource::OnCollision()
 		if (other->tag == "Harpoon")
 		{
 			if (level > 1) {
-				level = 0;
+				level = 1;
 			}
 		}
 

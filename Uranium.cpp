@@ -11,9 +11,8 @@ Uranium::Uranium()
 		_Obj = new OBJ;
 		_Obj->ReadObj(filePath, "Uranium.obj");
 	}
-	obj = _Obj;
-	MeshInit();
 
+	obj = _Obj;
 	level = 3;
 
 	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));

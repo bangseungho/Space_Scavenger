@@ -11,9 +11,8 @@ Particle::Particle()
 		_Obj = new OBJ;
 		_Obj->ReadObj((char*)"Sphere.obj");
 	}
-	obj = _Obj;
-	MeshInit();
 
+	obj = _Obj;
 	transform.local->scale = vec3(10);
 
 	Render::objectRender->AddObject(this, "Particle");

@@ -16,7 +16,7 @@ public:
 	wstring reward;
 
 	struct NeedItem {
-		string name;
+		wstring name;
 		int count;
 	};
 

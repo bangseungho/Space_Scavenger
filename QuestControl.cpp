@@ -5,21 +5,8 @@ QuestControl::QuestControl(Player* _Player) : player(_Player)
 	nowToggle = nullptr;
 
 	seccseButton.transform.local->position.y = -200;
-
-	for (auto& node : quest.nodeList)
-	{
-		questToggles[node.second->name] = new Toggle("UI/Toggle/Window/");
-	}
-
-	int i = 0;
-	for (auto& toggle : questToggles)
-	{
-		toggle.second->transform.local->position.y = (questToggles.size() / 2.0f - i++) * 100.0f;
-	}
-
-	//questToggles[L"작살을 얻자"] = new Toggle("UI/Toggle/Window/");
-	//questToggles[L"작살을 얻자"]->name += " 작살을 얻자";
-	//questToggles[L"총을 쏘자"]->name += " 작살을 얻자";
+	questToggles[L"작살을 얻자"] = new Toggle("UI/Toggle/Window/");
+	questToggles[L"작살을 얻자"]->name += " 작살을 얻자";
 	//questToggles[L"작살을 얻자"].transform.local->position.y = -200;
 
 	SetActive(false);
@@ -45,13 +32,13 @@ void QuestControl::Disable()
 
 void QuestControl::Update()
 {
-	if (nowToggle != nullptr && !nowToggle->isToggle)
-		nowToggle = nullptr;
 	for (auto& toggle : questToggles)
 	{
-		if (!toggle.second->isToggle) continue;
-		if (!toggle.second->ActiveSelf()) continue;
-		if (toggle.second == nowToggle) continue;
+		if (!toggle.second->ActiveSelf())
+			continue;
+
+		if (toggle.second == nowToggle)
+			continue;
 
 		if (nowToggle != nullptr)
 			nowToggle->ToggleClick();

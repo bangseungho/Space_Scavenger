@@ -18,6 +18,8 @@ void GameManager::Init()
 	Camera::mainCamera->target_Pos = &player.transform;
 
 	bgm.Load("Sound/bgm.mp3", true);
+	effect.Load("Sound/ItemEarn.wav", false);
+
 	bgm.RepeatPlay();
 }
 
@@ -32,6 +34,9 @@ void GameManager::SpecialKeyboard(int key, int x, int y)
 	case GLUT_KEY_ALT_L:
 		isALT_L = true;
 		Camera::mainCamera->cameraDirection = vec3(0);
+		break;
+	case GLUT_KEY_F1:
+		effect.Play();
 		break;
 	}
 }

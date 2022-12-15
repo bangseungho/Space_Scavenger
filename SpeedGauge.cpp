@@ -32,7 +32,6 @@ SpeedGauge::Panel::Panel() : UIMesh(this)
 {
 	name = "Gauge Panel";
 	image_file = "UI/Player/GaugePanel.png";
-	MeshInit();
 
 	Render::uiRender->AddObject(this);
 }
@@ -41,7 +40,6 @@ SpeedGauge::Gauge::Gauge() : UIMesh(this)
 {
 	name = "Gauge";
 	image_file = "UI/Player/Gauge.png";
-	MeshInit();
 
 	color.SetColor({ 0,0.3,1,1 });
 

@@ -1,18 +1,11 @@
 #include "Star.h"
 
-OBJ* Star::_Obj = nullptr;
-
-Star::Star() : Mesh(this)
+Star::Star(string objName) : Mesh(this)
 {
-	if (_Obj == nullptr)
-	{
-		_Obj = new OBJ;
-		_Obj->ReadObj("Obj/Star/", "Sun.obj");
-	}
-	obj = _Obj;
-	MeshInit();
+	name = objName.substr(0, objName.size() - 4);
 
-	name = "Sun";
+	obj = new OBJ;
+	obj->ReadObj("Obj/Star/", objName);
 
 	lightTypeIndex = 1;
 
