@@ -20,7 +20,6 @@ bool is_Polygon = false;
 bool is_CullFace = false;
 bool is_ColliderDraw = false;
 
-list<Mesh*> Mesh::allMesh;
 list<Object*> Object::allObject;
 list<Light*> Light::allLight;
 
@@ -91,12 +90,21 @@ void Init()
 	backGround = new CubeMap("UI/CubeBox/Default/");
 
 	glUseProgram(Shader::allProgram.find("Object")->second->program);
-	for (const auto& mesh : Mesh::allMesh)
-		mesh->MeshInit();
-	for (const auto& obj : Object::allObject)
-		obj->Init();
-	for (const auto& collider : Collider::allCollider)
-		collider->Init();
+	while (!Object::initObject.empty())
+	{
+		Object::initObject.back()->Init();
+		Object::initObject.pop_back();
+	}
+	while (!Mesh::initMesh.empty())
+	{
+		Mesh::initMesh.back()->MeshInit();
+		Mesh::initMesh.pop_back();
+	}
+	while (!Collider::initCollider.empty())
+	{
+		Collider::initCollider.back()->Init();
+		Collider::initCollider.pop_back();
+	}
 }
 
 
@@ -168,6 +176,25 @@ void drawScene()
 		if (!obj->ActiveSelf())
 			continue;
 		obj->OnCollision();
+	}
+
+	{
+		glUseProgram(Shader::allProgram.find("Object")->second->program);
+		while (!Object::initObject.empty())
+		{
+			Object::initObject.back()->Init();
+			Object::initObject.pop_back();
+		}
+		while (!Mesh::initMesh.empty())
+		{
+			Mesh::initMesh.back()->MeshInit();
+			Mesh::initMesh.pop_back();
+		}
+		while (!Collider::initCollider.empty())
+		{
+			Collider::initCollider.back()->Init();
+			Collider::initCollider.pop_back();
+		}
 	}
 
 	{

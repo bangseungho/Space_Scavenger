@@ -1,6 +1,8 @@
 #include "Mesh.h"
 
 Shader* Mesh::objectShader = nullptr;
+vector<Mesh*> Mesh::initMesh;
+
 unsigned int Mesh::vertexLocation;
 unsigned int Mesh::uvLoaction;
 unsigned int Mesh::normalLocation;
@@ -37,13 +39,12 @@ Mesh::Mesh(Object* obj) : object(obj)
 
 	lightTypeIndex = 0;
 
-	allMesh.push_back(this);
 	isDraw = true;
+	initMesh.push_back(this);
 }
 
 Mesh::~Mesh()
 {
-	allMesh.erase(remove(allMesh.begin(), allMesh.end(), this), allMesh.end());
 }
 
 void Mesh::MeshInit()

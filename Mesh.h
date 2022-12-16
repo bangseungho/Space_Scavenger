@@ -7,7 +7,7 @@ class Mesh
 {
 public:
 	static Shader* objectShader;
-	static list<Mesh*> allMesh;
+	static vector<Mesh*> initMesh;
 	static unsigned int vertexLocation;
 	static unsigned int uvLoaction;
 	static unsigned int normalLocation;
@@ -42,4 +42,3 @@ protected:
 	GLuint* VAO, *VBO, *EBO;
 
 };
-
