@@ -11,9 +11,9 @@ public:
 	~QuestNode();
 public:
 	bool isSeccse;
-	wstring name;
-	wstring explain;
-	wstring reward;
+	string name;
+	string explain;
+	string reward;
 
 	struct NeedItem {
 		string name;
@@ -33,6 +33,6 @@ public:
 	~Quest();
 
 public:
-	map<wstring, QuestNode*> nodeList;
+	map<string, QuestNode*> nodeList;
 };
 

@@ -108,19 +108,45 @@ public:
 public:
 	void Enable();
 	void Disable();
+	void Init();
 	void Update();
 
+public:
+	void ActiveAnimation();
+
 private:
-	void ClickQuestSeccse(wstring questName);
+	void ClickQuestSeccse(string questName);
 	void QuestReward(QuestNode* node);
+
+public:
+	bool isActiveAniamtion;
 
 private:
 	Player* player;
 	Quest quest;
 
 private:
-	//BackGround background{};
-	Button seccseButton;
-	Toggle* nowToggle;
-	map<wstring, Toggle*> questToggles;
+	BackGround background{"UI/BackGround/", "GuidanceBackground.png"};
+	Button successButton;
+
+	struct FontNode {
+		Font nameFont;
+		Font explainFont;
+		Font rewardFont;
+		void OnFont(bool value)
+		{
+			nameFont.SetActive(value);
+			explainFont.SetActive(value);
+			rewardFont.SetActive(value);
+		}
+	};
+
+	struct QuestToggleNode
+	{
+		Toggle toggle{ "UI/Toggle/Window/"};
+		FontNode fontNode;
+	};
+	QuestToggleNode* nowToggle;
+	map<string, QuestToggleNode*> questToggles;
+	FontNode fontNode;
 };

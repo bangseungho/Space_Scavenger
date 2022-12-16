@@ -5,6 +5,7 @@ unsigned int OBJ::MaterialBlockLocation;
 OBJ::OBJ()
 {
 	isOnMTL = false;
+	VAO = nullptr;
 }
 
 OBJ::~OBJ()
@@ -17,11 +18,22 @@ void OBJ::ReadObj(string path, string objFileName)
 	char lineHeader[1000];
 	int groupNum = 0;
 	string fileName = path + objFileName;
+	int faceCount = 0;
+	int maxFaceConut = 100;
 
 	obj = fopen(fileName.c_str(), "r");
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
-		if (strcmp(lineHeader, "g") == 0) groupNum++;
+		if (strcmp(lineHeader, "g") == 0) 
+		{
+			groupNum++;
+			faceCount = 0;
+		}
+		else if (strcmp(lineHeader, "f") == 0)
+		{
+			if (++faceCount == maxFaceConut)
+				groupNum++;
+		}
 		else if (strcmp(lineHeader, "mtllib") == 0)
 		{
 			char mtlName[1000];
@@ -39,6 +51,8 @@ void OBJ::ReadObj(string path, string objFileName)
 	vBlock.min = vec3(10000); vBlock.max = vec3(-10000);
 	vBlock.usemtlName = new string[groupNum];
 
+	
+	faceCount = 0;
 	rewind(obj);
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
@@ -46,9 +60,18 @@ void OBJ::ReadObj(string path, string objFileName)
 		else if (strcmp(lineHeader, "v") == 0) PushVertex(obj);
 		else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
 		else if (strcmp(lineHeader, "vn") == 0) PushNormal(obj);
-		else if (strcmp(lineHeader, "f") == 0) PushFaceIndex(obj);
+		else if (strcmp(lineHeader, "f") == 0)
+		{
+			PushFaceIndex(obj);
+			if (++faceCount == maxFaceConut)
+			{
+				vBlock.groupCount++;
+				vBlock.usemtlName[vBlock.groupCount] = vBlock.usemtlName[vBlock.groupCount - 1];
+			}
+		}
 		else if (strcmp(lineHeader, "g") == 0)
 		{
+			faceCount = 0;
 			vBlock.groupCount++;
 			vBlock.usemtlName[vBlock.groupCount] = "NULL";
 		}

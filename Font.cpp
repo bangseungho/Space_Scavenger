@@ -47,6 +47,10 @@ void Font::Draw()
 	float y = (tokeSize - 1) * size;
 
 	int i = 0;
+	mat4 projection = mat4(1);
+	projection = ortho(-windowSize_W / 2, windowSize_W / 2, -windowSize_H / 2, windowSize_H / 2, -1.0, 1.0);
+	glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
+	glUniform4f(ColorLocation, color.R, color.G, color.B, color.A);
 	for (auto& token : textToken)
 	{
 		vec2 pos = vec2(0);
@@ -62,15 +66,9 @@ void Font::Draw()
 			pos.y -= size / 2.0f;
 
 		model = translate(model, vec3(pos, 0));
-
-		glm::mat4 projection = glm::mat4(1.0f);
-		projection = ortho(-windowSize_W / 2, windowSize_W / 2, -windowSize_H / 2, windowSize_H / 2, -1.0, 1.0);
-		glUniform4f(ColorLocation, color.R, color.G, color.B, color.A);
-		glUniformMatrix4fv(ortho_projection, 1, GL_FALSE, value_ptr(projection));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(model));
 
 		glRasterPos2f(0, 0);
-
 		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)token.c_str());
 		i++;
 	}

@@ -34,18 +34,29 @@ PlanetManager::PlanetManager()
 	//yellowMoon.color.SetColor({ 1,1,0,1 });
 	//saturn.transform.local->position.y = 10000;
 
-	for (Star& sun : suns)
-	{
-		sun.transform.local->position.x = RandomInt(5000, 15000) * RandomPlusMinus();
-		sun.transform.local->position.y = RandomInt(5000, 15000) * RandomPlusMinus();
-		sun.transform.local->position.z = RandomInt(5000, 15000) * RandomPlusMinus();
-		sun.color.SetRandomColor();
-		sun.color.G = RandomInt(1, 5);
-		sun.color.B = RandomInt(1, 5);
-	}
-	suns[0].color.SetColor({ 1,1,1,1 });
+	sun.transform.local->position.x = RandomInt(5000, 15000) * RandomPlusMinus();
+	sun.transform.local->position.y = RandomInt(5000, 15000) * RandomPlusMinus();
+	sun.transform.local->position.z = RandomInt(5000, 15000) * RandomPlusMinus();
+	sun.color.SetRandomColor();
+	sun.color.G = RandomInt(1, 5);
+	sun.color.B = RandomInt(1, 5);
+
+	earth.color.SetRandomColor();
+	earth.transform.local->position.x = RandomInt(5500, 12000);
+	earth.transform.local->position.y = RandomInt(200, 3000);
+	earth.transform.local->position.z = RandomInt(-2200, -1000);
 }
 
 PlanetManager::~PlanetManager()
 {
+}
+
+void PlanetManager::Init()
+{
+	for (auto& world : sun.transform.world)
+	{
+		earth.transform.world.push_back(world);
+	}
+	TransformBlock* local = sun.transform.local;
+	earth.transform.world.push_back(local);
 }

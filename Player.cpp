@@ -102,6 +102,8 @@ void Player::Handle_Event(unsigned char key)
 		break;
 	case 'q':
 		questControl->SetActive(!questControl->ActiveSelf());
+		//questControl->isActiveAniamtion = !questControl->isActiveAniamtion;
+		//questControl->ActiveAnimation();
 		upgrade->SetActive(false);
 		guidanceControl->SetActive(false);
 		break;
@@ -193,15 +195,18 @@ void Player::OnCollision()
 		if (!other->OBBCollision(collider, *other))
 			continue;
 
-		Resource* resource = reinterpret_cast<Resource*>(other->object);
-		if (resource->isDragged)
-			equipment.find("Guidance")->second->isDragged = false;
+		if (other->tag == "Resource")
+		{
+			Resource* resource = reinterpret_cast<Resource*>(other->object);
+			if (resource->isDragged)
+				equipment.find("Guidance")->second->isDragged = false;
 
-		hp -= resource->level;
-		resourceCount[resource->name] += resource->amount;
+			hp -= resource->level;
+			resourceCount[resource->name] += resource->amount;
 
-		if (resource->level > 0)
-			speedBlock.current *= 0.7;
+			if (resource->level > 0)
+				speedBlock.current *= 0.7;
+		}
 	}
 }
 

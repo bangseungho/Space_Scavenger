@@ -20,6 +20,8 @@ GuidanceControl::GuidanceControl(Guidance* _Guidance) : guidance(_Guidance)
 
 		resourceToggles[name] = toggle;
 	}
+
+	SetActive(false);
 }
 
 GuidanceControl::~GuidanceControl()

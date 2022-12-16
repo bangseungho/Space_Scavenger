@@ -6,20 +6,37 @@ QuestControl::QuestControl(Player* _Player) : player(_Player)
 
 	for (auto& node : quest.nodeList)
 	{
-		questToggles[node.second->name] = new Toggle("UI/Toggle/Window/");
+		QuestToggleNode* toggle = new QuestToggleNode;
+		toggle->toggle.font.isDraw = false;
+		toggle->fontNode.nameFont.text = node.second->name;
+		toggle->fontNode.explainFont.text = node.second->explain;
+		toggle->fontNode.rewardFont.text = node.second->reward;
+		
+		toggle->fontNode.OnFont(false);
+
+		questToggles[node.second->name] = toggle;
 	}
 
 	int i = 0;
 	for (auto& toggle : questToggles)
 	{
-		toggle.second->transform.local->position.y = (questToggles.size() / 2.0f - i++) * 100.0f;
+		toggle.second->toggle.transform.local->position.x = -400;
+		toggle.second->toggle.transform.local->position.y = (questToggles.size() / 2.0f - i++) * 100.0f;
 	}
 
-	//seccseButton.transform.local->position.y = -200;
-	//questToggles[L"작살을 얻자"] = new Toggle("UI/Toggle/Window/");
-	//questToggles[L"작살을 얻자"]->name += " 작살을 얻자";
-	//questToggles[L"작살을 얻자"].transform.local->position.y = -200;
+	background.color.A = 0.7f;
+	successButton.font.text = "Success";
+	successButton.transform.local->position.y = -200;
 
+	fontNode.nameFont.lineType = 1;
+	fontNode.rewardFont.lineType = 1;
+
+	fontNode.nameFont.transform.local->position.y = 200;
+	fontNode.explainFont.transform.local->position.x = -300;
+	fontNode.explainFont.transform.local->position.y = 100;
+	fontNode.rewardFont.transform.local->position.y = -100;
+
+	isActiveAniamtion = false;
 	SetActive(false);
 }
 
@@ -29,47 +46,111 @@ QuestControl::~QuestControl()
 
 void QuestControl::Enable()
 {
-	seccseButton.SetActive(true);
+	background.SetActive(true);
+	successButton.SetActive(true);
 	for (auto& toggle : questToggles)
-		toggle.second->SetActive(true);
+		toggle.second->toggle.SetActive(true);
+
+	fontNode.OnFont(true);
 }
 
 void QuestControl::Disable()
 {
-	seccseButton.SetActive(false);
+	background.SetActive(false);
+	successButton.SetActive(false);
 	for (auto& toggle : questToggles)
-		toggle.second->SetActive(false);
+		toggle.second->toggle.SetActive(false);
+
+	fontNode.OnFont(false);
+
+	//transform.local->position.x = windowSize_W / 2.0f + background.width;
+}
+
+void QuestControl::Init()
+{
+	for (auto& world : transform.world)
+	{
+		background.transform.world.push_back(world);
+		successButton.transform.world.push_back(world);
+		for (auto& toggle : questToggles)
+			toggle.second->toggle.transform.world.push_back(world);
+
+		fontNode.nameFont.transform.world.push_back(world);
+		fontNode.explainFont.transform.world.push_back(world);
+		fontNode.rewardFont.transform.world.push_back(world);
+	}
+
+	background.transform.world.push_back(transform.local);
+	successButton.transform.world.push_back(transform.local);
+	for (auto& toggle : questToggles)
+		toggle.second->toggle.transform.world.push_back(transform.local);
+
+	fontNode.nameFont.transform.world.push_back(transform.local);
+	fontNode.explainFont.transform.world.push_back(transform.local);
+	fontNode.rewardFont.transform.world.push_back(transform.local);
 }
 
 void QuestControl::Update()
 {
-	if (nowToggle != nullptr && !nowToggle->isToggle)
+	//ActiveAnimation();
+
+	// 현재 고른 Toggle 만 off 할때
+	if (nowToggle != nullptr && !nowToggle->toggle.isToggle)
+	{
+		fontNode.OnFont(false);
 		nowToggle = nullptr;
+	}
+
 	for (auto& toggle : questToggles)
 	{
-		if (!toggle.second->isToggle) continue;
-		if (!toggle.second->ActiveSelf()) continue;
+		if (!toggle.second->toggle.isToggle) continue;
+		if (!toggle.second->toggle.ActiveSelf()) continue;
 		if (toggle.second == nowToggle) continue;
 
 		if (nowToggle != nullptr)
-			nowToggle->ToggleClick();
+			nowToggle->toggle.ToggleClick();
 
 		nowToggle = toggle.second;
+		fontNode.nameFont.text = nowToggle->fontNode.nameFont.text;
+		fontNode.explainFont.text = nowToggle->fontNode.explainFont.text;
+		fontNode.rewardFont.text = nowToggle->fontNode.rewardFont.text;
+		fontNode.OnFont(true);
 	}
 
-	if (!seccseButton.isClick)
+	if (!successButton.isClick)
 		return;
 
 	for (auto& toggle : questToggles)
 	{
-		if (!toggle.second->isToggle)
+		if (!toggle.second->toggle.isToggle)
 			continue;
 		ClickQuestSeccse(toggle.first);
 		return;
 	}
 }
 
-void QuestControl::ClickQuestSeccse(wstring questName)
+void QuestControl::ActiveAnimation()
+{
+	if (isActiveAniamtion)
+	{
+		SetActive(true);
+		transform.local->position.x -= 3000 * FrameTime::oneFrame;
+		if (transform.local->position.x < 0)
+		{
+			transform.local->position.x = 0;
+		}
+	}
+	else
+	{
+		transform.local->position.x += 3000 * FrameTime::oneFrame;
+		if (transform.local->position.x > windowSize_W/2.0f + background.width/2)
+		{
+			SetActive(false);
+		}
+	}
+}
+
+void QuestControl::ClickQuestSeccse(string questName)
 {
 	if (quest.nodeList.find(questName) != quest.nodeList.cend())
 	{
@@ -85,28 +166,26 @@ void QuestControl::ClickQuestSeccse(wstring questName)
 			player->resourceCount.find(item.name)->second -= item.count;
 		}
 
-		cout << "퀘스트 성공 : ";
-		wcout.imbue(locale("korean"));
-		wcout << questName << endl;
+		cout << questName << endl;
 		QuestReward(node);
 	}
 }
 
 void QuestControl::QuestReward(QuestNode* node)
 {
-	if (node->name == L"작살을 얻자")
+	if (node->name == "Let's get a harpoon")
 	{
 		player->equipment.find("Harpoon")->second->SetActive(true);
 	}
-	else if (node->name == L"자원을 뿌셔")
+	else if (node->name == "Let's shoot a gun")
 	{
 		player->equipment.find("LowGun")->second->SetActive(true);
 	}
-	else if (node->name == L"자원 유도 장치")
+	else if (node->name == "resource guidance system")
 	{
 		player->equipment.find("Guidance")->second->SetActive(true);
 	}
-	else if (node->name == L"")
+	else if (node->name == "")
 	{
 
 	}

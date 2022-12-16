@@ -38,7 +38,7 @@ void Button::Init()
 {
 	for (const auto& world : transform.world)
 	{
-		ui_Defualt.transform.world.push_back(world);
+		ui_Defualt.transform.world = transform.world;
 		ui_OnMouse.transform.world.push_back(world);
 		ui_Click.transform.world.push_back(world);
 		font.transform.world.push_back(world);

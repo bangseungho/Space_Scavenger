@@ -1,5 +1,6 @@
 #pragma once
 #include "Render.h"
+#include "Font.h"
 
 class ToggleUnMark : public Object, public UIMesh
 {
@@ -39,6 +40,7 @@ private:
 	bool CheckInMouse();
 
 public:
+	Font font;
 	Color color;
 	bool isToggle;
 

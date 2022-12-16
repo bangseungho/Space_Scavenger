@@ -105,6 +105,9 @@
     <Filter Include="Object\Equipment\Contain\Gun">
       <UniqueIdentifier>{9cb9046a-bf24-4f07-bdf7-82a5152d3e74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Planet\Contain">
+      <UniqueIdentifier>{ed725cef-faee-4400-864a-c93a77ae07be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -272,6 +275,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
+    <ClCompile Include="Earth.cpp">
+      <Filter>Object\Planet\Contain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -427,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth.h">
+      <Filter>Object\Planet\Contain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

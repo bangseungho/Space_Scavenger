@@ -8,6 +8,8 @@ Toggle::Toggle(string path)
 
 	ui_Mark.image_file = path + "Mark.png";
 	ui_UnMark.image_file = path + "UnMark.png";
+
+	font.lineType = 1;
 }
 
 Toggle::~Toggle()
@@ -18,12 +20,14 @@ void Toggle::Enable()
 {
 	ui_UnMark.SetActive(!isToggle);
 	ui_Mark.SetActive(isToggle);
+	font.SetActive(true);
 }
 
 void Toggle::Disable()
 {
 	ui_UnMark.SetActive(false);
 	ui_Mark.SetActive(false);
+	font.SetActive(false);
 }
 
 void Toggle::Init()
@@ -32,9 +36,11 @@ void Toggle::Init()
 	{
 		ui_UnMark.transform.world.push_back(world);
 		ui_Mark.transform.world.push_back(world);
+		font.transform.world.push_back(world);
 	}
 	ui_UnMark.transform.world.push_back(transform.local);
 	ui_Mark.transform.world.push_back(transform.local);
+	font.transform.world.push_back(transform.local);
 
 	width = ui_UnMark.width;
 	height = ui_UnMark.height;

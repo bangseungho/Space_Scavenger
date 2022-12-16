@@ -1,11 +1,11 @@
 #pragma once
-
 #include "Mesh.h"
 
 class Collider {
 public:
+	//static list<Collider*> allCollider;
 	static vector<Collider*> allCollider;
-	static vector<Collider*> initCollider;
+	static list<Collider*> initCollider;
 	static OBJ* _Obj;
 	static bool isPrint;
 

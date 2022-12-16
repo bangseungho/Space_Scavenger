@@ -1,8 +1,8 @@
 #include "Collider.h"
 
-OBJ* Collider::_Obj = nullptr;
 vector<Collider*> Collider::allCollider;
-vector<Collider*> Collider::initCollider;
+
+OBJ* Collider::_Obj = nullptr;
 bool Collider::isPrint = false;
 
 Collider::Collider()
@@ -68,8 +68,6 @@ void Collider::DrawBox()
 
 	glBindVertexArray(VAO);
 
-	//glPointSize(5.0f);
-	//glDrawArrays(GL_POINTS, 0, obj->vBlock.vertexIndices[0].size());
 	glDrawElements(GL_TRIANGLES, obj->vBlock.vertexIndices[0].size() * 3, GL_UNSIGNED_SHORT, 0);
 }
 // Right Front Top 점을 정해주면 된다.
@@ -122,8 +120,6 @@ bool Collider::OBBCollision(Collider& a,Collider& b)
 	double r, r1, r2;	// 투영된 길이
 	bool isExitsParallelPair = false;
 
-	//dis = abs(a.object->transform.model * vec4(0,0,0,1) - b.object->transform.model * vec4(0,0,0,1));
-	//dis = b.object->transform.local->position - a.object->transform.local->position;
 	dis = (b.object->transform.model - a.object->transform.model) * vec4(0, 0, 0, 1);
 
 	for (int n = 0; n < 3; n++)

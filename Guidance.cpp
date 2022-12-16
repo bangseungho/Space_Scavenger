@@ -18,6 +18,7 @@ Guidance::Guidance()
 
 	sound_Dragged.Load("Sound/Player/Dragged.mp3");
 
+	GetData();
 	Render::objectRender->AddObject(this);
 }
 

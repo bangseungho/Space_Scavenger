@@ -3,10 +3,10 @@
 class Planet : public Object, public Mesh
 {
 public:
-	Planet(string objName);
+	Planet();
 	~Planet();
 
 public:
-	void Update();
+	virtual void Update();
 };
 

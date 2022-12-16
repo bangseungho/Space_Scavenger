@@ -1,7 +1,6 @@
 #include "Mesh.h"
 
 Shader* Mesh::objectShader = nullptr;
-vector<Mesh*> Mesh::initMesh;
 
 unsigned int Mesh::vertexLocation;
 unsigned int Mesh::uvLoaction;
@@ -49,6 +48,12 @@ Mesh::~Mesh()
 
 void Mesh::MeshInit()
 {
+	if (obj->VAO != nullptr)
+	{
+		VAO = obj->VAO;
+		return;
+	}
+
 	int num = obj->vBlock.groupCount;
 	VAO = new GLuint[num];
 	VBO = new GLuint[1];
@@ -81,6 +86,8 @@ void Mesh::MeshInit()
 		glVertexAttribPointer(vertexLocation, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0); // Á¤Á¡
 		glEnableVertexAttribArray(vertexLocation);
 	}
+
+	obj->VAO = VAO;
 }
 
 void Mesh::Draw()

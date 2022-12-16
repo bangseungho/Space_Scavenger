@@ -28,9 +28,15 @@ Quest::Quest()
 	for (int i = -1; i < maxCount - 1; i++)
 	{
 		QuestNode* node = new QuestNode;
-		node->name = sheet->readStr(i + 9, 2);
-		node->explain = sheet->readStr(i + 9, 3);
-		node->reward = sheet->readStr(i + 9, 4);
+		string str;
+		static std::locale loc("");
+		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(sheet->readStr(i + 9, 2));
+		node->name = str;
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(sheet->readStr(i + 9, 3));
+		node->explain = str;
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(sheet->readStr(i + 9, 4));
+		node->reward = str;
 
 		wstring itemsName(sheet->readStr(i + 9, 5));
 		itemsName.append(L"\n");
@@ -61,8 +67,8 @@ Quest::Quest()
 		{
 			QuestNode::NeedItem item;
 			string str;
-			static std::locale loc("");
-			auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
+			//static std::locale loc("");
+			//auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
 			str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(nameToken[i]);
 
 			item.name = str;

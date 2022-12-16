@@ -153,6 +153,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Emerald.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Font.cpp">
@@ -212,6 +213,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Earth.h" />
     <ClInclude Include="Emerald.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="Font.h">

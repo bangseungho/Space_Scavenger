@@ -1,6 +1,6 @@
 #include "Object.h"
 
-vector<Object*> Object::initObject;
+
 int Object::ID_Count = 0;
 unsigned char Object::key;
 unsigned char Object::keyUp;
@@ -22,13 +22,6 @@ Object::Object(): transform()
 Object::~Object()
 {
 	allObject.erase(remove(allObject.begin(), allObject.end(), this), allObject.end());
-}
-
-void Object::Update()
-{
-}
-void Object::Init()
-{
 }
 
 void Object::SetActive(bool value)

@@ -21,7 +21,10 @@ bool is_CullFace = false;
 bool is_ColliderDraw = false;
 
 list<Object*> Object::allObject;
+list<Object*> Object::initObject;
+list<Collider*> Collider::initCollider;
 list<Light*> Light::allLight;
+list<Mesh*> Mesh::initMesh;
 
 Shader objectShader("Object");
 Shader uiShader("UI");
@@ -90,20 +93,20 @@ void Init()
 	backGround = new CubeMap("UI/CubeBox/Default/");
 
 	glUseProgram(Shader::allProgram.find("Object")->second->program);
-	while (!Object::initObject.empty())
-	{
-		Object::initObject.back()->Init();
-		Object::initObject.pop_back();
-	}
 	while (!Mesh::initMesh.empty())
 	{
-		Mesh::initMesh.back()->MeshInit();
-		Mesh::initMesh.pop_back();
+		Mesh::initMesh.front()->MeshInit();
+		Mesh::initMesh.pop_front();
+	}
+	while (!Object::initObject.empty())
+	{
+		Object::initObject.front()->Init();
+		Object::initObject.pop_front();
 	}
 	while (!Collider::initCollider.empty())
 	{
-		Collider::initCollider.back()->Init();
-		Collider::initCollider.pop_back();
+		Collider::initCollider.front()->Init();
+		Collider::initCollider.pop_front();
 	}
 }
 
@@ -180,15 +183,15 @@ void drawScene()
 
 	{
 		glUseProgram(Shader::allProgram.find("Object")->second->program);
-		while (!Object::initObject.empty())
-		{
-			Object::initObject.back()->Init();
-			Object::initObject.pop_back();
-		}
 		while (!Mesh::initMesh.empty())
 		{
 			Mesh::initMesh.back()->MeshInit();
 			Mesh::initMesh.pop_back();
+		}
+		while (!Object::initObject.empty())
+		{
+			Object::initObject.back()->Init();
+			Object::initObject.pop_back();
 		}
 		while (!Collider::initCollider.empty())
 		{
@@ -197,8 +200,7 @@ void drawScene()
 		}
 	}
 
-	{
-		// 현재 Viewport
+	{	// 현재 Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
 		backGround->Draw();

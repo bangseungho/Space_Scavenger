@@ -5,7 +5,7 @@ class Object {
 public:
 	static int ID_Count;
 	static list<Object*> allObject;
-	static vector<Object*> initObject;
+	static list<Object*> initObject;
 
 	static unsigned char key;
 	static unsigned char keyUp;
@@ -21,8 +21,8 @@ public:
 public:
 	virtual void Enable() {};
 	virtual void Disable() {};
-	virtual void Init();
-	virtual void Update();
+	virtual void Init() {};
+	virtual void Update() {};
 	virtual void OnCollision() {};
 	virtual void MyTimer();
 	virtual mat4& SetMatrix();

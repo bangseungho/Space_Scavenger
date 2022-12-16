@@ -77,6 +77,7 @@ private:	// mtl ฐüทร
 public:
 	VertexBlock vBlock;
 	map<string, MaterialBlock> mBlock;
+	GLuint* VAO;
 
 	bool isOnMTL;
 private:
