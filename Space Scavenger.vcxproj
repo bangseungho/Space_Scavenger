@@ -150,6 +150,7 @@
     <ClCompile Include="ChatBox.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Copper.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="Data.cpp" />
@@ -166,6 +167,8 @@
     <ClCompile Include="Guidance.cpp" />
     <ClCompile Include="GuidanceControl.cpp" />
     <ClCompile Include="Harpoon.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Iron.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LowGun.cpp" />
@@ -210,6 +213,7 @@
     <ClInclude Include="ChatBox.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Copper.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="Data.h" />
@@ -225,6 +229,7 @@
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Guidance.h" />
     <ClInclude Include="Harpoon.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LowGun.h" />

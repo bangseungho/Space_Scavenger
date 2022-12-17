@@ -50,6 +50,7 @@ void Resource::Disable()
 
 void Resource::Init()
 {
+	collider.SetBox_OBB(vec3(obj->vBlock.max - obj->vBlock.min));
 }
 
 void Resource::Update()

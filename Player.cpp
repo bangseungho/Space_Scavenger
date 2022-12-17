@@ -15,6 +15,9 @@ Player::Player() : Mesh(this)
 	}
 	obj = _Obj;
 
+	// Data
+	playerData = PlayerData::Instance;
+
 	// Speed
 	speedBlock.current = 10;
 	speedBlock.max = 100;
@@ -48,11 +51,10 @@ Player::Player() : Mesh(this)
 	upgrade = new UpgradeControl(this);
 	questControl = new QuestControl(this);
 	guidanceControl = new GuidanceControl(guidance);
+	inventory = new Inventory(this);
 
 	hp = 100;
 
-	// Data Setting
-	GetDate();
 	Render::objectRender->AddObject(this);
 }
 
@@ -102,20 +104,27 @@ void Player::Handle_Event(unsigned char key)
 		break;
 	case 'q':
 		questControl->SetActive(!questControl->ActiveSelf());
-		//questControl->isActiveAniamtion = !questControl->isActiveAniamtion;
-		//questControl->ActiveAnimation();
 		upgrade->SetActive(false);
 		guidanceControl->SetActive(false);
+		inventory->SetActive(false);
 		break;
 	case 'e':
 		questControl->SetActive(false);
 		upgrade->SetActive(!upgrade->ActiveSelf());
 		guidanceControl->SetActive(false);
+		inventory->SetActive(false);
 		break;
 	case 'g':
 		questControl->SetActive(false);
 		upgrade->SetActive(false);
 		guidanceControl->SetActive(!guidanceControl->ActiveSelf());
+		inventory->SetActive(false);
+		break;
+	case 'i':
+		questControl->SetActive(false);
+		upgrade->SetActive(false);
+		guidanceControl->SetActive(false);
+		inventory->SetActive(!inventory->ActiveSelf());
 		break;
 	}
 }
@@ -202,7 +211,7 @@ void Player::OnCollision()
 				equipment.find("Guidance")->second->isDragged = false;
 
 			hp -= resource->level;
-			resourceCount[resource->name] += resource->amount;
+			playerData->resourceCount[resource->name] += resource->amount;
 
 			if (resource->level > 0)
 				speedBlock.current *= 0.7;
@@ -246,20 +255,4 @@ void Player::FaceMove(const vec2& diffPos)
 	transform.local->rotation.y -= fMoveSpeed.x;
 	transform.local->rotation.x -= fMoveSpeed.y;
 	transform.CurrentFront();
-}
-
-void Player::GetDate()
-{
-	PlayerData* data = PlayerData::Instance;
-	int count = data->sheet->readNum(1, 0);
-	for (int i = 0; i < count; i++)
-	{
-		wstring rName = data->sheet->readStr(i + 5, 2);
-		string type;
-		static std::locale loc("");
-		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
-		type = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(rName);
-
-		resourceCount[type] = data->sheet->readNum(i + 5, 3);
-	}
 }

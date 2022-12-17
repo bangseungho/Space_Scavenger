@@ -191,9 +191,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UpgradeControl.cpp">
-      <Filter>Object\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Mineral.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
@@ -208,9 +205,6 @@
     </ClCompile>
     <ClCompile Include="Toggle.cpp">
       <Filter>UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>소스 파일\미완성</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>UI\Default</Filter>
@@ -241,9 +235,6 @@
     </ClCompile>
     <ClCompile Include="Star.cpp">
       <Filter>Object\Star</Filter>
-    </ClCompile>
-    <ClCompile Include="QuestControl.cpp">
-      <Filter>Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Data.cpp">
       <Filter>Data</Filter>
@@ -277,6 +268,24 @@
     </ClCompile>
     <ClCompile Include="Earth.cpp">
       <Filter>Object\Planet\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestControl.cpp">
+      <Filter>Object\Player\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeControl.cpp">
+      <Filter>Object\Player\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Object\Player\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>UI\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Copper.cpp">
+      <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,9 +382,6 @@
     <ClInclude Include="Toggle.h">
       <Filter>UI\Default</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>소스 파일\미완성</Filter>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>UI\Default</Filter>
     </ClInclude>
@@ -436,6 +442,15 @@
     </ClInclude>
     <ClInclude Include="Earth.h">
       <Filter>Object\Planet\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>FramWork\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>UI\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Copper.h">
+      <Filter>Object\Resource\Contain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

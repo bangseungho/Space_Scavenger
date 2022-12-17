@@ -152,18 +152,19 @@ void QuestControl::ActiveAnimation()
 
 void QuestControl::ClickQuestSeccse(string questName)
 {
+	PlayerData* pData = PlayerData::Instance;
 	if (quest.nodeList.find(questName) != quest.nodeList.cend())
 	{
 		QuestNode* node = quest.nodeList.find(questName)->second;
 		for (auto& item : node->needItems)
 		{
-			if (player->resourceCount.find(item.name)->second < item.count)
+			if (pData->resourceCount.find(item.name)->second < item.count)
 				return;
 		}
 
 		for (auto& item : node->needItems)
 		{
-			player->resourceCount.find(item.name)->second -= item.count;
+			pData->resourceCount.find(item.name)->second -= item.count;
 		}
 
 		cout << questName << endl;

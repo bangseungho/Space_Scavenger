@@ -105,12 +105,7 @@ void Guidance::GetData()
 	ResourceData* data = ResourceData::Instance;
 	for (auto& type : data->resourceTypes)
 	{
-		string str;
-		static std::locale loc("");
-		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
-		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(type);
-
-		resourceType[str] = false;
+		resourceType[type] = false;
 	}
 }
 
