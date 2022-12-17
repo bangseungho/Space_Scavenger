@@ -10,11 +10,18 @@ ResourceData::ResourceData()
 	book->load(L"Data/ResourceData.xlsx");
 	sheet = book->getSheet(0);
 
-	int count = sheet->readNum(1, 0);
-	for (int i = 0; i < count; i++)
+	maxCount = sheet->readNum(1, 0);
+
+	static locale loc("");
+	auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
+
+	for (int i = 0; i < maxCount; i++)
 	{
-		resourceTypes.push_back(sheet->readStr(i + 2, 1));
-		resourceTexts.push_back(sheet->readStr(i + 2, 2));
+		string str;
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(sheet->readStr(i + 2, 1));
+		resourceTypes.push_back(str);
+		str = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(sheet->readStr(i + 2, 2));
+		resourceTexts.push_back(str);
 	}
 }
 

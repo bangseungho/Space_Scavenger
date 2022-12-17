@@ -15,6 +15,7 @@ public:
 	libxl::Sheet* sheet;
 
 public:
-	vector<wstring> resourceTypes;
-	vector<wstring> resourceTexts;
+	int maxCount;
+	vector<string> resourceTypes;
+	vector<string> resourceTexts;
 };
