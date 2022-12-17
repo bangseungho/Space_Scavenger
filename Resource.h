@@ -3,7 +3,6 @@
 #include "Collider.h"
 #include "Xlsx.h"
 #include "Guidance.h"
-#include "Particle.h"
 
 class Resource : public Object, public Mesh
 {

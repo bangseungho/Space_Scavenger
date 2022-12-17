@@ -52,7 +52,6 @@ void Transform::CurrentFront()
 	vec3 dir = translate(model, vec3(0, 0, -1)) * vec4(0, 0, 0, 1);
 	vec3 norm = normalize(dir - pos);
 
-
 	front = norm;
 }
 

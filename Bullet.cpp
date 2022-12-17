@@ -16,12 +16,12 @@ Bullet::Bullet()
 
 	collider.tag = "Bullet";
 	collider.object = this;
-	speed = 100;
+	speed = 1;
 	isUse = false;
 
 	obj = _Obj;
-	transform.local->rotation.x = -90;
-	transform.local->scale = vec3(0.1);
+	transform.local->scale = vec3(1);
+	transform.local->rotation.x -= 90;
 	collider.SetBox_OBB(vec3(2));
 
 	Render::objectRender->AddObject(this, "Bullet");

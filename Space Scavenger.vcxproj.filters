@@ -266,9 +266,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>Object\Defualt</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
     <ClCompile Include="LowGun.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
@@ -277,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="Earth.cpp">
       <Filter>Object\Planet\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletNum.cpp">
+      <Filter>UI\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,7 +424,6 @@
     <ClInclude Include="Light.h">
       <Filter>Object\Defualt</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h" />
     <ClInclude Include="LowGun.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
@@ -436,6 +435,9 @@
     </ClInclude>
     <ClInclude Include="Earth.h">
       <Filter>Object\Planet\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletNum.h">
+      <Filter>UI\Default</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
