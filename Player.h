@@ -21,9 +21,11 @@
 
 // UI
 #include "SpeedGauge.h"
+#include "Image.h";
 
 class QuestControl;
 class UpgradeControl;
+class Inventory;
 
 class Player : public Object, public Mesh
 {
@@ -49,23 +51,21 @@ public:
 	mat4& SetMatrix();
 	void FaceMove(const vec2& diffPos);
 
-private:
-	void GetDate();
-
 public:
 	Collider collider;
 	map<string, Equipment*> equipment;
 
 public: // Upgrade ฐüทร
 	SpeedBlock speedBlock;
-	map<string, int> resourceCount;
 	int hp;
 
 private:
 	bool move_front;
 	bool move_back;
 
+	PlayerData* playerData;
 private:
+	Inventory* inventory;
 	UpgradeControl* upgrade;
 	QuestControl* questControl;
 	GuidanceControl* guidanceControl;
@@ -149,4 +149,41 @@ private:
 	QuestToggleNode* nowToggle;
 	map<string, QuestToggleNode*> questToggles;
 	FontNode fontNode;
+};
+
+class Inventory : public Object
+{
+public:
+	Inventory(Player* _Player);
+	~Inventory();
+
+public:
+	void Enable();
+	void Disable();
+	void Init();
+
+private:
+	void GetData();
+
+public:
+	Player* player;
+
+private: // Data
+	PlayerData* pData;
+	ResourceData* rData;
+	
+private:
+	BackGround background{ "UI/BackGround/", "GuidanceBackground.png" };
+	class ResourceSlot : public Object
+	{
+	public:
+		void Enable();
+		void Disable();
+		void Init();
+
+	public:
+		Image image;
+		Font amountFont;
+	};
+	vector<ResourceSlot*> resourceSlot;
 };
