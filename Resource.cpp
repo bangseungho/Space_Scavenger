@@ -81,9 +81,7 @@ void Resource::OnCollision()
 
 		if (other->tag == "Harpoon")
 		{
-			if (level > 1) {
-				level = 0;
-			}
+			SetActive(false);
 		}
 
 		if (other->tag == "Bullet")

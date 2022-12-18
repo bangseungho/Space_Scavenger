@@ -12,7 +12,7 @@ ParticleGenerator::ParticleGenerator(int _Amount) : amount{ _Amount }
 		}
 		particles[i]->distanceYaw = temp;
 	}
-		
+
 	startPoint = vec3(0.0f);
 	start = false;
 }

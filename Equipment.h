@@ -44,7 +44,7 @@ public:
 	bool isDragged; // 현재 자원을 끓어오고 있는지 체크
 	Transform targetPos;
 
-protected:
+public:
 	EqType myType;
 	State myState;
 };

@@ -46,7 +46,7 @@ Player::Player() : Mesh(this)
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	equipment.find("LowGun")->second->SetActive(true);
+	equipment.find("Harpoon")->second->SetActive(true);
 	
 	// Object
 	upgrade = new UpgradeControl(this);

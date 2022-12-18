@@ -18,7 +18,7 @@ Bullet::Bullet()
 	collider.object = this;
 	speed = 1;
 	isUse = false;
-
+	SetActive(false);
 	particle = new ParticleGenerator(50);
 
 	obj = _Obj;

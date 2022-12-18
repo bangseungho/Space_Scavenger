@@ -10,7 +10,7 @@ Harpoon::Harpoon()
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Harpoon.obj");
+		_Obj->ReadObj("Obj/Equipment/Harpoon/", "Harpoon.obj");
 	}
 
 	obj = _Obj;
@@ -18,6 +18,9 @@ Harpoon::Harpoon()
 	collider.tag = "Harpoon";
 	collider.SetBox_OBB(vec3(2));
 	collider.object = this;
+
+	transform.local->position.z += 5;
+	transform.local->position.y -= 3;
 
 	gauge = new Gauge();
 
@@ -57,7 +60,7 @@ void Harpoon::ChargingEnergy()
 void Harpoon::FinishCharging()
 {
 	cout << "Finish Charging" << endl;
-	
+
 	cout << "Charging Time : " << chargingTime << endl;
 
 	chargedEnergy = chargingTime * 10;
@@ -90,16 +93,16 @@ void Harpoon::Fire()
 
 	if (curEnergy < chargedEnergy)
 	{
-		transform.local->position.z += 1.5 * frameSpeed * chargedEnergy / 30.0 * 400;
-		transform.local->scale.z -= 1.5 * frameSpeed * chargedEnergy / 30.0;
+		transform.local->position.z += frameSpeed * chargedEnergy / 15.0;
+		transform.local->scale.z += frameSpeed * chargedEnergy / 30.0;
 	}
 	else {
-		transform.local->position.z -= 1.5 * frameSpeed * chargedEnergy / 150.0 * 400;
-		transform.local->scale.z += 1.5 * frameSpeed * chargedEnergy / 150.0;
+		transform.local->position.z -= frameSpeed * chargedEnergy / 75.0;
+		transform.local->scale.z -= frameSpeed * chargedEnergy / 150.0;
 
-		if (transform.local->scale.z > 0) {
-			transform.local->position.z = 0;
-			transform.local->scale.z = 0.5;
+		if (transform.local->scale.z < 0.005) {
+			transform.local->position.z = 5;
+			transform.local->scale.z = 1;
 			chargedEnergy = 0;
 			SetState(State::IDLE);
 		}
@@ -122,7 +125,7 @@ void Harpoon::OnCollision()
 
 		if (other->tag == "Resource")
 		{
-			cout << "DDDDDDDDDD" << endl;
+			cout << "COLLIDE HARPOON RESOURCE" << endl;
 		}
 	}
 }
