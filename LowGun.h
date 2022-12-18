@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Bullet.h"
 #include "Sound.h"
+#include "BulletNum.h"
 
 class LowGun : public Equipment
 {
@@ -13,7 +14,11 @@ public:
 	~LowGun();
 
 public:
+	void Enable();
+	void Disable();
 	void Update();
+
+public:
 	int Fire(const Transform& transform);
 	void ReLoad();
 
@@ -23,8 +28,13 @@ public:
 private:
 	int bulletNum;
 	int fireCount;
+	int remainBullet;
+
+private:
+	BulletNum* ui_bulletNum;
 
 private:
 	Sound fireSound;
 	Sound loadSound;
+
 };

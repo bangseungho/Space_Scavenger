@@ -81,10 +81,12 @@ void Init()
 	Camera::mainCamera = &camera;
 	fristCamera = &camera;
 	camera.name = "Main";
-	camera.cameraPos.y = 3;
+	//camera.cameraPos.y = 3;
+	camera.cameraPos.y = 5;
 	camera.cameraPos.z = -10;
 	camera.cameraDirection.z = 4;
-	camera.cameraDirection.y = 1;
+	//camera.cameraDirection.y = 1;
+	camera.cameraDirection.y = 2;
 	camera.isPitch = true;
 
 	uiCamera.isProjection_XY = true;

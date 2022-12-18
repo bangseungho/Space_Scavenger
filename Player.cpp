@@ -22,7 +22,7 @@ Player::Player() : Mesh(this)
 	speedBlock.current = 0;
 	speedBlock.max = 100;
 	speedBlock.accelerat = 1;
-
+	 
 	// Tranform
 
 	// Collider

@@ -44,3 +44,9 @@ void Color::SetColor(GLclampf i[])
 	B = i[2];
 	A = i[3];
 }
+
+void Color::BlinkAlpha()
+{
+
+
+}

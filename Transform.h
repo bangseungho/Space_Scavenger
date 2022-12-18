@@ -23,6 +23,9 @@ public:
 	~Transform();
 
 public:
+	Transform(const Transform& _Other);
+
+public:
 	void SetScale(); // 랜덤 스케일
 	void SetRandomRotate();
 	void CurrentFront();
