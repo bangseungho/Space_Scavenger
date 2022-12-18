@@ -111,6 +111,9 @@
     <Filter Include="소스 파일\Manager">
       <UniqueIdentifier>{ba71943c-6655-441c-930c-d044cd3c8fb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Resource\Particle">
+      <UniqueIdentifier>{ebc59f6f-d7e6-4a2b-93ad-6a556ba0ee20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -302,6 +305,12 @@
     <ClCompile Include="BulletNum.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Object\Resource\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Object\Resource\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -480,6 +489,12 @@
     </ClInclude>
     <ClInclude Include="BulletNum.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Object\Resource\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Object\Resource\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,10 @@ public:
 	void OnCollision();
 
 public:
+	void Handle_Event();
+	void Handle_Event_Up();
+
+public:
 	Collider collider;
 
 public:

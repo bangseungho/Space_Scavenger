@@ -78,6 +78,7 @@ void Player::Init()
 
 void Player::Update()
 {
+	equipment.find("LowGun")->second->targetPos = transform;
 	Handle_Event(key);
 	Handle_Event(specialKey);
 	Handle_Event_Up(keyUp);
@@ -132,24 +133,6 @@ void Player::Handle_Event(unsigned char key)
 
 void Player::Handle_Event(int specialKey)
 {
-	//Harpoon* _harpoon; LowGun* _lowgun;
-	switch (specialKey)
-	{
-	case GLUT_KEY_CTRL_L:
-		Harpoon* harpoon = reinterpret_cast<Harpoon*>(equipment.find("Harpoon")->second);
-		LowGun* lowGun = reinterpret_cast<LowGun*>(equipment.find("LowGun")->second);
-		Guidance* guidance = reinterpret_cast<Guidance*>(equipment.find("Guidance")->second);
-
-		if (harpoon->ActiveSelf())
-		{
-			harpoon->ChargingEnergy();
-		}
-
-		if (lowGun->ActiveSelf())
-		{
-			lowGun->Fire(transform);
-		}
-	}
 }
 
 void Player::Handle_Event_Up(unsigned char key)
@@ -167,13 +150,6 @@ void Player::Handle_Event_Up(unsigned char key)
 
 void Player::Handle_Event_Up(int specialKeyUp)
 {
-	switch (specialKeyUp)
-	{
-	case GLUT_KEY_CTRL_L:
-		Harpoon* harpoon = reinterpret_cast<Harpoon*>(equipment.find("Harpoon")->second);
-		harpoon->FinishCharging();
-		break;
-	}
 }
 
 void Player::MyTimer()
