@@ -11,6 +11,7 @@ public:
 	void SetRandomColor();
 	void SetColor(Color color);
 	void SetColor(GLclampf i[]);
+	void BlinkAlpha();
 
 private:
 

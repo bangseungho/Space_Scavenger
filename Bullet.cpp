@@ -21,7 +21,6 @@ Bullet::Bullet()
 
 	obj = _Obj;
 	transform.local->scale = vec3(1);
-	transform.local->rotation.x -= 90;
 	collider.SetBox_OBB(vec3(2));
 
 	Render::objectRender->AddObject(this, "Bullet");

@@ -153,6 +153,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMap.cpp" />
+    <ClCompile Include="CurEquipment.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Emerald.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="CurEquipment.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Emerald.h" />

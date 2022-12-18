@@ -26,7 +26,7 @@ BulletNum::BulletNum(string path)
 	font.transform.local->position.x += 7;
 
 	transform.local->position.y = -330;
-	transform.local->position.x = +510;
+	transform.local->position.x = 510;
 }
 
 BulletNum::~BulletNum()

@@ -20,7 +20,7 @@ LowGun::LowGun()
 	transform.local->rotation.y = -90;
 	transform.local->position.y = 3;
 
-	bulletNum = remainBullet = 12; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
+	bulletNum = remainBullet = 48; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
 
 	ui_bulletNum = new BulletNum();
 
@@ -57,6 +57,7 @@ int LowGun::Fire(const Transform& transform)
 		bullets[fireCount]->SetActive(true);
 		bullets[fireCount]->transform.local->rotation = transform.local->rotation;
 		bullets[fireCount]->transform.local->position = transform.local->position;
+		bullets[fireCount]->transform.local->position.y += 3;
 		bullets[fireCount]->transform.local->rotation.x += 90;
 		bullets[fireCount]->trajectory = transform.front;
 

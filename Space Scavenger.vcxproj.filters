@@ -108,6 +108,9 @@
     <Filter Include="Object\Planet\Contain">
       <UniqueIdentifier>{ed725cef-faee-4400-864a-c93a77ae07be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Equipment\UI">
+      <UniqueIdentifier>{7a2357b0-bf74-4efb-8169-df083ef1487d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -275,8 +278,11 @@
     <ClCompile Include="Earth.cpp">
       <Filter>Object\Planet\Contain</Filter>
     </ClCompile>
+    <ClCompile Include="CurEquipment.cpp">
+      <Filter>Object\Equipment\UI</Filter>
+    </ClCompile>
     <ClCompile Include="BulletNum.cpp">
-      <Filter>UI\Default</Filter>
+      <Filter>Object\Equipment\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -436,8 +442,11 @@
     <ClInclude Include="Earth.h">
       <Filter>Object\Planet\Contain</Filter>
     </ClInclude>
+    <ClInclude Include="CurEquipment.h">
+      <Filter>Object\Equipment\UI</Filter>
+    </ClInclude>
     <ClInclude Include="BulletNum.h">
-      <Filter>UI\Default</Filter>
+      <Filter>Object\Equipment\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
