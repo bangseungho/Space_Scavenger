@@ -38,6 +38,7 @@ void SoundManager::Disable()
 	bar_Effect->SetActive(false);
 
 	FMOD_Channel_SetPaused(Sound::MUSIC.channel, 0);
+	FMOD_Channel_SetPaused(Sound::EFFECT.channel, 0);
 }
 
 void SoundManager::Init()

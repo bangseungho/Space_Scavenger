@@ -57,14 +57,21 @@ void Font::Draw()
 		vec2 pos = vec2(0);
 		mat4 model = transform.model;
 
-		if (lineType == 1)
+		if (lineType == 0)
+		{
+			pos.y = -i * 24;
+		}
+		else if (lineType == 1)
+		{
 			pos.x -= token.size() * size / 4.0f;
+			if (tokeSize != 1)
+				pos.y += (tokeSize / 2 - i) * y;
+			if ((int)y % 2 == 0)
+				pos.y -= size / 2.0f;
+		}
 		else if (lineType == 2)
 			pos.x -= token.size() * size / 4.0f;
-		if(tokeSize != 1)
-			pos.y += (tokeSize / 2 - i) * y;
-		if ((int)y % 2 == 0)
-			pos.y -= size / 2.0f;
+
 
 		model = translate(model, vec3(pos, 0));
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(model));

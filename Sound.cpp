@@ -7,9 +7,11 @@ Channel Sound::EFFECT;
 void Sound::SetVolum()
 {
 	FMOD_Channel_SetPaused(MUSIC.channel, 1);
+	FMOD_Channel_SetPaused(EFFECT.channel, 1);
 	FMOD_Channel_SetVolume(MUSIC.channel, MUSIC.volum);
 	FMOD_Channel_SetVolume(EFFECT.channel, EFFECT.volum);
 	FMOD_Channel_SetPaused(MUSIC.channel, 0);
+	FMOD_Channel_SetPaused(EFFECT.channel, 0);
 }
 
 Sound::Sound()
