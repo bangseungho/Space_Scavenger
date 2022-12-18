@@ -46,9 +46,12 @@ void LowGun::Disable() {
 
 void LowGun::Update()
 {
+	Handle_Event();
 	remainBullet = bulletNum - fireCount;
 	ui_bulletNum->GetBulletInfo(bulletNum, remainBullet);
 }
+
+
 
 int LowGun::Fire(const Transform& transform)
 {
@@ -65,6 +68,17 @@ int LowGun::Fire(const Transform& transform)
 	}
 	return fireCount;
 }
+
+void LowGun::Handle_Event()
+{
+	switch (specialKey)
+	{
+	case GLUT_KEY_CTRL_L:
+			Fire(targetPos);
+			break;
+	}
+}
+
 
 void LowGun::ReLoad()
 {

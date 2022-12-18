@@ -38,7 +38,8 @@ void Harpoon::Init()
 
 void Harpoon::Update()
 {
-
+	Handle_Event();
+	Handle_Event_Up();
 }
 
 void Harpoon::ChargingEnergy()
@@ -123,5 +124,25 @@ void Harpoon::OnCollision()
 		{
 			cout << "DDDDDDDDDD" << endl;
 		}
+	}
+}
+
+void Harpoon::Handle_Event()
+{
+	switch (specialKey)
+	{
+	case GLUT_KEY_CTRL_L:
+		ChargingEnergy();
+		break;
+	}
+}
+
+void Harpoon::Handle_Event_Up()
+{
+	switch (specialKeyUp)
+	{
+	case GLUT_KEY_CTRL_L:
+		FinishCharging();
+		break;
 	}
 }

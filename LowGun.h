@@ -19,6 +19,9 @@ public:
 	void Update();
 
 public:
+	void Handle_Event();
+
+public:
 	int Fire(const Transform& transform);
 	void ReLoad();
 
@@ -36,5 +39,4 @@ private:
 private:
 	Sound fireSound;
 	Sound loadSound;
-
 };

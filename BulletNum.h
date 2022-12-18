@@ -1,7 +1,6 @@
 #pragma once
 #include "Render.h"
 #include "Font.h"
-#define PI 3.1415923565
 
 #pragma region Image
 class IconBullet : public Object, public UIMesh
