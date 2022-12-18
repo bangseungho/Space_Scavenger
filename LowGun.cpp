@@ -14,8 +14,8 @@ LowGun::LowGun()
 	}
 	obj = _Obj;
 
-	fireSound.Load("Sound/fire_bullet.mp3", false);
-	loadSound.Load("Sound/load_bullet.mp3", false);
+	fireSound.Load("Sound/Gun/Fire.mp3", false);
+	loadSound.Load("Sound/Gun/Reloading.mp3", false);
 
 	transform.local->rotation.y = -90;
 	transform.local->position.y = 3;

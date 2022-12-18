@@ -143,7 +143,7 @@ void QuestControl::ActiveAnimation()
 	else
 	{
 		transform.local->position.x += 3000 * FrameTime::oneFrame;
-		if (transform.local->position.x > windowSize_W/2.0f + background.width/2)
+		if (transform.local->position.x > windowSize_W/2.0f + background.size->width/2)
 		{
 			SetActive(false);
 		}

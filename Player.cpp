@@ -56,6 +56,10 @@ Player::Player() : Mesh(this)
 
 	hp = 100;
 
+	//Sound
+	sound_Hit.Load("Sound/Player/Hit.mp3");
+	sound_Hit.channelType = "Effect";
+
 	Render::objectRender->AddObject(this);
 }
 
@@ -215,7 +219,10 @@ void Player::OnCollision()
 			playerData->resourceCount[resource->name] += resource->amount;
 
 			if (resource->level > 0)
+			{
 				speedBlock.current *= 0.7;
+				sound_Hit.Play();
+			}
 		}
 	}
 }

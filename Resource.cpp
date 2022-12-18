@@ -81,28 +81,21 @@ void Resource::OnCollision()
 
 		if (other->tag == "Harpoon")
 		{
-			if (level > 1) {
+			if (level > 1)
 				level = 0;
-			}
 		}
 
 		if (other->tag == "Bullet")
 		{
-			other->object->SetActive(false);
-
-			if (level > 1) {
-				level -= 1;
-				
-				color.R += 0.3;
-				if (color.R > 1) color.R = 1;
-				
-				color.G -= 0.3;
-				if (color.G < 0) color.G = 0;
-
-				color.B -= 0.3;
-				if (color.B < 0) color.B = 0;
+			if (level < 1)
+			{
+				color.R = 1;
+				continue;
 			}
-			cout << level << endl;
+			level -= 1;
+
+			float hitColorValue = level * 0.1f;
+			color.SetColor({ hitColorValue ,hitColorValue,hitColorValue, 1 });
 		}
 	}
 }

@@ -2,6 +2,11 @@
 #include "Mesh.h"
 #include "stb_image.h"
 #define STB_IMAGE_IMPLEMENTATION
+struct ImageSize {
+	int width;
+	int height;
+};
+
 class UIMesh : public Mesh
 {
 	static Shader* uiShader;
@@ -26,7 +31,6 @@ public:
 	unsigned int my_texture;
 
 public:
-	int width;
-	int height;
+	ImageSize* size;
 };
 

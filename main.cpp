@@ -142,6 +142,7 @@ int main(int argc, char** argv)
 	glutMouseWheelFunc(MouseWheel);
 	//glutSetCursor(GLUT_CURSOR_NONE); // 마우스 커서 없애기
 	glutPassiveMotionFunc(Motion);
+	glutMotionFunc(Motion);
 	glutTimerFunc(10, TimerFunc, 1);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
@@ -268,6 +269,8 @@ void KeyBoard(unsigned char key, int x, int y)
 		exit(1);
 		break;
 	}
+
+	gameManager->KeyBoard(key, x, y);
 
 	glutPostRedisplay();
 }

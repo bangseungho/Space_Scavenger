@@ -302,6 +302,12 @@
     <ClCompile Include="BulletNum.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -481,6 +487,8 @@
     <ClInclude Include="BulletNum.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Bar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

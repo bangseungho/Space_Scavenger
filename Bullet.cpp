@@ -23,6 +23,10 @@ Bullet::Bullet()
 	transform.local->scale = vec3(1);
 	collider.SetBox_OBB(vec3(2));
 
+	// Sound
+	sound_Hit.Load("Sound/Bullet/Hit.mp3");
+	sound_Hit.channelType = "Effect";
+
 	Render::objectRender->AddObject(this, "Bullet");
 }
 
@@ -52,6 +56,8 @@ void Bullet::OnCollision()
 		if (other->tag == "Resource")
 		{
 			// Bullet이 Resouce에 맞으면 Resouce에서 삭제
+			sound_Hit.Play();
+			SetActive(false);
 		}
 	}
 }

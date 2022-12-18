@@ -1,13 +1,7 @@
 #pragma once
 #include "Player.h"
-#include "Map.h"
-#include "ChatBox.h"
-#include "Iron.h"
-#include "Light.h"
-#include "Gauge.h"
-#include "Sound.h"
-#include "Button.h"
 #include "PlanetManager.h"
+#include "SoundManager.h"
 
 class GameManager : public Object
 {
@@ -26,10 +20,12 @@ public:
 	void MouseEntry(int state);
 
 public:
-	PlanetManager planetManager[3] = {
+	SoundManager soundManager;
+	PlanetManager planetManager[1] = {
 		PlanetManager{ 1500,5000 },
-		PlanetManager{5000,15000},
-		PlanetManager{20000,30000} };
+	/*	PlanetManager{5000,15000},
+		PlanetManager{20000,30000} */
+	};
 public:
 	Player player;
 
