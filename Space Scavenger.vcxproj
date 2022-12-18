@@ -153,6 +153,7 @@
     <ClCompile Include="Copper.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMap.cpp" />
+    <ClCompile Include="CubeMapManager.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Emerald.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mineral.cpp" />
+    <ClCompile Include="Moon.cpp" />
     <ClCompile Include="OBJ.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceData.cpp" />
     <ClCompile Include="ResourcePool.cpp" />
+    <ClCompile Include="Saturn.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpeedGauge.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="Toggle.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIMesh.cpp" />
+    <ClCompile Include="UpgradeData.cpp" />
     <ClCompile Include="UpgradeControl.cpp" />
     <ClCompile Include="Uranium.cpp" />
     <ClCompile Include="Vertex_AFX.cpp" />
@@ -216,6 +220,7 @@
     <ClInclude Include="Copper.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMap.h" />
+    <ClInclude Include="CubeMapManager.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Emerald.h" />
@@ -236,6 +241,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mineral.h" />
+    <ClInclude Include="Moon.h" />
     <ClInclude Include="OBJ.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Particle.h" />
@@ -249,6 +255,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceData.h" />
     <ClInclude Include="ResourcePool.h" />
+    <ClInclude Include="Saturn.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SpeedGauge.h" />
@@ -259,6 +266,7 @@
     <ClInclude Include="Toggle.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIMesh.h" />
+    <ClInclude Include="UpgradeData.h" />
     <ClInclude Include="Uranium.h" />
     <ClInclude Include="Vector_AFX.h" />
     <ClInclude Include="Xlsx.h" />

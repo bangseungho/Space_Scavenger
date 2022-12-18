@@ -31,3 +31,22 @@ vec2 Coordinate(vec2 pos)
 
 	return result;
 }
+
+vec3 RandomVEC3(vec3 frist, vec3 second)
+{
+	vec3 result;
+
+	result.x = RandomFloat(frist.x, second.x);
+	result.y = RandomFloat(frist.y, second.y);
+	result.z = RandomFloat(frist.z, second.z);
+
+	return result;
+}
+
+bool CompareOverVEC3(const vec3 my, const vec3 other)
+{
+	if (my.x < other.x) return false;
+	if (my.y < other.y) return false;
+	if (my.z < other.z) return false;
+	return true;
+}

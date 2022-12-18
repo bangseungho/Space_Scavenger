@@ -14,7 +14,6 @@ Emerald::Emerald()
 
 	obj = _Obj;
 	level = 3;
-
 }
 
 Emerald::~Emerald()

@@ -12,7 +12,6 @@ int RandomPlusMinus()
 			return 1;
 	}
 }
-
 //int RandomInt(int first, int second)
 //{
 //	random_device rd;

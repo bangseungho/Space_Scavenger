@@ -1,50 +1,23 @@
 #include "PlanetManager.h"
 
-PlanetManager::PlanetManager()
+PlanetManager::PlanetManager(int frist, int second)
 {
-	//earth.transform.local->position.x = 1000;
-	//blueEarth.transform.local->scale *= 1.4;
-	//blueEarth.transform.local->position.x = 2000;
-	//blueEarth.color.SetColor({ 0,0,1,1 });
-	//moon.transform.local->position.y = 3000;
-	//yellowMoon.transform.local->scale *= 3;
-	//yellowMoon.transform.local->position.x = 7000;
-	//yellowMoon.color.SetColor({ 1,1,0,1 });
-	//saturn.transform.local->position.x = 4000;
-	//int i = 0;
-	//for (Star& sun : suns)
-	//{
-	//	sun.transform.local->position.x = 2000 * i++;
-	//	sun.transform.local->position.y = 1000;
-	//	sun.transform.local->position.z = 1000;
-	//	sun.color.R = RandomFloat(0, 1);
-	//	sun.color.G += RandomInt(1, 10);
-	//	sun.color.B += RandomInt(1, 10);
-	//}
-
-	//earth.transform.local->position.x = 10000;
-	//blueEarth.transform.local->scale *= 1.4;
-	//blueEarth.transform.local->position.x = 5000;
-	//blueEarth.transform.local->position.y = 5000;
-	//blueEarth.color.SetColor({ 0,0,1,1 });
-	//moon.transform.local->position.x = -10000;
-	//yellowMoon.transform.local->scale *= 30;
-	//yellowMoon.transform.local->position.y = -10000;
-	//yellowMoon.transform.local->position.z = 30000;
-	//yellowMoon.color.SetColor({ 1,1,0,1 });
-	//saturn.transform.local->position.y = 10000;
-
-	sun.transform.local->position.x = RandomInt(5000, 15000) * RandomPlusMinus();
-	sun.transform.local->position.y = RandomInt(5000, 15000) * RandomPlusMinus();
-	sun.transform.local->position.z = RandomInt(5000, 15000) * RandomPlusMinus();
+	sun.transform.local->position.x = RandomInt(frist, second) * RandomPlusMinus();
+	sun.transform.local->position.y = RandomInt(frist, second) * RandomPlusMinus();
+	sun.transform.local->position.z = RandomInt(frist, second) * RandomPlusMinus();
 	sun.color.SetRandomColor();
 	sun.color.G = RandomInt(1, 5);
 	sun.color.B = RandomInt(1, 5);
 
 	earth.color.SetRandomColor();
-	earth.transform.local->position.x = RandomInt(5500, 12000);
-	earth.transform.local->position.y = RandomInt(200, 3000);
-	earth.transform.local->position.z = RandomInt(-2200, -1000);
+	earth.transform.local->position = RandomVEC3(vec3(5500, 2000, 2200), vec3(12000, 3000, 5500));
+
+	moon.color.SetRandomColor();
+	moon.transform.local->scale = vec3(RandomInt(1, 3));
+	moon.transform.local->position = RandomVEC3(vec3(1500, 200, 700), vec3(5000, 2000, 2000));
+
+	saturn.color.SetRandomColor();
+	saturn.transform.local->position = RandomVEC3(vec3(1300, 5000, -2200), vec3(32000, 10000, -1000));
 }
 
 PlanetManager::~PlanetManager()
@@ -56,7 +29,11 @@ void PlanetManager::Init()
 	for (auto& world : sun.transform.world)
 	{
 		earth.transform.world.push_back(world);
+		moon.transform.world.push_back(world);
+		saturn.transform.world.push_back(world);
 	}
 	TransformBlock* local = sun.transform.local;
 	earth.transform.world.push_back(local);
+	moon.transform.world.push_back(local);
+	saturn.transform.world.push_back(local);
 }

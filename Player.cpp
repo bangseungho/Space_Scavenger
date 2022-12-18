@@ -19,7 +19,7 @@ Player::Player() : Mesh(this)
 	playerData = PlayerData::Instance;
 
 	// Speed
-	speedBlock.current = 10;
+	speedBlock.current = 0;
 	speedBlock.max = 100;
 	speedBlock.accelerat = 1;
 
@@ -31,11 +31,12 @@ Player::Player() : Mesh(this)
 	collider.object = this;
 
 	// Resource Init
-	//ironPool.InitPool(5, 1, 1.0f, &transform);
-	goldPool.InitPool(5, 1, 1.0f, &transform);
-	mineralPool.InitPool(5, 1, 1.0f, &transform);
-	emeraldlPool.InitPool(5, 1, 1.0f, &transform);
-	uraniumPool.InitPool(5, 1, 1.0f, &transform);
+	ironPool.InitPool(7, 3, 10.0f, &transform);
+	copperPool.InitPool(7, 3, 10.0f, &transform);
+	goldPool.InitPool(5, 2, 20.0f, &transform,200.0f, 300.0f );
+	mineralPool.InitPool(3, 1, 50.0f, &transform, 250.0f, 400.0f);
+	emeraldlPool.InitPool(3, 1, 30.0f, &transform, 400.0f, 400.0f);
+	uraniumPool.InitPool(1, 1, 100.0f, & transform, 500.0f,1000.0f);
 
 	// Equipment Init
 	equipment["Harpoon"] = new Harpoon;

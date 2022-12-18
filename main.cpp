@@ -1,6 +1,6 @@
-#include "GameManager.h"
 #include "Data.h"
-#include "CubeMap.h"
+#include "GameManager.h"
+#include "CubeMapManager.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -38,7 +38,7 @@ Render uiRender;
 Render fontRender;
 
 GameManager* gameManager;
-CubeMap* backGround;
+CubeMapManager* skyBoxManager;
 
 void InitShader()
 {
@@ -67,7 +67,7 @@ void InitRender()
 	Render::uiRender = &uiRender;
 	Render::fontRender = &fontRender;
 
-	string uiLayer[] = { "Default" , "Resource", "Plaayer", "Equipment" };
+	string uiLayer[] = { "Default" , "Resource", "Player", "Equipment" };
 	uiRender.SetLayer(*uiLayer);
 }
 
@@ -90,7 +90,8 @@ void Init()
 	uiCamera.isProjection_XY = true;
 
 	gameManager = new GameManager;
-	backGround = new CubeMap("UI/CubeBox/Default/");
+	skyBoxManager = new CubeMapManager(&gameManager->player.transform);
+
 
 	glUseProgram(Shader::allProgram.find("Object")->second->program);
 	while (!Mesh::initMesh.empty())
@@ -203,7 +204,7 @@ void drawScene()
 	{	// ÇöÀç Viewport
 		glViewport(0, 0, windowSize_W, windowSize_H);
 		Camera::mainCamera = fristCamera;
-		backGround->Draw();
+		skyBoxManager->DrawSky();
 
 		glUseProgram(Shader::allProgram.find("Object")->second->program);
 		objectRender.Draw();

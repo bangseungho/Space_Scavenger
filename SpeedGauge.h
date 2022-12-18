@@ -1,5 +1,6 @@
 #pragma once
 #include "Render.h"
+#include "Image.h"
 
 struct SpeedBlock {
 	float max;	// 최대 스피드
@@ -9,16 +10,6 @@ struct SpeedBlock {
 
 class SpeedGauge : public Object
 {
-	class Panel : public Object, public UIMesh {
-	public:
-		Panel();
-	};
-
-	class Gauge : public Object, public UIMesh {
-	public:
-		Gauge();
-	};
-
 public:
 	SpeedGauge(SpeedBlock* _Speed);
 	~SpeedGauge();
@@ -28,8 +19,9 @@ public:
 	void Update();
 
 private:
-	Panel ui_Panel;
-	Gauge ui_Gauge;
+	Image ui_Panel;
+	Image ui_PanelBack;
+	Image ui_Gauge;
 
 private:
 	SpeedBlock* speedBlock;

@@ -18,7 +18,6 @@ void GameManager::Init()
 	Camera::mainCamera->target_Pos = &player.transform;
 
 	bgm.Load("Sound/bgm.mp3", true);
-
 	bgm.RepeatPlay();
 }
 

@@ -26,7 +26,10 @@ public:
 	void MouseEntry(int state);
 
 public:
-	PlanetManager planetManager;
+	PlanetManager planetManager[3] = {
+		PlanetManager{ 1500,5000 },
+		PlanetManager{5000,15000},
+		PlanetManager{20000,30000} };
 public:
 	Player player;
 

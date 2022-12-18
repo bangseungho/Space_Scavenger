@@ -6,19 +6,12 @@ GuidanceControl::GuidanceControl(Guidance* _Guidance) : guidance(_Guidance)
 	int count = data->sheet->readNum(1, 0);
 	for (int i = 0; i < count; i++)
 	{
-		wstring wNmae = data->sheet->readStr(i + 2, 1);
-		string name;
-
-		static std::locale loc(""); 
-		auto& facet = use_facet<codecvt<wchar_t, char, mbstate_t>>(loc);
-		name = wstring_convert<remove_reference<decltype(facet)>::type, wchar_t>(&facet).to_bytes(wNmae);
-
-		Toggle* toggle = new Toggle;
-		toggle->name += name;
-		toggle->transform.local->scale *= 3;
+		string path = "UI/Resource/" + data->resourceTypes[i] + "_";
+		Toggle* toggle = new Toggle(path);
+		toggle->name += data->resourceTypes[i];
 		toggle->transform.local->position = vec3(100 * i - 300, 100, 0);
 
-		resourceToggles[name] = toggle;
+		resourceToggles[data->resourceTypes[i]] = toggle;
 	}
 
 	SetActive(false);

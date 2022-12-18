@@ -13,6 +13,9 @@ Button::Button(string path)
 
 	sound_Click.Load("Sound/Button/Default/Click.wav");
 	sound_OnMouse.Load("Sound/Button/Default/OnMouse.wav");
+
+	sound_Click.channelType = "Effect";
+	sound_OnMouse.channelType = "Effect";
 }
 
 Button::~Button()

@@ -18,22 +18,11 @@ void OBJ::ReadObj(string path, string objFileName)
 	char lineHeader[1000];
 	int groupNum = 0;
 	string fileName = path + objFileName;
-	int faceCount = 0;
-	int maxFaceConut = 100;
 
 	obj = fopen(fileName.c_str(), "r");
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
-		if (strcmp(lineHeader, "g") == 0) 
-		{
-			groupNum++;
-			faceCount = 0;
-		}
-		else if (strcmp(lineHeader, "f") == 0)
-		{
-			if (++faceCount == maxFaceConut)
-				groupNum++;
-		}
+		if (strcmp(lineHeader, "g") == 0) groupNum++;
 		else if (strcmp(lineHeader, "mtllib") == 0)
 		{
 			char mtlName[1000];
@@ -46,32 +35,21 @@ void OBJ::ReadObj(string path, string objFileName)
 
 	vBlock.vertexIndices = new vector<Face>[groupNum];
 	vBlock.normalIndices = new vector<Face>[groupNum];
-	vBlock.uvIndices = new vector<Face>[groupNum];
+	//vBlock.uvIndices = new vector<Face>[groupNum];
 	vBlock.groupCount = -1;
 	vBlock.min = vec3(10000); vBlock.max = vec3(-10000);
 	vBlock.usemtlName = new string[groupNum];
 
-	
-	faceCount = 0;
 	rewind(obj);
 	while (!feof(obj)) {
 		fscanf(obj, "%s", lineHeader);
 		if (strcmp("#", lineHeader) == 0)SkipCommand(obj);
 		else if (strcmp(lineHeader, "v") == 0) PushVertex(obj);
-		else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
+		//else if (strcmp(lineHeader, "vt") == 0) PushUV(obj);
 		else if (strcmp(lineHeader, "vn") == 0) PushNormal(obj);
-		else if (strcmp(lineHeader, "f") == 0)
-		{
-			PushFaceIndex(obj);
-			if (++faceCount == maxFaceConut)
-			{
-				vBlock.groupCount++;
-				vBlock.usemtlName[vBlock.groupCount] = vBlock.usemtlName[vBlock.groupCount - 1];
-			}
-		}
+		else if (strcmp(lineHeader, "f") == 0)PushFaceIndex(obj);
 		else if (strcmp(lineHeader, "g") == 0)
 		{
-			faceCount = 0;
 			vBlock.groupCount++;
 			vBlock.usemtlName[vBlock.groupCount] = "NULL";
 		}
@@ -84,13 +62,6 @@ void OBJ::ReadObj(string path, string objFileName)
 	{
 		temp -= pivot;
 	}
-	//vec3 scale = vBlock.max - vBlock.min;
-
-	//for (auto& temp : vBlock.vertices)
-	//{
-	//	temp = temp - vBlock.min;
-	//	temp = ((temp * 2.0f) / scale) - 1.0f;
-	//}
 
 	objName = fileName;
 	fclose(obj);
@@ -196,7 +167,7 @@ void OBJ::PushFaceIndex(FILE* obj)
 		return;
 	}
 	vBlock.vertexIndices[vBlock.groupCount].push_back(vertexIndex - 1);
-	vBlock.uvIndices[vBlock.groupCount].push_back(uvIndex - 1);
+	//vBlock.uvIndices[vBlock.groupCount].push_back(uvIndex - 1);
 	vBlock.normalIndices[vBlock.groupCount].push_back(normalIndex - 1);
 }
 

@@ -2,8 +2,10 @@
 
 SpeedGauge::SpeedGauge(SpeedBlock* _Speed) : speedBlock(_Speed)
 {
-	transform.local->scale *= 3;
-	transform.local->scale.x *= 2;
+	ui_Panel.image_file = "UI/Player/Panner.png";
+	ui_PanelBack.image_file = "UI/Player/PannerBack.png";
+	ui_Gauge.image_file = "UI/Player/Guage.png";
+
 	transform.local->position.y = -windowSize_H/2 + 50;
 }
 
@@ -16,32 +18,24 @@ void SpeedGauge::Init()
 	for (const auto& world : transform.world)
 	{
 		ui_Panel.transform.world.push_back(world);
+		ui_PanelBack.transform.world.push_back(world);
 		ui_Gauge.transform.world.push_back(world);
 	}
 	ui_Panel.transform.world.push_back(transform.local);
+	ui_PanelBack.transform.world.push_back(transform.local);
 	ui_Gauge.transform.world.push_back(transform.local);
 }
 
 void SpeedGauge::Update()
 {
-	ui_Gauge.transform.local->scale.x = speedBlock->current / speedBlock->max;
-	ui_Gauge.transform.local->position.x = (ui_Gauge.transform.local->scale.x - 1.0f) * 0.5f * ui_Gauge.width;
-}
+	float xScale = speedBlock->current / speedBlock->max;
+	ui_Gauge.transform.local->scale.x = xScale;
+	ui_Gauge.transform.local->position.x = (xScale - 1.0f) * 0.5f * ui_Gauge.width;
 
-SpeedGauge::Panel::Panel() : UIMesh(this)
-{
-	name = "Gauge Panel";
-	image_file = "UI/Player/GaugePanel.png";
-
-	Render::uiRender->AddObject(this);
-}
-
-SpeedGauge::Gauge::Gauge() : UIMesh(this)
-{
-	name = "Gauge";
-	image_file = "UI/Player/Gauge.png";
-
-	color.SetColor({ 0,0.3,1,1 });
-
-	Render::uiRender->AddObject(this);
+	if(xScale > 0 && xScale < 0.3f)
+		ui_Gauge.color.SetColor({ 0,1,0,1 });
+	else if (xScale > 0.3f && xScale < 0.7f)
+		ui_Gauge.color.SetColor({ 0,0,1,1 });
+	else if (xScale > 0.7f)
+		ui_Gauge.color.SetColor({ 1,0,0,1 });
 }

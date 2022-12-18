@@ -7,7 +7,7 @@ ResourcePool<ROS>::ResourcePool(int _MaxCount, int _SpawnCount, float _DurationT
 	pool = new ROS[_MaxCount];
 	spawnTimer.durationTime = _DurationTime;
 	target_Transform = _Target;
-	distance_Min = distance_Max = 10;	// 임시
+	distanceMin = distanceMax = 100;	// 임시
 }
 
 template<class ROS>
@@ -22,11 +22,11 @@ void ResourcePool<ROS>::Update()
 	if (!spawnTimer.CheckTimer())
 		return;
 
-	Spawn(distance_Min, distance_Max);
+	Spawn();
 }
 
 template<class ROS>
-void ResourcePool<ROS>::Spawn(float _Min, float _Max)
+void ResourcePool<ROS>::Spawn()
 {
 	int count = 0;
 	for (int i = 0; i < maxCount; i++)
@@ -34,7 +34,7 @@ void ResourcePool<ROS>::Spawn(float _Min, float _Max)
 		if (pool[i].ActiveSelf())
 			continue;
 
-		float dis = RandomFloat(_Min, _Max);
+		float dis = RandomFloat(distanceMin, distanceMax);
 		float radian = radians(RandomFloat(0, 360));
 		vec3 pos{ dis * sin(radian), dis * cos(radian), dis * tan(radian) };
 		pool[i].transform.local->position = pos + target_Transform->local->position;
@@ -46,7 +46,7 @@ void ResourcePool<ROS>::Spawn(float _Min, float _Max)
 }
 
 template<class ROS>
-void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target)
+void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, float _DurationTime, Transform* _Target, float min, float max)
 {
 	pool = new ROS[_MaxCount];
 	maxCount = _MaxCount;
@@ -55,7 +55,8 @@ void ResourcePool<ROS>::InitPool(int _MaxCount, int _SpawnCount, float _Duration
 	spawnTimer.durationTime = _DurationTime;
 	target_Transform = _Target;
 
-	distance_Min = distance_Max = 10;	// 임시
+	distanceMin = min;
+	distanceMax = max;
 }
 
 template<class ROS>
@@ -71,7 +72,7 @@ void ResourcePool<ROS>::CheckDistance()
 
 		float dis = length((target_Transform->model - pool[i].transform.model) * vec4(0,0,0,1));
 
-		if (dis > 100)
+		if (dis > distanceMax + 1000)
 			pool[i].SetActive(false);
 	}
 }

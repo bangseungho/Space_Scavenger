@@ -56,7 +56,7 @@ void Inventory::GetData()
 		rSlot->amountFont.text = to_string(pData->resourceCount.find(rData->resourceTypes[i])->second);
 
 		rSlot->transform.local->position.x = -400;
-		rSlot->transform.local->position.y = 200 + i * -50;
+		rSlot->transform.local->position.y = 200 + i * -70;
 		resourceSlot.push_back(rSlot);
 	}
 }
@@ -76,7 +76,7 @@ void Inventory::ResourceSlot::Disable()
 
 void Inventory::ResourceSlot::Init()
 {
-	amountFont.transform.local->position.x = 100;
+	amountFont.transform.local->position.x = 70;
 
 	for (auto& world : transform.world)
 	{

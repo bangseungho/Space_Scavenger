@@ -1,12 +1,18 @@
 #include "CubeMap.h"
 
+Shader* CubeMap::shader = nullptr;
+
 CubeMap::CubeMap(string _Path)
 {
+    if (shader == nullptr)
+    {
+        shader = new Shader{ "SkyBox" };
+        shader->CreatVertexShader("CubeMap_Vertex.glsl");
+        shader->CreatFragmentShader("CubeMap_Fragment.glsl");
+        shader->CreatProgram();
+    }
     path = _Path;
-    shader.CreatVertexShader("CubeMap_Vertex.glsl");
-    shader.CreatFragmentShader("CubeMap_Fragment.glsl");
-    shader.CreatProgram();
-    glUseProgram(shader.program);
+    glUseProgram(shader->program);
 
     float skyboxVertices[] = {
         // positions          
@@ -61,24 +67,13 @@ CubeMap::CubeMap(string _Path)
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    vector<string> faces
-    {
-        "right.png",
-        "left.png",
-        "top.png",
-        "bottom.png",
-        "front.png",
-        "back.png"
-    };
-    cubemapTexture = loadCubemap(faces);
-
-    viewLocation = glGetUniformLocation(shader.program, "view");
-    projectionLocation = glGetUniformLocation(shader.program, "projection");
+    viewLocation = glGetUniformLocation(shader->program, "view");
+    projectionLocation = glGetUniformLocation(shader->program, "projection");
 }
 
 void CubeMap::Draw()
 {
-    glUseProgram(shader.program);
+    glUseProgram(shader->program);
     Camera::mainCamera->Draw();
     glDepthFunc(GL_LEQUAL);
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(Camera::mainCamera->view));
@@ -90,8 +85,24 @@ void CubeMap::Draw()
 
 }
 
+void CubeMap::Load()
+{
+    vector<string> faces
+    {
+        "right.png",
+        "left.png",
+        "top.png",
+        "bottom.png",
+        "front.png",
+        "back.png"
+    };
+    cubemapTexture = loadCubemap(faces);
+}
+
 unsigned int CubeMap::loadCubemap(vector<std::string> faces)
 {
+    glUseProgram(shader->program);
+
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);

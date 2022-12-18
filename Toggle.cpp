@@ -4,6 +4,10 @@ Toggle::Toggle(string path)
 {
 	name = "Button";
 
+	sound_Click.Load("Sound/Button/Default/Click.wav");
+	sound_Click.channelType = "Effect";
+
+	// Member º¯¼ö
 	isToggle = false;
 
 	ui_Mark.image_file = path + "Mark.png";
@@ -67,6 +71,8 @@ void Toggle::ToggleClick()
 	ui_UnMark.SetActive(!ui_UnMark.ActiveSelf());
 	ui_Mark.SetActive(!ui_Mark.ActiveSelf());
 	isToggle = !isToggle;
+
+	sound_Click.Play();
 }
 
 bool Toggle::CheckInMouse()

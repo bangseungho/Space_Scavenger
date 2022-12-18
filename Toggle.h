@@ -1,6 +1,7 @@
 #pragma once
 #include "Render.h"
 #include "Font.h"
+#include "Sound.h"
 
 class ToggleUnMark : public Object, public UIMesh
 {
@@ -47,6 +48,8 @@ public:
 private:
 	ToggleUnMark ui_UnMark;
 	ToggleMark ui_Mark;
+
+	Sound sound_Click;
 
 	int width;
 	int height;

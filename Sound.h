@@ -6,6 +6,8 @@ class Sound : public Object
 {
 public:
 	static FMOD_SYSTEM* SOUND_SYSTEM;
+	static FMOD_CHANNEL* MUSIC_CHANNER;
+	static FMOD_CHANNEL* EFFECT_CHANNER;
 
 	static float musicVolum;
 public:
@@ -24,8 +26,8 @@ public:
 	void SetVolum(float _Volum);
 
 public:
-	FMOD_CHANNEL* MUSIC_CHANNER;
 	FMOD_SOUND* sound;
+	string channelType;
 
 private:
 	bool isLoop;

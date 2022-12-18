@@ -5,15 +5,18 @@
 class CubeMap
 {
 public:
+    static Shader* shader;
+public:
     CubeMap(string _Path);
 public:
     void Draw();
+    void Load();
 
 private:
     unsigned int loadCubemap(vector<std::string> faces);
   
 private:
-    Shader shader{ "SkyBox" };
+    //Shader shader{ "SkyBox" };
     string path;
 
     unsigned int posLocation;

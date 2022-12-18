@@ -108,6 +108,9 @@
     <Filter Include="Object\Planet\Contain">
       <UniqueIdentifier>{ed725cef-faee-4400-864a-c93a77ae07be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager">
+      <UniqueIdentifier>{ba71943c-6655-441c-930c-d044cd3c8fb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -151,9 +154,6 @@
     </ClCompile>
     <ClCompile Include="Quest.cpp">
       <Filter>Object\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>FramWork\소스</Filter>
@@ -287,6 +287,21 @@
     <ClCompile Include="Copper.cpp">
       <Filter>Object\Resource\Contain</Filter>
     </ClCompile>
+    <ClCompile Include="Moon.cpp">
+      <Filter>Object\Planet\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="Saturn.cpp">
+      <Filter>Object\Planet\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMapManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeData.cpp">
+      <Filter>Data\Contain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Afx.h">
@@ -330,9 +345,6 @@
     </ClInclude>
     <ClInclude Include="Quest.h">
       <Filter>Object\Quest</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>FramWork\헤더</Filter>
@@ -451,6 +463,21 @@
     </ClInclude>
     <ClInclude Include="Copper.h">
       <Filter>Object\Resource\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Moon.h">
+      <Filter>Object\Planet\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="Saturn.h">
+      <Filter>Object\Planet\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMapManager.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeData.h">
+      <Filter>Data\Contain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

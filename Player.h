@@ -1,13 +1,17 @@
 #pragma once
-#include "PlayerData.h"
 #include "Sound.h"
 #include "Button.h"
 #include "Quest.h"
 #include "BackGround.h"
 
+// Data
+#include "PlayerData.h"
+#include "UpgradeData.h"
+
 // Resource
 #include "ResourcePool.cpp"
 #include "Iron.h"
+#include "Copper.h"
 #include "Mineral.h"
 #include "Emerald.h"
 #include "Uranium.h"
@@ -71,7 +75,8 @@ private:
 	GuidanceControl* guidanceControl;
 
 private:	// 플레이어 주위에서 spawn 될 자원 pool
-	//ResourcePool<Iron> ironPool;
+	ResourcePool<Iron> ironPool;
+	ResourcePool<Copper> copperPool;
 	ResourcePool<Gold> goldPool;
 	ResourcePool<Mineral> mineralPool;
 	ResourcePool<Emerald> emeraldlPool;
@@ -93,11 +98,15 @@ public:
 	void Update();
 
 public:
-	Player* player;
+	void GetData();
+public:
 
 private:
+	Player* player;
+	UpgradeData* data;
+
 	BackGround background{ "UI/", "Frame.png"};
-	map<string, Button> upgradeButtons;
+	map<string, Button*> upgradeButtons;
 };
 
 class QuestControl : public Object {

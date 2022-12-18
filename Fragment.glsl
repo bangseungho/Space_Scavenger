@@ -49,7 +49,7 @@ void main()
         for(int i = 0; i < LightCount; i++)
             result += CalcDirLight(dirLight[i], norm, viewDir);
     
-        FragColor = vec4(result, 1.0) * vColor;
+        FragColor = vec4(result, 1.0) * vColor + vec4(0.001f * Ka, 1);
     }
 }
 

@@ -13,9 +13,9 @@ Resource::Resource() : Mesh(this)
 		book->load(L"Data/PlayerData.xlsx");
 		sheet = book->getSheet(0);
 	}
-
 	SetActive(false);
 
+	// Member º¯¼ö
 	collider.tag = "Resource";
 	collider.object = this;
 
@@ -25,8 +25,6 @@ Resource::Resource() : Mesh(this)
 	
 	draggedSpeed = 1;
 	isDragged = false;
-
-	//particles = new Particle();
 
 	Render::objectRender->AddObject(this, "Resource");
 }
@@ -41,6 +39,9 @@ void Resource::Enable()
 	amount = RandomInt(1,3);
 	velocity = vec3(RandomFloat(-1, 1), RandomFloat(-1, 1), RandomFloat(-1, 1));
 	velocity = normalize(velocity);
+	level = RandomInt(1, 7);
+	transform.local->scale = vec3((float)level * 1.3f);
+	color.SetColor({ 1,1,1,1 });
 }
 
 void Resource::Disable()
