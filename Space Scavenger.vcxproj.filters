@@ -257,9 +257,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>Object\Defualt</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClCompile>
     <ClCompile Include="LowGun.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="UpgradeData.cpp">
       <Filter>Data\Contain</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletNum.cpp">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,7 +442,6 @@
     <ClInclude Include="Light.h">
       <Filter>Object\Defualt</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h" />
     <ClInclude Include="LowGun.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
@@ -478,6 +477,9 @@
     </ClInclude>
     <ClInclude Include="UpgradeData.h">
       <Filter>Data\Contain</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletNum.h">
+      <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
