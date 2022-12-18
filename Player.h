@@ -101,7 +101,8 @@ public:
 
 public:
 	void GetData();
-public:
+private:
+	void ClickUpgrade(string type);
 
 private:
 	Player* player;

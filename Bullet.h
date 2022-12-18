@@ -25,7 +25,6 @@ public:
 
 public:
 	float distance;
-	bool isUse;
 
 private:
 	Sound sound_Hit;

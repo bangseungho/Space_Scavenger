@@ -114,6 +114,9 @@
     <Filter Include="Object\Equipment\Contain\Harpoon">
       <UniqueIdentifier>{47fcbd0a-1cca-4ad9-8346-beb23e3fc4b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{02277dec-51cb-4db7-9540-377473f4ef69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -296,20 +299,26 @@
     <ClCompile Include="BulletNum.cpp">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Bar.cpp">
       <Filter>UI\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugManager.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Harpoon.cpp">
       <Filter>Object\Equipment\Contain\Harpoon</Filter>
     </ClCompile>
     <ClCompile Include="Gauge.cpp">
       <Filter>Object\Equipment\Contain\Harpoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -481,16 +490,26 @@
     <ClInclude Include="BulletNum.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Bar.h">
       <Filter>UI\Default</Filter>
     </ClInclude>
-    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Harpoon.h">
       <Filter>Object\Equipment\Contain\Harpoon</Filter>
     </ClInclude>
     <ClInclude Include="Gauge.h">
       <Filter>Object\Equipment\Contain\Harpoon</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>소스 파일\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>소스 파일\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

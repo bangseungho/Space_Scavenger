@@ -46,7 +46,6 @@ Player::Player() : Mesh(this)
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	equipment.find("LowGun")->second->SetActive(true);
 	
 	// Object
 	upgrade = new UpgradeControl(this);
@@ -199,15 +198,10 @@ void Player::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-		
-		if (!other->OBBCollision(collider, *other))
-			continue;
+		if (!other->object->ActiveSelf()) continue;
+		if (!other->isCollide) continue;
+		if (other->object->id == id) continue;
+		if (!other->OBBCollision(collider, *other)) continue;
 
 		if (other->tag == "Resource")
 		{
@@ -215,11 +209,12 @@ void Player::OnCollision()
 			if (resource->isDragged)
 				equipment.find("Guidance")->second->isDragged = false;
 
-			hp -= resource->level;
 			playerData->resourceCount[resource->name] += resource->amount;
 
 			if (resource->level > 0)
 			{
+				hp -= resource->level;
+				DebugManager::Instance->Log("Lost You Are HP : " + to_string(resource->level));
 				speedBlock.current *= 0.7;
 				sound_Hit.Play();
 			}

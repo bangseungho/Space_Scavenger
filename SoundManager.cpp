@@ -99,7 +99,7 @@ void SoundBar::Update()
 	{
 		plus_Button.transform.local->position.x = (bar.size->width + plus_Button.size->width) / 2.0f;
 		minus_Button.transform.local->position.x = -(bar.size->width + plus_Button.size->width) / 2.0f;
-		font.transform.local->position.y = bar.size->height / 2.0f;
+		font.transform.local->position.y = bar.size->height / 2.0f + 12;
 		font.text = type;
 	}
 

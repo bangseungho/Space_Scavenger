@@ -27,9 +27,10 @@ public:
 
 public:
 	vector<Bullet*> bullets;
+	int bulletNum;
+	int bulletPower;
 
 private:
-	int bulletNum;
 	int fireCount;
 	int remainBullet;
 

@@ -18,7 +18,7 @@ private:
 		Timer time;
 		Font log;
 	};
-	Massage massage[5];
+	Massage massage[7];
 	int count;
 	int maxChat;
 };

@@ -6,7 +6,7 @@ ChatBox::ChatBox() : UIMesh(this)
 	image_file = "UI/ChatBox.png";
 
 	count = 0;
-	maxChat = 5;
+	maxChat = 7;
 	// 초기 위치, 크기 설정
 	transform.local->position.x -= 0.67 * 1600 / 2;
 	transform.local->position.y -= 0.68 * 900 / 2;
@@ -14,7 +14,7 @@ ChatBox::ChatBox() : UIMesh(this)
 	for (int i = 0; i < maxChat; i++)
 	{
 		massage[i].log.transform.local->position.x = -240;
-		massage[i].log.transform.local->position.y = -100 + 50 * i;
+		massage[i].log.transform.local->position.y = -100 + 30 * i;
 	}
 	Render::uiRender->AddObject(this);
 }
@@ -48,18 +48,19 @@ void ChatBox::Init()
 
 void ChatBox::Update()
 {
+	int count = 0;
+	int k = 0;
+
 	for (int i = 0; i < maxChat; i++)
 	{
 		if (!massage[i].log.ActiveSelf()) continue;
 		if (!massage[i].time.CheckTimer()) continue;
 
 		massage[i].log.SetActive(false);
-		break;
 	}
-
 	while (!DebugManager::Instance->massage.empty())
 	{
-		int count = 0;
+		count = 0;
 		for (int i = 0; i < maxChat; i++)
 		{
 			count++;
@@ -69,15 +70,15 @@ void ChatBox::Update()
 			massage[i].log.text = DebugManager::Instance->massage.back();
 			DebugManager::Instance->massage.pop_back();
 			massage[i].time.OnTimer(5);
+			count--;
 			break;
 		}
 		if (count >= maxChat)
 		{
-			for (int i = 0; i < maxChat; i++)
-				massage[i].log.SetActive(false);
-			massage[0].log.text = DebugManager::Instance->massage.back();
+			massage[k].log.text = DebugManager::Instance->massage.back();
 			DebugManager::Instance->massage.pop_back();
-			massage[0].time.OnTimer(5);
+			massage[k].time.OnTimer(5);
+			if (++k >= maxChat) k = 0;
 		}
 	}
 }

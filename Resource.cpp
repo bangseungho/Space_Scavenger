@@ -64,15 +64,10 @@ void Resource::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-
-		if (!Collider::OBBCollision(collider, *other))
-			continue;
+		if (!other->object->ActiveSelf()) continue;
+		if (!other->isCollide) continue;
+		if (other->object->id == id) continue;
+		if (!Collider::OBBCollision(collider, *other)) continue;
 
 		if (other->tag == "Player")
 		{
@@ -87,13 +82,13 @@ void Resource::OnCollision()
 
 		if (other->tag == "Bullet")
 		{
+			level -= 1;
+			
 			if (level < 1)
 			{
 				color.R = 1;
 				continue;
 			}
-			level -= 1;
-
 			float hitColorValue = level * 0.1f;
 			color.SetColor({ hitColorValue ,hitColorValue,hitColorValue, 1 });
 		}
