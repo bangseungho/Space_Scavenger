@@ -54,6 +54,7 @@ void SoundManager::Init()
 SoundBar::SoundBar()
 {
 	name = "SoundBar";
+	font.lineType = 1;
 }
 
 SoundBar::~SoundBar()
@@ -62,6 +63,7 @@ SoundBar::~SoundBar()
 
 void SoundBar::Enable()
 {
+	font.SetActive(true);
 	bar.SetActive(true);
 	plus_Button.SetActive(true);
 	minus_Button.SetActive(true);
@@ -69,6 +71,7 @@ void SoundBar::Enable()
 
 void SoundBar::Disable()
 {
+	font.SetActive(false);
 	bar.SetActive(false);
 	plus_Button.SetActive(false);
 	minus_Button.SetActive(false);
@@ -78,16 +81,16 @@ void SoundBar::Init()
 {
 	for (const auto& world : transform.world)
 	{
+		font.transform.world.push_back(world);
 		bar.transform.world.push_back(world);
 		plus_Button.transform.world.push_back(world);
 		minus_Button.transform.world.push_back(world);
 	}
 
+	font.transform.world.push_back(transform.local);
 	bar.transform.world.push_back(transform.local);
 	plus_Button.transform.world.push_back(transform.local);
 	minus_Button.transform.world.push_back(transform.local);
-
-
 }
 
 void SoundBar::Update()
@@ -96,6 +99,8 @@ void SoundBar::Update()
 	{
 		plus_Button.transform.local->position.x = (bar.size->width + plus_Button.size->width) / 2.0f;
 		minus_Button.transform.local->position.x = -(bar.size->width + plus_Button.size->width) / 2.0f;
+		font.transform.local->position.y = bar.size->height / 2.0f;
+		font.text = type;
 	}
 
 	if (plus_Button.isClick) bar.amount += 0.1f;

@@ -40,6 +40,7 @@ public:
 public:
 	string type; // what kind of sound
 private:
+	Font font;
 	Bar bar;
 	Button plus_Button{ "UI/Setting/Sound/Button/Plus/" };
 	Button minus_Button{ "UI/Setting/Sound/Button/Minus/" };

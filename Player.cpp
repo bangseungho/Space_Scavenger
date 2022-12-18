@@ -131,6 +131,30 @@ void Player::Handle_Event(unsigned char key)
 		guidanceControl->SetActive(false);
 		inventory->SetActive(!inventory->ActiveSelf());
 		break;
+	case '1':
+		if (equipment.find("Harpoon")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("Harpoon")->second->SetActive(true);
+		}
+		break;
+	case '2':
+		if (equipment.find("LowGun")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("LowGun")->second->SetActive(true);
+		}
+		break;
+	case '3':
+		if (equipment.find("Guidance")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("Guidance")->second->SetActive(true);
+		}
+		break;
 	}
 }
 

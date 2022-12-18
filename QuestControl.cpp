@@ -156,6 +156,9 @@ void QuestControl::ClickQuestSeccse(string questName)
 	if (quest.nodeList.find(questName) != quest.nodeList.cend())
 	{
 		QuestNode* node = quest.nodeList.find(questName)->second;
+		if (node->isSeccse)
+			return;
+
 		for (auto& item : node->needItems)
 		{
 			if (pData->resourceCount.find(item.name)->second < item.count)
@@ -167,7 +170,7 @@ void QuestControl::ClickQuestSeccse(string questName)
 			pData->resourceCount.find(item.name)->second -= item.count;
 		}
 
-		cout << questName << endl;
+		node->isSeccse = true;
 		QuestReward(node);
 	}
 }
@@ -177,14 +180,17 @@ void QuestControl::QuestReward(QuestNode* node)
 	if (node->name == "Let's get a harpoon")
 	{
 		player->equipment.find("Harpoon")->second->SetActive(true);
+		player->equipment.find("Harpoon")->second->isUnLock = true;
 	}
 	else if (node->name == "Let's shoot a gun")
 	{
 		player->equipment.find("LowGun")->second->SetActive(true);
+		player->equipment.find("LowGun")->second->isUnLock = true;
 	}
 	else if (node->name == "resource guidance system")
 	{
 		player->equipment.find("Guidance")->second->SetActive(true);
+		player->equipment.find("Guidance")->second->isUnLock = true;
 	}
 	else if (node->name == "")
 	{
