@@ -42,6 +42,7 @@ void Bullet::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
+		if (!other->object->ActiveSelf()) continue;
 		if (!other->isCollide) continue;
 		if (other->tag != "Resource") continue;
 		if (!other->OBBCollision(collider, *other))	continue;

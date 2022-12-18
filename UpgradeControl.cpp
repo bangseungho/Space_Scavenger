@@ -88,5 +88,8 @@ void UpgradeControl::ClickUpgrade(string type)
 	{
 		LowGun* lowgun = reinterpret_cast<LowGun*>(player->equipment.find("LowGun")->second);
 		lowgun->bulletNum += 2;
+
+		if (lowgun->bulletNum >= 102)
+			lowgun->bulletNum += 102;
 	}
 }

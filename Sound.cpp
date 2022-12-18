@@ -6,8 +6,10 @@ Channel Sound::EFFECT;
 
 void Sound::SetVolum()
 {
+	FMOD_Channel_SetPaused(MUSIC.channel, 1);
 	FMOD_Channel_SetVolume(MUSIC.channel, MUSIC.volum);
 	FMOD_Channel_SetVolume(EFFECT.channel, EFFECT.volum);
+	FMOD_Channel_SetPaused(MUSIC.channel, 0);
 }
 
 Sound::Sound()
@@ -52,8 +54,6 @@ void Sound::Play()
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_DEFAULT, 0, &sound);
 	}
 	
-	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
-
 	if(channelType == "Music")
 		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC.channel);
 	else if (channelType == "Effect")
@@ -68,7 +68,6 @@ void Sound::RepeatPlay()
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_LOOP_NORMAL, 0, &sound);
 	}
 
-	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
 	if (channelType == "Music")
 		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC.channel);
 	else if (channelType == "Effect")

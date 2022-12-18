@@ -20,7 +20,7 @@ LowGun::LowGun()
 	transform.local->rotation.y = 90;
 	transform.local->position.y = 3;
 
-	bulletNum = remainBullet = 2; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
+	bulletNum = remainBullet = 2 + 100; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
 
 	ui_bulletNum = new BulletNum();
 

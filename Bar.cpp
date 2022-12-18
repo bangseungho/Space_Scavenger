@@ -49,8 +49,6 @@ void Bar::Update()
 	{
 		float x = mouse_Pos.x;
 		amount = x / s + 0.5f;
-		cout << mouse_Pos.x << endl;
-		cout << amount << endl;
 	}
 
 	if (amount > 1) amount = 1;

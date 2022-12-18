@@ -49,8 +49,6 @@ void Harpoon::ChargingEnergy()
 {
 	startTime = clock();
 
-	cout << "Charging energy..." << endl;
-
 	curEnergy = 0;
 	chargedEnergy = 0;
 
@@ -59,10 +57,6 @@ void Harpoon::ChargingEnergy()
 
 void Harpoon::FinishCharging()
 {
-	cout << "Finish Charging" << endl;
-
-	cout << "Charging Time : " << chargingTime << endl;
-
 	chargedEnergy = chargingTime * 10;
 
 	SetState(State::FIRING);
@@ -125,7 +119,6 @@ void Harpoon::OnCollision()
 
 		if (other->tag == "Resource")
 		{
-			cout << "COLLIDE HARPOON RESOURCE" << endl;
 		}
 	}
 }
