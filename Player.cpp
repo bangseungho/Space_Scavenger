@@ -247,6 +247,8 @@ void Player::OnCollision()
 				speedBlock.current *= 0.7;
 				sound_Hit.Play();
 			}
+
+			DebugManager::Instance->Log(to_string(resource->amount) + " " + resource->name + " Earn");
 		}
 	}
 }

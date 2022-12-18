@@ -157,6 +157,7 @@
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="CubeMapManager.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Emerald.cpp" />
     <ClCompile Include="Equipment.cpp" />
@@ -176,7 +177,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LowGun.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="Moon.cpp" />
@@ -226,6 +226,7 @@
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="CubeMapManager.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Emerald.h" />
     <ClInclude Include="Equipment.h" />
@@ -242,7 +243,6 @@
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LowGun.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="Moon.h" />

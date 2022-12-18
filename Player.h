@@ -1,8 +1,8 @@
 #pragma once
-#include "Sound.h"
 #include "Button.h"
 #include "Quest.h"
 #include "BackGround.h"
+#include "DebugManager.h"
 
 // Data
 #include "PlayerData.h"

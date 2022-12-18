@@ -111,6 +111,9 @@
     <Filter Include="소스 파일\Manager">
       <UniqueIdentifier>{ba71943c-6655-441c-930c-d044cd3c8fb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Equipment\Contain\Harpoon">
+      <UniqueIdentifier>{47fcbd0a-1cca-4ad9-8346-beb23e3fc4b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,9 +149,6 @@
     <ClCompile Include="Equipment.cpp">
       <Filter>Object\Equipment</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="Xlsx.cpp">
       <Filter>FramWork\소스</Filter>
     </ClCompile>
@@ -157,9 +157,6 @@
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>FramWork\소스</Filter>
-    </ClCompile>
-    <ClCompile Include="Harpoon.cpp">
-      <Filter>Object\Equipment\Contain</Filter>
     </ClCompile>
     <ClCompile Include="CubeMap.cpp">
       <Filter>FramWork\GameObject\UI</Filter>
@@ -186,9 +183,6 @@
       <Filter>FramWork\GameObject\UI</Filter>
     </ClCompile>
     <ClCompile Include="ChatBox.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Mineral.cpp">
@@ -306,7 +300,16 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Bar.cpp">
+      <Filter>UI\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Harpoon.cpp">
+      <Filter>Object\Equipment\Contain\Harpoon</Filter>
+    </ClCompile>
+    <ClCompile Include="Gauge.cpp">
+      <Filter>Object\Equipment\Contain\Harpoon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,9 +346,6 @@
     <ClInclude Include="Equipment.h">
       <Filter>Object\Equipment</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="Xlsx.h">
       <Filter>FramWork\헤더</Filter>
     </ClInclude>
@@ -380,9 +380,6 @@
       <Filter>FramWork\GameObject\UI</Filter>
     </ClInclude>
     <ClInclude Include="ChatBox.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Mineral.h">
@@ -451,9 +448,6 @@
     <ClInclude Include="LowGun.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
-    <ClInclude Include="Harpoon.h">
-      <Filter>Object\Equipment\Contain</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
@@ -488,7 +482,16 @@
       <Filter>Object\Equipment\Contain\Gun</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Bar.h" />
+    <ClInclude Include="Bar.h">
+      <Filter>UI\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h" />
+    <ClInclude Include="Harpoon.h">
+      <Filter>Object\Equipment\Contain\Harpoon</Filter>
+    </ClInclude>
+    <ClInclude Include="Gauge.h">
+      <Filter>Object\Equipment\Contain\Harpoon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl">

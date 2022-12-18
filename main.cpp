@@ -1,6 +1,7 @@
 #include "Data.h"
 #include "GameManager.h"
 #include "CubeMapManager.h"
+#include "DebugManager.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -15,6 +16,7 @@ void Motion(int x, int y);
 void MouseEntry(int state);
 
 Color windowColor;
+DebugManager debugManager;
 
 bool is_Polygon = false;
 bool is_CullFace = false;

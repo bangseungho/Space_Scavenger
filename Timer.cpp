@@ -2,13 +2,19 @@
 
 Timer::Timer()
 {
-    startTime = 0;
+    startTime = clock();
     endTime = 0;
     durationTime = 0;
 }
 
 Timer::~Timer()
 {
+}
+
+void Timer::OnTimer(double _Duration)
+{
+    startTime = clock();
+    durationTime = _Duration;
 }
 
 bool Timer::CheckTimer()

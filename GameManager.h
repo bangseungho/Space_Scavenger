@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlanetManager.h"
 #include "SoundManager.h"
+#include "ChatBox.h"
 
 class GameManager : public Object
 {
@@ -28,6 +29,7 @@ public:
 	};
 public:
 	Player player;
+	ChatBox chat;
 
 private:
 	bool isMouseRight;
