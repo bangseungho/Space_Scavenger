@@ -51,7 +51,6 @@ private:
 
 	Sound sound_Click;
 
-	int width;
-	int height;
+	ImageSize* size;
 };
 

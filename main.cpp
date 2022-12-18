@@ -1,6 +1,7 @@
 #include "Data.h"
 #include "GameManager.h"
 #include "CubeMapManager.h"
+#include "DebugManager.h"
 
 void drawScene();
 GLvoid Reshape(int w, int h);
@@ -15,6 +16,7 @@ void Motion(int x, int y);
 void MouseEntry(int state);
 
 Color windowColor;
+DebugManager debugManager;
 
 bool is_Polygon = false;
 bool is_CullFace = false;
@@ -142,6 +144,7 @@ int main(int argc, char** argv)
 	glutMouseWheelFunc(MouseWheel);
 	//glutSetCursor(GLUT_CURSOR_NONE); // 마우스 커서 없애기
 	glutPassiveMotionFunc(Motion);
+	glutMotionFunc(Motion);
 	glutTimerFunc(10, TimerFunc, 1);
 	glutEntryFunc(MouseEntry);
 	glutMainLoop();
@@ -268,6 +271,8 @@ void KeyBoard(unsigned char key, int x, int y)
 		exit(1);
 		break;
 	}
+
+	gameManager->KeyBoard(key, x, y);
 
 	glutPostRedisplay();
 }

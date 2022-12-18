@@ -51,8 +51,7 @@ void Button::Init()
 	ui_Click.transform.world.push_back(transform.local);
 	font.transform.world.push_back(transform.local);
 
-	width = ui_Defualt.width;
-	height = ui_Defualt.height;
+	size = ui_Defualt.size;
 }
 
 void Button::Update()
@@ -96,6 +95,9 @@ void Button::CheckClick()
 		if (!CheckInMouse())
 			return;
 
+		if (ui_Click.ActiveSelf())
+			return;
+
 		sound_Click.Play();
 		ui_Defualt.SetActive(false);
 		ui_OnMouse.SetActive(false);
@@ -115,8 +117,8 @@ void Button::CheckClick()
 bool Button::CheckInMouse()
 {
 	vec2 pos[2];
-	pos[0] = transform.model * vec4(-width / 2, -height / 2, 0, 1); // bottom left
-	pos[1] = transform.model * vec4(width / 2, height / 2, 0, 1); // top right
+	pos[0] = transform.model * vec4(-size->width / 2, -size->height / 2, 0, 1); // bottom left
+	pos[1] = transform.model * vec4(size->width / 2, size->height / 2, 0, 1); // top right
 	if (mouse_Pos.x < pos[0].x) return false;
 	if (mouse_Pos.y < pos[0].y) return false;
 	if (mouse_Pos.x > pos[1].x) return false;

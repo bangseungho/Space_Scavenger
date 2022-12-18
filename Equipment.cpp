@@ -5,6 +5,7 @@ Equipment::Equipment() : Mesh(this)
 	SetState(State::IDLE);
 
 	isDragged = false;
+	isUnLock = false;
 }
 
 Equipment::~Equipment()

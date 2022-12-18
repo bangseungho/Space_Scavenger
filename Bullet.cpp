@@ -13,18 +13,18 @@ Bullet::Bullet()
 		_Obj = new OBJ;
 		_Obj->ReadObj("Obj/Equipment/LowGun/", "Bullet.obj");
 	}
+	obj = _Obj;
 
 	collider.tag = "Bullet";
 	collider.object = this;
-	speed = 1;
-	isUse = false;
-	SetActive(false);
-	particle = new ParticleGenerator(50);
-
-	obj = _Obj;
-	transform.local->scale = vec3(1);
 	collider.SetBox_OBB(vec3(2));
 
+	particle = new ParticleGenerator(10);
+
+	transform.local->scale = vec3(1);
+	speed = 1;
+
+	SetActive(false);
 	Render::objectRender->AddObject(this, "Bullet");
 }
 
@@ -42,18 +42,13 @@ void Bullet::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->isCollide)
-			continue;
-
-		if (other->tag != "Resource")
-			continue;
-
-
-		if (!other->OBBCollision(collider, *other))
-			continue;
+		if (!other->isCollide) continue;
+		if (other->tag != "Resource") continue;
+		if (!other->OBBCollision(collider, *other))	continue;
 
 		if (other->tag == "Resource")
 		{
+			SetActive(false);
 			particle->ExplodeParticles(transform);
 		}
 	}

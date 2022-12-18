@@ -10,11 +10,9 @@ public:
 	~Particle();
 
 public:
+	void Enable();
 	void Update();
 
-public:
-	int distancePitch;
-	int distanceYaw;
-	float velocity;
-	float distance;
+private:
+	vec3 velocity;
 };

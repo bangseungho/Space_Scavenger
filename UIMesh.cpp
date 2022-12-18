@@ -18,6 +18,8 @@ UIMesh::UIMesh(Object* obj) : Mesh(obj)
 		texture1_Location = glGetUniformLocation(uiShader->program, "texture1");
 		ColorLocation = glGetUniformLocation(uiShader->program, "vColor");
 	}
+
+	size = new ImageSize;
 }
 
 UIMesh::~UIMesh()
@@ -33,13 +35,13 @@ void UIMesh::MeshInit()
 	stbi_set_flip_vertically_on_load(true);
 
 	int nrChannels;
-	unsigned char* data = stbi_load(image_file.c_str(), &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load(image_file.c_str(), &size->width, &size->height, &nrChannels, 0);
 
 	//float vertice_x = static_cast<float>(width) / windowSize_W;
 	//float vertice_y = static_cast<float>(height) / windowSize_H;
 
-	float vertice_x = static_cast<float>(width/2);
-	float vertice_y = static_cast<float>(height/2);
+	float vertice_x = static_cast<float>(size->width/2);
+	float vertice_y = static_cast<float>(size->height/2);
 
 	float vertices[] = {
 		// positions          // colors           // texture coords
@@ -82,7 +84,7 @@ void UIMesh::MeshInit()
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size->width, size->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else

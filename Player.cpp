@@ -46,7 +46,6 @@ Player::Player() : Mesh(this)
 	
 	for (auto& eq : equipment)
 		eq.second->SetActive(false);
-	equipment.find("Harpoon")->second->SetActive(true);
 	
 	// Object
 	upgrade = new UpgradeControl(this);
@@ -55,6 +54,10 @@ Player::Player() : Mesh(this)
 	inventory = new Inventory(this);
 
 	hp = 100;
+
+	//Sound
+	sound_Hit.Load("Sound/Player/Hit.mp3");
+	sound_Hit.channelType = "Effect";
 
 	Render::objectRender->AddObject(this);
 }
@@ -128,6 +131,30 @@ void Player::Handle_Event(unsigned char key)
 		guidanceControl->SetActive(false);
 		inventory->SetActive(!inventory->ActiveSelf());
 		break;
+	case '1':
+		if (equipment.find("Harpoon")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("Harpoon")->second->SetActive(true);
+		}
+		break;
+	case '2':
+		if (equipment.find("LowGun")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("LowGun")->second->SetActive(true);
+		}
+		break;
+	case '3':
+		if (equipment.find("Guidance")->second->isUnLock)
+		{
+			for (auto& equi : equipment)
+				equi.second->SetActive(false);
+			equipment.find("Guidance")->second->SetActive(true);
+		}
+		break;
 	}
 }
 
@@ -171,15 +198,10 @@ void Player::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-		
-		if (!other->OBBCollision(collider, *other))
-			continue;
+		if (!other->object->ActiveSelf()) continue;
+		if (!other->isCollide) continue;
+		if (other->object->id == id) continue;
+		if (!other->OBBCollision(collider, *other)) continue;
 
 		if (other->tag == "Resource")
 		{
@@ -187,11 +209,17 @@ void Player::OnCollision()
 			if (resource->isDragged)
 				equipment.find("Guidance")->second->isDragged = false;
 
-			hp -= resource->level;
 			playerData->resourceCount[resource->name] += resource->amount;
 
 			if (resource->level > 0)
+			{
+				hp -= resource->level;
+				DebugManager::Instance->Log("Lost You Are HP : " + to_string(resource->level));
 				speedBlock.current *= 0.7;
+				sound_Hit.Play();
+			}
+
+			DebugManager::Instance->Log(to_string(resource->amount) + " " + resource->name + " Earn");
 		}
 	}
 }

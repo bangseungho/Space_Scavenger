@@ -9,7 +9,7 @@ Sphere::Sphere() : Mesh(this)
 	if (_Obj == nullptr)
 	{
 		_Obj = new OBJ;
-		_Obj->ReadObj((char*)"Sphere.obj");
+		_Obj->ReadObj("Obj/Default/", "Sphere.obj");
 	}
 
 	obj = _Obj;

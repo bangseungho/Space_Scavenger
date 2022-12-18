@@ -17,9 +17,19 @@ public:
 
 public:
 	int maxCount;
-	vector<string> name;
-	vector<string> text;
-	vector<vec3> position;
-	vector<Color> color;
+	struct NeedItem {
+		string name;
+		int count;
+	};
+
+	struct UpgradeType {
+		string name;
+		string text;
+		vec3 position;
+		Color color;
+		vector<NeedItem> needItems;
+	};
+
+	vector<UpgradeType*> type;
 };
 

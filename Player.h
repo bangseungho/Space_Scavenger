@@ -1,8 +1,8 @@
 #pragma once
-#include "Sound.h"
 #include "Button.h"
 #include "Quest.h"
 #include "BackGround.h"
+#include "DebugManager.h"
 
 // Data
 #include "PlayerData.h"
@@ -67,6 +67,8 @@ private:
 	bool move_front;
 	bool move_back;
 
+	Sound sound_Hit;
+
 	PlayerData* playerData;
 private:
 	Inventory* inventory;
@@ -99,13 +101,14 @@ public:
 
 public:
 	void GetData();
-public:
+private:
+	void ClickUpgrade(string type);
 
 private:
 	Player* player;
 	UpgradeData* data;
 
-	BackGround background{ "UI/", "Frame.png"};
+	BackGround background{ "UI/BackGround/", "GuidanceBackground.png" };
 	map<string, Button*> upgradeButtons;
 };
 

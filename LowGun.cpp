@@ -14,13 +14,13 @@ LowGun::LowGun()
 	}
 	obj = _Obj;
 
-	fireSound.Load("Sound/fire_bullet.mp3", false);
-	loadSound.Load("Sound/load_bullet.mp3", false);
+	fireSound.Load("Sound/Gun/Fire.mp3", false);
+	loadSound.Load("Sound/Gun/Reloading.mp3", false);
 
-	transform.local->rotation.y = -90;
+	transform.local->rotation.y = 90;
 	transform.local->position.y = 3;
 
-	bulletNum = remainBullet = 48; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
+	bulletNum = remainBullet = 2; // 총알 개수 12의 배수로 설정 업그레이드 또한 12..24..36
 
 	ui_bulletNum = new BulletNum();
 
@@ -50,8 +50,6 @@ void LowGun::Update()
 	remainBullet = bulletNum - fireCount;
 	ui_bulletNum->GetBulletInfo(bulletNum, remainBullet);
 }
-
-
 
 int LowGun::Fire(const Transform& transform)
 {

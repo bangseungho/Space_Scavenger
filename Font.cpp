@@ -28,6 +28,7 @@ Font::Font(string _Name) : Mesh(this)
 
 Font::~Font()
 {
+	Render::fontRender->RemoveObject(this);
 }
 
 void Font::Draw()
