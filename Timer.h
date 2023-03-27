@@ -8,6 +8,7 @@ public:
 	~Timer();
 
 public:
+	void OnTimer(double _Duration);
 	bool CheckTimer();
 
 public:

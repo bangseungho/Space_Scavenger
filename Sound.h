@@ -2,14 +2,19 @@
 #include "Object.h"
 #include <fmod.hpp>
 
+struct Channel {
+	FMOD_CHANNEL* channel;
+	float volum;
+};
+
 class Sound : public Object
 {
 public:
 	static FMOD_SYSTEM* SOUND_SYSTEM;
-	static FMOD_CHANNEL* MUSIC_CHANNER;
-	static FMOD_CHANNEL* EFFECT_CHANNER;
+	static Channel MUSIC;
+	static Channel EFFECT;
 
-	static float musicVolum;
+	static void SetVolum();
 public:
 	Sound();
 	~Sound();
@@ -23,7 +28,6 @@ public:
 	void Play();
 	void RepeatPlay();
 	void Stop();
-	void SetVolum(float _Volum);
 
 public:
 	FMOD_SOUND* sound;

@@ -104,6 +104,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\API\libxl-4.0.4.0\include_cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,6 +112,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>glew32.lib freeglut.lib fmod_vc.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>D:\API\libxl-4.0.4.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libxl.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Afx.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="BulletNum.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -156,6 +160,7 @@
     <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="CubeMapManager.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Emerald.cpp" />
     <ClCompile Include="Equipment.cpp" />
@@ -175,7 +180,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LowGun.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mineral.cpp" />
     <ClCompile Include="Moon.cpp" />
@@ -197,6 +201,7 @@
     <ClCompile Include="Saturn.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpeedGauge.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Star.cpp" />
@@ -213,6 +218,7 @@
   <ItemGroup>
     <ClInclude Include="Afx.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Bar.h" />
     <ClInclude Include="BulletNum.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Bullet.h" />
@@ -225,6 +231,7 @@
     <ClInclude Include="CubeMap.h" />
     <ClInclude Include="CubeMapManager.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Emerald.h" />
     <ClInclude Include="Equipment.h" />
@@ -241,7 +248,6 @@
     <ClInclude Include="Iron.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LowGun.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mineral.h" />
     <ClInclude Include="Moon.h" />
@@ -262,6 +268,7 @@
     <ClInclude Include="Saturn.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpeedGauge.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Star.h" />
@@ -276,29 +283,6 @@
     <ClInclude Include="Xlsx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Harpoon.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Obj\Default\Cube.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Obj\Planet\Earth.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Obj\Player\SpaceShip.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Obj\Resource\Iron.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Obj\Resource\Uranium.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-    <Object Include="Sphere.obj">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Object>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="CubeMap_Fragment.glsl" />
     <None Include="CubeMap_Vertex.glsl" />
     <None Include="Font_Fragment.glsl" />
@@ -306,18 +290,6 @@
     <None Include="Fragment.glsl" />
     <None Include="GuiFragment.glsl" />
     <None Include="GuiVertex.glsl" />
-    <None Include="Harpoon.mtl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Obj\Default\Cube.mtl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Obj\Player\SpaceShip.mtl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Obj\Resource\Iron.mtl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </None>
     <None Include="Vertex.glsl" />
   </ItemGroup>
   <ItemGroup>

@@ -25,9 +25,10 @@ public:
 
 public:
 	float distance;
-	bool isUse;
 
 private:
+	Sound sound_Hit;
+
 	const int range = 200;
 
 private:

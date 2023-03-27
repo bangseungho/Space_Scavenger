@@ -9,14 +9,9 @@ Particle::Particle() : Mesh(this)
 		_Obj = new OBJ;
 		_Obj->ReadObj("Obj/Default/", "Cube.obj");
 	}
-
 	obj = _Obj;
-	SetActive(false);
 
-	transform.local->scale = vec3(RandomFloat(0.3, 1.0));
-	color.SetColor({ 1.0, 0.5, 0.0, 1.0 });
-	velocity = RandomFloat(40, 60);
-
+	name = "Particle";
 
 	Render::objectRender->AddObject(this, "Particle");
 }
@@ -25,7 +20,15 @@ Particle::~Particle()
 {
 }
 
+void Particle::Enable()
+{
+	transform.local->scale = vec3(RandomFloat(0.3, 1.0));
+	velocity = vec3(RandomFloat(-1, 1), RandomFloat(-1, 1), RandomFloat(-1, 1)) * RandomFloat(20,40);
+	color.SetColor({ 1.0, 0.5, 0.0, 1.0 });
+}
+
 void Particle::Update()
 {
-	distance += velocity * FrameTime::oneFrame;
+	transform.local->position += velocity * FrameTime::oneFrame;
+	color.A -= 0.03f;
 }

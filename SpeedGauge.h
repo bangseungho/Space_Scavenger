@@ -19,9 +19,9 @@ public:
 	void Update();
 
 private:
-	Image ui_Panel;
-	Image ui_PanelBack;
+	Image ui_PannelBack;
 	Image ui_Gauge;
+	Image ui_Pannel;
 
 private:
 	SpeedBlock* speedBlock;

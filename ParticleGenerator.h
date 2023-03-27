@@ -9,21 +9,16 @@ public:
 	~ParticleGenerator();
 
 public:
+	void Enable();
+	void Disable();
 	void Init();
 	void Update();
 
 public:
 	void ExplodeParticles(const Transform& _TargetPos);
-	void SpreadParticles();
-
-public:
-	int amount;
-	bool start;
-
-public:
-	vec3 startPoint;
 
 private:
+	Timer timer;
 	vector<Particle*> particles;
 	int toSpawnParticleNum;
 

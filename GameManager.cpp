@@ -25,6 +25,16 @@ void GameManager::Update()
 {
 }
 
+void GameManager::KeyBoard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case 27: // Escape key
+		soundManager.SetActive(!soundManager.ActiveSelf());
+		break;
+	}
+}
+
 void GameManager::SpecialKeyboard(int key, int x, int y)
 {
 	switch (key)

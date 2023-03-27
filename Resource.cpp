@@ -64,15 +64,10 @@ void Resource::OnCollision()
 {
 	for (auto& other : Collider::allCollider)
 	{
-		if (!other->object->ActiveSelf())
-			continue;
-		if (!other->isCollide)
-			continue;
-		if (other->object->id == id)
-			continue;
-
-		if (!Collider::OBBCollision(collider, *other))
-			continue;
+		if (!other->object->ActiveSelf()) continue;
+		if (!other->isCollide) continue;
+		if (other->object->id == id) continue;
+		if (!Collider::OBBCollision(collider, *other)) continue;
 
 		if (other->tag == "Player")
 		{
@@ -81,26 +76,21 @@ void Resource::OnCollision()
 
 		if (other->tag == "Harpoon")
 		{
-			SetActive(false);
+			if (level > 1)
+				level = 0;
 		}
 
 		if (other->tag == "Bullet")
 		{
-			other->object->SetActive(false);
-
-			if (level > 1) {
-				level -= 1;
-				
-				color.R += 0.3;
-				if (color.R > 1) color.R = 1;
-				
-				color.G -= 0.3;
-				if (color.G < 0) color.G = 0;
-
-				color.B -= 0.3;
-				if (color.B < 0) color.B = 0;
+			level -= 1;
+			
+			if (level < 1)
+			{
+				color.R = 1;
+				continue;
 			}
-			cout << level << endl;
+			float hitColorValue = level * 0.1f;
+			color.SetColor({ hitColorValue ,hitColorValue,hitColorValue, 1 });
 		}
 	}
 }

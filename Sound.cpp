@@ -1,9 +1,18 @@
 #include "Sound.h"
 
 FMOD_SYSTEM* Sound::SOUND_SYSTEM = nullptr;
-FMOD_CHANNEL* Sound::MUSIC_CHANNER;
-FMOD_CHANNEL* Sound::EFFECT_CHANNER;
-float Sound::musicVolum = 1;
+Channel Sound::MUSIC;
+Channel Sound::EFFECT;
+
+void Sound::SetVolum()
+{
+	FMOD_Channel_SetPaused(MUSIC.channel, 1);
+	FMOD_Channel_SetPaused(EFFECT.channel, 1);
+	FMOD_Channel_SetVolume(MUSIC.channel, MUSIC.volum);
+	FMOD_Channel_SetVolume(EFFECT.channel, EFFECT.volum);
+	FMOD_Channel_SetPaused(MUSIC.channel, 0);
+	FMOD_Channel_SetPaused(EFFECT.channel, 0);
+}
 
 Sound::Sound()
 {
@@ -13,8 +22,8 @@ Sound::Sound()
 		SetActive(true);
 		FMOD_System_Create(&SOUND_SYSTEM);
 		FMOD_System_Init(SOUND_SYSTEM, 10, FMOD_INIT_NORMAL, NULL);
-		FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
-		FMOD_Channel_SetVolume(EFFECT_CHANNER, musicVolum);
+		FMOD_Channel_SetVolume(MUSIC.channel, MUSIC.volum);
+		FMOD_Channel_SetVolume(EFFECT.channel, EFFECT.volum);
 	}
 
 	channelType = "Music";
@@ -47,12 +56,10 @@ void Sound::Play()
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_DEFAULT, 0, &sound);
 	}
 	
-	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
-
 	if(channelType == "Music")
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
+		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC.channel);
 	else if (channelType == "Effect")
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &EFFECT_CHANNER);
+		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &EFFECT.channel);
 }
 
 void Sound::RepeatPlay()
@@ -63,24 +70,14 @@ void Sound::RepeatPlay()
 		FMOD_System_CreateSound(SOUND_SYSTEM, fileName.c_str(), FMOD_LOOP_NORMAL, 0, &sound);
 	}
 
-	//FMOD_Channel_SetVolume(MUSIC_CHANNER, musicVolum);
 	if (channelType == "Music")
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC_CHANNER);
+		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &MUSIC.channel);
 	else if (channelType == "Effect")
-		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &EFFECT_CHANNER);
+		FMOD_System_PlaySound(SOUND_SYSTEM, sound, 0, false, &EFFECT.channel);
 }
 
 void Sound::Stop()
 {
-	FMOD_Channel_Stop(MUSIC_CHANNER);
-}
-
-void Sound::SetVolum(float _Volum)
-{
-	musicVolum += _Volum;
-
-	if (musicVolum < 0) musicVolum = 0; // Min Volum
-	if (musicVolum > 2) musicVolum = 2; // Max Volum
-
-	FMOD_Channel_SetVolume(MUSIC_CHANNER , musicVolum);
+	if (channelType == "Music") FMOD_Channel_Stop(MUSIC.channel);
+	else if (channelType == "Effect") FMOD_Channel_Stop(EFFECT.channel);
 }

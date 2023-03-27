@@ -56,6 +56,8 @@ public:
 	Font font;
 	Color color;
 	bool isClick;
+
+	ImageSize* size;
 private:
 	ButtonDefualt ui_Defualt;
 	ButtonOnMouse ui_OnMouse;
@@ -63,8 +65,5 @@ private:
 
 	Sound sound_OnMouse;
 	Sound sound_Click;
-
-	int width;
-	int height;
 };
 

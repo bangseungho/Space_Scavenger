@@ -13,11 +13,12 @@ BulletNum::BulletNum(string path)
 	ui_LowGun.image_file = path + "Gun.png";
 
 	for (int i = 0; i < FullBullet::totalNum; ++i) {
+		float r = 360 * i / FullBullet::totalNum;
 		ui_Full.push_back(new FullBullet);
 		ui_Full[i]->image_file = path + "Full_BulletNum.png";
-		ui_Full[i]->transform.local->rotation.z -= 360 / FullBullet::totalNum * i;
-		ui_Full[i]->transform.local->position.x = FullBullet::rad * sin((i * (360.0 / FullBullet::totalNum)) / 360.0 * PI * 2.0);
-		ui_Full[i]->transform.local->position.y = FullBullet::rad * cos((i * (360.0 / FullBullet::totalNum)) / 360.0 * PI * 2.0);
+		ui_Full[i]->transform.local->rotation.z -= r;
+		ui_Full[i]->transform.local->position.x = FullBullet::rad * sin(radians(r));
+		ui_Full[i]->transform.local->position.y = FullBullet::rad * cos(radians(r));
 		ui_Full[i]->color.SetColor(Color(1.0f, 0.5 - i * 0.07f, 0.0f, 1.0f));
 	}
 

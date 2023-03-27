@@ -1,4 +1,5 @@
 #pragma once
+#include "Timer.h"
 #include "FrameTime.h"
 #include "Random.h"
 #include "Shader.h"

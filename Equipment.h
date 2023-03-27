@@ -42,6 +42,7 @@ public:
 	bool firing = false;
 	bool charging = false;
 	bool isDragged; // 현재 자원을 끓어오고 있는지 체크
+	bool isUnLock;	// 이 도구를 사용할 수 있는지에 대한 여부
 	Transform targetPos;
 
 public:

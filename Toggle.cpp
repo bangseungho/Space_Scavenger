@@ -46,8 +46,7 @@ void Toggle::Init()
 	ui_Mark.transform.world.push_back(transform.local);
 	font.transform.world.push_back(transform.local);
 
-	width = ui_UnMark.width;
-	height = ui_UnMark.height;
+	size = ui_UnMark.size;
 }
 
 void Toggle::Update()
@@ -78,8 +77,8 @@ void Toggle::ToggleClick()
 bool Toggle::CheckInMouse()
 {
 	vec2 pos[2];
-	pos[0] = transform.model * vec4(-width / 2, -height / 2, 0, 1); // bottom left
-	pos[1] = transform.model * vec4(width / 2, height / 2, 0, 1); // top right
+	pos[0] = transform.model * vec4(-size->width / 2, -size->height / 2, 0, 1); // bottom left
+	pos[1] = transform.model * vec4(size->width / 2, size->height / 2, 0, 1); // top right
 	if (mouse_Pos.x < pos[0].x) return false;
 	if (mouse_Pos.y < pos[0].y) return false;
 	if (mouse_Pos.x > pos[1].x) return false;
